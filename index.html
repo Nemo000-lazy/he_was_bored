@@ -74,7 +74,6 @@
   main { flex: 1; padding-bottom: 60px; }
   .screen { display: none; opacity: 0; transition: opacity 0.4s var(--ease-out); }
   .screen.active { display: block; opacity: 1; animation: slideUp 0.5s var(--ease-out) forwards; }
-  .screen:focus { outline: none; }
   
   @keyframes slideUp {
     from { transform: translateY(15px); opacity: 0; }
@@ -104,7 +103,7 @@
   .progress-text { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); }
   .btn-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); padding: 8px 12px; border-radius: 8px; transition: background 0.2s; }
   .btn-back:hover { background: rgba(0,0,0,0.05); }
-  .btn-back[hidden] { display: inline-flex; visibility: hidden; }
+  .btn-back[hidden] { visibility: hidden; } /* Use visibility to keep layout stable */
   
   .progress-bar { width: 100%; height: 6px; background: var(--border-light); border-radius: 99px; overflow: hidden; margin-bottom: 30px; }
   .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s var(--ease-out); }
@@ -601,9 +600,6 @@
         screens[key].classList.remove('active');
       }
     });
-    const activeScreen = screens[screenName];
-    activeScreen.setAttribute('tabindex', '-1');
-    activeScreen.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -660,9 +656,15 @@
     const currentVal = answers[currentIndex];
     
     let html = `
+      <comment-tag id="3"><div class="q-dim">${dim.name}</div>
+      <h3 class="q-text">${q.text}</h3>
+      <div class="options-list" role="radiogroup"></comment-tag id="3" text="To ensure screen readers don't lose their place when the card auto-advances, it's best practice to programmatically focus the new question text. You can do this by adding an ID and a tabindex.
+
       <div class="q-dim">${dim.name}</div>
-      <h3 class="q-text" id="q-text">${q.text}</h3>
-      <div class="options-list" role="radiogroup" aria-labelledby="q-text">
+      <h3 class="q-text" id="q-text" tabindex="-1">${q.text}</h3>
+      <div class="options-list" role="radiogroup">
+
+(Note: You would also add `document.getElementById('q-text')?.focus({preventScroll: true});` to your JS logic right after `fader.innerHTML` updates)." type="suggestion">
         ${q.options.map((opt, idx) => `
           <label class="option-label">
             <input type="radio" name="q${currentIndex}" value="${opt.val}" class="option-input" ${currentVal === opt.val ? 'checked' : ''}>
@@ -674,29 +676,40 @@
     
     fader.innerHTML = html;
     
-    if (animateIn) {
+    <comment-tag id="2">if (animateIn) {
       fader.className = 'question-fader fade-in';
     }
     
-    // Attach listener for choices
+    // Attach listener for choices</comment-tag id="2" text="On mobile devices, users often scroll down to read the last few options. When the next question fades in, they might be left looking at the bottom of the new card. Adding a smooth scroll ensures they always start at the top of the next question.
+
+if (animateIn) {
+      fader.className = 'question-fader fade-in';
+    }
+    
+    // Ensure mobile users are scrolled to the top of the new question
+    const qContainer = document.querySelector('.question-container');
+    if (qContainer && animateIn) {
+      const y = qContainer.getBoundingClientRect().top + window.scrollY - 20;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+
+    // Attach listener for choices" type="suggestion">
     const inputs = fader.querySelectorAll('input[type="radio"]');
     inputs.forEach(input => {
       input.addEventListener('change', handleAnswer);
     });
-
-    // Focus the question for screen readers
-    const qText = fader.querySelector('.q-text');
-    if (qText) {
-      qText.setAttribute('tabindex', '-1');
-      qText.focus({ preventScroll: true });
-    }
   }
 
   function handleAnswer(e) {
     if (isAnimating) return;
-    const val = parseInt(e.target.value, 10);
+    <comment-tag id="1">const val = parseInt(e.target.value, 10);
     answers[currentIndex] = val;
-    saveState();
+    saveState();</comment-tag id="1" text="Adding a subtle haptic vibration here makes the digital interface feel highly responsive and tactile on mobile devices when a user makes a selection.
+
+const val = parseInt(e.target.value, 10);
+    answers[currentIndex] = val;
+    if (navigator.vibrate) navigator.vibrate(25);
+    saveState();" type="suggestion">
     
     // Slight delay to show selected state before moving on
     isAnimating = true;
@@ -757,8 +770,12 @@
     return { results, overall, strongest, growth };
   }
 
+  <comment-tag id="5">function getBandText(score) {
+    if (score >= 80) return { title: 'A Well-Rounded Communicator', summary: 'Your dimensions are balanced and consistently high. The work now is contextual refinement rather than fixing weak areas.' };</comment-tag id="5" text="Adding a top-tier band for exceptionally high scores rewards users and adds a layer of gamification that makes achieving a high score feel more special.
+
   function getBandText(score) {
-    if (score >= 80) return { title: 'A Well-Rounded Communicator', summary: 'Your dimensions are balanced and consistently high. The work now is contextual refinement rather than fixing weak areas.' };
+    if (score >= 92) return { title: 'A Masterful Communicator', summary: 'Your dimensions are exceptionally high across the board. Your focus now is mentoring others and adapting to the most high-stakes environments.' };
+    if (score >= 80) return { title: 'A Well-Rounded Communicator', summary: 'Your dimensions are balanced and consistently high. The work now is contextual refinement rather than fixing weak areas.' };" type="suggestion">
     if (score >= 60) return { title: 'A Capable Communicator', summary: 'You have solid strengths. The fastest progress will come from deliberately practicing your lowest dimension.' };
     if (score >= 40) return { title: 'A Communicator in Development', summary: 'You have an honest baseline. Pick one dimension—the lowest—and work on it for a month before touching anything else.' };
     return { title: 'At the Beginning', summary: 'Low scores here are information, not verdicts. Choose the single dimension that would change the most for you, and start there.' };
@@ -775,20 +792,19 @@
     const n = results.length;
     
     // Draw background rings
-    const gridHtml = rings.map((level) => {
+    const gridHtml = rings.map((level, ringIdx) => {
       const pts = results.map((_, i) => {
         const p = getPolarCoordinates(maxR * level, i, n, cx, cy);
         return `${p.x},${p.y}`;
       }).join(' ');
       const isOuter = level === 1.0;
-      const strokeWidth = isOuter ? 1.5 : 1;
-      return `<polygon points="${pts}" style="fill:none; stroke:var(--border-light); stroke-width:${strokeWidth};" />`;
+      return `<polygon points="${pts}" fill="none" stroke="var(--border-light)" stroke-width="${isOuter ? 1.5 : 1}" />`;
     }).join('');
 
     // Draw axes
     const axesHtml = results.map((_, i) => {
       const p = getPolarCoordinates(maxR, i, n, cx, cy);
-      return `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" style="stroke:var(--border-light); stroke-width:1;" />`;
+      return `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" stroke="var(--border-light)" stroke-width="1" />`;
     }).join('');
 
     // Draw Data Polygon
@@ -823,8 +839,8 @@
     });
 
     const centerHtml = `
-      <text x="${cx}" y="${cy + 6}" text-anchor="middle" style="font-family:var(--font-serif); font-size:32px; font-weight:600; fill:var(--text-main);">${overall}</text>
-      <text x="${cx}" y="${cy + 22}" text-anchor="middle" style="font-family:var(--font-sans); font-size:8px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; fill:var(--text-light);">Overall</text>
+      <text x="${cx}" y="${cy + 6}" text-anchor="middle" font-family="var(--font-serif)" font-size="32" font-weight="600" fill="var(--text-main)">${overall}</text>
+      <text x="${cx}" y="${cy + 22}" text-anchor="middle" font-family="var(--font-sans)" font-size="8" font-weight="700" letter-spacing="0.1em" text-transform="uppercase" fill="var(--text-light)">Overall</text>
     `;
 
     return `<svg class="radar-svg" viewBox="0 0 ${size} ${size}">
@@ -890,9 +906,13 @@
   }
 
   btnShare.addEventListener('click', async () => {
-    const { overall, strongest, growth } = computeScores();
+    <comment-tag id="4">const { overall, strongest, growth } = computeScores();
     const text = `My Esperiel Index: ${overall}% overall. Strongest: ${strongest.name}. Growth edge: ${growth.name}.`;
-    const url = window.location.href;
+    const url = window.location.href;</comment-tag id="4" text="When users share their results to apps like WhatsApp, Slack, or Twitter, plain text can get lost. Formatting it with emojis and line breaks makes the output much more striking and encourages others to take the index.
+
+    const { overall, strongest, growth } = computeScores();
+    const text = `📊 My Esperiel Index: ${overall}%\n🏆 Strength: ${strongest.name}\n🌱 Growth Edge: ${growth.name}\n\nTake the assessment:`;
+    const url = window.location.href;" type="suggestion">
 
     if (navigator.share) {
       try {
