@@ -5,11 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Esperiel Index — A Communication Self-Assessment</title>
 <meta name="description" content="Map how you show up across Clarity, Confidence, Connection, Composure, Curiosity, and Conviction in eighteen questions. Free, private, takes three minutes.">
-<meta name="theme-color" content="#F7F3EC">
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="Esperiel Index — A Communication Self-Assessment">
-<meta property="og:description" content="Eighteen questions. Six dimensions. See where you're already strong and where your next edge of growth is.">
+<meta name="theme-color" content="#FAF7F2">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,898 +14,888 @@
 <style>
   :root {
     color-scheme: light;
-
-    --paper:        #F7F3EC;
-    --surface:      #FFFFFF;
     
-    --ink:          #2A241E;
-    --ink-soft:     #564A3E;
-    --muted:        #8A7C6D;
-
-    --line:         #EBE1D1;
-    --line-strong:  #D7C8B1;
-
+    --bg-color:     #FAF7F2;
+    --card-bg:      #FFFFFF;
+    
+    --text-main:    #2A241E;
+    --text-muted:   #564A3E;
+    --text-light:   #8A7C6D;
+    
+    --border-light: #E8DFD3;
+    --border-focus: #B5673F;
+    
     --accent:       #B5673F;
-    --accent-deep:  #8E4D2C;
-    --accent-dark:  #6D3A1F;
-    --accent-soft:  #F4E2D5;
-
-    --support:      #7A8F7E;
-    --support-deep: #5E7362;
-    --support-soft: #E5EBE4;
-
-    --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
-    --serif:'Fraunces',Georgia,'Times New Roman',serif;
-
-    --radius-card: 24px;
-    --radius-pill: 999px;
-
-    /* FLUID SIZING */
-    --card-h: clamp(340px, calc(100dvh - 220px), 580px);
-
-    /* Silky, physics-based UI animation */
-    --ease-ios: cubic-bezier(0.16, 1, 0.3, 1);
-    --dur: 550ms;
-    --advance-delay: 500ms;
-  }
-
-  @supports not (height: 100dvh){
-    :root{ --card-h: clamp(340px, calc(100vh - 220px), 580px); }
-  }
-
-  *,*::before,*::after{ box-sizing:border-box }
-  html{ -webkit-text-size-adjust:100% }
-  body{
-    margin:0;
-    font-family:var(--sans);
-    color:var(--ink);
-    line-height:1.6;
-    font-size:17px;
-    -webkit-font-smoothing:antialiased;
-    background:var(--paper);
-    min-height:100vh;
-    min-height:100dvh;
-    position:relative;
-    overflow-x:hidden;
-  }
-
-  /* Soft, minimalist background gradient (simplified for performance) */
-  body::before{
-    content:'';
-    position:fixed; inset: -20%;
-    pointer-events:none; z-index:-2;
-    background:
-      radial-gradient(circle at 15% 10%, rgba(244,226,213,0.6) 0%, transparent 50%),
-      radial-gradient(circle at 85% 20%, rgba(229,235,228,0.5) 0%, transparent 50%);
-    opacity: 0.8;
-  }
-
-  h1,h2,h3{ font-family:var(--serif); font-weight:600; line-height:1.14; letter-spacing:-.015em; margin:0 }
-  p{ margin:0 0 1rem }
-  button{ font:inherit; color:inherit; border:none; background:none; padding:0; cursor:pointer; }
-
-  :focus-visible{ outline:2.5px solid var(--accent); outline-offset:3px; border-radius:8px }
-
-  .sr-only{
-    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-    overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
-  }
-  .skip-link{
-    position:absolute; left:-9999px; top:0; z-index:200;
-    background:var(--ink); color:#fff; padding:.7rem 1.2rem;
-    border-radius:0 0 12px 0; text-decoration:none; font-weight:600;
-  }
-  .skip-link:focus{ left:0 }
-
-  .wrap{ width:min(720px,100% - 2rem); margin-inline:auto }
-
-  /* ============ Header ============ */
-  header.site{ padding:1.2rem 0 .5rem }
-  .wordmark{
-    display:inline-flex; align-items:center; gap:.6rem;
-    font-family:var(--serif); font-size:1rem; font-weight:600;
-    text-decoration:none; color:var(--ink);
-  }
-  .wordmark .dot{
-    width:8px; height:8px; border-radius:50%;
-    background:var(--accent);
-  }
-
-  /* ============ Screens ============ */
-  main{ padding:.25rem 0 3rem }
-  .screen{ display:none }
-  .screen.active{ display:block; animation:rise .6s var(--ease-ios) both }
-  @keyframes rise{ from{ opacity:0; transform:translateY(12px) } to{ opacity:1; transform:none } }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ transition-duration:.01ms !important; animation-duration:.01ms !important }
-  }
-
-  /* ============ Intro ============ */
-  .eyebrow{
-    font-size:.74rem; font-weight:700; letter-spacing:.17em; text-transform:uppercase;
-    color:var(--accent-deep); margin:0 0 1rem;
-  }
-  .intro h1{ font-size:clamp(2rem,5.5vw,2.8rem); margin-bottom:1.1rem }
-  .intro .lead{
-    font-family:var(--serif); font-size:clamp(1.1rem,2.6vw,1.3rem);
-    line-height:1.5; color:var(--ink-soft); margin-bottom:1rem;
-  }
-  .intro .body{ color:var(--ink-soft); max-width:58ch; font-size:.95rem; opacity:0.9; }
-
-  /* Clean, flat chips */
-  .dims-preview{
-    display:flex; flex-wrap:wrap; gap:.6rem; margin:2rem 0 1.8rem;
-  }
-  .chip{
-    background: #FFFFFF;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-pill);
-    padding: .5rem .9rem; font-size: .84rem; font-weight: 500;
-    color: var(--ink-soft);
-    display: flex; align-items: center; gap: .5rem;
-    box-shadow: 0 2px 8px -2px rgba(60,45,30,0.05);
-  }
-  .chip .bullet{
-    width:5px; height:5px; border-radius:50%; background:var(--accent); opacity:0.8;
-  }
-
-  .note{
-    display:flex; align-items:flex-start; gap:.6rem;
-    font-size:.85rem; color:var(--ink-soft); margin:1.5rem 0 2rem;
-    background: #FFFFFF; border-radius:12px; padding:.75rem 1rem;
-    max-width:fit-content; border: 1px solid var(--line);
-    box-shadow: 0 2px 8px -2px rgba(60,45,30,0.05);
-  }
-  .note svg{ flex:none; color:var(--accent-deep); opacity:.7; margin-top: 2px; }
-
-  /* ============ Buttons ============ */
-  .btn{
-    display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
-    padding:.85rem 1.6rem; border-radius:var(--radius-pill);
-    font-weight:600; font-size:.95rem; text-decoration:none;
-    transition: transform .2s var(--ease-ios), box-shadow .2s ease, background .2s ease;
-    white-space:nowrap;
-    width: 100%; /* Fix Android alignment: Full width on mobile */
-  }
-  .btn:active{ transform:scale(.98) }
-
-  .btn-primary{
-    background:var(--accent-deep); color:#fff;
-    box-shadow: 0 4px 12px -4px rgba(142,77,44,.4);
-  }
-  .btn-primary:hover{
-    background:var(--accent-dark);
-    box-shadow: 0 6px 16px -4px rgba(109,58,31,.5);
-    transform:translateY(-1px);
-  }
-  .btn-ghost{
-    background: #FFFFFF;
-    border: 1px solid var(--line);
-    color:var(--ink-soft);
-  }
-  .btn-ghost:hover{
-    background: #F7F3EC; color:var(--ink);
-  }
-  .btn-row{ 
-    display:flex; flex-direction:column; gap:.7rem; width:100%; 
-  }
-  
-  /* Stack buttons side-by-side on larger screens */
-  @media (min-width: 480px) {
-    .btn { width: auto; }
-    .btn-row { flex-direction: row; align-items: center; }
-  }
-
-  /* ============ Quiz Meta ============ */
-  .quiz-meta{
-    display:flex; justify-content:space-between; align-items:center;
-    gap:1rem; margin-bottom:.55rem; min-height:34px;
-  }
-  .quiz-count{
-    font-size:.72rem; font-weight:700; letter-spacing:.14em;
-    text-transform:uppercase; color:var(--muted); margin:0;
-  }
-
-  .back-btn{
-    display:inline-flex; align-items:center; gap:.3rem;
-    padding:.35rem .75rem .35rem .5rem;
-    border-radius:var(--radius-pill);
-    background: #FFFFFF; border: 1px solid var(--line);
-    color:var(--ink-soft); font-size:.8rem; font-weight:600;
-    transition: all .2s ease;
-  }
-  .back-btn:hover{ background: #F7F3EC; color:var(--ink); transform:translateX(-2px); }
-  .back-btn[hidden]{ display:none; }
-
-  .progress{
-    height:4px; background: rgba(60,45,30,0.08); border-radius:99px;
-    overflow:hidden; margin-bottom:1.5rem;
-  }
-  .progress-fill{
-    height:100%; width:0; background:var(--accent-deep);
-    transition: width .6s var(--ease-ios);
-  }
-
-  /* =========================================================
-     CLEAN 2.5D STACK 
-     Cards stack neatly downwards. Active card is highest.
-  ========================================================= */
-  .stack-viewport{
-    position:relative;
-    height:calc(var(--card-h) + 40px); /* Padding for the lower stack peek */
-  }
-
-  .qcard{
-    position:absolute; left:0; right:0; top:0;
-    height:var(--card-h);
-    display:flex; flex-direction:column;
-    border-radius:var(--radius-card);
-    overflow:hidden;
-    pointer-events: none;
+    --accent-hover: #8E4D2C;
+    --accent-bg:    #F8EFEA;
     
-    /* Ultra-fast solid background (replaces laggy glassmorphism) */
+    --support:      #5E7362;
+    --support-bg:   #EAF0EB;
+
+    --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+    --font-serif:   'Fraunces', Georgia, serif;
+    
+    --ease-out:     cubic-bezier(0.2, 0.8, 0.2, 1);
+    --ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: var(--font-sans);
+    color: var(--text-main);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Utility Classes */
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .container { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  
+  h1, h2, h3 { font-family: var(--font-serif); font-weight: 600; line-height: 1.2; }
+  
+  button { font-family: inherit; border: none; background: none; cursor: pointer; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
+
+  header { padding: 24px 0; }
+  .logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; text-decoration: none; color: var(--text-main); }
+  .logo-dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--accent); }
+
+  main { flex: 1; padding-bottom: 60px; }
+  .screen { display: none; opacity: 0; transition: opacity 0.4s var(--ease-out); }
+  .screen.active { display: block; opacity: 1; animation: slideUp 0.5s var(--ease-out) forwards; }
+  
+  @keyframes slideUp {
+    from { transform: translateY(15px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .intro-header { text-align: center; margin: 40px 0; }
+  .intro-eyebrow { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 16px; display: block; }
+  .intro-title { font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; margin-bottom: 20px; color: var(--text-main); }
+  .intro-desc { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+  .features { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 40px 0; }
+  .feature-tag { background: #FFFFFF; border: 1px solid var(--border-light); padding: 8px 16px; border-radius: 99px; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .feature-tag::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+  .button-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 30px; width: 100%; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 32px; border-radius: 99px; font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.2s ease; width: 100%; max-width: 300px; }
+  @media (min-width: 480px) { .btn { width: auto; max-width: none; } }
+  
+  .btn-primary { background-color: var(--accent); color: #FFFFFF; box-shadow: 0 4px 12px rgba(181, 103, 63, 0.2); }
+  .btn-primary:hover, .btn-primary:active { background-color: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(181, 103, 63, 0.3); }
+  
+  .btn-secondary { background-color: #FFFFFF; border: 1px solid var(--border-light); color: var(--text-muted); }
+  .btn-secondary:hover, .btn-secondary:active { border-color: var(--text-muted); color: var(--text-main); }
+
+  .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .progress-text { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); }
+  .btn-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); padding: 8px 12px; border-radius: 8px; transition: background 0.2s; }
+  .btn-back:hover { background: rgba(0,0,0,0.05); }
+  .btn-back[hidden] { visibility: hidden; } /* Use visibility to keep layout stable */
+  
+  .progress-bar { width: 100%; height: 6px; background: var(--border-light); border-radius: 99px; overflow: hidden; margin-bottom: 30px; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s var(--ease-out); }
+
+  .question-container {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: clamp(24px, 5vw, 40px);
+    box-shadow: 0 10px 30px rgba(42, 36, 30, 0.04), 0 1px 3px rgba(42, 36, 30, 0.02);
+    border: 1px solid rgba(0,0,0,0.04);
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Transition wrapper for smooth flat fades */
+  .question-fader { flex: 1; display: flex; flex-direction: column; transition: opacity 0.3s ease, transform 0.3s ease; }
+  .question-fader.fade-out { opacity: 0; transform: translateY(-10px); }
+  .question-fader.fade-in { opacity: 1; transform: translateY(0); }
+
+  .q-dim { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 12px; }
+  .q-text { font-family: var(--font-serif); font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 32px; line-height: 1.4; color: var(--text-main); }
+
+  /* Sentence-based Options */
+  .options-list { display: flex; flex-direction: column; gap: 12px; margin-top: auto; }
+  .option-label {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 16px 20px;
     background: #FFFFFF;
-    border: 1px solid var(--line);
-    box-shadow: 
-      0 12px 32px -12px rgba(60,45,30,0.08), 
-      0 4px 12px -4px rgba(60,45,30,0.04);
-
-    /* Force Hardware GPU Acceleration on Mobile */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    will-change: transform, opacity;
-
-    transition:
-      transform var(--dur) var(--ease-ios),
-      opacity var(--dur) var(--ease-ios);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
   }
-
-  /* Timer bar at the bottom edge */
-  .qcard-timer {
-    position: absolute; bottom: 0; left: 0; width: 100%; height: 3px;
-    background: transparent; z-index: 10; opacity: 0; transition: opacity 0.2s;
-  }
-  .qcard-timer-fill {
-    height: 100%; width: 0%; background: var(--accent-deep);
-  }
-  .qcard.advancing .qcard-timer { opacity: 1; }
-  .qcard.advancing .qcard-timer-fill { width: 100%; transition: width var(--advance-delay) linear; }
-
-  /* 
-     Stack States:
-     0: Active (Top)
-     1: Next (Slightly smaller, shifted down)
-     2: Next+1 (Even smaller, further down)
-    -1: Prev (Fades up and away to reduce clutter)
-  */
-  .qcard[data-offset="0"]{
-    transform: translateY(0) scale(1);
-    z-index: 10; pointer-events: auto; opacity: 1;
-  }
-  .qcard[data-offset="1"]{
-    transform: translateY(22px) scale(0.96);
-    z-index: 5; opacity: 0.7;
-    border-color: rgba(255,255,255,0.6);
-  }
-  .qcard[data-offset="2"]{
-    transform: translateY(40px) scale(0.92);
-    z-index: 4; opacity: 0.25;
-  }
-  .qcard[data-offset="-1"], .qcard[data-offset="-2"]{
-    transform: translateY(-20px) scale(0.98);
-    z-index: 1; opacity: 0;
-  }
-
-  /* =========================================================
-     CARD BODY
-  ========================================================= */
-  .qcard-body{
-    position: relative; flex: 1 1 auto; min-height: 0;
-    display: flex; align-items: center; justify-content: center;
-    padding: clamp(1.2rem, 3.5vh, 2.5rem) clamp(1.2rem, 4vw, 2.5rem);
-  }
-
-  .qcard-content{ width: 100%; transform-origin: 50% 50%; transition: transform .3s ease; }
-
-  .qcard-dim{
-    font-size: clamp(.65rem, 1.2dvh, .75rem);
-    font-weight:700; letter-spacing:.15em; text-transform:uppercase;
-    color:var(--accent-deep); margin:0 0 clamp(.6rem, 1.5dvh, 1rem);
-  }
-  .qcard-question{
-    font-family:var(--serif);
-    font-size: clamp(1.05rem, 2dvh + .5vw, 1.45rem);
-    line-height: 1.35; letter-spacing:-.01em;
-    margin: 0 0 clamp(1.2rem, 2.5dvh, 1.8rem); color: var(--ink);
-  }
-
-  /* Clean Options */
-  .options{ display: flex; flex-direction: column; gap: clamp(.4rem, .8dvh, .6rem); }
-
-  .option{
-    display:flex; align-items:center; gap:.8rem;
-    padding: clamp(.6rem, 1.5dvh, .9rem) clamp(.8rem, 2.5vw, 1.2rem);
-    background: #FAF6EF;
-    border: 1px solid transparent;
-    border-radius: clamp(12px, 2vw, 16px);
-    cursor:pointer;
-    transition: all .2s ease;
-  }
-  .option:hover{ background: #FFFFFF; border-color: rgba(60,45,30,0.08); box-shadow: 0 2px 6px -2px rgba(60,45,30,0.04); }
+  .option-label:hover { border-color: var(--accent); background: #FCFAFA; }
   
-  .option:has(input:checked){
-    background: rgba(244,226,213,0.4); border-color: var(--accent-deep);
+  .option-input {
+    appearance: none; -webkit-appearance: none;
+    width: 22px; height: 22px; flex-shrink: 0;
+    border: 2px solid var(--border-light);
+    border-radius: 50%; margin-top: 2px;
+    transition: all 0.2s ease;
+    position: relative;
+    cursor: pointer;
   }
-
-  .option input{
-    appearance:none; -webkit-appearance:none; flex:none;
-    width: 18px; height: 18px; margin:0;
-    border:2px solid var(--line-strong); border-radius:50%;
-    position:relative; cursor:pointer; transition: border-color .2s ease;
+  .option-input:checked { border-color: var(--accent); }
+  .option-input:checked::after {
+    content: ''; position: absolute; inset: 4px;
+    background: var(--accent); border-radius: 50%;
+    animation: popIn 0.3s var(--ease-out) forwards;
   }
-  .option input::after{
-    content:''; position:absolute; inset:3px; border-radius:50%;
-    background:var(--accent-deep); transform:scale(0);
-    transition: transform .3s cubic-bezier(.34,1.56,.64,1);
-  }
-  .option input:checked{ border-color:var(--accent-deep) }
-  .option input:checked::after{ transform:scale(1) }
-  .option input:focus-visible{ outline:none; box-shadow: 0 0 0 2px rgba(181,103,63,0.3); }
-
-  .option-label{
-    font-size: clamp(.85rem, 1.5dvh, .95rem); font-weight:500; color:var(--ink-soft);
-  }
-  .option:has(input:checked) .option-label{ color:var(--accent-deep); font-weight:600; }
-
-  /* =========================================================
-     RESULTS
-  ========================================================= */
-  .results-head{ text-align:center; margin-bottom:2.5rem }
-  .radar-wrap{
-    width:min(380px, 100%); margin:0 auto 1rem; padding:1.5rem; border-radius:24px;
-    background: #FFFFFF;
-    border:1px solid var(--line);
-    box-shadow: 0 8px 24px -8px rgba(60,45,30,0.06);
-  }
-  .radar{ width:100%; height:auto; display:block; overflow:visible }
-  .radar-grid, .radar-axes{ opacity:0; animation: radarFade .8s ease forwards; }
-  .radar-axes{ animation-delay:.15s }
-  @keyframes radarFade{ to{ opacity:1 } }
-  .radar-data{ transform-box: view-box; transform-origin: 190px 190px; transform: scale(.001); opacity: 0; transition: transform 1s var(--ease-ios), opacity .6s ease; }
-  .radar-data.in{ transform:scale(1); opacity:1 }
-  .radar-poly{ fill: rgba(181,103,63,0.12); stroke: var(--accent-deep); stroke-width: 2.5; stroke-linejoin: round }
-  .radar-dot{ fill: var(--accent-deep); stroke: var(--surface); stroke-width: 2.5 }
-  .radar-dot.is-growth{ fill: var(--accent-dark); stroke: var(--surface); stroke-width: 3 }
-  .radar-dot.is-strongest{ fill: var(--support-deep); stroke: var(--surface); stroke-width: 3 }
-  .radar-label{ font-family: var(--sans); font-size: 11.5px; font-weight: 600; letter-spacing: .02em; fill: var(--muted) }
-  .radar-label.is-growth{ fill: var(--accent-dark) }
-  .radar-label.is-strongest{ fill: var(--support-deep) }
-  .radar-overall{ font-family: var(--serif); font-size: 52px; font-weight: 600; letter-spacing: -.025em; fill: var(--ink) }
-  .radar-overall-label{ font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; fill: var(--muted) }
-  .results-head h2{ font-size:clamp(1.4rem,4vw,1.9rem); margin:1rem 0 .5rem; text-wrap:balance; }
-  .results-summary{ color:var(--ink-soft); max-width:52ch; margin-inline:auto; font-size:.95rem; }
+  @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
   
-  .dims{ display:flex; flex-direction:column; gap:1.6rem; margin-bottom:2.6rem }
-  .dim-head{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; margin-bottom:.5rem; flex-wrap:wrap }
-  .dim-name{ font-weight:600; display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; font-size:.95rem }
-  .dim-pct{ font-family:var(--serif); font-size:1rem; color:var(--muted) }
-  .badge{ font-size:.64rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:.2rem .55rem; border-radius:99px; background: var(--support-soft); color: var(--support-deep); }
-  .badge.growth{ background: var(--accent-soft); color: var(--accent-deep); }
-  .dim-bar{ height:6px; background: rgba(60,45,30,0.06); border-radius:99px; overflow:hidden; }
-  .dim-fill{ height:100%; border-radius:99px; width:0; background: var(--accent-deep); transition: width 1s var(--ease-ios); }
-  .dim-fill.growth{ background: var(--accent-dark) }
-  .dim-blurb{ font-size:.85rem; color:var(--ink-soft); margin:.4rem 0 0; max-width:62ch }
-  .dim-action{ font-size:.85rem; color:var(--ink-soft); margin:.6rem 0 0; padding:.75rem 1rem; background: #FFFFFF; border-left:2.5px solid var(--accent-deep); border-radius: 0 8px 8px 0; max-width:62ch; box-shadow: 0 2px 8px rgba(60,45,30,0.04); }
-  .dim-action strong{ font-weight:600; color:var(--ink) }
-  
-  .results-actions{ display:flex; flex-direction:column; gap:.7rem; width:100%; padding-top:1.8rem; border-top:1px solid var(--line); }
-  @media (min-width: 480px) {
-    .results-actions { flex-direction: row; justify-content: center; }
+  .option-label:has(.option-input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-bg);
+  }
+  .option-label:has(.option-input:focus-visible) {
+    outline: 2px solid var(--accent); outline-offset: 2px;
   }
 
-  /* ============ Toast ============ */
-  .toast{ position:fixed; left:50%; bottom:-5rem; transform:translateX(-50%); background: var(--ink); color:#fff; padding:.75rem 1.2rem; border-radius:var(--radius-pill); font-size:.85rem; font-weight:500; box-shadow: 0 10px 24px -8px rgba(60,45,30,0.3); z-index:100; transition: bottom .4s cubic-bezier(0.16,1,0.3,1), opacity .4s, visibility .4s; max-width:calc(100vw - 2rem); opacity: 0; visibility: hidden; }
-  .toast.show{ bottom:1.6rem; opacity: 1; visibility: visible; }
-  footer.site{ padding:2rem 0 2.5rem; border-top:1px solid var(--line); font-size:.82rem; color:var(--muted); text-align:center; }
-  footer.site p{ margin:0 }
+  .option-text { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); line-height: 1.5; transition: color 0.2s; }
+  .option-label:has(.option-input:checked) .option-text { color: var(--accent-hover); font-weight: 600; }
+
+  .results-header { text-align: center; margin-bottom: 40px; }
+  .radar-container {
+    width: min(360px, 100%); margin: 0 auto 20px;
+    background: #FFFFFF; border-radius: 24px; padding: 24px;
+    box-shadow: 0 10px 30px rgba(42, 36, 30, 0.04);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .radar-svg { width: 100%; height: auto; overflow: visible; }
+  
+  .radar-poly { fill: rgba(181,103,63,0.12); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; transition: all 1s var(--ease-out); }
+  .radar-dot { fill: var(--accent); stroke: #FFF; stroke-width: 2; transition: all 1s var(--ease-out); }
+  .radar-dot-strength { fill: var(--support); stroke-width: 3; r: 5; }
+  .radar-dot-growth { fill: var(--accent-hover); stroke-width: 3; r: 5; }
+  
+  .radar-label { font-family: var(--font-sans); font-size: 11px; font-weight: 600; fill: var(--text-light); }
+  .radar-label-strength { fill: var(--support); font-weight: 700; }
+  .radar-label-growth { fill: var(--accent-hover); font-weight: 700; }
+
+  .results-title { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: 12px; }
+  .results-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+  .dim-list { display: flex; flex-direction: column; gap: 24px; margin-bottom: 40px; }
+  .dim-card { background: #FFFFFF; border-radius: 16px; padding: 24px; border: 1px solid var(--border-light); }
+  .dim-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+  .dim-card-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+  .dim-card-score { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; color: var(--text-main); }
+  
+  .badge { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 99px; }
+  .badge-strength { background: var(--support-bg); color: var(--support); }
+  .badge-growth { background: var(--accent-bg); color: var(--accent-hover); }
+
+  .dim-track { height: 6px; background: var(--border-light); border-radius: 99px; overflow: hidden; margin-bottom: 16px; }
+  .dim-track-fill { height: 100%; background: var(--text-light); border-radius: 99px; width: 0%; transition: width 1s var(--ease-out); }
+  .dim-track-fill.strength { background: var(--support); }
+  .dim-track-fill.growth { background: var(--accent); }
+
+  .dim-blurb { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 12px; }
+  .dim-action { background: var(--bg-color); padding: 16px; border-radius: 12px; border-left: 3px solid var(--accent); font-size: 0.9rem; color: var(--text-main); }
+  .dim-action strong { color: var(--accent-hover); }
+
+  /* Toast Notification */
+  .toast {
+    position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+    background: var(--text-main); color: #FFFFFF; padding: 12px 24px;
+    border-radius: 99px; font-size: 0.9rem; font-weight: 500;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: bottom 0.4s var(--ease-out);
+    z-index: 1000;
+    pointer-events: none;
+  }
+  .toast.show { bottom: 30px; }
+
+  footer { text-align: center; padding: 30px 20px; color: var(--text-light); font-size: 0.85rem; border-top: 1px solid var(--border-light); margin-top: auto; }
 </style>
 </head>
 <body>
 
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
-<header class="site">
-  <div class="wrap">
-    <a class="wordmark" href="./">
-      <span class="dot" aria-hidden="true"></span>
+<header>
+  <div class="container">
+    <a href="./" class="logo">
+      <span class="logo-dot" aria-hidden="true"></span>
       Esperiel Index
     </a>
   </div>
 </header>
 
-<main id="main">
-  <div class="wrap">
-
-    <section id="screen-intro" class="screen active" aria-labelledby="intro-title">
-      <div class="intro">
-        <p class="eyebrow">An eighteen-question reflection</p>
-        <h1 id="intro-title" tabindex="-1">Communication is not one skill. It is six.</h1>
-        <p class="lead">And they rarely grow at the same rate.</p>
-        <p class="body">
-          The Esperiel Index maps how you show up across six dimensions of communication,
-          so you can see where you are already strong — and where your next edge of growth
-          actually is, rather than guessing.
+<main id="main-content">
+  <div class="container">
+    
+    <section id="screen-intro" class="screen active">
+      <div class="intro-header">
+        <span class="intro-eyebrow">An 18-Question Reflection</span>
+        <h1 class="intro-title">Communication is not one skill. It is six.</h1>
+        <p class="intro-desc">
+          The Esperiel Index maps how you show up across six dimensions of communication. 
+          See where you are already strong—and where your next edge of growth actually lies.
         </p>
-        <div class="dims-preview" id="dimsPreview" aria-hidden="true"></div>
-        <div class="note">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-          <span>Takes about three minutes. Your answers never leave this browser.</span>
-        </div>
-        <div class="btn-row" id="introActions"></div>
+      </div>
+
+      <div class="features">
+        <span class="feature-tag">Clarity</span>
+        <span class="feature-tag">Confidence</span>
+        <span class="feature-tag">Connection</span>
+        <span class="feature-tag">Composure</span>
+        <span class="feature-tag">Curiosity</span>
+        <span class="feature-tag">Conviction</span>
+      </div>
+
+      <div class="button-group" id="intro-buttons">
+        <!-- Buttons injected by JS -->
       </div>
     </section>
 
-    <section id="screen-quiz" class="screen" aria-labelledby="quiz-title">
-      <h2 id="quiz-title" class="sr-only" tabindex="-1">Assessment questions</h2>
-
-      <div class="quiz-meta">
-        <button class="back-btn" id="backBtn" type="button" hidden aria-label="Go back to the previous question">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M15 18l-6-6 6-6"/>
-          </svg> Back
+    <section id="screen-quiz" class="screen">
+      <div class="quiz-header">
+        <button id="btn-back" class="btn-back" hidden aria-label="Previous question">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          Back
         </button>
-        <p class="quiz-count" id="quizCount">Question 1 of 18</p>
+        <div id="quiz-progress-text" class="progress-text" aria-live="polite">Question 1 of 18</div>
+      </div>
+      
+      <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="progress-bar-attr">
+        <div class="progress-fill" id="progress-fill"></div>
       </div>
 
-      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Assessment progress" id="progressBar">
-        <div class="progress-fill" id="progressFill"></div>
+      <div class="question-container">
+        <div id="question-fader" class="question-fader fade-in">
+          <!-- Question content injected here by JS -->
+        </div>
       </div>
-
-      <div class="stack-viewport" id="stackViewport"></div>
     </section>
 
-    <section id="screen-results" class="screen" aria-labelledby="results-title">
-      <div id="resultsBody"></div>
+    <section id="screen-results" class="screen">
+      <div class="results-header">
+        <div class="radar-container" id="radar-container">
+          <!-- Radar SVG injected here -->
+        </div>
+        <h2 class="results-title" id="results-title">Your Profile</h2>
+        <p class="results-desc" id="results-summary"></p>
+      </div>
+
+      <div class="dim-list" id="dim-list">
+        <!-- Dimension breakdowns injected here -->
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-primary" id="btn-share">Share my result</button>
+        <button class="btn btn-secondary" id="btn-retake">Retake assessment</button>
+      </div>
     </section>
 
   </div>
 </main>
 
-<footer class="site">
-  <div class="wrap">
-    <p>Esperiel Index · A reflective tool, not a diagnostic instrument.</p>
-  </div>
+<footer>
+  <p>Esperiel Index · A reflective tool, not a diagnostic instrument.</p>
 </footer>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="toast" class="toast" role="alert" aria-live="assertive"></div>
 
 <script>
-(function(){
+(function() {
   'use strict';
 
-  const REDUCE_MOTION = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-
-  /* ---------------------------------------------------------------
-     DATA CONFIGURATION
-  --------------------------------------------------------------- */
+  /* --- DATA CONFIGURATION --- */
   const DIMENSIONS = {
-    clarity: { name:'Clarity', blurb:'How well you translate complex thinking into language other people can follow.', action:'State the conclusion first, then the reasoning behind it.' },
-    confidence: { name:'Confidence', blurb:'Your ability to hold your ground and speak without shrinking.', action:'Make one statement without softening it with "just" or "sort of."' },
-    connection: { name:'Connection', blurb:'How attuned you are to the people you are communicating with.', action:'Ask someone what they are actually working on, then listen without planning your reply.' },
-    composure: { name:'Composure', blurb:'How steady you stay when a conversation becomes difficult.', action:'When you feel the heat rise, name it silently and wait three seconds before speaking.' },
-    curiosity: { name:'Curiosity', blurb:'How openly you seek out perspectives beyond your own.', action:'In your next disagreement, ask: "What would have to be true for you to be right?"' },
-    conviction: { name:'Conviction', blurb:'How firmly you stand behind your ideas and your commitments.', action:'Pick one small commitment this week and treat it as unbreakable.' }
+    clarity: { name: 'Clarity', blurb: 'How well you translate complex thinking into language other people can follow.', action: 'State the conclusion first, then the reasoning behind it.' },
+    confidence: { name: 'Confidence', blurb: 'Your ability to hold your ground and speak without shrinking.', action: 'Make one statement without softening it with "just" or "sort of."' },
+    connection: { name: 'Connection', blurb: 'How attuned you are to the people you are communicating with.', action: 'Ask someone what they are actually working on, then listen without planning your reply.' },
+    composure: { name: 'Composure', blurb: 'How steady you stay when a conversation becomes difficult.', action: 'When you feel the heat rise, name it silently and wait three seconds before speaking.' },
+    curiosity: { name: 'Curiosity', blurb: 'How openly you seek out perspectives beyond your own.', action: 'In your next disagreement, ask: "What would have to be true for you to be right?"' },
+    conviction: { name: 'Conviction', blurb: 'How firmly you stand behind your ideas and your commitments.', action: 'Pick one small commitment this week and treat it as unbreakable.' }
   };
 
+  /* 
+    The 18 Questions with completely custom, contextual sentences.
+    This provides a much richer experience than "Agree/Disagree".
+  */
   const QUESTIONS = [
-    { dim:'clarity',    text:'When I explain a complex idea, people usually grasp it without needing me to repeat myself.' },
-    { dim:'clarity',    text:'I organize my thoughts before I speak, rather than thinking out loud.' },
-    { dim:'clarity',    text:'I can summarize a long discussion into a single clear sentence.' },
-    { dim:'confidence', text:'I can speak up in a room where I am not the most senior person present.' },
-    { dim:'confidence', text:'I state my views plainly, without hedging them into something smaller.' },
-    { dim:'confidence', text:'I can say "I don\u2019t know" without it costing me my footing.' },
-    { dim:'connection', text:'I notice when someone has disengaged, and I adjust how I am communicating.' },
-    { dim:'connection', text:'People tend to tell me what is really going on, not just the surface version.' },
-    { dim:'connection', text:'I remember what matters to people and bring it up later.' },
-    { dim:'composure',  text:'When I am caught off guard, I take a breath before I respond.' },
-    { dim:'composure',  text:'I can stay steady when a conversation turns tense or adversarial.' },
-    { dim:'composure',  text:'I can disagree with someone without it becoming personal.' },
-    { dim:'curiosity',  text:'I ask questions in order to understand, not just to line up my response.' },
-    { dim:'curiosity',  text:'I actively seek out perspectives that challenge my own.' },
-    { dim:'curiosity',  text:'I change my mind when the evidence calls for it.' },
-    { dim:'conviction', text:'I can advocate for an idea even when it is unpopular in the room.' },
-    { dim:'conviction', text:'I follow through on what I have committed to, even when it becomes inconvenient.' },
-    { dim:'conviction', text:'My actions tend to match the values I say I hold.' }
+    // CLARITY
+    {
+      dim: 'clarity',
+      text: 'When you explain a complex idea to a group, what usually happens?',
+      options: [
+        { val: 1, label: 'People look confused, and I usually have to start over from scratch.' },
+        { val: 2, label: 'I frequently have to re-explain key points to get people on the same page.' },
+        { val: 3, label: 'It varies; sometimes they follow me, sometimes they need a lot of clarification.' },
+        { val: 4, label: 'Most people understand my point clearly after my first explanation.' },
+        { val: 5, label: 'People almost always grasp the full complexity immediately without repetition.' }
+      ]
+    },
+    {
+      dim: 'clarity',
+      text: 'How do you approach organizing your thoughts before speaking?',
+      options: [
+        { val: 1, label: 'I figure out what I want to say entirely by talking out loud.' },
+        { val: 2, label: 'I often start talking and hope the main point eventually becomes clear.' },
+        { val: 3, label: 'I pause briefly to find a starting point, but structure it as I go.' },
+        { val: 4, label: 'I usually mentally outline my main point and supporting details before speaking.' },
+        { val: 5, label: 'I always distill my thoughts into a clear, structured sequence before opening my mouth.' }
+      ]
+    },
+    {
+      dim: 'clarity',
+      text: 'If asked to summarize a long, winding meeting, you would...',
+      options: [
+        { val: 1, label: 'Find it very difficult to condense without giving a long recap of everything.' },
+        { val: 2, label: 'Provide a summary that still includes quite a few unnecessary details.' },
+        { val: 3, label: 'Summarize the main themes, though it might take a few sentences.' },
+        { val: 4, label: 'Confidently extract the core takeaway into a brief, clear summary.' },
+        { val: 5, label: 'Easily distill the entire discussion into a single, sharp, actionable sentence.' }
+      ]
+    },
+    // CONFIDENCE
+    {
+      dim: 'confidence',
+      text: 'How do you behave in a room where you are the least senior person?',
+      options: [
+        { val: 1, label: 'I stay completely silent; it is not my place to speak.' },
+        { val: 2, label: 'I only speak if I am directly asked a question by a senior leader.' },
+        { val: 3, label: 'I will share an idea, but I feel highly anxious and often rush through it.' },
+        { val: 4, label: 'I comfortably offer my perspective when I know it adds value.' },
+        { val: 5, label: 'I speak up with the same steady presence as I would with my peers.' }
+      ]
+    },
+    {
+      dim: 'confidence',
+      text: 'When presenting a strong viewpoint, how often do you use words like "just", "maybe", or "sort of"?',
+      options: [
+        { val: 1, label: 'Constantly; I subconsciously pad almost every statement I make.' },
+        { val: 2, label: 'Frequently, especially if I am worried about how my view will be received.' },
+        { val: 3, label: 'Occasionally, mostly out of habit rather than lack of certainty.' },
+        { val: 4, label: 'Rarely; I try to make my statements direct and unqualified.' },
+        { val: 5, label: 'Never; I state my views plainly without hedging them into something smaller.' }
+      ]
+    },
+    {
+      dim: 'confidence',
+      text: 'When asked a question you don’t know the answer to, you typically:',
+      options: [
+        { val: 1, label: 'Panic, guess, or make something up to avoid looking incompetent.' },
+        { val: 2, label: 'Talk around the issue hoping nobody notices I didn’t answer the question.' },
+        { val: 3, label: 'Admit I don\'t know, but feel deeply embarrassed about it.' },
+        { val: 4, label: 'Simply state I don\'t know and offer to find the answer.' },
+        { val: 5, label: 'Say "I don\'t know" comfortably, knowing it doesn\'t diminish my value.' }
+      ]
+    },
+    // CONNECTION
+    {
+      dim: 'connection',
+      text: 'During a 1-on-1 conversation, if the other person starts to disengage:',
+      options: [
+        { val: 1, label: 'I rarely notice until the conversation is completely over.' },
+        { val: 2, label: 'I might notice they are quiet, but I just keep talking to fill the silence.' },
+        { val: 3, label: 'I notice, but I\'m not always sure how to bring them back in.' },
+        { val: 4, label: 'I usually notice and pause to ask them a question.' },
+        { val: 5, label: 'I immediately sense the shift and smoothly adapt my approach to re-engage them.' }
+      ]
+    },
+    {
+      dim: 'connection',
+      text: 'When people describe their problems to you, they usually:',
+      options: [
+        { val: 1, label: 'Give me a very brief, formal summary and move on.' },
+        { val: 2, label: 'Share the surface-level facts but keep their real feelings hidden.' },
+        { val: 3, label: 'Tell me the practical issues, but only occasionally open up.' },
+        { val: 4, label: 'Feel comfortable enough to share their genuine frustrations with me.' },
+        { val: 5, label: 'Consistently reveal what is really going on beneath the surface.' }
+      ]
+    },
+    {
+      dim: 'connection',
+      text: 'How well do you track the personal details of the people you work with?',
+      options: [
+        { val: 1, label: 'I struggle to remember names, let alone personal details.' },
+        { val: 2, label: 'I focus strictly on the work and rarely learn about what matters to them.' },
+        { val: 3, label: 'I remember big life events, but forget the smaller details.' },
+        { val: 4, label: 'I make a mental note of their interests and occasionally ask about them.' },
+        { val: 5, label: 'I instinctively remember what matters to them and naturally weave it into future chats.' }
+      ]
+    },
+    // COMPOSURE
+    {
+      dim: 'composure',
+      text: 'When you are caught off guard by harsh feedback:',
+      options: [
+        { val: 1, label: 'I visibly panic or immediately shut down completely.' },
+        { val: 2, label: 'I get highly defensive and snap back with a justification immediately.' },
+        { val: 3, label: 'I get flustered and give a rushed, messy response.' },
+        { val: 4, label: 'I feel a spike of stress but manage to pause before responding.' },
+        { val: 5, label: 'I take a slow breath, process the information calmly, and respond with total steadiness.' }
+      ]
+    },
+    {
+      dim: 'composure',
+      text: 'When a meeting suddenly turns tense or adversarial:',
+      options: [
+        { val: 1, label: 'I become entirely overwhelmed and either flee or lose my temper.' },
+        { val: 2, label: 'My voice gets shaky or raises, and I let my emotions drive my words.' },
+        { val: 3, label: 'I become very quiet and try to avoid the conflict entirely.' },
+        { val: 4, label: 'I manage to keep my voice level, even though my heart is racing.' },
+        { val: 5, label: 'I remain an anchoring presence in the room, keeping the conversation productive.' }
+      ]
+    },
+    {
+      dim: 'composure',
+      text: 'When a colleague aggressively disagrees with your core strategy:',
+      options: [
+        { val: 1, label: 'I take it as a deeply personal attack and hold a grudge.' },
+        { val: 2, label: 'I argue back fiercely to prove I am right and they are wrong.' },
+        { val: 3, label: 'I feel personally offended, but try to hide it professionally.' },
+        { val: 4, label: 'I can separate my ego from the idea and debate the merits.' },
+        { val: 5, label: 'I completely detach from ego, viewing the disagreement purely as a puzzle to solve together.' }
+      ]
+    },
+    // CURIOSITY
+    {
+      dim: 'curiosity',
+      text: 'While someone is explaining an opposing viewpoint, you are usually:',
+      options: [
+        { val: 1, label: 'Interrupting them to tell them why they are wrong.' },
+        { val: 2, label: 'Silently rehearsing my counter-argument while they speak.' },
+        { val: 3, label: 'Half-listening, waiting for my turn to speak.' },
+        { val: 4, label: 'Listening closely to understand the logic behind their stance.' },
+        { val: 5, label: 'Deeply listening and asking clarifying questions to fully map their perspective.' }
+      ]
+    },
+    {
+      dim: 'curiosity',
+      text: 'How often do you intentionally consume content or seek opinions that challenge your beliefs?',
+      options: [
+        { val: 1, label: 'Never. I stick strictly to people and sources that agree with me.' },
+        { val: 2, label: 'Rarely. If I encounter opposing views, I usually ignore them.' },
+        { val: 3, label: 'Sometimes, though I mostly do it to find flaws in their arguments.' },
+        { val: 4, label: 'Regularly. I like to keep a pulse on what the other side thinks.' },
+        { val: 5, label: 'Constantly. I actively seek out intelligent challenges to stress-test my own worldview.' }
+      ]
+    },
+    {
+      dim: 'curiosity',
+      text: 'When presented with clear evidence that contradicts a long-held belief you have:',
+      options: [
+        { val: 1, label: 'I reject the evidence entirely to protect my belief.' },
+        { val: 2, label: 'I heavily scrutinize the evidence, looking for any reason to dismiss it.' },
+        { val: 3, label: 'I feel uncomfortable, but will quietly reconsider my stance over time.' },
+        { val: 4, label: 'I readily accept the new data and adjust my thinking accordingly.' },
+        { val: 5, label: 'I immediately change my mind and openly admit to others that I was previously wrong.' }
+      ]
+    },
+    // CONVICTION
+    {
+      dim: 'conviction',
+      text: 'If you realize your idea is highly unpopular in a room full of peers:',
+      options: [
+        { val: 1, label: 'I instantly abandon the idea and agree with the majority.' },
+        { val: 2, label: 'I backtrack and pretend I wasn\'t actually serious about it.' },
+        { val: 3, label: 'I water the idea down significantly to make it more palatable.' },
+        { val: 4, label: 'I politely defend it, but will back down if pushed too hard.' },
+        { val: 5, label: 'I calmly and firmly advocate for it, regardless of the room\'s resistance.' }
+      ]
+    },
+    {
+      dim: 'conviction',
+      text: 'When you make a commitment to do something, and it later becomes highly inconvenient:',
+      options: [
+        { val: 1, label: 'I regularly drop commitments if they become too difficult.' },
+        { val: 2, label: 'I often look for excuses or technicalities to get out of it.' },
+        { val: 3, label: 'I might flake, but I feel very guilty about doing so.' },
+        { val: 4, label: 'I usually push through and get it done, though I might complain.' },
+        { val: 5, label: 'I follow through with zero exceptions. My word is unbreakable.' }
+      ]
+    },
+    {
+      dim: 'conviction',
+      text: 'If a project requirement directly conflicts with your stated ethical values:',
+      options: [
+        { val: 1, label: 'I ignore my values entirely to get the job done.' },
+        { val: 2, label: 'I follow orders, assuming leadership knows best.' },
+        { val: 3, label: 'I feel conflicted and complain privately, but still comply.' },
+        { val: 4, label: 'I push back and suggest alternative ways to achieve the goal.' },
+        { val: 5, label: 'I refuse to proceed. My actions will always match the values I claim to hold.' }
+      ]
+    }
   ];
 
-  const SCALE = [
-    { value:1, label:'Strongly disagree' },
-    { value:2, label:'Disagree' },
-    { value:3, label:'Neutral' },
-    { value:4, label:'Agree' },
-    { value:5, label:'Strongly agree' }
-  ];
-
-  const STORAGE_KEY = 'esperiel-index-v8';
-
+  // System State
+  const STORAGE_KEY = 'esperiel-index-flat-v1';
   let answers = new Array(QUESTIONS.length).fill(null);
-  let current = 0;
-  let cardsRendered = false;
-  let advanceTimer = null;
+  let currentIndex = 0;
+  let isAnimating = false;
 
   const screens = {
-    intro:   document.getElementById('screen-intro'),
-    quiz:    document.getElementById('screen-quiz'),
+    intro: document.getElementById('screen-intro'),
+    quiz: document.getElementById('screen-quiz'),
     results: document.getElementById('screen-results')
   };
-  const stackViewport = document.getElementById('stackViewport');
-  const resultsBody   = document.getElementById('resultsBody');
-  const introActions  = document.getElementById('introActions');
-  const dimsPreview   = document.getElementById('dimsPreview');
-  const quizCount     = document.getElementById('quizCount');
-  const progressFill  = document.getElementById('progressFill');
-  const progressBar   = document.getElementById('progressBar');
-  const backBtn       = document.getElementById('backBtn');
-  const toastEl       = document.getElementById('toast');
 
-  function showScreen(name){
-    Object.entries(screens).forEach(([key, el]) => el.classList.toggle('active', key === name));
-    window.scrollTo({ top:0, behavior:'smooth' });
-    const heading = screens[name].querySelector('h1, h2');
-    if (heading) heading.focus({ preventScroll:true });
+  // Intro UI
+  const introButtons = document.getElementById('intro-buttons');
+  
+  // Quiz UI
+  const fader = document.getElementById('question-fader');
+  const btnBack = document.getElementById('btn-back');
+  const progressText = document.getElementById('quiz-progress-text');
+  const progressFill = document.getElementById('progress-fill');
+  const progressBarAttr = document.getElementById('progress-bar-attr');
+  
+  // Results UI
+  const radarContainer = document.getElementById('radar-container');
+  const resultsTitle = document.getElementById('results-title');
+  const resultsSummary = document.getElementById('results-summary');
+  const dimList = document.getElementById('dim-list');
+  const btnShare = document.getElementById('btn-share');
+  const btnRetake = document.getElementById('btn-retake');
+  const toast = document.getElementById('toast');
+
+  function init() {
+    loadState();
+    renderIntro();
+    switchScreen('intro');
   }
 
-  function toast(message){
-    toastEl.textContent = message;
-    toastEl.classList.add('show');
-    clearTimeout(toast._t);
-    toast._t = setTimeout(() => toastEl.classList.remove('show'), 2400);
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ answers, currentIndex })); } catch (e) {}
   }
-
-  function save(){ try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ answers, current })); } catch (e) {} }
-  function load(){
+  function loadState() {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return null;
-      const data = JSON.parse(raw);
-      if (!data || !Array.isArray(data.answers) || data.answers.length !== QUESTIONS.length) return null;
-      return data;
-    } catch (e) { return null; }
-  }
-  function clearSaved(){ try { localStorage.removeItem(STORAGE_KEY); } catch (e) {} }
-  function firstUnanswered(){ const i = answers.findIndex(a => a === null); return i === -1 ? 0 : i; }
-  function answeredCount(){ return answers.filter(a => a !== null).length; }
-
-  /* ===============================================================
-     AUTO-FIT
-  =============================================================== */
-  function fitCard(card){
-    const body = card.querySelector('.qcard-body');
-    const content = card.querySelector('.qcard-content');
-    if (!body || !content) return;
-    content.style.transform = '';
-    void content.offsetHeight; // force reflow
-    const style = getComputedStyle(body);
-    const available = body.clientHeight - (parseFloat(style.paddingTop) || 0) - (parseFloat(style.paddingBottom) || 0);
-    if (available <= 0) return;
-    const needed = content.offsetHeight;
-    if (needed > available + 1){
-      content.style.transform = 'scale(' + Math.max(0.68, available / needed) + ')';
-    }
-  }
-
-  function fitAllCards(){ stackViewport.querySelectorAll('.qcard').forEach(fitCard); }
-  let resizeTimer;
-  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(fitAllCards, 140); });
-  window.addEventListener('orientationchange', () => setTimeout(fitAllCards, 200));
-
-  /* ===============================================================
-     HEXAGON RADAR
-  =============================================================== */
-  const RADAR = { size: 380, cx: 190, cy: 190, maxR: 112, labelR: 138, rings: [0.2, 0.4, 0.6, 0.8, 1.0] };
-  function polar(r, index, total){ const angle = (index * (360 / total) - 90) * Math.PI / 180; return { x: RADAR.cx + r * Math.cos(angle), y: RADAR.cy + r * Math.sin(angle) }; }
-
-  function buildRadarSVG(results, overall, strongestKey, growthKey){
-    const n = results.length;
-    const { cx, cy, maxR, labelR, rings, size } = RADAR;
-    const gridHtml = rings.map(level => {
-      const pts = results.map((_, i) => { const p = polar(maxR * level, i, n); return p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
-      const isOuter = level === 1;
-      return '<polygon points="' + pts + '" fill="none" stroke="' + (isOuter ? 'var(--line-strong)' : 'var(--line)') + '" stroke-width="' + (isOuter ? 1.5 : 1) + '" />';
-    }).join('');
-    const axesHtml = results.map((_, i) => {
-      const p = polar(maxR, i, n);
-      return '<line x1="' + cx + '" y1="' + cy + '" x2="' + p.x.toFixed(1) + '" y2="' + p.y.toFixed(1) + '" stroke="var(--line)" stroke-width="1" />';
-    }).join('');
-    const dataPts = results.map((d, i) => { const p = polar(maxR * (d.pct / 100), i, n); return p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
-    const dotsHtml = results.map((d, i) => {
-      const p = polar(maxR * (d.pct / 100), i, n);
-      let cls = 'radar-dot'; let r = 4.5;
-      if (d.key === growthKey && strongestKey !== growthKey){ cls += ' is-growth'; r = 5.5; }
-      else if (d.key === strongestKey && strongestKey !== growthKey){ cls += ' is-strongest'; r = 5.5; }
-      return '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + r + '" class="' + cls + '" />';
-    }).join('');
-    const labelsHtml = results.map((d, i) => {
-      const p = polar(labelR, i, n); const dx = p.x - cx; const dy = p.y - cy;
-      const anchor = dx > 8 ? 'start' : dx < -8 ? 'end' : 'middle';
-      let baseline = 'middle'; if (dy < -8) baseline = 'auto'; if (dy > 8) baseline = 'hanging';
-      let cls = 'radar-label';
-      if (d.key === growthKey && strongestKey !== growthKey) cls += ' is-growth';
-      else if (d.key === strongestKey && strongestKey !== growthKey) cls += ' is-strongest';
-      return '<text x="' + p.x.toFixed(1) + '" y="' + p.y.toFixed(1) + '" text-anchor="' + anchor + '" dominant-baseline="' + baseline + '" class="' + cls + '">' + d.name + '</text>';
-    }).join('');
-
-    return '<svg class="radar" viewBox="0 0 ' + size + ' ' + size + '" role="img" aria-label="Hexagon radar chart. Overall score ' + overall + ' percent.">' +
-      '<g class="radar-grid">' + gridHtml + '</g><g class="radar-axes">' + axesHtml + '</g>' +
-      '<g class="radar-data"><polygon points="' + dataPts + '" class="radar-poly" />' + dotsHtml + '</g>' +
-      '<text x="' + cx + '" y="' + (cy + 4) + '" text-anchor="middle" class="radar-overall" id="radarOverall">0</text>' +
-      '<text x="' + cx + '" y="' + (cy + 32) + '" text-anchor="middle" class="radar-overall-label">overall</text></svg>';
-  }
-
-  function animateCount(el, target, duration){
-    if (REDUCE_MOTION){ el.textContent = String(target); return; }
-    const start = performance.now();
-    const ease = t => 1 - Math.pow(1 - t, 3);
-    function frame(now){
-      const t = Math.min(1, (now - start) / duration);
-      el.textContent = String(Math.round(ease(t) * target));
-      if (t < 1) requestAnimationFrame(frame); else el.textContent = String(target);
-    }
-    requestAnimationFrame(frame);
-  }
-
-  /* ---------------------------------------------------------------
-     INTRO & APP INIT
-  --------------------------------------------------------------- */
-  function renderDimensionPreview(){
-    dimsPreview.innerHTML = Object.values(DIMENSIONS).map(d => '<div class="chip"><span class="bullet" aria-hidden="true"></span>' + d.name + '</div>').join('');
-  }
-
-  function renderIntroActions(){
-    const saved = load();
-    const completed = answeredCount() === QUESTIONS.length;
-    let html = '<button class="btn btn-primary" id="beginBtn" type="button">Begin the index</button>';
-    if (completed){
-      html = '<button class="btn btn-primary" id="viewResultsBtn" type="button">View your results</button><button class="btn btn-ghost" id="beginBtn" type="button">Start over</button>';
-    } else if (saved && answeredCount() > 0){
-      html = '<button class="btn btn-primary" id="resumeBtn" type="button">Resume — ' + (QUESTIONS.length - answeredCount()) + ' left</button><button class="btn btn-ghost" id="beginBtn" type="button">Start over</button>';
-    }
-    introActions.innerHTML = html;
-    if (document.getElementById('beginBtn')) document.getElementById('beginBtn').addEventListener('click', () => { answers = new Array(QUESTIONS.length).fill(null); current = 0; clearSaved(); startQuiz(); });
-    if (document.getElementById('resumeBtn')) document.getElementById('resumeBtn').addEventListener('click', () => { current = firstUnanswered(); startQuiz(); });
-    if (document.getElementById('viewResultsBtn')) document.getElementById('viewResultsBtn').addEventListener('click', () => { renderResults(); showScreen('results'); });
-  }
-
-  /* ---------------------------------------------------------------
-     QUIZ
-  --------------------------------------------------------------- */
-  function startQuiz(){
-    if (!cardsRendered) buildStack();
-    syncStack(false);
-    showScreen('quiz');
-    requestAnimationFrame(() => requestAnimationFrame(fitAllCards));
-  }
-
-  function buildStack(){
-    stackViewport.innerHTML = QUESTIONS.map((q, i) => {
-      return '<article class="qcard" data-index="' + i + '" data-offset="' + (i === 0 ? 0 : 1) + '" aria-label="Question ' + (i + 1) + ' of ' + QUESTIONS.length + '">' +
-        '<div class="qcard-body"><div class="qcard-content">' +
-          '<p class="qcard-dim">' + DIMENSIONS[q.dim].name + '</p>' +
-          '<h3 class="qcard-question">' + q.text + '</h3>' +
-          '<div class="options" role="radiogroup">' +
-            SCALE.map(opt => '<label class="option"><input type="radio" name="q' + i + '" value="' + opt.value + '" ' + (answers[i] === opt.value ? 'checked' : '') + '><span class="option-label">' + opt.label + '</span></label>').join('') +
-          '</div>' +
-        '</div></div>' +
-        '<div class="qcard-timer" aria-hidden="true"><div class="qcard-timer-fill"></div></div>' + 
-      '</article>';
-    }).join('');
-    cardsRendered = true;
-  }
-
-  function syncStack(animate){
-    stackViewport.querySelectorAll('.qcard').forEach((card, i) => {
-      const raw = i - current;
-      // Clamping limits memory rendering of unused cards
-      const offset = Math.max(-2, Math.min(2, raw));
-      card.dataset.offset = String(offset);
-      const isCurrent = raw === 0;
-      card.setAttribute('aria-hidden', isCurrent ? 'false' : 'true');
-      if ('inert' in card) card.inert = !isCurrent;
-      if (!animate){ card.style.transition = 'none'; void card.offsetWidth; card.style.transition = ''; }
-    });
-    updateMeta();
-  }
-
-  function updateMeta(){
-    const total = QUESTIONS.length;
-    const pct = Math.round((answeredCount() / total) * 100);
-    quizCount.textContent = 'Question ' + (current + 1) + ' of ' + total;
-    progressFill.style.width = pct + '%';
-    progressBar.setAttribute('aria-valuenow', String(pct));
-    if (current === 0) backBtn.setAttribute('hidden',''); else backBtn.removeAttribute('hidden');
-  }
-
-  function answerAndAdvance(card, value){
-    if (card.dataset.offset !== '0') return;
-    const i = Number(card.dataset.index);
-    answers[i] = value;
-    save();
-    updateMeta();
-
-    if (advanceTimer) {
-      clearTimeout(advanceTimer);
-      stackViewport.querySelectorAll('.qcard.advancing').forEach(c => {
-         c.classList.remove('advancing');
-         const f = c.querySelector('.qcard-timer-fill');
-         if(f) f.style.width = '0%';
-      });
-    }
-
-    // Trigger elegant thin visual timer
-    card.classList.add('advancing');
-    requestAnimationFrame(() => {
-      const fill = card.querySelector('.qcard-timer-fill');
-      if(fill) fill.style.width = '100%';
-    });
-
-    advanceTimer = setTimeout(() => {
-      advanceTimer = null;
-      card.classList.remove('advancing');
-      const fill = card.querySelector('.qcard-timer-fill');
-      if(fill) fill.style.width = '0%';
-
-      if (i < QUESTIONS.length - 1){
-        const oldHeading = card.querySelector('.qcard-question');
-        if (oldHeading) oldHeading.removeAttribute('tabindex');
-
-        current = i + 1;
-        syncStack(true);
-        
-        const newCard = stackViewport.querySelector('.qcard[data-offset="0"]');
-        if (newCard) fitCard(newCard);
-        
-        const newHeading = newCard && newCard.querySelector('.qcard-question');
-        if (newHeading){
-          newHeading.setAttribute('tabindex','-1');
-          newHeading.focus({ preventScroll:true });
-        }
-      } else {
-        finish();
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (data && Array.isArray(data.answers) && data.answers.length === QUESTIONS.length) {
+        answers = data.answers;
+        currentIndex = data.currentIndex || 0;
       }
-    }, REDUCE_MOTION ? 150 : 500);
+    } catch (e) {}
+  }
+  function clearState() {
+    answers = new Array(QUESTIONS.length).fill(null);
+    currentIndex = 0;
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
   }
 
-  stackViewport.addEventListener('change', (e) => {
-    const input = e.target;
-    if (!input.matches('input[type="radio"]')) return;
-    const card = input.closest('.qcard');
-    if (!card) return;
-    if (navigator.vibrate) navigator.vibrate(20);
-    answerAndAdvance(card, Number(input.value));
-  });
+  function answeredCount() { return answers.filter(a => a !== null).length; }
 
-  stackViewport.addEventListener('click', (e) => {
-    const input = e.target.closest('input[type="radio"]');
-    if (!input || !input.checked) return;
-    const card = input.closest('.qcard');
-    if (!card) return;
-    if (answers[Number(card.dataset.index)] === Number(input.value)){
-      answerAndAdvance(card, Number(input.value));
-    }
-  });
-
-  backBtn.addEventListener('click', () => {
-    if (advanceTimer){ 
-      clearTimeout(advanceTimer); advanceTimer = null; 
-      stackViewport.querySelectorAll('.qcard.advancing').forEach(c => c.classList.remove('advancing'));
-    }
-    if (current === 0) return;
-    current--;
-    syncStack(true);
-    const newCard = stackViewport.querySelector('.qcard[data-offset="0"]');
-    if (newCard) fitCard(newCard);
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (!screens.quiz.classList.contains('active') || e.metaKey || e.ctrlKey || e.altKey) return;
-    const card = stackViewport.querySelector('.qcard[data-offset="0"]');
-    if (!card) return;
-    const n = parseInt(e.key, 10);
-    if (n >= 1 && n <= SCALE.length){
-      const input = card.querySelectorAll('input[type="radio"]')[n - 1];
-      if (input){ input.checked = true; input.dispatchEvent(new Event('change', { bubbles:true })); e.preventDefault(); }
-    }
-  });
-
-  /* ---------------------------------------------------------------
-     SCORING
-  --------------------------------------------------------------- */
-  function computeScores(){
-    const per = {}; Object.keys(DIMENSIONS).forEach(key => { per[key] = { total:0, max:0 }; });
-    QUESTIONS.forEach((q, i) => { per[q.dim].total += (answers[i] || 0); per[q.dim].max += 5; });
-    const results = Object.keys(DIMENSIONS).map(key => {
-      return { key, name: DIMENSIONS[key].name, blurb: DIMENSIONS[key].blurb, action: DIMENSIONS[key].action, pct: per[key].max ? Math.round((per[key].total / per[key].max) * 100) : 0 };
+  function switchScreen(screenName) {
+    Object.keys(screens).forEach(key => {
+      if (key === screenName) {
+        screens[key].classList.add('active');
+      } else {
+        screens[key].classList.remove('active');
+      }
     });
-    const totalPoints = answers.reduce((sum, a) => sum + (a || 0), 0);
-    const maxPoints = QUESTIONS.length * 5;
-    const overall = Math.round((totalPoints / maxPoints) * 100);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renderIntro() {
+    const count = answeredCount();
+    let html = '';
+    
+    if (count === QUESTIONS.length) {
+      html = `
+        <button class="btn btn-primary" id="start-results">View your results</button>
+        <button class="btn btn-secondary" id="start-new">Start over</button>
+      `;
+    } else if (count > 0) {
+      html = `
+        <button class="btn btn-primary" id="start-resume">Resume (${QUESTIONS.length - count} left)</button>
+        <button class="btn btn-secondary" id="start-new">Start over</button>
+      `;
+    } else {
+      html = `<button class="btn btn-primary" id="start-new">Begin the index</button>`;
+    }
+    
+    introButtons.innerHTML = html;
+    
+    const btnNew = document.getElementById('start-new');
+    const btnRes = document.getElementById('start-resume');
+    const btnView = document.getElementById('start-results');
+    
+    if (btnNew) btnNew.addEventListener('click', () => { clearState(); startQuiz(); });
+    if (btnRes) btnRes.addEventListener('click', () => { startQuiz(); });
+    if (btnView) btnView.addEventListener('click', () => { generateResults(); switchScreen('results'); });
+  }
+
+  function startQuiz() {
+    switchScreen('quiz');
+    renderQuestion(false); // First render, no animation needed
+  }
+
+  function updateQuizHeader() {
+    const total = QUESTIONS.length;
+    const pct = Math.round(((currentIndex) / total) * 100);
+    
+    progressText.textContent = `Question ${currentIndex + 1} of ${total}`;
+    progressFill.style.width = `${pct}%`;
+    progressBarAttr.setAttribute('aria-valuenow', pct);
+    
+    if (currentIndex === 0) btnBack.setAttribute('hidden', '');
+    else btnBack.removeAttribute('hidden');
+  }
+
+  function renderQuestion(animateIn = true) {
+    updateQuizHeader();
+    const q = QUESTIONS[currentIndex];
+    const dim = DIMENSIONS[q.dim];
+    const currentVal = answers[currentIndex];
+    
+    let html = `
+      <div class="q-dim">${dim.name}</div>
+      <h3 class="q-text">${q.text}</h3>
+      <div class="options-list" role="radiogroup">
+        ${q.options.map((opt, idx) => `
+          <label class="option-label">
+            <input type="radio" name="q${currentIndex}" value="${opt.val}" class="option-input" ${currentVal === opt.val ? 'checked' : ''}>
+            <span class="option-text">${opt.label}</span>
+          </label>
+        `).join('')}
+      </div>
+    `;
+    
+    fader.innerHTML = html;
+    
+    if (animateIn) {
+      fader.className = 'question-fader fade-in';
+    }
+    
+    // Attach listener for choices
+    const inputs = fader.querySelectorAll('input[type="radio"]');
+    inputs.forEach(input => {
+      input.addEventListener('change', handleAnswer);
+    });
+  }
+
+  function handleAnswer(e) {
+    if (isAnimating) return;
+    const val = parseInt(e.target.value, 10);
+    answers[currentIndex] = val;
+    saveState();
+    
+    // Slight delay to show selected state before moving on
+    isAnimating = true;
+    setTimeout(() => {
+      goToNext();
+    }, 400); 
+  }
+
+  function goToNext() {
+    if (currentIndex < QUESTIONS.length - 1) {
+      fader.className = 'question-fader fade-out';
+      setTimeout(() => {
+        currentIndex++;
+        saveState();
+        renderQuestion(true);
+        isAnimating = false;
+      }, 300); // Wait for fade out CSS
+    } else {
+      isAnimating = false;
+      generateResults();
+      switchScreen('results');
+    }
+  }
+
+  btnBack.addEventListener('click', () => {
+    if (isAnimating || currentIndex === 0) return;
+    isAnimating = true;
+    fader.className = 'question-fader fade-out';
+    setTimeout(() => {
+      currentIndex--;
+      saveState();
+      renderQuestion(true);
+      isAnimating = false;
+    }, 300);
+  });
+
+  function computeScores() {
+    const rawScores = {};
+    Object.keys(DIMENSIONS).forEach(key => { rawScores[key] = { total: 0, max: 0 }; });
+    
+    QUESTIONS.forEach((q, i) => {
+      rawScores[q.dim].total += (answers[i] || 0);
+      rawScores[q.dim].max += 5;
+    });
+
+    const results = Object.keys(DIMENSIONS).map(key => {
+      const pct = rawScores[key].max > 0 ? Math.round((rawScores[key].total / rawScores[key].max) * 100) : 0;
+      return { key, name: DIMENSIONS[key].name, blurb: DIMENSIONS[key].blurb, action: DIMENSIONS[key].action, pct };
+    });
+
+    const overall = Math.round((answers.reduce((sum, a) => sum + (a || 0), 0) / (QUESTIONS.length * 5)) * 100);
+    
+    // Sort to find strength and growth
     const sorted = [...results].sort((a, b) => b.pct - a.pct);
-    return { results, overall, strongest: sorted[0], growth: sorted[sorted.length - 1] };
+    const strongest = sorted[0];
+    const growth = sorted[sorted.length - 1];
+
+    return { results, overall, strongest, growth };
   }
 
-  function overallBand(score){
-    if (score >= 80) return { title: 'A well-rounded communicator', summary: 'Your dimensions are broadly balanced and consistently high. The work now is refinement — depth in specific contexts rather than repair of a weak area.' };
-    if (score >= 60) return { title: 'A capable communicator with clear edges', summary: 'You have real strengths to build on. The fastest progress will come from deliberately practising your lowest dimension rather than polishing your highest.' };
-    if (score >= 40) return { title: 'A communicator in development', summary: 'You have an honest baseline. Pick one dimension — the lowest — and work on it for a month before touching anything else. Compounding beats coverage.' };
-    return { title: 'At the beginning of a meaningful climb', summary: 'Low scores here are information, not verdicts. Choose the single dimension that would change the most for you, and start there.' };
+  function getBandText(score) {
+    if (score >= 80) return { title: 'A Well-Rounded Communicator', summary: 'Your dimensions are balanced and consistently high. The work now is contextual refinement rather than fixing weak areas.' };
+    if (score >= 60) return { title: 'A Capable Communicator', summary: 'You have solid strengths. The fastest progress will come from deliberately practicing your lowest dimension.' };
+    if (score >= 40) return { title: 'A Communicator in Development', summary: 'You have an honest baseline. Pick one dimension—the lowest—and work on it for a month before touching anything else.' };
+    return { title: 'At the Beginning', summary: 'Low scores here are information, not verdicts. Choose the single dimension that would change the most for you, and start there.' };
   }
 
-  function finish(){ save(); renderResults(); showScreen('results'); }
+  // Pure SVG Math function
+  function getPolarCoordinates(r, index, total, cx, cy) {
+    const angle = (index * (360 / total) - 90) * (Math.PI / 180);
+    return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
+  }
 
-  /* ---------------------------------------------------------------
-     RESULTS
-  --------------------------------------------------------------- */
-  function renderResults(){
-    const { results, overall, strongest, growth } = computeScores();
-    const band = overallBand(overall);
-    const tied = strongest.pct === growth.pct;
-    const radarSvg = buildRadarSVG(results, overall, tied ? null : strongest.key, tied ? null : growth.key);
-
-    const dimsHtml = results.map(d => {
-      const isStrongest = !tied && d.key === strongest.key;
-      const isGrowth = !tied && d.key === growth.key;
-      const badge = isStrongest ? '<span class="badge">Strength</span>' : isGrowth ? '<span class="badge growth">Growth edge</span>' : '';
-      const actionHtml = isGrowth ? '<p class="dim-action"><strong>Try this:</strong> ' + d.action + '</p>' : '';
-      return '<div class="dim">' +
-          '<div class="dim-head"><span class="dim-name">' + d.name + ' ' + badge + '</span><span class="dim-pct">' + d.pct + '%</span></div>' +
-          '<div class="dim-bar"><div class="' + (isGrowth ? 'dim-fill growth' : 'dim-fill') + '" data-width="' + d.pct + '%"></div></div>' +
-          '<p class="dim-blurb">' + d.blurb + '</p>' + actionHtml + '</div>';
+  function drawRadar(results, overall, strongKey, growthKey) {
+    const size = 300, cx = 150, cy = 150, maxR = 90, labelR = 125, rings = [0.25, 0.5, 0.75, 1.0];
+    const n = results.length;
+    
+    // Draw background rings
+    const gridHtml = rings.map((level, ringIdx) => {
+      const pts = results.map((_, i) => {
+        const p = getPolarCoordinates(maxR * level, i, n, cx, cy);
+        return `${p.x},${p.y}`;
+      }).join(' ');
+      const isOuter = level === 1.0;
+      return `<polygon points="${pts}" fill="none" stroke="var(--border-light)" stroke-width="${isOuter ? 1.5 : 1}" />`;
     }).join('');
 
-    resultsBody.innerHTML = '<div class="results-head"><p class="eyebrow">Your Esperiel Index</p><div class="radar-wrap">' + radarSvg + '</div><h2 id="results-title" tabindex="-1">' + band.title + '</h2><p class="results-summary">' + band.summary + '</p></div>' +
-      '<div class="dims">' + dimsHtml + '</div>' +
-      '<div class="results-actions"><button class="btn btn-primary" id="shareBtn" type="button">Share my result</button><button class="btn btn-ghost" id="retakeBtn" type="button">Retake</button></div>';
+    // Draw axes
+    const axesHtml = results.map((_, i) => {
+      const p = getPolarCoordinates(maxR, i, n, cx, cy);
+      return `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" stroke="var(--border-light)" stroke-width="1" />`;
+    }).join('');
 
-    requestAnimationFrame(() => {
-      const dataGroup = document.querySelector('.radar-data'); if (dataGroup) dataGroup.classList.add('in');
-      const numEl = document.getElementById('radarOverall'); if (numEl) animateCount(numEl, overall, 1300);
-      document.querySelectorAll('.dim-fill').forEach(el => { el.style.width = el.dataset.width; });
+    // Draw Data Polygon
+    const dataPts = results.map((d, i) => {
+      const p = getPolarCoordinates(maxR * (d.pct / 100), i, n, cx, cy);
+      return `${p.x},${p.y}`;
+    }).join(' ');
+    
+    const polyHtml = `<polygon points="${dataPts}" class="radar-poly" />`;
+
+    // Draw Dots and Labels
+    let dotsHtml = '';
+    let labelsHtml = '';
+
+    results.forEach((d, i) => {
+      const pDot = getPolarCoordinates(maxR * (d.pct / 100), i, n, cx, cy);
+      let dotClass = 'radar-dot';
+      if (d.key === strongKey && strongKey !== growthKey) dotClass += ' radar-dot-strength';
+      else if (d.key === growthKey && strongKey !== growthKey) dotClass += ' radar-dot-growth';
+      dotsHtml += `<circle cx="${pDot.x}" cy="${pDot.y}" r="3.5" class="${dotClass}" />`;
+
+      const pLabel = getPolarCoordinates(labelR, i, n, cx, cy);
+      const dx = pLabel.x - cx, dy = pLabel.y - cy;
+      const anchor = dx > 10 ? 'start' : dx < -10 ? 'end' : 'middle';
+      const baseline = dy < -10 ? 'auto' : dy > 10 ? 'hanging' : 'middle';
+      
+      let labelClass = 'radar-label';
+      if (d.key === strongKey && strongKey !== growthKey) labelClass += ' radar-label-strength';
+      else if (d.key === growthKey && strongKey !== growthKey) labelClass += ' radar-label-growth';
+
+      labelsHtml += `<text x="${pLabel.x}" y="${pLabel.y}" text-anchor="${anchor}" dominant-baseline="${baseline}" class="${labelClass}">${d.name}</text>`;
     });
 
-    document.getElementById('shareBtn').addEventListener('click', shareResult);
-    document.getElementById('retakeBtn').addEventListener('click', () => {
-      answers = new Array(QUESTIONS.length).fill(null); current = 0; clearSaved();
-      stackViewport.querySelectorAll('.qcard input[type="radio"]').forEach(inp => { inp.checked = false; });
-      syncStack(false); renderIntroActions(); showScreen('intro');
-    });
+    const centerHtml = `
+      <text x="${cx}" y="${cy + 6}" text-anchor="middle" font-family="var(--font-serif)" font-size="32" font-weight="600" fill="var(--text-main)">${overall}</text>
+      <text x="${cx}" y="${cy + 22}" text-anchor="middle" font-family="var(--font-sans)" font-size="8" font-weight="700" letter-spacing="0.1em" text-transform="uppercase" fill="var(--text-light)">Overall</text>
+    `;
+
+    return `<svg class="radar-svg" viewBox="0 0 ${size} ${size}">
+      <g>${gridHtml}</g><g>${axesHtml}</g><g>${polyHtml}</g><g>${dotsHtml}</g><g>${labelsHtml}</g>${centerHtml}
+    </svg>`;
   }
 
-  async function shareResult(){
+  function generateResults() {
+    const { results, overall, strongest, growth } = computeScores();
+    const band = getBandText(overall);
+    const tied = strongest.pct === growth.pct;
+
+    // Set Headers
+    resultsTitle.textContent = band.title;
+    resultsSummary.textContent = band.summary;
+
+    // Draw Chart
+    radarContainer.innerHTML = drawRadar(results, overall, tied ? null : strongest.key, tied ? null : growth.key);
+
+    // Build Dimension Cards
+    dimList.innerHTML = results.map(d => {
+      const isStrong = !tied && d.key === strongest.key;
+      const isGrowth = !tied && d.key === growth.key;
+      
+      let badgeHtml = '';
+      let fillClass = 'dim-track-fill';
+      if (isStrong) { badgeHtml = `<span class="badge badge-strength">Strength</span>`; fillClass += ' strength'; }
+      if (isGrowth) { badgeHtml = `<span class="badge badge-growth">Growth Edge</span>`; fillClass += ' growth'; }
+
+      const actionHtml = isGrowth ? `<div class="dim-action"><strong>Try this next:</strong> ${d.action}</div>` : '';
+
+      return `
+        <div class="dim-card">
+          <div class="dim-card-header">
+            <span class="dim-card-title">${d.name} ${badgeHtml}</span>
+            <span class="dim-card-score">${d.pct}%</span>
+          </div>
+          <div class="dim-track"><div class="${fillClass}" data-target="${d.pct}%"></div></div>
+          <p class="dim-blurb">${d.blurb}</p>
+          ${actionHtml}
+        </div>
+      `;
+    }).join('');
+
+    // Trigger bar animations via requestAnimationFrame
+    setTimeout(() => {
+      document.querySelectorAll('.dim-track-fill').forEach(el => {
+        el.style.width = el.getAttribute('data-target');
+      });
+    }, 100);
+  }
+
+  btnRetake.addEventListener('click', () => {
+    clearState();
+    renderIntro();
+    switchScreen('intro');
+  });
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+
+  btnShare.addEventListener('click', async () => {
     const { overall, strongest, growth } = computeScores();
-    const text = 'My Esperiel Index: ' + overall + '% overall. Strongest dimension: ' + strongest.name + ' (' + strongest.pct + '%). Growth edge: ' + growth.name + ' (' + growth.pct + '%).';
+    const text = `My Esperiel Index: ${overall}% overall. Strongest: ${strongest.name}. Growth edge: ${growth.name}.`;
     const url = window.location.href;
-    if (navigator.share){ try { await navigator.share({ title:'Esperiel Index', text, url }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
-    try { await navigator.clipboard.writeText(text + ' ' + url); toast('Result copied to clipboard'); } catch (e) { toast('Copying is not supported in this browser'); }
-  }
 
-  /* ---------------------------------------------------------------
-     INIT
-  --------------------------------------------------------------- */
-  function init(){
-    renderDimensionPreview();
-    const saved = load();
-    if (saved){ answers = saved.answers; current = typeof saved.current === 'number' ? saved.current : 0; }
-    renderIntroActions();
-    showScreen('intro');
-    if (document.fonts && document.fonts.ready){ document.fonts.ready.then(() => { if (cardsRendered) fitAllCards(); }); }
-  }
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'Esperiel Index', text, url });
+        return;
+      } catch (e) { if (e.name === 'AbortError') return; }
+    }
+    
+    try {
+      await navigator.clipboard.writeText(`${text} ${url}`);
+      showToast('Result copied to clipboard');
+    } catch (e) {
+      showToast('Copying failed in this browser');
+    }
+  });
 
+  // Start app
   init();
+
 })();
 </script>
 </body>
