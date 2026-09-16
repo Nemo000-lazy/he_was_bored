@@ -41,10 +41,9 @@
     --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
     --font-serif:   'Fraunces', Georgia, serif;
 
-    /* Motion tokens */
-    --ease-smooth:  cubic-bezier(0.22, 1, 0.36, 1);      /* expo-out, elegant decel */
-    --ease-spring:  cubic-bezier(0.34, 1.45, 0.64, 1);   /* gentle overshoot */
-    --ease-soft:    cubic-bezier(0.4, 0, 0.2, 1);        /* standard */
+    --ease-smooth:  cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-spring:  cubic-bezier(0.34, 1.45, 0.64, 1);
+    --ease-soft:    cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -64,7 +63,6 @@
     overflow-x: hidden;
   }
 
-  /* Utility */
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .container { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 20px; }
 
@@ -118,7 +116,6 @@
       border-color     0.25s var(--ease-soft),
       box-shadow       0.3s  var(--ease-smooth),
       transform        0.35s var(--ease-spring);
-    will-change: transform;
   }
   @media (min-width: 480px) { .btn { width: auto; max-width: none; } }
 
@@ -262,7 +259,6 @@
       transform 0.28s var(--ease-spring),
       box-shadow 0.28s var(--ease-smooth);
     animation: optionEnter 0.55s var(--ease-smooth) both;
-    will-change: transform;
   }
   @keyframes optionEnter {
     from { opacity: 0; transform: translateY(12px); }
@@ -333,7 +329,7 @@
   }
   @media (min-width: 480px) {
     .q-actions {
-      flex-direction: row; /* desktop: Back left, Next right */
+      flex-direction: row;
       justify-content: flex-end;
     }
     .q-actions .btn {
@@ -370,7 +366,6 @@
     transform-box: view-box;
     transform-origin: 150px 150px;
     animation: radarGrow 1s var(--ease-smooth) 0.1s both;
-    will-change: transform, opacity;
   }
   .radar-dot {
     fill: var(--accent);
@@ -450,7 +445,6 @@
 
   footer { text-align: center; padding: 30px 20px; color: var(--text-light); font-size: 0.85rem; border-top: 1px solid var(--border-light); margin-top: auto; }
 
-  /* ---------- REDUCED MOTION ---------- */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -496,7 +490,9 @@
         <span class="feature-tag">Conviction</span>
       </div>
 
-      <div class="button-group" id="intro-buttons"><!-- injected --></div>
+      <div class="button-group" id="intro-buttons">
+        <button class="btn btn-primary" id="start-new">Begin the index</button>
+      </div>
     </section>
 
     <section id="screen-quiz" class="screen">
@@ -512,11 +508,11 @@
         <div id="question-fader" class="question-fader fade-in"><!-- injected --></div>
 
         <div class="q-actions">
-          <button type="button" id="btn-back" class="btn btn-secondary">
+          <button type="button" id="btn-back" class="btn btn-secondary" hidden>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
             Back
           </button>
-          <button type="button" id="btn-next" class="btn btn-primary">Next</button>
+          <button type="button" id="btn-next" class="btn btn-primary" disabled>Next</button>
         </div>
       </div>
     </section>
@@ -746,26 +742,35 @@
   /* --- INTRO --- */
   function renderIntro() {
     const count = answeredCount();
-    let html = '';
 
     if (count === QUESTIONS.length) {
-      html = `
+      introButtons.innerHTML = `
         <button class="btn btn-primary" id="start-results">View your results</button>
         <button class="btn btn-secondary" id="start-new">Start over</button>`;
     } else if (count > 0) {
-      html = `
+      introButtons.innerHTML = `
         <button class="btn btn-primary" id="start-resume">Resume (${QUESTIONS.length - count} left)</button>
         <button class="btn btn-secondary" id="start-new">Start over</button>`;
-    } else {
-      html = `<button class="btn btn-primary" id="start-new">Begin the index</button>`;
     }
-
-    introButtons.innerHTML = html;
-
-    document.getElementById('start-new')?.addEventListener('click', () => { clearState(); startQuiz(); });
-    document.getElementById('start-resume')?.addEventListener('click', () => startQuiz());
-    document.getElementById('start-results')?.addEventListener('click', () => { generateResults(); switchScreen('results'); });
+    // else: leave the static "Begin the index" button in place
   }
+
+  /* Delegated handler — works for both static and JS-rendered buttons */
+  introButtons.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const id = btn.id;
+
+    if (id === 'start-new') {
+      clearState();
+      startQuiz();
+    } else if (id === 'start-resume') {
+      startQuiz();
+    } else if (id === 'start-results') {
+      generateResults();
+      switchScreen('results');
+    }
+  });
 
   function startQuiz() {
     switchScreen('quiz');
@@ -880,7 +885,6 @@
 
   btnBack.addEventListener('click', goBack);
 
-  /* Keyboard shortcuts: 1–5 select an option, Backspace goes back */
   document.addEventListener('keydown', (e) => {
     if (!screens.quiz.classList.contains('active')) return;
     if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -1043,7 +1047,6 @@
       `;
     }).join('');
 
-    // Animate bars with a slight stagger for fluidity
     requestAnimationFrame(() => {
       document.querySelectorAll('.dim-track-fill').forEach(el => {
         const idx = parseInt(el.getAttribute('data-index'), 10) || 0;
