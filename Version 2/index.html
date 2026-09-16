@@ -6,15 +6,24 @@
 <title>Esperiel Index — A Communication Self-Assessment</title>
 <meta name="description" content="Map how you show up across Clarity, Confidence, Connection, Composure, Curiosity, and Conviction in eighteen questions. Free, private, takes three minutes.">
 <meta name="theme-color" content="#FAF7F2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Esperiel">
 <meta property="og:title" content="Esperiel Index — A Communication Self-Assessment">
 <meta property="og:description" content="Map how you show up across six dimensions of communication. Free, three minutes.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23FAF7F2'/%3E%3Cpolygon points='32 10, 54 22, 54 42, 32 54, 10 42, 10 22' fill='%23B5673F'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23FAF7F2'/%3E%3Cpolygon points='90 30, 152 66, 152 114, 90 150, 28 114, 28 66' fill='%23B5673F'/%3E%3C/svg%3E">
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Esperiel%20Index%22%2C%22short_name%22%3A%22Esperiel%22%2C%22description%22%3A%22An%2018-question%20self-assessment%20mapping%20six%20dimensions%20of%20communication.%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23FAF7F2%22%2C%22theme_color%22%3A%22%23B5673F%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%2527http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2527%2520viewBox%253D%25270%25200%2520512%2520512%2527%253E%253Crect%2520width%253D%2527512%2527%2520height%253D%2527512%2527%2520fill%253D%2527%2523FAF7F2%2527%252F%253E%253Cpolygon%2520points%253D%2527256%252080%252C%2520432%2520176%252C%2520432%2520336%252C%2520256%2520432%252C%252080%2520336%252C%252080%2520176%2527%2520fill%253D%2527%2523B5673F%2527%252F%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%22%7D%5D%7D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Esperiel Index","description":"An 18-question self-assessment mapping six dimensions of communication.","applicationCategory":"LifestyleApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Quiz","name":"Esperiel Index","description":"Map how you show up across Clarity, Confidence, Connection, Composure, Curiosity, and Conviction.","numberOfQuestions":18,"about":{"@type":"Thing","name":"Communication"},"educationalLevel":"beginner","assesses":"Communication self-awareness across six dimensions","typicalAgeRange":"18-"}
 </script>
 <style>
 :root{color-scheme:light;--bg-color:#FAF7F2;--card-bg:#FFFFFF;--text-main:#2A241E;--text-muted:#564A3E;--text-light:#736556;--ink:#1E2A28;--border-light:#E8DFD3;--accent:#B5673F;--accent-hover:#8E4D2C;--accent-bg:#F8EFEA;--support:#5E7362;--support-bg:#EAF0EB;--dim-clarity:#B5673F;--dim-confidence:#8B4A2B;--dim-connection:#7A8471;--dim-composure:#5E7362;--dim-curiosity:#C08A3E;--dim-conviction:#8E5E4A;--font-sans:'Inter',system-ui,-apple-system,sans-serif;--font-serif:'Fraunces',Georgia,serif;--ease-smooth:cubic-bezier(0.22,1,0.36,1);--ease-spring:cubic-bezier(0.34,1.45,0.64,1);--ease-soft:cubic-bezier(0.4,0,0.2,1)}
@@ -32,6 +41,7 @@ header{position:sticky;top:0;z-index:50;padding:20px 0;transition:background-col
 header.scrolled{background:rgba(250,247,242,.82);-webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px);padding:14px 0;border-bottom:1px solid rgba(42,36,30,.05)}
 .logo{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-serif);font-size:1.1rem;font-weight:600;text-decoration:none;color:var(--text-main);font-variation-settings:'SOFT' 30,'WONK' 1}
 .logo-mark{width:12px;height:12px;background:var(--accent);clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%)}
+.header-actions{display:flex;gap:2px;align-items:center}
 main{flex:1;padding-bottom:60px}
 .screen{display:none}
 .screen.active{display:block;animation:screenEnter .55s var(--ease-smooth) both}
@@ -141,20 +151,10 @@ main{flex:1;padding-bottom:60px}
 .forced-card[aria-pressed="true"] .forced-card-label{color:var(--accent-hover)}
 .forced-actions{margin-top:28px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .forced-actions .btn{width:auto;min-width:120px;max-width:none;padding:12px 24px;font-size:.9rem}
-/* RESULTS VIEW TOGGLE */
 .results-view-toggle{display:flex;justify-content:center;gap:4px;margin:0 auto 24px;padding:4px;background:rgba(255,255,255,.7);border:1px solid var(--border-light);border-radius:99px;width:fit-content;animation:contentEnter .5s var(--ease-smooth) both}
 .results-view-toggle button{padding:8px 18px;border-radius:99px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);transition:background-color .2s var(--ease-soft),color .2s var(--ease-soft)}
 .results-view-toggle button[aria-pressed="true"]{background:var(--ink);color:#FFF}
-#screen-results.view-minimal .bookends,
-#screen-results.view-minimal #consistency-note,
-#screen-results.view-minimal #priorities,
-#screen-results.view-minimal #focus-card,
-#screen-results.view-minimal .reflection,
-#screen-results.view-minimal #review-section,
-#screen-results.view-minimal .delta-row,
-#screen-results.view-minimal .delta-caption,
-#screen-results.view-minimal .belief-quote,
-#screen-results.view-minimal .results-ctas{display:none !important}
+#screen-results.view-minimal .bookends,#screen-results.view-minimal #consistency-note,#screen-results.view-minimal #priorities,#screen-results.view-minimal #focus-card,#screen-results.view-minimal .reflection,#screen-results.view-minimal #review-section,#screen-results.view-minimal .delta-row,#screen-results.view-minimal .delta-caption,#screen-results.view-minimal .belief-quote,#screen-results.view-minimal .results-ctas{display:none !important}
 .results-hero{position:relative;text-align:center;padding:44px 20px 32px;border-radius:24px;background:radial-gradient(ellipse at 50% 0%,var(--archetype-tint,transparent) 0%,transparent 65%);animation:contentEnter .6s var(--ease-smooth) both;overflow:hidden}
 .archetype-eyebrow{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:14px;display:block}
 .archetype-title{font-size:clamp(2.2rem,5.4vw,3.4rem);letter-spacing:-.024em;color:var(--text-main);margin-bottom:10px;line-height:1.05}
@@ -272,6 +272,13 @@ main{flex:1;padding-bottom:60px}
 .commit-row input[type="checkbox"]:checked::after{content:'';position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #FFF;border-width:0 2px 2px 0;transform:rotate(45deg);animation:popIn .25s var(--ease-spring) both}
 .commit-caption{font-size:.82rem;color:var(--text-light);font-style:italic;margin-top:8px;padding-left:30px}
 .commit-caption.is-active{color:var(--accent-hover);font-style:normal;font-weight:600}
+.notify-prompt{margin-top:14px;padding:14px 16px;background:rgba(255,255,255,.75);border:1px dashed var(--border-light);border-radius:12px;font-size:.85rem;color:var(--text-muted);line-height:1.5;display:flex;align-items:center;gap:12px;flex-wrap:wrap;animation:contentEnter .4s var(--ease-smooth) both}
+.notify-prompt-text{flex:1;min-width:200px}
+.notify-prompt-actions{display:flex;gap:8px}
+.notify-prompt-btn{padding:8px 14px;border-radius:99px;font-size:.78rem;font-weight:600;background:var(--accent);color:#FFF;transition:background-color .2s var(--ease-soft)}
+.notify-prompt-btn:hover{background:var(--accent-hover)}
+.notify-prompt-skip{padding:8px 14px;border-radius:99px;font-size:.78rem;font-weight:600;background:transparent;color:var(--text-light);transition:color .2s var(--ease-soft)}
+.notify-prompt-skip:hover{color:var(--text-main)}
 .reflection{text-align:center;padding:30px 24px;margin-bottom:40px;border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);animation:contentEnter .6s var(--ease-smooth) both}
 .reflection-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--text-light);margin-bottom:14px;display:block}
 .reflection-prompt{font-family:var(--font-serif);font-style:italic;font-size:clamp(1.1rem,2.6vw,1.35rem);line-height:1.5;color:var(--text-main);max-width:520px;margin:0 auto;font-variation-settings:'SOFT' 60,'WONK' 1,'opsz' 40}
@@ -317,8 +324,10 @@ main{flex:1;padding-bottom:60px}
 footer{text-align:center;padding:34px 20px 30px;color:var(--text-light);font-size:.85rem;border-top:1px solid var(--border-light);margin-top:auto;background:linear-gradient(180deg,transparent 0%,rgba(30,42,40,.025) 100%)}
 .footer-mark{display:flex;justify-content:center;gap:6px;margin-bottom:12px}
 .footer-dot{width:7px;height:7px;border-radius:50%;display:block}
+.footer-links{margin-top:14px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-size:.82rem}
+.footer-links a{color:var(--text-light);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s var(--ease-soft),color .2s var(--ease-soft)}
+.footer-links a:hover{color:var(--accent-hover);border-bottom-color:var(--accent-hover)}
 @media (max-width:640px){.question-container{min-height:auto;padding-bottom:28px}}
-/* COMPARE VIEW */
 .results-ctas{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:0 auto 24px;animation:contentEnter .55s var(--ease-smooth) both}
 .cta-link{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:99px;font-size:.88rem;font-weight:600;background:#FFF;border:1px solid var(--border-light);color:var(--text-muted);transition:background-color .2s var(--ease-soft),border-color .2s var(--ease-soft),color .2s var(--ease-soft),transform .28s var(--ease-spring)}
 .cta-link:hover{border-color:var(--accent);color:var(--accent-hover);transform:translateY(-1px)}
@@ -336,7 +345,6 @@ footer{text-align:center;padding:34px 20px 30px;color:var(--text-light);font-siz
 .compare-insight{padding:16px 20px;background:#FFF;border:1px solid var(--border-light);border-radius:14px;font-size:.95rem;line-height:1.55;color:var(--text-muted);animation:contentEnter .5s var(--ease-smooth) both}
 .compare-insight strong{color:var(--text-main);font-weight:600}
 .compare-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
-/* GUESS VIEW */
 .guess-header{text-align:center;margin:40px 0 20px;animation:contentEnter .6s var(--ease-smooth) both}
 .guess-title{font-size:clamp(2rem,5vw,3rem);letter-spacing:-.024em;margin-bottom:12px;color:var(--text-main)}
 .guess-sub{font-size:1.02rem;color:var(--text-muted);max-width:480px;margin:0 auto;line-height:1.55}
@@ -354,15 +362,26 @@ footer{text-align:center;padding:34px 20px 30px;color:var(--text-light);font-siz
 .guess-result-copy{font-size:.95rem;color:var(--text-muted);line-height:1.55;margin-bottom:20px}
 .guess-callout{padding:14px 16px;background:rgba(255,255,255,.7);border-left:3px solid var(--accent);border-radius:10px;font-size:.9rem;line-height:1.5;color:var(--text-main);margin-bottom:20px;text-align:left}
 .guess-callout strong{color:var(--accent-hover);display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px}
-@media print{@page{margin:24mm}header,footer,.button-group,.toast,.trust-line,.empty-state,.results-divider,.reflection,.radar-help,.commit-row,.compact-row .chev,.keyboard-hint,.intro-readings,.visit-meta,.motion-toggle,.snapshot-banner,.priorities,.results-view-toggle,.results-ctas,.compare-actions{display:none !important}body::before{display:none}.screen:not(.active){display:none !important}.radar-container,.bookend,.focus-card,.compact-item,.reading-card,.consistency-note,.receipt-group{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none !important}.radar-poly,.radar-dot,.radar-grid{-webkit-print-color-adjust:exact;print-color-adjust:exact}.review-section>summary{display:none !important}.review-content{display:block !important}.print-header{display:block !important;font-size:1rem;margin-bottom:16px;color:#564A3E;font-family:Georgia,serif}.compact-detail{display:block !important}.bookends{grid-template-columns:1fr 1fr}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;transition-delay:0ms !important;scroll-behavior:auto !important}.hero-radar-ghost{animation:none !important;opacity:.7 !important}.screen.active{animation:none !important;opacity:1 !important}.option-label{animation:none !important;opacity:1 !important;transform:none !important}.dim-card,.bookend,.focus-card,.compact-row,.results-hero,.q-dim,.q-text,.reading-card,.consistency-note,.priorities,.belief-quote,.receipt-group,.compare-insight,.guess-result{animation:none !important;opacity:1 !important;transform:none !important}}
-html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{animation-duration:.01ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;transition-delay:0ms !important;scroll-behavior:auto !important}
-.motion-toggle{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;color:var(--text-light);padding:7px 12px;border-radius:99px;background:transparent;transition:background-color .2s var(--ease-soft),color .2s var(--ease-soft)}
-.motion-toggle:hover{background:rgba(42,36,30,.05);color:var(--text-main)}
-.motion-toggle svg{width:13px;height:13px;flex-shrink:0}
-.motion-toggle .motion-label{display:none}
-@media (min-width:560px){.motion-toggle .motion-label{display:inline}}
-.motion-toggle[data-on="true"]{color:var(--accent-hover);background:var(--accent-bg)}
+/* MANIFESTO */
+.manifesto{max-width:620px;margin:0 auto;padding:40px 0 20px;animation:contentEnter .6s var(--ease-smooth) both}
+.manifesto-eyebrow{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:14px;display:block;text-align:center}
+.manifesto-title{font-size:clamp(2rem,5vw,3rem);letter-spacing:-.024em;margin-bottom:24px;color:var(--text-main);text-align:center}
+.manifesto p{font-size:1.05rem;line-height:1.65;color:var(--text-muted);margin-bottom:22px}
+.manifesto p.lead{font-family:var(--font-serif);font-size:clamp(1.15rem,2.6vw,1.4rem);font-style:italic;color:var(--text-main);font-variation-settings:'SOFT' 60,'WONK' 1,'opsz' 30;line-height:1.5;text-align:center;margin-bottom:34px}
+.manifesto strong{color:var(--text-main);font-weight:600}
+.manifesto ul{list-style:none;display:flex;flex-direction:column;gap:14px;margin:24px 0 30px;padding:0}
+.manifesto ul li{display:flex;gap:14px;align-items:flex-start;font-size:1rem;line-height:1.55;color:var(--text-muted)}
+.manifesto ul li::before{content:'';flex-shrink:0;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:10px}
+.manifesto ul li b{color:var(--text-main);font-family:var(--font-serif);font-weight:600;font-variation-settings:'SOFT' 30,'WONK' 1;min-width:110px}
+.manifesto-closing{font-family:var(--font-serif);font-size:clamp(1.1rem,2.4vw,1.3rem);font-style:italic;color:var(--text-main);font-variation-settings:'SOFT' 60,'WONK' 1;line-height:1.5;text-align:center;margin-top:36px;padding-top:36px;border-top:1px solid var(--border-light)}
+.manifesto-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:40px}
+/* TOGGLES */
+.motion-toggle,.contrast-toggle{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;color:var(--text-light);padding:7px 12px;border-radius:99px;background:transparent;transition:background-color .2s var(--ease-soft),color .2s var(--ease-soft)}
+.motion-toggle:hover,.contrast-toggle:hover{background:rgba(42,36,30,.05);color:var(--text-main)}
+.motion-toggle svg,.contrast-toggle svg{width:13px;height:13px;flex-shrink:0}
+.motion-toggle .motion-label,.contrast-toggle .contrast-label{display:none}
+@media (min-width:680px){.motion-toggle .motion-label,.contrast-toggle .contrast-label{display:inline}}
+.motion-toggle[data-on="true"],.contrast-toggle[data-on="true"]{color:var(--accent-hover);background:var(--accent-bg)}
 .intro-readings{text-align:center;margin-top:30px;animation:contentEnter .6s var(--ease-smooth) .5s both}
 .readings-link{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:99px;font-size:.85rem;font-weight:600;color:var(--text-muted);background:rgba(255,255,255,.6);border:1px solid var(--border-light);text-decoration:none;transition:background-color .2s var(--ease-soft),border-color .2s var(--ease-soft),color .2s var(--ease-soft),transform .25s var(--ease-spring)}
 .readings-link:hover{background:#FFF;border-color:var(--accent);color:var(--accent-hover);transform:translateY(-1px)}
@@ -387,6 +406,29 @@ html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{an
 .reading-card:hover .reading-sparkbar{opacity:1}
 .readings-empty{text-align:center;padding:60px 24px;color:var(--text-light);font-size:.95rem;font-style:italic}
 .sr-only-result{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* HIGH CONTRAST */
+html.high-contrast{--bg-color:#FFFFFF;--text-main:#000000;--text-muted:#1F1814;--text-light:#3A2E24;--border-light:#8F7F68;--accent:#6E3920;--accent-hover:#4A2410;--accent-bg:#F5E4D6;--support:#2E4A2E;--support-bg:#D9E5D9;--ink:#000000}
+html.high-contrast body::before{display:none}
+html.high-contrast .option-label{border-width:2px}
+html.high-contrast .option-input{border-width:2.5px}
+html.high-contrast .hero-radar-ghost{display:none}
+html.high-contrast .hero-radar-ring,html.high-contrast .hero-radar-axis{stroke-width:1.5;opacity:1}
+html.high-contrast .radar-poly{stroke-width:3}
+html.high-contrast .radar-dot{stroke-width:3}
+html.high-contrast .radar-grid,html.high-contrast .radar-axis{stroke-width:1.5}
+html.high-contrast .bookend-strength,html.high-contrast .bookend-growth,html.high-contrast .focus-card,html.high-contrast .question-container,html.high-contrast .forced-container,html.high-contrast .radar-container,html.high-contrast .compare-radar-wrap{background:#FFFFFF}
+html.high-contrast .btn-primary{background:var(--accent)}
+html.high-contrast .btn-primary:hover:not(:disabled){background:var(--accent-hover)}
+html.high-contrast .progress-fill{background:var(--ink)}
+html.high-contrast .badge-strength,html.high-contrast .badge-growth{border:1px solid currentColor}
+@media (prefers-contrast: more){
+  :root{--bg-color:#FFFFFF;--text-main:#000000;--text-muted:#1F1814;--text-light:#3A2E24;--border-light:#8F7F68;--accent:#6E3920}
+  body::before{display:none}
+  .option-label{border-width:2px}
+}
+@media print{@page{margin:24mm}header,footer,.button-group,.toast,.trust-line,.empty-state,.results-divider,.reflection,.radar-help,.commit-row,.compact-row .chev,.keyboard-hint,.intro-readings,.visit-meta,.motion-toggle,.contrast-toggle,.snapshot-banner,.priorities,.results-view-toggle,.results-ctas,.compare-actions,.notify-prompt,.manifesto-actions{display:none !important}body::before{display:none}.screen:not(.active){display:none !important}.radar-container,.bookend,.focus-card,.compact-item,.reading-card,.consistency-note,.receipt-group{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none !important}.radar-poly,.radar-dot,.radar-grid{-webkit-print-color-adjust:exact;print-color-adjust:exact}.review-section>summary{display:none !important}.review-content{display:block !important}.print-header{display:block !important;font-size:1rem;margin-bottom:16px;color:#564A3E;font-family:Georgia,serif}.compact-detail{display:block !important}.bookends{grid-template-columns:1fr 1fr}.manifesto{margin-top:0;padding-top:0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;transition-delay:0ms !important;scroll-behavior:auto !important}.hero-radar-ghost{animation:none !important;opacity:.7 !important}.screen.active{animation:none !important;opacity:1 !important}.option-label{animation:none !important;opacity:1 !important;transform:none !important}.dim-card,.bookend,.focus-card,.compact-row,.results-hero,.q-dim,.q-text,.reading-card,.consistency-note,.priorities,.belief-quote,.receipt-group,.compare-insight,.guess-result,.manifesto{animation:none !important;opacity:1 !important;transform:none !important}}
+html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{animation-duration:.01ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;transition-delay:0ms !important;scroll-behavior:auto !important}
 </style>
 </head>
 <body>
@@ -397,10 +439,16 @@ html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{an
       <span class="logo-mark" aria-hidden="true"></span>
       Esperiel Index
     </a>
-    <button class="motion-toggle" id="motion-toggle" data-on="false" aria-pressed="false" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 8v4l2 2"/></svg>
-      <span class="motion-label">Reduce motion</span>
-    </button>
+    <div class="header-actions">
+      <button class="contrast-toggle" id="contrast-toggle" data-on="false" aria-pressed="false" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M12 2a10 10 0 0 0 0 20" fill="currentColor" fill-opacity="0.35"/></svg>
+        <span class="contrast-label">High contrast</span>
+      </button>
+      <button class="motion-toggle" id="motion-toggle" data-on="false" aria-pressed="false" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 8v4l2 2"/></svg>
+        <span class="motion-label">Reduce motion</span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -634,6 +682,31 @@ html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{an
       </div>
     </section>
 
+    <section id="screen-manifesto" class="screen">
+      <div class="manifesto">
+        <span class="manifesto-eyebrow">A short manifesto</span>
+        <h2 class="manifesto-title">Why these six?</h2>
+        <p class="lead">Most communication advice is a list of tricks. Make eye contact. Pause before you speak. Listen more. Be concise.</p>
+        <p>The tricks don't help, because they don't answer the deeper question: <strong>what kind of communicator are you?</strong></p>
+        <p>We chose six dimensions because they are the six ways a conversation can break down. When you say <em>"that meeting went badly,"</em> it is almost always one of these:</p>
+        <ul>
+          <li><b>Clarity</b><span>Nobody understood the point.</span></li>
+          <li><b>Confidence</b><span>You didn't say what you meant.</span></li>
+          <li><b>Connection</b><span>Nobody felt heard.</span></li>
+          <li><b>Composure</b><span>The room got hot and you lost yourself.</span></li>
+          <li><b>Curiosity</b><span>Nobody learned anything.</span></li>
+          <li><b>Conviction</b><span>Nothing changed.</span></li>
+        </ul>
+        <p>Six. Not five. Not seven. Because these are the six ways a conversation can fail &mdash; and the six ways it can succeed.</p>
+        <p>You don't need to be great at all six. You need to know <strong>which ones you lead with</strong>, and which one to work on next.</p>
+        <p class="manifesto-closing">That's the index.</p>
+        <div class="manifesto-actions">
+          <button class="btn btn-primary" id="manifesto-start" type="button">Begin the index</button>
+          <button class="btn btn-secondary" id="manifesto-back" type="button">Back</button>
+        </div>
+      </div>
+    </section>
+
   </div>
 </main>
 
@@ -647,6 +720,10 @@ html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{an
     <span class="footer-dot" style="background:var(--dim-conviction)"></span>
   </div>
   <p>Esperiel Index · A reflective tool, not a diagnostic instrument.</p>
+  <div class="footer-links">
+    <a href="#manifesto" id="footer-manifesto">Manifesto</a>
+    <a href="#readings" id="footer-readings">Past readings</a>
+  </div>
 </footer>
 
 <div id="toast" class="toast" role="alert"></div>
@@ -839,12 +916,16 @@ var RUNS_KEY='esperiel-runs-v1';
 var COMMIT_KEY='esperiel-commit-v1';
 var VISITS_KEY='esperiel-visits-v1';
 var MOTION_KEY='esperiel-reduce-motion-v1';
+var CONTRAST_KEY='esperiel-high-contrast-v1';
 var CONTEXT_KEY='esperiel-context-v1';
 var ONBOARD_KEY='esperiel-onboarding-v1';
 var FORCED_KEY='esperiel-forced-v1';
 var REFLECTION_KEY='esperiel-reflection-v1';
 var VIEW_KEY='esperiel-view-v1';
 var CHALLENGE_KEY='esperiel-pending-challenge-v1';
+var NOTIFY_KEY='esperiel-notify-log-v1';
+var NOTIFY_PROMPT_KEY='esperiel-notify-prompted-v1';
+var ANALYTICS_KEY='esperiel-analytics-v1';
 var answers=new Array(QUESTIONS.length).fill(null);
 var currentIndex=0;
 var forcedAnswers=new Array(FORCED_CHOICE.length).fill(null);
@@ -856,6 +937,7 @@ var cachedShareBlob=null;
 var cachePromise=null;
 var loadedFromHash=false;
 var selectedContext=null;
+var currentView='intro';
 
 /* ================== DOM ================== */
 var screens={
@@ -866,7 +948,8 @@ var screens={
   results:document.getElementById('screen-results'),
   readings:document.getElementById('screen-readings'),
   compare:document.getElementById('screen-compare'),
-  guess:document.getElementById('screen-guess')
+  guess:document.getElementById('screen-guess'),
+  manifesto:document.getElementById('screen-manifesto')
 };
 var siteHeader=document.getElementById('site-header');
 var logoLink=document.getElementById('logo-link');
@@ -927,6 +1010,22 @@ var btnCompareShareBack=document.getElementById('btn-compare-share-back');
 var guessGrid=document.getElementById('guess-grid');
 var guessResult=document.getElementById('guess-result');
 var btnGuessBack=document.getElementById('btn-guess-back');
+var manifestoStart=document.getElementById('manifesto-start');
+var manifestoBack=document.getElementById('manifesto-back');
+var footerManifesto=document.getElementById('footer-manifesto');
+var footerReadings=document.getElementById('footer-readings');
+
+/* ================== ANALYTICS ================== */
+function track(event){
+  try{
+    var data=JSON.parse(localStorage.getItem(ANALYTICS_KEY)||'{}');
+    if(!data.counts)data.counts={};
+    data.counts[event]=(data.counts[event]||0)+1;
+    data.lastEvent=event;
+    data.lastTs=Date.now();
+    localStorage.setItem(ANALYTICS_KEY,JSON.stringify(data));
+  }catch(e){}
+}
 
 /* ================== HEADER SCROLL ================== */
 window.addEventListener('scroll',function(){
@@ -994,7 +1093,7 @@ function renderVisitMeta(){
   el.hidden=false;
 }
 
-/* ================== MOTION ================== */
+/* ================== MOTION & CONTRAST ================== */
 function setupMotionToggle(){
   var btn=document.getElementById('motion-toggle');if(!btn)return;
   var stored=false;try{stored=localStorage.getItem(MOTION_KEY)==='1';}catch(e){}
@@ -1008,11 +1107,78 @@ function setupMotionToggle(){
     try{localStorage.setItem(MOTION_KEY,on?'1':'0');}catch(e){}
   });
 }
+function setupContrastToggle(){
+  var btn=document.getElementById('contrast-toggle');if(!btn)return;
+  var stored=null;try{stored=localStorage.getItem(CONTRAST_KEY);}catch(e){}
+  if(stored===null){
+    try{if(window.matchMedia&&window.matchMedia('(prefers-contrast: more)').matches)stored='1';}catch(e){}
+  }
+  var on=stored==='1';
+  if(on)document.documentElement.classList.add('high-contrast');
+  btn.setAttribute('data-on',on?'true':'false');
+  btn.setAttribute('aria-pressed',on?'true':'false');
+  btn.addEventListener('click',function(){
+    var active=document.documentElement.classList.toggle('high-contrast');
+    btn.setAttribute('data-on',active?'true':'false');
+    btn.setAttribute('aria-pressed',active?'true':'false');
+    try{localStorage.setItem(CONTRAST_KEY,active?'1':'0');}catch(e){}
+    track(active?'contrastOn':'contrastOff');
+  });
+}
 function isReducedMotion(){return document.documentElement.classList.contains('reduce-motion');}
+
+/* ================== NOTIFICATIONS ================== */
+function supportsNotifications(){return typeof Notification!=='undefined';}
+function maybeAskNotification(){
+  if(!supportsNotifications())return;
+  if(Notification.permission!=='default')return;
+  var prompted=false;try{prompted=localStorage.getItem(NOTIFY_PROMPT_KEY)==='1';}catch(e){}
+  if(prompted)return;
+  try{Notification.requestPermission().then(function(perm){
+    try{localStorage.setItem(NOTIFY_PROMPT_KEY,'1');}catch(e){}
+    if(perm==='granted')showToast('We\u2019ll nudge you in a week');
+  }).catch(function(){});}catch(e){}
+}
+function maybeFireReminder(){
+  if(!supportsNotifications()||Notification.permission!=='granted')return;
+  var saved=loadCommit();if(!saved)return;
+  var log={};try{log=JSON.parse(localStorage.getItem(NOTIFY_KEY)||'{}');}catch(e){}
+  var daysSince=Math.floor((Date.now()-saved.ts)/(1000*60*60*24));
+  var weekIndex=Math.floor(daysSince/7);
+  if(daysSince<7)return;
+  if((log.week||0)>=weekIndex)return;
+  try{
+    var dimName=DIMENSIONS[saved.dim]?DIMENSIONS[saved.dim].name:'your focus';
+    new Notification('Esperiel Index \u2014 check-in',{
+      body:'You committed to '+dimName+' '+daysSince+' days ago. How did it go?',
+      icon:'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 64 64\'%3E%3Crect width=\'64\' height=\'64\' fill=\'%23FAF7F2\'/%3E%3Cpolygon points=\'32 10, 54 22, 54 42, 32 54, 10 42, 10 22\' fill=\'%23B5673F\'/%3E%3C/svg%3E',
+      tag:'esperiel-checkin'
+    });
+    log.week=weekIndex;log.lastTs=Date.now();
+    try{localStorage.setItem(NOTIFY_KEY,JSON.stringify(log));}catch(e){}
+  }catch(e){}
+}
+function renderNotifyPrompt(){
+  var block=focusCard.querySelector('.commit-block');if(!block)return;
+  if(!supportsNotifications())return;
+  if(Notification.permission!=='default')return;
+  if(block.querySelector('.notify-prompt'))return;
+  var prompted=false;try{prompted=localStorage.getItem(NOTIFY_PROMPT_KEY)==='1';}catch(e){}
+  if(prompted)return;
+  var prompt=document.createElement('div');
+  prompt.className='notify-prompt';
+  prompt.innerHTML=
+    '<span class="notify-prompt-text">Want a gentle nudge in a week to see how the practice is going?</span>'+
+    '<span class="notify-prompt-actions"><button type="button" class="notify-prompt-btn" id="notify-yes">Yes</button><button type="button" class="notify-prompt-skip" id="notify-no">Not now</button></span>';
+  block.appendChild(prompt);
+  var yes=prompt.querySelector('#notify-yes');
+  var no=prompt.querySelector('#notify-no');
+  if(yes)yes.addEventListener('click',function(){maybeAskNotification();prompt.remove();});
+  if(no)no.addEventListener('click',function(){try{localStorage.setItem(NOTIFY_PROMPT_KEY,'1');}catch(e){}prompt.remove();});
+}
 
 /* ================== URL HASH ================== */
 function encodeAnswers(){return answers.map(function(a){return a===null?'0':String(a);}).join('');}
-function encodeAnswersArr(arr){return arr.map(function(a){return a===null?'0':String(a);}).join('');}
 function decodeAnswers(str){
   if(!str||str.length!==QUESTIONS.length)return null;
   var arr=str.split('').map(function(c){return c==='0'?null:parseInt(c,10);});
@@ -1025,12 +1191,14 @@ function switchScreen(name,updateUrl){
   if(updateUrl===undefined)updateUrl=true;
   Object.keys(screens).forEach(function(k){screens[k].classList.toggle('active',k===name);});
   window.scrollTo({top:0,behavior:'smooth'});
+  currentView=name;
   if(updateUrl){
     if(name==='results'&&answeredCount()===QUESTIONS.length&&!loadedFromHash){safeReplaceHash('#r='+encodeAnswers());}
     else if(name==='quiz'){safeReplaceHash('#quiz');}
     else if(name==='prep'){safeReplaceHash('#prep');}
     else if(name==='forced'){safeReplaceHash('#forced');}
     else if(name==='readings'){safeReplaceHash('#readings');}
+    else if(name==='manifesto'){safeReplaceHash('#manifesto');}
     else{safeReplaceHash('');}
   }
 }
@@ -1090,9 +1258,9 @@ function renderIntro(){
 introButtons.addEventListener('click',function(e){
   var btn=e.target.closest('button');if(!btn)return;
   var id=btn.id;
-  if(id==='start-new'){clearState();openPrep();}
-  else if(id==='start-resume'){startQuiz();}
-  else if(id==='start-results'){generateResults(false);switchScreen('results');}
+  if(id==='start-new'){clearState();openPrep();track('startNew');}
+  else if(id==='start-resume'){startQuiz();track('resume');}
+  else if(id==='start-results'){generateResults(false);switchScreen('results');track('viewResults');}
 });
 function openPrep(){
   var savedCtx=loadContext();selectedContext=savedCtx;
@@ -1110,14 +1278,16 @@ function openPrep(){
   });
   switchScreen('prep');
 }
-btnPrepSkip.addEventListener('click',function(){saveContext('');selectedContext=null;startQuiz();});
+btnPrepSkip.addEventListener('click',function(){saveContext('');selectedContext=null;startQuiz();track('prepSkip');});
 btnPrepContinue.addEventListener('click',function(){
   if(selectedContext){saveContext(selectedContext);}
   var txt=onboardingInput.value.trim();
   if(txt){saveOnboarding(txt);}
   startQuiz();
+  track('prepContinue');
 });
 function startQuiz(){
+  track('startQuiz');
   if(answeredCount()===0){
     activePaneId='a';
     var apA=document.getElementById('q-pane-a');
@@ -1256,8 +1426,8 @@ btnForcedNext.addEventListener('click',function(){
   else{
     generateResults(true);
     var challenge=loadPendingChallenge();
-    if(challenge){clearPendingChallenge();renderCompareView(challenge,answers);switchScreen('compare');}
-    else{switchScreen('results');}
+    if(challenge){clearPendingChallenge();renderCompareView(challenge,answers);switchScreen('compare');track('completeQuizWithChallenge');}
+    else{switchScreen('results');track('completeQuiz');}
   }
 });
 
@@ -1450,6 +1620,7 @@ function getCompareInsights(myScores,theirScores){
   return lines;
 }
 function renderCompareView(challengerAnswers,myAnswers){
+  track('openCompare');
   var myScores=computeSimpleResults(myAnswers);
   var theirScores=computeSimpleResults(challengerAnswers);
   compareRadarWrap.innerHTML=drawCompareRadar(myScores.results,theirScores.results);
@@ -1458,17 +1629,12 @@ function renderCompareView(challengerAnswers,myAnswers){
     return'<div class="compare-insight" style="animation-delay:'+(i*70)+'ms">'+l+'</div>';
   }).join('');
 }
-btnCompareSeeMine.addEventListener('click',function(){
-  generateResults(false);
-  switchScreen('results');
-});
-btnCompareShareBack.addEventListener('click',function(){
-  var url=buildCompareLink();
-  copyToClipboard(url,'Compare link copied');
-});
+btnCompareSeeMine.addEventListener('click',function(){generateResults(false);switchScreen('results');});
+btnCompareShareBack.addEventListener('click',function(){copyToClipboard(buildCompareLink(),'Compare link copied');});
 
 /* ================== GUESS ================== */
 function renderGuessView(senderAnswers){
+  track('openGuess');
   var senderScores=computeSimpleResults(senderAnswers);
   var actualStrongest=senderScores.strongest.key;
   guessResult.hidden=true;guessResult.innerHTML='';
@@ -1496,10 +1662,7 @@ function renderGuessView(senderAnswers){
         '<div class="button-group" style="margin-top:0"><button class="btn btn-primary" id="guess-take-own" type="button">Take yours</button></div>';
       var takeBtn=document.getElementById('guess-take-own');
       if(takeBtn){
-        takeBtn.addEventListener('click',function(){
-          clearState();
-          openPrep();
-        });
+        takeBtn.addEventListener('click',function(){clearState();openPrep();});
       }
     });
   });
@@ -1510,10 +1673,12 @@ btnGuessBack.addEventListener('click',function(){renderIntro();switchScreen('int
 btnCompareShare.addEventListener('click',function(){
   if(answeredCount()!==QUESTIONS.length){showToast('Take the assessment first');return;}
   copyToClipboard(buildCompareLink(),'Compare link copied');
+  track('shareCompare');
 });
 btnGuessShare.addEventListener('click',function(){
   if(answeredCount()!==QUESTIONS.length){showToast('Take the assessment first');return;}
   copyToClipboard(buildGuessLink(),'Challenge link copied');
+  track('shareGuess');
 });
 
 /* ================== VIEW TOGGLE ================== */
@@ -1529,7 +1694,7 @@ function setupViewToggle(){
   var saved=loadViewMode();
   applyView(saved);
   resultsViewToggle.querySelectorAll('button').forEach(function(b){
-    b.addEventListener('click',function(){applyView(b.getAttribute('data-view'));});
+    b.addEventListener('click',function(){applyView(b.getAttribute('data-view'));track('viewToggle_'+b.getAttribute('data-view'));});
   });
 }
 
@@ -1638,6 +1803,8 @@ function renderFocusCard(dim){
       saveCommit(dim.key);caption.textContent='Day 1 of 30 \u2014 29 days left.';caption.classList.add('is-active');
       if(navigator.vibrate)navigator.vibrate(15);
       var rect=cb.getBoundingClientRect();confettiBurst(rect.left+rect.width/2,rect.top+rect.height/2);
+      track('commit');
+      renderNotifyPrompt();
     }else{try{localStorage.removeItem(COMMIT_KEY);}catch(e){}caption.textContent='';caption.classList.remove('is-active');}
   });
 }
@@ -1660,6 +1827,7 @@ reflectionSaveBtn.addEventListener('click',function(){
   if(!data.q1&&!data.q2&&!data.q3){showToast('Write something first');return;}
   saveReflection(data);renderReflectionJournal();showToast('Reflection saved');
   if(navigator.vibrate)navigator.vibrate(15);
+  track('reflectionSave');
 });
 
 /* ================== RECEIPT REVIEW ================== */
@@ -1722,7 +1890,7 @@ function renderDelta(results,previous){
   deltaCaption.textContent='Since your last attempt '+days+' '+(days===1?'day':'days')+' ago';
 }
 
-/* ================== SR NARRATION ================== */
+/* ================== SR ================== */
 function buildSRText(results,overall,strongest,growth,tied){
   var breakdown=results.map(function(d){return d.name+' at '+d.pct+' percent';}).join(', ');
   var strongestLine=tied?'All dimensions are roughly balanced.':'Your strongest dimension is '+strongest.name+' at '+strongest.pct+' percent. Your growth edge is '+growth.name+' at '+growth.pct+' percent.';
@@ -1766,7 +1934,7 @@ function renderReadings(){
   }).join('');
 }
 
-/* ================== SHARE PRECOMPUTE ================== */
+/* ================== SHARE IMAGE ================== */
 function precomputeShareImage(){
   cachedShareBlob=null;
   cachePromise=generateShareImage().then(function(blob){cachedShareBlob=blob;return blob;}).catch(function(){cachePromise=null;return null;});
@@ -1819,6 +1987,7 @@ function generateResults(saveAsRun){
       results:results.map(function(r){return{key:r.key,name:r.name,color:r.color,pct:r.pct};}),
       strongest:strongest.key,strongestName:strongest.name,
       growth:growth.key,growthName:growth.name});
+    track('completeQuiz');
   }
   precomputeShareImage();
 }
@@ -1827,9 +1996,10 @@ function generateResults(saveAsRun){
 btnCopyInsight.addEventListener('click',function(){
   var text=archetypeTitle.textContent+'. '+archetypeTagline.textContent+' '+archetypeInsight.textContent;
   copyToClipboard(text,'Insight copied');
+  track('copyInsight');
 });
 
-/* ================== SHARE IMAGE ================== */
+/* ================== CANVAS ================== */
 function roundRect(ctx,x,y,w,h,r){
   ctx.beginPath();ctx.moveTo(x+r,y);
   ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);
@@ -1921,7 +2091,7 @@ function generateShareImage(){
 /* ================== RETAKE ================== */
 btnRetake.addEventListener('click',function(){
   if(answeredCount()===QUESTIONS.length){if(!confirm('Start over? Your current answers will be lost.'))return;}
-  clearState();renderIntro();switchScreen('intro');
+  clearState();renderIntro();switchScreen('intro');track('retake');
 });
 
 /* ================== TOAST ================== */
@@ -1950,6 +2120,7 @@ btnShare.addEventListener('click',function(){
   }).catch(function(){showToast('Could not generate image');}).then(function(){
     btnShare.innerHTML=originalHtml;btnShare.disabled=false;
   });
+  track('shareImage');
 });
 
 /* ================== READINGS UI ================== */
@@ -1957,25 +2128,25 @@ var openReadings=document.getElementById('open-readings');
 if(openReadings){openReadings.addEventListener('click',function(e){e.preventDefault();renderReadings();switchScreen('readings');});}
 var btnReadingsBack=document.getElementById('btn-readings-back');
 if(btnReadingsBack){btnReadingsBack.addEventListener('click',function(){renderIntro();switchScreen('intro');});}
+if(footerReadings){footerReadings.addEventListener('click',function(e){e.preventDefault();renderReadings();switchScreen('readings');});}
+
+/* ================== MANIFESTO UI ================== */
+if(footerManifesto){footerManifesto.addEventListener('click',function(e){e.preventDefault();switchScreen('manifesto');});}
+if(manifestoStart){manifestoStart.addEventListener('click',function(){clearState();openPrep();track('manifestoStart');});}
+if(manifestoBack){manifestoBack.addEventListener('click',function(){renderIntro();switchScreen('intro');});}
 
 /* ================== ROUTING ================== */
 function routeFromHash(){
   var hash=window.location.hash||'';
   if(hash.indexOf('#r=')===0){
     var data=hash.slice(3);var decoded=decodeAnswers(data);
-    if(decoded){answers=decoded;loadedFromHash=true;generateResults(false);switchScreen('results',false);showSnapshotBanner();return true;}
+    if(decoded){answers=decoded;loadedFromHash=true;generateResults(false);switchScreen('results',false);showSnapshotBanner();track('openSharedResult');return true;}
   }
   if(hash.indexOf('#c=')===0){
     var challenger=decodeAnswers(hash.slice(3));
     if(challenger){
-      if(answeredCount()===QUESTIONS.length){
-        renderCompareView(challenger,answers);
-        switchScreen('compare',false);
-      }else{
-        savePendingChallenge(challenger);
-        showToast('Take the assessment to compare');
-        openPrep();
-      }
+      if(answeredCount()===QUESTIONS.length){renderCompareView(challenger,answers);switchScreen('compare',false);}
+      else{savePendingChallenge(challenger);showToast('Take the assessment to compare');openPrep();}
       return true;
     }
   }
@@ -1984,6 +2155,7 @@ function routeFromHash(){
     if(sender){renderGuessView(sender);switchScreen('guess',false);return true;}
   }
   if(hash==='#readings'){renderReadings();switchScreen('readings',false);return true;}
+  if(hash==='#manifesto'){switchScreen('manifesto',false);return true;}
   if(hash==='#prep'){openPrep();switchScreen('prep',false);return true;}
   if(hash==='#quiz'){switchScreen('quiz',false);renderQuestion(false);return true;}
   if(hash==='#forced'){switchScreen('forced',false);renderForced();return true;}
@@ -1996,8 +2168,11 @@ window.addEventListener('hashchange',function(){
 
 /* ================== VISIBILITY ================== */
 document.addEventListener('visibilitychange',function(){
-  if(document.visibilityState==='visible'&&screens.quiz.classList.contains('active')){
-    requestAnimationFrame(function(){window.scrollTo({top:lastScrollY,behavior:'auto'});});
+  if(document.visibilityState==='visible'){
+    maybeFireReminder();
+    if(screens.quiz.classList.contains('active')){
+      requestAnimationFrame(function(){window.scrollTo({top:lastScrollY,behavior:'auto'});});
+    }
   }
 });
 
@@ -2007,7 +2182,10 @@ forcedAnswers=loadForced();
 renderIntro();
 renderVisitMeta();
 setupMotionToggle();
+setupContrastToggle();
 setupViewToggle();
+track('view');
+maybeFireReminder();
 if(!routeFromHash()){switchScreen('intro',false);}
 
 })();
