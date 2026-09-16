@@ -7,6 +7,13 @@
 <meta name="description" content="Map how you show up across Clarity, Confidence, Connection, Composure, Curiosity, and Conviction in eighteen questions. Free, private, takes three minutes.">
 <meta name="theme-color" content="#FAF7F2">
 
+<meta property="og:title" content="Esperiel Index — A Communication Self-Assessment">
+<meta property="og:description" content="Map how you show up across six dimensions of communication. Free, three minutes.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Esperiel Index — A Communication Self-Assessment">
+<meta name="twitter:description" content="Map how you show up across six dimensions of communication. Free, three minutes.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,36 +21,34 @@
 <style>
   :root {
     color-scheme: light;
-    
+
     --bg-color:     #FAF7F2;
     --card-bg:      #FFFFFF;
-    
+
     --text-main:    #2A241E;
     --text-muted:   #564A3E;
     --text-light:   #8A7C6D;
-    
+
     --border-light: #E8DFD3;
     --border-focus: #B5673F;
-    
+
     --accent:       #B5673F;
     --accent-hover: #8E4D2C;
     --accent-bg:    #F8EFEA;
-    
+
     --support:      #5E7362;
     --support-bg:   #EAF0EB;
 
     --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
     --font-serif:   'Fraunces', Georgia, serif;
-    
+
     --ease-out:     cubic-bezier(0.2, 0.8, 0.2, 1);
     --ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  
-  html {
-    -webkit-text-size-adjust: 100%;
-  }
+
+  html { -webkit-text-size-adjust: 100%; }
 
   body {
     font-family: var(--font-sans);
@@ -52,18 +57,18 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
-    min-height: 100dvh; /* Fixes mobile scroll recalculation glitch */
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden; /* Prevents side-to-side wobble */
+    overflow-x: hidden;
   }
 
   /* Utility Classes */
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .container { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 20px; }
-  
+
   h1, h2, h3 { font-family: var(--font-serif); font-weight: 600; line-height: 1.2; }
-  
+
   button { font-family: inherit; border: none; background: none; cursor: pointer; }
   button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
 
@@ -72,9 +77,9 @@
   .logo-dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--accent); }
 
   main { flex: 1; padding-bottom: 60px; }
-  .screen { display: none; opacity: 0; transition: opacity 0.4s var(--ease-out); }
-  .screen.active { display: block; opacity: 1; animation: slideUp 0.5s var(--ease-out) forwards; }
-  
+  .screen { display: none; }
+  .screen.active { display: block; animation: slideUp 0.5s var(--ease-out) forwards; }
+
   @keyframes slideUp {
     from { transform: translateY(15px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
@@ -90,21 +95,24 @@
   .feature-tag::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
   .button-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 30px; width: 100%; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 32px; border-radius: 99px; font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.2s ease; width: 100%; max-width: 300px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 32px; border-radius: 99px; font-size: 1rem; font-weight: 600; text-decoration: none; transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; width: 100%; max-width: 300px; }
   @media (min-width: 480px) { .btn { width: auto; max-width: none; } }
-  
+
   .btn-primary { background-color: var(--accent); color: #FFFFFF; box-shadow: 0 4px 12px rgba(181, 103, 63, 0.2); }
-  .btn-primary:hover, .btn-primary:active { background-color: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(181, 103, 63, 0.3); }
-  
+  .btn-primary:hover:not(:disabled), .btn-primary:active:not(:disabled) { background-color: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(181, 103, 63, 0.3); }
+
   .btn-secondary { background-color: #FFFFFF; border: 1px solid var(--border-light); color: var(--text-muted); }
-  .btn-secondary:hover, .btn-secondary:active { border-color: var(--text-muted); color: var(--text-main); }
+  .btn-secondary:hover:not(:disabled), .btn-secondary:active:not(:disabled) { border-color: var(--text-muted); color: var(--text-main); }
+
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; transform: none; box-shadow: none; }
 
   .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
   .progress-text { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); }
   .btn-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); padding: 8px 12px; border-radius: 8px; transition: background 0.2s; }
   .btn-back:hover { background: rgba(0,0,0,0.05); }
-  .btn-back[hidden] { visibility: hidden; } /* Use visibility to keep layout stable */
-  
+  /* Keep layout stable when hidden without letting UA [hidden]{display:none} win */
+  .btn-back[hidden] { display: inline-flex; visibility: hidden; }
+
   .progress-bar { width: 100%; height: 6px; background: var(--border-light); border-radius: 99px; overflow: hidden; margin-bottom: 30px; }
   .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s var(--ease-out); }
 
@@ -114,21 +122,19 @@
     padding: clamp(24px, 5vw, 40px);
     box-shadow: 0 10px 30px rgba(42, 36, 30, 0.04), 0 1px 3px rgba(42, 36, 30, 0.02);
     border: 1px solid rgba(0,0,0,0.04);
-    min-height: 400px;
+    min-height: 440px;
     display: flex;
     flex-direction: column;
   }
 
-  /* Transition wrapper for smooth flat fades */
   .question-fader { flex: 1; display: flex; flex-direction: column; transition: opacity 0.3s ease, transform 0.3s ease; }
   .question-fader.fade-out { opacity: 0; transform: translateY(-10px); }
   .question-fader.fade-in { opacity: 1; transform: translateY(0); }
 
   .q-dim { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 12px; }
-  .q-text { font-family: var(--font-serif); font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 32px; line-height: 1.4; color: var(--text-main); }
+  .q-text { font-family: var(--font-serif); font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 32px; line-height: 1.4; color: var(--text-main); outline: none; }
 
-  /* Sentence-based Options */
-  .options-list { display: flex; flex-direction: column; gap: 12px; margin-top: auto; }
+  .options-list { display: flex; flex-direction: column; gap: 12px; }
   .option-label {
     display: flex; align-items: flex-start; gap: 16px;
     padding: 16px 20px;
@@ -136,17 +142,17 @@
     border: 1px solid var(--border-light);
     border-radius: 16px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
     -webkit-tap-highlight-color: transparent;
   }
   .option-label:hover { border-color: var(--accent); background: #FCFAFA; }
-  
+
   .option-input {
     appearance: none; -webkit-appearance: none;
     width: 22px; height: 22px; flex-shrink: 0;
     border: 2px solid var(--border-light);
     border-radius: 50%; margin-top: 2px;
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease;
     position: relative;
     cursor: pointer;
   }
@@ -157,7 +163,7 @@
     animation: popIn 0.3s var(--ease-out) forwards;
   }
   @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
-  
+
   .option-label:has(.option-input:checked) {
     border-color: var(--accent);
     background: var(--accent-bg);
@@ -169,6 +175,10 @@
   .option-text { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); line-height: 1.5; transition: color 0.2s; }
   .option-label:has(.option-input:checked) .option-text { color: var(--accent-hover); font-weight: 600; }
 
+  .q-actions { margin-top: auto; padding-top: 28px; display: flex; justify-content: flex-end; }
+  .q-actions .btn { width: 100%; max-width: 100%; }
+  @media (min-width: 480px) { .q-actions .btn { width: auto; min-width: 200px; } }
+
   .results-header { text-align: center; margin-bottom: 40px; }
   .radar-container {
     width: min(360px, 100%); margin: 0 auto 20px;
@@ -177,15 +187,43 @@
     border: 1px solid rgba(0,0,0,0.04);
   }
   .radar-svg { width: 100%; height: auto; overflow: visible; }
-  
-  .radar-poly { fill: rgba(181,103,63,0.12); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; transition: all 1s var(--ease-out); }
-  .radar-dot { fill: var(--accent); stroke: #FFF; stroke-width: 2; transition: all 1s var(--ease-out); }
-  .radar-dot-strength { fill: var(--support); stroke-width: 3; r: 5; }
-  .radar-dot-growth { fill: var(--accent-hover); stroke-width: 3; r: 5; }
-  
+
+  /* SVG styling via CSS (var() in presentation attributes is unreliable) */
+  .radar-grid       { fill: none; stroke: var(--border-light); stroke-width: 1; }
+  .radar-grid-outer { stroke-width: 1.5; }
+  .radar-axis       { stroke: var(--border-light); stroke-width: 1; }
+
+  .radar-poly {
+    fill: rgba(181,103,63,0.12);
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    transform-box: view-box;
+    transform-origin: 150px 150px;
+    animation: radarGrow 0.9s var(--ease-out) both;
+  }
+  .radar-dot {
+    fill: var(--accent);
+    stroke: #FFF;
+    stroke-width: 2;
+    transform-box: view-box;
+    transform-origin: 150px 150px;
+    animation: radarGrow 0.9s var(--ease-out) both;
+  }
+  .radar-dot-strength { fill: var(--support); stroke-width: 2; r: 5; }
+  .radar-dot-growth   { fill: var(--accent-hover); stroke-width: 2; r: 5; }
+
+  @keyframes radarGrow {
+    from { transform: scale(0.05); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
+  }
+
   .radar-label { font-family: var(--font-sans); font-size: 11px; font-weight: 600; fill: var(--text-light); }
   .radar-label-strength { fill: var(--support); font-weight: 700; }
-  .radar-label-growth { fill: var(--accent-hover); font-weight: 700; }
+  .radar-label-growth   { fill: var(--accent-hover); font-weight: 700; }
+
+  .radar-center-num   { font-family: var(--font-serif); font-size: 32px; font-weight: 600; fill: var(--text-main); }
+  .radar-center-label { font-family: var(--font-sans); font-size: 8px; font-weight: 700; letter-spacing: 0.1em; fill: var(--text-light); }
 
   .results-title { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: 12px; }
   .results-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
@@ -195,7 +233,7 @@
   .dim-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
   .dim-card-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
   .dim-card-score { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; color: var(--text-main); }
-  
+
   .badge { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 99px; }
   .badge-strength { background: var(--support-bg); color: var(--support); }
   .badge-growth { background: var(--accent-bg); color: var(--accent-hover); }
@@ -222,6 +260,15 @@
   .toast.show { bottom: 30px; }
 
   footer { text-align: center; padding: 30px 20px; color: var(--text-light); font-size: 0.85rem; border-top: 1px solid var(--border-light); margin-top: auto; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -237,13 +284,13 @@
 
 <main id="main-content">
   <div class="container">
-    
+
     <section id="screen-intro" class="screen active">
       <div class="intro-header">
         <span class="intro-eyebrow">An 18-Question Reflection</span>
         <h1 class="intro-title">Communication is not one skill. It is six.</h1>
         <p class="intro-desc">
-          The Esperiel Index maps how you show up across six dimensions of communication. 
+          The Esperiel Index maps how you show up across six dimensions of communication.
           See where you are already strong—and where your next edge of growth actually lies.
         </p>
       </div>
@@ -265,13 +312,13 @@
     <section id="screen-quiz" class="screen">
       <div class="quiz-header">
         <button id="btn-back" class="btn-back" hidden aria-label="Previous question">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
           Back
         </button>
         <div id="quiz-progress-text" class="progress-text" aria-live="polite">Question 1 of 18</div>
       </div>
-      
-      <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="progress-bar-attr">
+
+      <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-attr">
         <div class="progress-fill" id="progress-fill"></div>
       </div>
 
@@ -308,7 +355,7 @@
   <p>Esperiel Index · A reflective tool, not a diagnostic instrument.</p>
 </footer>
 
-<div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+<div id="toast" class="toast" role="alert"></div>
 
 <script>
 (function() {
@@ -316,18 +363,14 @@
 
   /* --- DATA CONFIGURATION --- */
   const DIMENSIONS = {
-    clarity: { name: 'Clarity', blurb: 'How well you translate complex thinking into language other people can follow.', action: 'State the conclusion first, then the reasoning behind it.' },
+    clarity:    { name: 'Clarity',    blurb: 'How well you translate complex thinking into language other people can follow.', action: 'State the conclusion first, then the reasoning behind it.' },
     confidence: { name: 'Confidence', blurb: 'Your ability to hold your ground and speak without shrinking.', action: 'Make one statement without softening it with "just" or "sort of."' },
     connection: { name: 'Connection', blurb: 'How attuned you are to the people you are communicating with.', action: 'Ask someone what they are actually working on, then listen without planning your reply.' },
-    composure: { name: 'Composure', blurb: 'How steady you stay when a conversation becomes difficult.', action: 'When you feel the heat rise, name it silently and wait three seconds before speaking.' },
-    curiosity: { name: 'Curiosity', blurb: 'How openly you seek out perspectives beyond your own.', action: 'In your next disagreement, ask: "What would have to be true for you to be right?"' },
+    composure:  { name: 'Composure',  blurb: 'How steady you stay when a conversation becomes difficult.', action: 'When you feel the heat rise, name it silently and wait three seconds before speaking.' },
+    curiosity:  { name: 'Curiosity',  blurb: 'How openly you seek out perspectives beyond your own.', action: 'In your next disagreement, ask: "What would have to be true for you to be right?"' },
     conviction: { name: 'Conviction', blurb: 'How firmly you stand behind your ideas and your commitments.', action: 'Pick one small commitment this week and treat it as unbreakable.' }
   };
 
-  /* 
-    The 18 Questions with completely custom, contextual sentences.
-    This provides a much richer experience than "Agree/Disagree".
-  */
   const QUESTIONS = [
     // CLARITY
     {
@@ -535,7 +578,6 @@
     }
   ];
 
-  // System State
   const STORAGE_KEY = 'esperiel-index-flat-v1';
   let answers = new Array(QUESTIONS.length).fill(null);
   let currentIndex = 0;
@@ -547,24 +589,20 @@
     results: document.getElementById('screen-results')
   };
 
-  // Intro UI
-  const introButtons = document.getElementById('intro-buttons');
-  
-  // Quiz UI
-  const fader = document.getElementById('question-fader');
-  const btnBack = document.getElementById('btn-back');
-  const progressText = document.getElementById('quiz-progress-text');
-  const progressFill = document.getElementById('progress-fill');
+  const introButtons    = document.getElementById('intro-buttons');
+  const fader           = document.getElementById('question-fader');
+  const btnBack         = document.getElementById('btn-back');
+  const progressText    = document.getElementById('quiz-progress-text');
+  const progressFill    = document.getElementById('progress-fill');
   const progressBarAttr = document.getElementById('progress-bar-attr');
-  
-  // Results UI
+
   const radarContainer = document.getElementById('radar-container');
-  const resultsTitle = document.getElementById('results-title');
+  const resultsTitle   = document.getElementById('results-title');
   const resultsSummary = document.getElementById('results-summary');
-  const dimList = document.getElementById('dim-list');
-  const btnShare = document.getElementById('btn-share');
-  const btnRetake = document.getElementById('btn-retake');
-  const toast = document.getElementById('toast');
+  const dimList        = document.getElementById('dim-list');
+  const btnShare       = document.getElementById('btn-share');
+  const btnRetake      = document.getElementById('btn-retake');
+  const toast          = document.getElementById('toast');
 
   function init() {
     loadState();
@@ -580,7 +618,7 @@
       const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
       if (data && Array.isArray(data.answers) && data.answers.length === QUESTIONS.length) {
         answers = data.answers;
-        currentIndex = data.currentIndex || 0;
+        currentIndex = typeof data.currentIndex === 'number' ? data.currentIndex : 0;
       }
     } catch (e) {}
   }
@@ -594,11 +632,7 @@
 
   function switchScreen(screenName) {
     Object.keys(screens).forEach(key => {
-      if (key === screenName) {
-        screens[key].classList.add('active');
-      } else {
-        screens[key].classList.remove('active');
-      }
+      screens[key].classList.toggle('active', key === screenName);
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -606,7 +640,7 @@
   function renderIntro() {
     const count = answeredCount();
     let html = '';
-    
+
     if (count === QUESTIONS.length) {
       html = `
         <button class="btn btn-primary" id="start-results">View your results</button>
@@ -620,102 +654,104 @@
     } else {
       html = `<button class="btn btn-primary" id="start-new">Begin the index</button>`;
     }
-    
+
     introButtons.innerHTML = html;
-    
-    const btnNew = document.getElementById('start-new');
-    const btnRes = document.getElementById('start-resume');
+
+    const btnNew  = document.getElementById('start-new');
+    const btnRes  = document.getElementById('start-resume');
     const btnView = document.getElementById('start-results');
-    
-    if (btnNew) btnNew.addEventListener('click', () => { clearState(); startQuiz(); });
-    if (btnRes) btnRes.addEventListener('click', () => { startQuiz(); });
+
+    if (btnNew)  btnNew.addEventListener('click', () => { clearState(); startQuiz(); });
+    if (btnRes)  btnRes.addEventListener('click', () => { startQuiz(); });
     if (btnView) btnView.addEventListener('click', () => { generateResults(); switchScreen('results'); });
   }
 
   function startQuiz() {
     switchScreen('quiz');
-    renderQuestion(false); // First render, no animation needed
+    renderQuestion(false);
   }
 
   function updateQuizHeader() {
     const total = QUESTIONS.length;
-    const pct = Math.round(((currentIndex) / total) * 100);
-    
+    const pct = Math.round(((currentIndex + 1) / total) * 100);
+
     progressText.textContent = `Question ${currentIndex + 1} of ${total}`;
     progressFill.style.width = `${pct}%`;
     progressBarAttr.setAttribute('aria-valuenow', pct);
-    
+
     if (currentIndex === 0) btnBack.setAttribute('hidden', '');
     else btnBack.removeAttribute('hidden');
   }
 
   function renderQuestion(animateIn = true) {
     updateQuizHeader();
+
     const q = QUESTIONS[currentIndex];
     const dim = DIMENSIONS[q.dim];
     const currentVal = answers[currentIndex];
-    
-    let html = `
-      <comment-tag id="3"><div class="q-dim">${dim.name}</div>
-      <h3 class="q-text">${q.text}</h3>
-      <div class="options-list" role="radiogroup"></comment-tag id="3" text="To ensure screen readers don't lose their place when the card auto-advances, it's best practice to programmatically focus the new question text. You can do this by adding an ID and a tabindex.
+    const isLast = currentIndex === QUESTIONS.length - 1;
 
+    fader.innerHTML = `
       <div class="q-dim">${dim.name}</div>
       <h3 class="q-text" id="q-text" tabindex="-1">${q.text}</h3>
-      <div class="options-list" role="radiogroup">
-
-(Note: You would also add `document.getElementById('q-text')?.focus({preventScroll: true});` to your JS logic right after `fader.innerHTML` updates)." type="suggestion">
-        ${q.options.map((opt, idx) => `
+      <div class="options-list" role="radiogroup" aria-labelledby="q-text">
+        ${q.options.map(opt => `
           <label class="option-label">
             <input type="radio" name="q${currentIndex}" value="${opt.val}" class="option-input" ${currentVal === opt.val ? 'checked' : ''}>
             <span class="option-text">${opt.label}</span>
           </label>
         `).join('')}
       </div>
+      <div class="q-actions">
+        <button type="button" class="btn btn-primary" id="btn-next" ${currentVal === null ? 'disabled' : ''}>
+          ${isLast ? 'See my results' : 'Next'}
+        </button>
+      </div>
     `;
-    
-    fader.innerHTML = html;
-    
-    <comment-tag id="2">if (animateIn) {
-      fader.className = 'question-fader fade-in';
-    }
-    
-    // Attach listener for choices</comment-tag id="2" text="On mobile devices, users often scroll down to read the last few options. When the next question fades in, they might be left looking at the bottom of the new card. Adding a smooth scroll ensures they always start at the top of the next question.
 
-if (animateIn) {
-      fader.className = 'question-fader fade-in';
-    }
-    
-    // Ensure mobile users are scrolled to the top of the new question
-    const qContainer = document.querySelector('.question-container');
-    if (qContainer && animateIn) {
-      const y = qContainer.getBoundingClientRect().top + window.scrollY - 20;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+    // Animate in (caller may have set .fade-out beforehand)
+    fader.className = 'question-fader fade-in';
+
+    if (animateIn) {
+      // Focus the new question for screen readers, then nudge mobile users back to the top
+      const qText = document.getElementById('q-text');
+      if (qText) qText.focus({ preventScroll: true });
+
+      const qContainer = document.querySelector('.question-container');
+      if (qContainer) {
+        const y = qContainer.getBoundingClientRect().top + window.scrollY - 20;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
     }
 
-    // Attach listener for choices" type="suggestion">
-    const inputs = fader.querySelectorAll('input[type="radio"]');
-    inputs.forEach(input => {
+    // Wire up radio inputs
+    fader.querySelectorAll('input[type="radio"]').forEach(input => {
       input.addEventListener('change', handleAnswer);
     });
+
+    // Wire up the Next button (rescues back-navigation where the radio won't fire change)
+    const btnNext = document.getElementById('btn-next');
+    if (btnNext) {
+      btnNext.addEventListener('click', () => {
+        if (isAnimating || answers[currentIndex] === null) return;
+        goToNext();
+      });
+    }
   }
 
   function handleAnswer(e) {
     if (isAnimating) return;
-    <comment-tag id="1">const val = parseInt(e.target.value, 10);
-    answers[currentIndex] = val;
-    saveState();</comment-tag id="1" text="Adding a subtle haptic vibration here makes the digital interface feel highly responsive and tactile on mobile devices when a user makes a selection.
 
-const val = parseInt(e.target.value, 10);
+    const val = parseInt(e.target.value, 10);
     answers[currentIndex] = val;
     if (navigator.vibrate) navigator.vibrate(25);
-    saveState();" type="suggestion">
-    
+    saveState();
+
     // Slight delay to show selected state before moving on
     isAnimating = true;
     setTimeout(() => {
       goToNext();
-    }, 400); 
+    }, 400);
   }
 
   function goToNext() {
@@ -726,7 +762,7 @@ const val = parseInt(e.target.value, 10);
         saveState();
         renderQuestion(true);
         isAnimating = false;
-      }, 300); // Wait for fade out CSS
+      }, 300);
     } else {
       isAnimating = false;
       generateResults();
@@ -746,10 +782,31 @@ const val = parseInt(e.target.value, 10);
     }, 300);
   });
 
+  // Keyboard shortcuts: 1–5 select an option, Backspace goes back
+  document.addEventListener('keydown', (e) => {
+    if (!screens.quiz.classList.contains('active')) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    const n = parseInt(e.key, 10);
+    if (n >= 1 && n <= 5) {
+      const input = fader.querySelector(`input[value="${n}"]`);
+      if (input) {
+        e.preventDefault();
+        if (answers[currentIndex] === n) return; // no-op if already selected
+        input.checked = true;
+        handleAnswer({ target: input });
+      }
+    } else if (e.key === 'Backspace') {
+      if (currentIndex === 0) return;
+      e.preventDefault();
+      btnBack.click();
+    }
+  });
+
   function computeScores() {
     const rawScores = {};
     Object.keys(DIMENSIONS).forEach(key => { rawScores[key] = { total: 0, max: 0 }; });
-    
+
     QUESTIONS.forEach((q, i) => {
       rawScores[q.dim].total += (answers[i] || 0);
       rawScores[q.dim].max += 5;
@@ -760,9 +817,9 @@ const val = parseInt(e.target.value, 10);
       return { key, name: DIMENSIONS[key].name, blurb: DIMENSIONS[key].blurb, action: DIMENSIONS[key].action, pct };
     });
 
-    const overall = Math.round((answers.reduce((sum, a) => sum + (a || 0), 0) / (QUESTIONS.length * 5)) * 100);
-    
-    // Sort to find strength and growth
+    const totalAnswered = answers.reduce((sum, a) => sum + (a || 0), 0);
+    const overall = Math.round((totalAnswered / (QUESTIONS.length * 5)) * 100);
+
     const sorted = [...results].sort((a, b) => b.pct - a.pct);
     const strongest = sorted[0];
     const growth = sorted[sorted.length - 1];
@@ -770,52 +827,49 @@ const val = parseInt(e.target.value, 10);
     return { results, overall, strongest, growth };
   }
 
-  <comment-tag id="5">function getBandText(score) {
-    if (score >= 80) return { title: 'A Well-Rounded Communicator', summary: 'Your dimensions are balanced and consistently high. The work now is contextual refinement rather than fixing weak areas.' };</comment-tag id="5" text="Adding a top-tier band for exceptionally high scores rewards users and adds a layer of gamification that makes achieving a high score feel more special.
-
   function getBandText(score) {
     if (score >= 92) return { title: 'A Masterful Communicator', summary: 'Your dimensions are exceptionally high across the board. Your focus now is mentoring others and adapting to the most high-stakes environments.' };
-    if (score >= 80) return { title: 'A Well-Rounded Communicator', summary: 'Your dimensions are balanced and consistently high. The work now is contextual refinement rather than fixing weak areas.' };" type="suggestion">
+    if (score >= 80) return { title: 'A Well-Rounded Communicator', summary: 'Your dimensions are balanced and consistently high. The work now is contextual refinement rather than fixing weak areas.' };
     if (score >= 60) return { title: 'A Capable Communicator', summary: 'You have solid strengths. The fastest progress will come from deliberately practicing your lowest dimension.' };
     if (score >= 40) return { title: 'A Communicator in Development', summary: 'You have an honest baseline. Pick one dimension—the lowest—and work on it for a month before touching anything else.' };
     return { title: 'At the Beginning', summary: 'Low scores here are information, not verdicts. Choose the single dimension that would change the most for you, and start there.' };
   }
 
-  // Pure SVG Math function
+  // Pure SVG math
   function getPolarCoordinates(r, index, total, cx, cy) {
     const angle = (index * (360 / total) - 90) * (Math.PI / 180);
     return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
   }
 
   function drawRadar(results, overall, strongKey, growthKey) {
-    const size = 300, cx = 150, cy = 150, maxR = 90, labelR = 125, rings = [0.25, 0.5, 0.75, 1.0];
+    const size = 300, cx = 150, cy = 150, maxR = 90, labelR = 125;
+    const rings = [0.25, 0.5, 0.75, 1.0];
     const n = results.length;
-    
-    // Draw background rings
-    const gridHtml = rings.map((level, ringIdx) => {
+
+    // Background rings
+    const gridHtml = rings.map(level => {
       const pts = results.map((_, i) => {
         const p = getPolarCoordinates(maxR * level, i, n, cx, cy);
         return `${p.x},${p.y}`;
       }).join(' ');
       const isOuter = level === 1.0;
-      return `<polygon points="${pts}" fill="none" stroke="var(--border-light)" stroke-width="${isOuter ? 1.5 : 1}" />`;
+      return `<polygon points="${pts}" class="${isOuter ? 'radar-grid radar-grid-outer' : 'radar-grid'}" />`;
     }).join('');
 
-    // Draw axes
+    // Axes
     const axesHtml = results.map((_, i) => {
       const p = getPolarCoordinates(maxR, i, n, cx, cy);
-      return `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" stroke="var(--border-light)" stroke-width="1" />`;
+      return `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" class="radar-axis" />`;
     }).join('');
 
-    // Draw Data Polygon
+    // Data polygon
     const dataPts = results.map((d, i) => {
       const p = getPolarCoordinates(maxR * (d.pct / 100), i, n, cx, cy);
       return `${p.x},${p.y}`;
     }).join(' ');
-    
     const polyHtml = `<polygon points="${dataPts}" class="radar-poly" />`;
 
-    // Draw Dots and Labels
+    // Dots and labels
     let dotsHtml = '';
     let labelsHtml = '';
 
@@ -830,7 +884,7 @@ const val = parseInt(e.target.value, 10);
       const dx = pLabel.x - cx, dy = pLabel.y - cy;
       const anchor = dx > 10 ? 'start' : dx < -10 ? 'end' : 'middle';
       const baseline = dy < -10 ? 'auto' : dy > 10 ? 'hanging' : 'middle';
-      
+
       let labelClass = 'radar-label';
       if (d.key === strongKey && strongKey !== growthKey) labelClass += ' radar-label-strength';
       else if (d.key === growthKey && strongKey !== growthKey) labelClass += ' radar-label-growth';
@@ -839,12 +893,17 @@ const val = parseInt(e.target.value, 10);
     });
 
     const centerHtml = `
-      <text x="${cx}" y="${cy + 6}" text-anchor="middle" font-family="var(--font-serif)" font-size="32" font-weight="600" fill="var(--text-main)">${overall}</text>
-      <text x="${cx}" y="${cy + 22}" text-anchor="middle" font-family="var(--font-sans)" font-size="8" font-weight="700" letter-spacing="0.1em" text-transform="uppercase" fill="var(--text-light)">Overall</text>
+      <text x="${cx}" y="${cy + 6}" text-anchor="middle" class="radar-center-num">${overall}</text>
+      <text x="${cx}" y="${cy + 22}" text-anchor="middle" class="radar-center-label">OVERALL</text>
     `;
 
-    return `<svg class="radar-svg" viewBox="0 0 ${size} ${size}">
-      <g>${gridHtml}</g><g>${axesHtml}</g><g>${polyHtml}</g><g>${dotsHtml}</g><g>${labelsHtml}</g>${centerHtml}
+    return `<svg class="radar-svg" viewBox="0 0 ${size} ${size}" role="img" aria-label="Communication profile radar chart">
+      <g>${gridHtml}</g>
+      <g>${axesHtml}</g>
+      <g>${polyHtml}</g>
+      <g>${dotsHtml}</g>
+      <g>${labelsHtml}</g>
+      ${centerHtml}
     </svg>`;
   }
 
@@ -853,24 +912,28 @@ const val = parseInt(e.target.value, 10);
     const band = getBandText(overall);
     const tied = strongest.pct === growth.pct;
 
-    // Set Headers
     resultsTitle.textContent = band.title;
-    resultsSummary.textContent = band.summary;
 
-    // Draw Chart
+    if (tied) {
+      resultsSummary.textContent = `${band.summary} Your dimensions are evenly balanced — pick any one and work it deliberately.`;
+    } else {
+      resultsSummary.textContent = band.summary;
+    }
+
     radarContainer.innerHTML = drawRadar(results, overall, tied ? null : strongest.key, tied ? null : growth.key);
 
-    // Build Dimension Cards
     dimList.innerHTML = results.map(d => {
       const isStrong = !tied && d.key === strongest.key;
       const isGrowth = !tied && d.key === growth.key;
-      
+
       let badgeHtml = '';
       let fillClass = 'dim-track-fill';
       if (isStrong) { badgeHtml = `<span class="badge badge-strength">Strength</span>`; fillClass += ' strength'; }
       if (isGrowth) { badgeHtml = `<span class="badge badge-growth">Growth Edge</span>`; fillClass += ' growth'; }
 
-      const actionHtml = isGrowth ? `<div class="dim-action"><strong>Try this next:</strong> ${d.action}</div>` : '';
+      const actionHtml = isGrowth
+        ? `<div class="dim-action"><strong>Try this next:</strong> ${d.action}</div>`
+        : '';
 
       return `
         <div class="dim-card">
@@ -885,7 +948,7 @@ const val = parseInt(e.target.value, 10);
       `;
     }).join('');
 
-    // Trigger bar animations via requestAnimationFrame
+    // Animate dimension bars
     setTimeout(() => {
       document.querySelectorAll('.dim-track-fill').forEach(el => {
         el.style.width = el.getAttribute('data-target');
@@ -906,21 +969,19 @@ const val = parseInt(e.target.value, 10);
   }
 
   btnShare.addEventListener('click', async () => {
-    <comment-tag id="4">const { overall, strongest, growth } = computeScores();
-    const text = `My Esperiel Index: ${overall}% overall. Strongest: ${strongest.name}. Growth edge: ${growth.name}.`;
-    const url = window.location.href;</comment-tag id="4" text="When users share their results to apps like WhatsApp, Slack, or Twitter, plain text can get lost. Formatting it with emojis and line breaks makes the output much more striking and encourages others to take the index.
-
     const { overall, strongest, growth } = computeScores();
-    const text = `📊 My Esperiel Index: ${overall}%\n🏆 Strength: ${strongest.name}\n🌱 Growth Edge: ${growth.name}\n\nTake the assessment:`;
-    const url = window.location.href;" type="suggestion">
+    const text = `📊 My Esperiel Index: ${overall}%\n🏆 Strength: ${strongest.name}\n🌱 Growth edge: ${growth.name}\n\nTake the assessment:`;
+    const url = window.location.href;
 
     if (navigator.share) {
       try {
         await navigator.share({ title: 'Esperiel Index', text, url });
         return;
-      } catch (e) { if (e.name === 'AbortError') return; }
+      } catch (e) {
+        if (e.name === 'AbortError') return;
+      }
     }
-    
+
     try {
       await navigator.clipboard.writeText(`${text} ${url}`);
       showToast('Result copied to clipboard');
@@ -929,9 +990,7 @@ const val = parseInt(e.target.value, 10);
     }
   });
 
-  // Start app
   init();
-
 })();
 </script>
 </body>
