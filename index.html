@@ -19,15 +19,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-  /* =========================================================
-     PALETTE — warm neutral world, one accent, one support
-  ========================================================= */
   :root{
     color-scheme: light;
 
     --paper:        #F7F3EC;
-    --paper-tint:   #F0E9DD;
-
     --surface:      #FFFFFF;
     --surface-2:    #FAF6EF;
     --surface-3:    #F2EBDE;
@@ -47,27 +42,31 @@
     --support-deep: #5E7362;
     --support-soft: #E5EBE4;
 
-    /* Glass tint colours */
     --glass-1: rgba(255, 255, 255, 0.72);
     --glass-2: rgba(255, 255, 255, 0.42);
-
-    --shadow-sm: 0 1px 2px rgba(60,45,30,.04), 0 4px 12px rgba(60,45,30,.05);
-    --shadow-md: 0 2px 4px rgba(60,45,30,.04), 0 14px 32px -10px rgba(60,45,30,.10);
-    --shadow-lg: 0 3px 6px rgba(60,45,30,.05), 0 24px 48px -18px rgba(60,45,30,.16);
 
     --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
     --serif:'Fraunces',Georgia,'Times New Roman',serif;
 
-    --radius-card: 28px;
+    --radius-card: 26px;
     --radius-pill: 999px;
-    --card-h: clamp(420px, 56vh, 500px);
-    --peek:   clamp(40px, 5vh, 60px);
 
-    /* Smoother motion */
+    /* =========================================================
+       FLUID SIZING — everything adapts to the device
+       Card height uses dvh so it responds to mobile browser chrome.
+       Peek is deliberately tiny so prev/next are just slivers.
+    ========================================================= */
+    --peek: clamp(12px, 1.8vh, 20px);
+    --card-h: clamp(360px, calc(100dvh - 230px), 620px);
+
     --ease-ios: cubic-bezier(.22, 1, .36, 1);
-    --ease-soft: cubic-bezier(.4, 0, .2, 1);
     --dur: 850ms;
     --advance-delay: 700ms;
+  }
+
+  /* Fallback for browsers without dvh */
+  @supports not (height: 100dvh){
+    :root{ --card-h: clamp(360px, calc(100vh - 230px), 620px); }
   }
 
   *,*::before,*::after{ box-sizing:border-box }
@@ -81,11 +80,11 @@
     -webkit-font-smoothing:antialiased;
     background:var(--paper);
     min-height:100vh;
+    min-height:100dvh;
     position:relative;
     overflow-x:hidden;
   }
 
-  /* Liquid ambient background — drifts slowly so the glass has something to pick up */
   body::before{
     content:'';
     position:fixed; inset:-30% -15% auto -15%;
@@ -125,13 +124,13 @@
   }
   .skip-link:focus{ left:0 }
 
-  .wrap{ width:min(720px,100% - 2.5rem); margin-inline:auto }
+  .wrap{ width:min(720px,100% - 2rem); margin-inline:auto }
 
   /* ============ Header ============ */
-  header.site{ padding:1.7rem 0 .5rem }
+  header.site{ padding:1.1rem 0 .35rem }
   .wordmark{
     display:inline-flex; align-items:center; gap:.6rem;
-    font-family:var(--serif); font-size:1.05rem; font-weight:600;
+    font-family:var(--serif); font-size:1rem; font-weight:600;
     text-decoration:none; color:var(--ink);
   }
   .wordmark .dot{
@@ -141,7 +140,7 @@
   }
 
   /* ============ Screens ============ */
-  main{ padding:.5rem 0 4rem }
+  main{ padding:.25rem 0 3rem }
   .screen{ display:none }
   .screen.active{ display:block; animation:rise .6s var(--ease-ios) both }
   @keyframes rise{ from{ opacity:0; transform:translateY(14px) } to{ opacity:1; transform:none } }
@@ -162,7 +161,6 @@
   }
   .intro .body{ color:var(--muted); max-width:58ch; font-size:1rem }
 
-  /* Intro chips — light glass */
   .dims-preview{
     display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
     gap:.55rem; margin:2.1rem 0 1.6rem;
@@ -234,7 +232,6 @@
       0 1px 2px rgba(0,0,0,.05);
     transform:translateY(-1px);
   }
-
   .btn-ghost{
     background: rgba(255,255,255,0.7);
     backdrop-filter: blur(12px);
@@ -250,30 +247,29 @@
     border-color: rgba(255,255,255,0.9);
     color:var(--ink);
   }
-
   .btn:disabled{ opacity:.35; cursor:not-allowed; transform:none !important; box-shadow:none }
   .btn-row{ display:flex; flex-wrap:wrap; gap:.7rem; align-items:center }
 
   /* ============ Quiz meta ============ */
   .quiz-meta{
     display:flex; justify-content:space-between; align-items:center;
-    gap:1rem; margin-bottom:1rem; min-height:40px;
+    gap:1rem; margin-bottom:.55rem; min-height:34px;
   }
   .quiz-count{
-    font-size:.76rem; font-weight:700; letter-spacing:.14em;
+    font-size:.72rem; font-weight:700; letter-spacing:.14em;
     text-transform:uppercase; color:var(--muted); margin:0;
   }
 
   .back-btn{
-    display:inline-flex; align-items:center; gap:.45rem;
-    padding:.48rem .95rem .48rem .75rem;
+    display:inline-flex; align-items:center; gap:.4rem;
+    padding:.4rem .85rem .4rem .65rem;
     border-radius:var(--radius-pill);
     border:1px solid rgba(255,255,255,0.8);
     background: rgba(255,255,255,0.65);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     color:var(--ink-soft);
-    font-size:.84rem; font-weight:600;
+    font-size:.8rem; font-weight:600;
     cursor:pointer;
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,0.95),
@@ -290,10 +286,9 @@
   .back-btn svg{ flex:none }
   .back-btn[hidden]{ display:none }
 
-  /* Progress */
   .progress{
-    height:6px; background: rgba(60,45,30,0.06); border-radius:99px;
-    overflow:hidden; margin-bottom:1.6rem;
+    height:5px; background: rgba(60,45,30,0.06); border-radius:99px;
+    overflow:hidden; margin-bottom:1rem;
     box-shadow: inset 0 1px 2px rgba(60,45,30,0.05);
   }
   .progress-fill{
@@ -303,7 +298,7 @@
   }
 
   /* =========================================================
-     CARD STACK — liquid frosted glass, 3D depth
+     CARD STACK — auto-sized, no internal scroll, minimal peek
   ========================================================= */
   .stack-viewport{
     position:relative;
@@ -312,9 +307,9 @@
     perspective: 1600px;
     perspective-origin: 50% 50%;
     -webkit-mask-image: linear-gradient(to bottom,
-      transparent 0%, #000 5%, #000 95%, transparent 100%);
+      transparent 0%, #000 2%, #000 98%, transparent 100%);
     mask-image: linear-gradient(to bottom,
-      transparent 0%, #000 5%, #000 95%, transparent 100%);
+      transparent 0%, #000 2%, #000 98%, transparent 100%);
   }
 
   .qcard{
@@ -329,7 +324,6 @@
     pointer-events: none;
     will-change: transform, opacity;
 
-    /* -------- Liquid frosted glass -------- */
     background: linear-gradient(155deg,
       var(--glass-1) 0%,
       var(--glass-2) 55%,
@@ -339,13 +333,9 @@
     border: 1px solid rgba(255,255,255,0.65);
 
     box-shadow:
-      /* top glass highlight */
       inset 0 1px 0 0 rgba(255,255,255,0.95),
-      /* bottom inner sheen */
       inset 0 -1px 0 0 rgba(255,255,255,0.45),
-      /* hairline outline */
       0 0 0 0.5px rgba(60,45,30,0.06),
-      /* ambient occlusion */
       0 24px 60px -22px rgba(60,45,30,0.24),
       0 8px 24px -12px rgba(60,45,30,0.12);
 
@@ -357,7 +347,6 @@
       background var(--dur) var(--ease-ios);
   }
 
-  /* Specular highlight — light glancing off the glass */
   .qcard::before{
     content:'';
     position:absolute; inset:0;
@@ -372,7 +361,6 @@
     opacity: 1;
   }
 
-  /* Liquid noise texture */
   .qcard::after{
     content:'';
     position:absolute; inset:0;
@@ -384,9 +372,8 @@
     z-index:2;
   }
 
-  /* ---------- Card positions ---------- */
+  /* ---------- Card positions — minimal peek, subtle 3D ---------- */
 
-  /* Current — front and centre */
   .qcard[data-offset="0"]{
     transform: translateY(0) translateZ(0) scale(1) rotateX(0deg);
     z-index: 5;
@@ -402,64 +389,73 @@
       0 0 70px -20px rgba(181,103,63,0.16);
   }
 
-  /* Previous — slides up, tilts away, still visible as frosted glass */
+  /* Previous — slides up, only the top sliver remains visible */
   .qcard[data-offset="-1"]{
     transform: translateY(calc(-1 * (var(--card-h) - var(--peek))))
-               translateZ(-60px)
-               scale(0.94)
-               rotateX(9deg);
+               translateZ(-40px)
+               scale(0.97)
+               rotateX(5deg);
     z-index: 4;
-    opacity: 0.92;
+    opacity: 0.9;
     border-color: rgba(255,255,255,0.55);
   }
 
-  /* Next — peeks below, tilts forward, still visible */
+  /* Next — peeks below, only the bottom sliver visible */
   .qcard[data-offset="1"]{
     transform: translateY(calc(var(--card-h) - var(--peek)))
-               translateZ(-60px)
-               scale(0.94)
-               rotateX(-9deg);
+               translateZ(-40px)
+               scale(0.97)
+               rotateX(-5deg);
     z-index: 4;
-    opacity: 0.92;
+    opacity: 0.9;
     border-color: rgba(255,255,255,0.55);
   }
 
-  /* Off-screen */
   .qcard[data-offset="-2"]{
-    transform: translateY(calc(-1 * (var(--card-h) - var(--peek)) - 70px))
-               translateZ(-140px)
-               scale(0.88)
-               rotateX(13deg);
+    transform: translateY(calc(-1 * (var(--card-h) - var(--peek)) - 60px))
+               translateZ(-120px)
+               scale(0.92)
+               rotateX(8deg);
     z-index: 3;
     opacity: 0;
   }
   .qcard[data-offset="2"]{
-    transform: translateY(calc(var(--card-h) - var(--peek) + 70px))
-               translateZ(-140px)
-               scale(0.88)
-               rotateX(-13deg);
+    transform: translateY(calc(var(--card-h) - var(--peek) + 60px))
+               translateZ(-120px)
+               scale(0.92)
+               rotateX(-8deg);
     z-index: 3;
     opacity: 0;
   }
 
-  /* Content inside the card — blurs and fades on prev/next */
+  /* =========================================================
+     CARD BODY — flex centers content, no scroll ever
+  ========================================================= */
   .qcard-body{
     position: relative;
     z-index: 3;
-    flex:1 1 auto;
-    padding: clamp(1.6rem,3.8vw,2.2rem) clamp(1.4rem,3.6vw,2.2rem) 1.4rem;
-    display:flex; flex-direction:column;
-    overflow-y:auto;
-    scrollbar-width:none; -ms-overflow-style:none;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1.1rem, 3vh, 2rem) clamp(1.2rem, 3.5vw, 2rem);
+    overflow: hidden;
     filter: blur(0);
     opacity: 1;
     transition:
       filter var(--dur) var(--ease-ios),
       opacity var(--dur) var(--ease-ios);
   }
-  .qcard-body::-webkit-scrollbar{ display:none }
 
-  /* Blur the content on non-current cards */
+  /* The scalable wrapper — JS shrinks this if content overflows */
+  .qcard-content{
+    width: 100%;
+    transform-origin: 50% 50%;
+    transition: transform .35s var(--ease-ios);
+  }
+
+  /* Blur content on non-current cards */
   .qcard[data-offset="-1"] .qcard-body,
   .qcard[data-offset="1"] .qcard-body{
     filter: blur(11px);
@@ -471,26 +467,37 @@
     opacity: 0.2;
   }
 
+  /* =========================================================
+     FLUID TYPOGRAPHY — everything scales with viewport height
+  ========================================================= */
   .qcard-dim{
-    font-size:.7rem; font-weight:700; letter-spacing:.19em;
+    font-size: clamp(.62rem, 1.1dvh + .15vw, .72rem);
+    font-weight:700; letter-spacing:.19em;
     text-transform:uppercase; color:var(--accent);
-    margin:0 0 1rem;
+    margin:0 0 clamp(.5rem, 1.2dvh, .95rem);
   }
 
   .qcard-question{
     font-family:var(--serif);
-    font-size:clamp(1.15rem,3vw,1.45rem);
-    line-height:1.4; letter-spacing:-.012em;
-    margin:0 0 1.6rem; color:var(--ink); text-wrap:balance;
+    font-size: clamp(.98rem, 1.9dvh + .55vw, 1.4rem);
+    line-height: 1.35;
+    letter-spacing:-.012em;
+    margin: 0 0 clamp(.9rem, 2dvh, 1.5rem);
+    color: var(--ink);
+    text-wrap: balance;
   }
 
-  .options{ display:flex; flex-direction:column; gap:.5rem }
+  .options{
+    display: flex;
+    flex-direction: column;
+    gap: clamp(.32rem, .7dvh, .5rem);
+  }
 
   .option{
-    display:flex; align-items:center; gap:.9rem;
-    padding:.76rem 1.05rem;
+    display:flex; align-items:center; gap:.8rem;
+    padding: clamp(.5rem, 1.2dvh, .8rem) clamp(.85rem, 2.5vw, 1.1rem);
     border:1.5px solid rgba(60,45,30,0.08);
-    border-radius:14px;
+    border-radius: clamp(11px, 1.8vw, 14px);
     cursor:pointer;
     background: rgba(255,255,255,0.55);
     backdrop-filter: blur(8px);
@@ -518,7 +525,10 @@
 
   .option input{
     appearance:none; -webkit-appearance:none;
-    flex:none; width:19px; height:19px; margin:0;
+    flex:none;
+    width: clamp(16px, 2.2dvh, 19px);
+    height: clamp(16px, 2.2dvh, 19px);
+    margin:0;
     border:2px solid var(--line-strong); border-radius:50%;
     position:relative; cursor:pointer;
     transition: border-color .25s ease;
@@ -533,7 +543,8 @@
   .option input:focus-visible{ outline:none }
 
   .option-label{
-    font-size:.95rem; font-weight:500; color:var(--ink-soft);
+    font-size: clamp(.82rem, 1.4dvh + .15vw, .95rem);
+    font-weight:500; color:var(--ink-soft);
     transition: color .3s ease;
   }
   .option:has(input:checked) .option-label{
@@ -541,10 +552,10 @@
   }
 
   .qcard-hint{
-    margin:auto 0 0;
-    padding-top:1.4rem;
+    margin: clamp(.6rem, 1.4dvh, 1rem) 0 0;
     text-align:center;
-    font-size:.76rem; font-weight:500;
+    font-size: clamp(.66rem, 1dvh + .1vw, .76rem);
+    font-weight:500;
     letter-spacing:.06em;
     color:var(--muted);
     opacity:.7;
@@ -586,53 +597,17 @@
   }
   .radar-data.in{ transform:scale(1); opacity:1 }
 
-  .radar-poly{
-    fill: rgba(181,103,63,0.16);
-    stroke: var(--accent);
-    stroke-width: 2.5;
-    stroke-linejoin: round;
-  }
-  .radar-dot{
-    fill: var(--accent);
-    stroke: var(--surface);
-    stroke-width: 2.5;
-  }
-  .radar-dot.is-growth{
-    fill: var(--accent-deep);
-    stroke: var(--surface);
-    stroke-width: 3;
-  }
-  .radar-dot.is-strongest{
-    fill: var(--support-deep);
-    stroke: var(--surface);
-    stroke-width: 3;
-  }
+  .radar-poly{ fill: rgba(181,103,63,0.16); stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round }
+  .radar-dot{ fill: var(--accent); stroke: var(--surface); stroke-width: 2.5 }
+  .radar-dot.is-growth{ fill: var(--accent-deep); stroke: var(--surface); stroke-width: 3 }
+  .radar-dot.is-strongest{ fill: var(--support-deep); stroke: var(--surface); stroke-width: 3 }
 
-  .radar-label{
-    font-family: var(--sans);
-    font-size: 11.5px;
-    font-weight: 600;
-    letter-spacing: .02em;
-    fill: var(--muted);
-  }
+  .radar-label{ font-family: var(--sans); font-size: 11.5px; font-weight: 600; letter-spacing: .02em; fill: var(--muted) }
   .radar-label.is-growth{ fill: var(--accent-deep) }
   .radar-label.is-strongest{ fill: var(--support-deep) }
 
-  .radar-overall{
-    font-family: var(--serif);
-    font-size: 52px;
-    font-weight: 600;
-    letter-spacing: -.025em;
-    fill: var(--ink);
-  }
-  .radar-overall-label{
-    font-family: var(--sans);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    fill: var(--muted);
-  }
+  .radar-overall{ font-family: var(--serif); font-size: 52px; font-weight: 600; letter-spacing: -.025em; fill: var(--ink) }
+  .radar-overall-label{ font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; fill: var(--muted) }
 
   .results-head h2{
     font-size:clamp(1.5rem,4.2vw,2.05rem);
@@ -643,14 +618,8 @@
   }
 
   .dims{ display:flex; flex-direction:column; gap:1.5rem; margin-bottom:2.6rem }
-  .dim-head{
-    display:flex; justify-content:space-between; align-items:baseline;
-    gap:1rem; margin-bottom:.5rem; flex-wrap:wrap;
-  }
-  .dim-name{
-    font-weight:600; display:flex; align-items:center; gap:.6rem;
-    flex-wrap:wrap; font-size:.97rem;
-  }
+  .dim-head{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; margin-bottom:.5rem; flex-wrap:wrap }
+  .dim-name{ font-weight:600; display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; font-size:.97rem }
   .dim-pct{ font-family:var(--serif); font-size:1.02rem; color:var(--muted) }
 
   .badge{
@@ -677,9 +646,7 @@
   }
   .dim-fill.growth{ background: var(--accent-deep) }
 
-  .dim-blurb{
-    font-size:.86rem; color:var(--muted); margin:.55rem 0 0; max-width:62ch;
-  }
+  .dim-blurb{ font-size:.86rem; color:var(--muted); margin:.55rem 0 0; max-width:62ch }
   .dim-action{
     font-size:.88rem; color:var(--ink-soft); margin:.7rem 0 0;
     padding:.75rem 1rem .75rem 1.05rem;
@@ -713,28 +680,17 @@
   .toast.show{ transform:translate(-50%,0) }
 
   footer.site{
-    padding:2.2rem 0 3rem;
+    padding:2rem 0 2.5rem;
     border-top:1px solid var(--line);
     font-size:.82rem; color:var(--muted);
   }
   footer.site p{ margin:0 }
 
-  /* ============ Small screens ============ */
-  @media (max-width:560px){
-    :root{
-      --card-h: clamp(420px, 58vh, 480px);
-      --peek:   clamp(32px, 4.4vh, 46px);
-      --radius-card: 22px;
-    }
-    body{ font-size:16px }
-    .wrap{ width:min(720px, 100% - 1.6rem) }
-    .option{ padding:.7rem .9rem; gap:.8rem }
-    .option-label{ font-size:.92rem }
-    .qcard-question{ margin-bottom:1.4rem }
-    .radar-label{ font-size:13px }
-    /* Reduce 3D intensity on mobile for performance */
-    .qcard[data-offset="-1"]{ transform: translateY(calc(-1 * (var(--card-h) - var(--peek)))) scale(0.95) rotateX(5deg) }
-    .qcard[data-offset="1"]{ transform: translateY(calc(var(--card-h) - var(--peek))) scale(0.95) rotateX(-5deg) }
+  /* ============ Very small screens ============ */
+  @media (max-width:400px){
+    :root{ --peek: 10px; }
+    .wrap{ width:calc(100% - 1.4rem) }
+    .qcard{ border-radius: 22px }
   }
 </style>
 </head>
@@ -754,7 +710,6 @@
 <main id="main">
   <div class="wrap">
 
-    <!-- ============ INTRO ============ -->
     <section id="screen-intro" class="screen active" aria-labelledby="intro-title">
       <div class="intro">
         <p class="eyebrow">An eighteen-question reflection</p>
@@ -780,7 +735,6 @@
       </div>
     </section>
 
-    <!-- ============ QUIZ ============ -->
     <section id="screen-quiz" class="screen" aria-labelledby="quiz-title">
       <h2 id="quiz-title" class="sr-only" tabindex="-1">Assessment questions</h2>
 
@@ -804,7 +758,6 @@
       <div class="stack-viewport" id="stackViewport"></div>
     </section>
 
-    <!-- ============ RESULTS ============ -->
     <section id="screen-results" class="screen" aria-labelledby="results-title">
       <div id="resultsBody"></div>
     </section>
@@ -892,19 +845,13 @@
     { value:5, label:'Strongly agree' }
   ];
 
-  const STORAGE_KEY = 'esperiel-index-v6';
+  const STORAGE_KEY = 'esperiel-index-v7';
 
-  /* ---------------------------------------------------------------
-     STATE
-  --------------------------------------------------------------- */
   let answers = new Array(QUESTIONS.length).fill(null);
   let current = 0;
   let cardsRendered = false;
   let advanceTimer = null;
 
-  /* ---------------------------------------------------------------
-     ELEMENTS
-  --------------------------------------------------------------- */
   const screens = {
     intro:   document.getElementById('screen-intro'),
     quiz:    document.getElementById('screen-quiz'),
@@ -920,9 +867,6 @@
   const backBtn       = document.getElementById('backBtn');
   const toastEl       = document.getElementById('toast');
 
-  /* ---------------------------------------------------------------
-     HELPERS
-  --------------------------------------------------------------- */
   function showScreen(name){
     Object.entries(screens).forEach(([key, el]) => {
       el.classList.toggle('active', key === name);
@@ -964,20 +908,58 @@
   }
 
   /* ===============================================================
+     AUTO-FIT — shrink content if it ever overflows the card
+  =============================================================== */
+  function fitCard(card){
+    const body = card.querySelector('.qcard-body');
+    const content = card.querySelector('.qcard-content');
+    if (!body || !content) return;
+
+    // Reset to natural size
+    content.style.transform = '';
+
+    // Force synchronous layout to get accurate measurements
+    void content.offsetHeight;
+
+    const style = getComputedStyle(body);
+    const padTop = parseFloat(style.paddingTop) || 0;
+    const padBottom = parseFloat(style.paddingBottom) || 0;
+    const available = body.clientHeight - padTop - padBottom;
+
+    if (available <= 0) return;
+
+    const needed = content.offsetHeight;
+
+    if (needed > available + 1){
+      // Scale down but never below 68% — anything smaller is unreadable
+      const scale = Math.max(0.68, available / needed);
+      content.style.transform = 'scale(' + scale + ')';
+    }
+  }
+
+  function fitAllCards(){
+    stackViewport.querySelectorAll('.qcard').forEach(fitCard);
+  }
+
+  // Debounced resize handler
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(fitAllCards, 140);
+  });
+
+  window.addEventListener('orientationchange', () => {
+    setTimeout(fitAllCards, 200);
+  });
+
+  /* ===============================================================
      HEXAGON RADAR
   =============================================================== */
-  const RADAR = {
-    size: 380, cx: 190, cy: 190,
-    maxR: 112, labelR: 138,
-    rings: [0.2, 0.4, 0.6, 0.8, 1.0]
-  };
+  const RADAR = { size: 380, cx: 190, cy: 190, maxR: 112, labelR: 138, rings: [0.2, 0.4, 0.6, 0.8, 1.0] };
 
   function polar(r, index, total){
     const angle = (index * (360 / total) - 90) * Math.PI / 180;
-    return {
-      x: RADAR.cx + r * Math.cos(angle),
-      y: RADAR.cy + r * Math.sin(angle)
-    };
+    return { x: RADAR.cx + r * Math.cos(angle), y: RADAR.cy + r * Math.sin(angle) };
   }
 
   function buildRadarSVG(results, overall, strongestKey, growthKey){
@@ -1116,6 +1098,10 @@
     if (!cardsRendered) buildStack();
     syncStack(false);
     showScreen('quiz');
+    // Fit after the screen is visible so measurements are accurate
+    requestAnimationFrame(() => {
+      requestAnimationFrame(fitAllCards);
+    });
   }
 
   function buildStack(){
@@ -1124,18 +1110,20 @@
         '<article class="qcard" data-index="' + i + '" data-offset="' + (i === 0 ? 0 : 1) + '" ' +
                  'aria-label="Question ' + (i + 1) + ' of ' + QUESTIONS.length + '">' +
           '<div class="qcard-body">' +
-            '<p class="qcard-dim">' + DIMENSIONS[q.dim].name + '</p>' +
-            '<h3 class="qcard-question">' + q.text + '</h3>' +
-            '<div class="options" role="radiogroup">' +
-              SCALE.map(opt =>
-                '<label class="option">' +
-                  '<input type="radio" name="q' + i + '" value="' + opt.value + '" ' +
-                         (answers[i] === opt.value ? 'checked' : '') + '>' +
-                  '<span class="option-label">' + opt.label + '</span>' +
-                '</label>'
-              ).join('') +
+            '<div class="qcard-content">' +
+              '<p class="qcard-dim">' + DIMENSIONS[q.dim].name + '</p>' +
+              '<h3 class="qcard-question">' + q.text + '</h3>' +
+              '<div class="options" role="radiogroup">' +
+                SCALE.map(opt =>
+                  '<label class="option">' +
+                    '<input type="radio" name="q' + i + '" value="' + opt.value + '" ' +
+                           (answers[i] === opt.value ? 'checked' : '') + '>' +
+                    '<span class="option-label">' + opt.label + '</span>' +
+                  '</label>'
+                ).join('') +
+              '</div>' +
+              '<p class="qcard-hint">Choose an answer to continue</p>' +
             '</div>' +
-            '<p class="qcard-hint">Choose an answer to continue</p>' +
           '</div>' +
         '</article>';
     }).join('');
@@ -1178,7 +1166,6 @@
     else backBtn.removeAttribute('hidden');
   }
 
-  /* ---- Auto-advance on answer ---- */
   function answerAndAdvance(card, value){
     if (card.dataset.offset !== '0') return;
 
@@ -1194,6 +1181,8 @@
         current = i + 1;
         syncStack(true);
         const newCard = stackViewport.querySelector('.qcard[data-offset="0"]');
+        // Ensure the new current card's content fits
+        if (newCard) fitCard(newCard);
         const heading = newCard && newCard.querySelector('.qcard-question');
         if (heading){
           heading.setAttribute('tabindex','-1');
@@ -1229,6 +1218,8 @@
     if (current === 0) return;
     current--;
     syncStack(true);
+    const newCard = stackViewport.querySelector('.qcard[data-offset="0"]');
+    if (newCard) fitCard(newCard);
   });
 
   document.addEventListener('keydown', (e) => {
@@ -1424,6 +1415,13 @@
 
     renderIntroActions();
     showScreen('intro');
+
+    // Re-fit once fonts are fully loaded
+    if (document.fonts && document.fonts.ready){
+      document.fonts.ready.then(() => {
+        if (cardsRendered) fitAllCards();
+      });
+    }
   }
 
   init();
