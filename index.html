@@ -409,8 +409,8 @@
   }
 
   /* ============ Toast ============ */
-  .toast{ position:fixed; left:50%; bottom:1.6rem; transform:translate(-50%,140%); background: var(--ink); color:#fff; padding:.75rem 1.2rem; border-radius:var(--radius-pill); font-size:.85rem; font-weight:500; box-shadow: 0 10px 24px -8px rgba(60,45,30,0.3); z-index:100; transition: transform .4s cubic-bezier(0.16,1,0.3,1), opacity .4s, visibility .4s; max-width:calc(100vw - 2rem); opacity: 0; visibility: hidden; }
-  .toast.show{ transform:translate(-50%,0); opacity: 1; visibility: visible; }
+  .toast{ position:fixed; left:50%; bottom:-5rem; transform:translateX(-50%); background: var(--ink); color:#fff; padding:.75rem 1.2rem; border-radius:var(--radius-pill); font-size:.85rem; font-weight:500; box-shadow: 0 10px 24px -8px rgba(60,45,30,0.3); z-index:100; transition: bottom .4s cubic-bezier(0.16,1,0.3,1), opacity .4s, visibility .4s; max-width:calc(100vw - 2rem); opacity: 0; visibility: hidden; }
+  .toast.show{ bottom:1.6rem; opacity: 1; visibility: visible; }
   footer.site{ padding:2rem 0 2.5rem; border-top:1px solid var(--line); font-size:.82rem; color:var(--muted); text-align:center; }
   footer.site p{ margin:0 }
 </style>
