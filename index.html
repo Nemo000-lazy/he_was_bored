@@ -7,6 +7,13 @@
 <meta name="description" content="Map how you show up across Clarity, Confidence, Connection, Composure, Curiosity, and Conviction in eighteen questions. Free, private, takes three minutes.">
 <meta name="theme-color" content="#FAF7F2">
 
+<meta property="og:title" content="Esperiel Index — A Communication Self-Assessment">
+<meta property="og:description" content="Map how you show up across six dimensions of communication. Free, three minutes.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Esperiel Index — A Communication Self-Assessment">
+<meta name="twitter:description" content="Map how you show up across six dimensions of communication. Free, three minutes.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,36 +21,35 @@
 <style>
   :root {
     color-scheme: light;
-    
+
     --bg-color:     #FAF7F2;
     --card-bg:      #FFFFFF;
-    
+
     --text-main:    #2A241E;
     --text-muted:   #564A3E;
     --text-light:   #8A7C6D;
-    
+
     --border-light: #E8DFD3;
-    --border-focus: #B5673F;
-    
+
     --accent:       #B5673F;
     --accent-hover: #8E4D2C;
     --accent-bg:    #F8EFEA;
-    
+
     --support:      #5E7362;
     --support-bg:   #EAF0EB;
 
     --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
     --font-serif:   'Fraunces', Georgia, serif;
-    
-    --ease-out:     cubic-bezier(0.2, 0.8, 0.2, 1);
-    --ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Motion tokens */
+    --ease-smooth:  cubic-bezier(0.22, 1, 0.36, 1);      /* expo-out, elegant decel */
+    --ease-spring:  cubic-bezier(0.34, 1.45, 0.64, 1);   /* gentle overshoot */
+    --ease-soft:    cubic-bezier(0.4, 0, 0.2, 1);        /* standard */
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  
-  html {
-    -webkit-text-size-adjust: 100%;
-  }
+
+  html { -webkit-text-size-adjust: 100%; }
 
   body {
     font-family: var(--font-sans);
@@ -52,34 +58,36 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
-    min-height: 100dvh; /* Fixes mobile scroll recalculation glitch */
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden; /* Prevents side-to-side wobble */
+    overflow-x: hidden;
   }
 
-  /* Utility Classes */
+  /* Utility */
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .container { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 20px; }
-  
+
   h1, h2, h3 { font-family: var(--font-serif); font-weight: 600; line-height: 1.2; }
-  
+
   button { font-family: inherit; border: none; background: none; cursor: pointer; }
-  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
 
   header { padding: 24px 0; }
   .logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; text-decoration: none; color: var(--text-main); }
   .logo-dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--accent); }
 
   main { flex: 1; padding-bottom: 60px; }
-  .screen { display: none; opacity: 0; transition: opacity 0.4s var(--ease-out); }
-  .screen.active { display: block; opacity: 1; animation: slideUp 0.5s var(--ease-out) forwards; }
-  
-  @keyframes slideUp {
-    from { transform: translateY(15px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+
+  .screen { display: none; }
+  .screen.active { display: block; animation: screenEnter 0.55s var(--ease-smooth) both; }
+
+  @keyframes screenEnter {
+    from { opacity: 0; transform: translateY(18px) scale(0.995); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
   }
 
+  /* ---------- INTRO ---------- */
   .intro-header { text-align: center; margin: 40px 0; }
   .intro-eyebrow { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 16px; display: block; }
   .intro-title { font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; margin-bottom: 20px; color: var(--text-main); }
@@ -90,23 +98,100 @@
   .feature-tag::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
   .button-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 30px; width: 100%; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 32px; border-radius: 99px; font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.2s ease; width: 100%; max-width: 300px; }
-  @media (min-width: 480px) { .btn { width: auto; max-width: none; } }
-  
-  .btn-primary { background-color: var(--accent); color: #FFFFFF; box-shadow: 0 4px 12px rgba(181, 103, 63, 0.2); }
-  .btn-primary:hover, .btn-primary:active { background-color: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(181, 103, 63, 0.3); }
-  
-  .btn-secondary { background-color: #FFFFFF; border: 1px solid var(--border-light); color: var(--text-muted); }
-  .btn-secondary:hover, .btn-secondary:active { border-color: var(--text-muted); color: var(--text-main); }
 
-  .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-  .progress-text { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); }
-  .btn-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); padding: 8px 12px; border-radius: 8px; transition: background 0.2s; }
-  .btn-back:hover { background: rgba(0,0,0,0.05); }
-  .btn-back[hidden] { visibility: hidden; } /* Use visibility to keep layout stable */
-  
-  .progress-bar { width: 100%; height: 6px; background: var(--border-light); border-radius: 99px; overflow: hidden; margin-bottom: 30px; }
-  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s var(--ease-out); }
+  /* ---------- BUTTONS ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border-radius: 99px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    width: 100%;
+    max-width: 320px;
+    transition:
+      background-color 0.25s var(--ease-soft),
+      color            0.25s var(--ease-soft),
+      border-color     0.25s var(--ease-soft),
+      box-shadow       0.3s  var(--ease-smooth),
+      transform        0.35s var(--ease-spring);
+    will-change: transform;
+  }
+  @media (min-width: 480px) { .btn { width: auto; max-width: none; } }
+
+  .btn-primary {
+    background-color: var(--accent);
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(181, 103, 63, 0.2);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(181, 103, 63, 0.28);
+  }
+  .btn-primary:active:not(:disabled) {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 3px 8px rgba(181, 103, 63, 0.25);
+    transition-duration: 0.08s;
+  }
+
+  .btn-secondary {
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-light);
+    color: var(--text-muted);
+  }
+  .btn-secondary:hover:not(:disabled) {
+    border-color: var(--text-muted);
+    color: var(--text-main);
+    transform: translateY(-1px);
+  }
+  .btn-secondary:active:not(:disabled) {
+    transform: translateY(0) scale(0.97);
+    transition-duration: 0.08s;
+  }
+
+  .btn:disabled {
+    opacity: 0.42;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* ---------- QUIZ ---------- */
+  .quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    min-height: 24px;
+  }
+  .progress-text {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-light);
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--border-light);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 99px;
+    width: 0%;
+    transition: width 0.55s var(--ease-smooth);
+  }
 
   .question-container {
     background: var(--card-bg);
@@ -114,94 +199,229 @@
     padding: clamp(24px, 5vw, 40px);
     box-shadow: 0 10px 30px rgba(42, 36, 30, 0.04), 0 1px 3px rgba(42, 36, 30, 0.02);
     border: 1px solid rgba(0,0,0,0.04);
-    min-height: 400px;
+    min-height: 480px;
     display: flex;
     flex-direction: column;
   }
 
-  /* Transition wrapper for smooth flat fades */
-  .question-fader { flex: 1; display: flex; flex-direction: column; transition: opacity 0.3s ease, transform 0.3s ease; }
-  .question-fader.fade-out { opacity: 0; transform: translateY(-10px); }
-  .question-fader.fade-in { opacity: 1; transform: translateY(0); }
+  .question-fader {
+    display: flex;
+    flex-direction: column;
+    transition:
+      opacity   0.42s var(--ease-smooth),
+      transform 0.42s var(--ease-smooth);
+    will-change: opacity, transform;
+  }
+  .question-fader.fade-out {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.985);
+  }
+  .question-fader.fade-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 
-  .q-dim { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 12px; }
-  .q-text { font-family: var(--font-serif); font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 32px; line-height: 1.4; color: var(--text-main); }
+  .q-dim {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 12px;
+    animation: contentEnter 0.5s var(--ease-smooth) both;
+  }
+  .q-text {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    margin-bottom: 32px;
+    line-height: 1.4;
+    color: var(--text-main);
+    outline: none;
+    animation: contentEnter 0.55s var(--ease-smooth) 0.04s both;
+  }
+  @keyframes contentEnter {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-  /* Sentence-based Options */
-  .options-list { display: flex; flex-direction: column; gap: 12px; margin-top: auto; }
+  .options-list { display: flex; flex-direction: column; gap: 12px; }
+
   .option-label {
-    display: flex; align-items: flex-start; gap: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
     padding: 16px 20px;
     background: #FFFFFF;
     border: 1px solid var(--border-light);
     border-radius: 16px;
     cursor: pointer;
-    transition: all 0.2s ease;
     -webkit-tap-highlight-color: transparent;
+    transition:
+      border-color 0.22s var(--ease-soft),
+      background-color 0.22s var(--ease-soft),
+      transform 0.28s var(--ease-spring),
+      box-shadow 0.28s var(--ease-smooth);
+    animation: optionEnter 0.55s var(--ease-smooth) both;
+    will-change: transform;
   }
-  .option-label:hover { border-color: var(--accent); background: #FCFAFA; }
-  
+  @keyframes optionEnter {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .option-label:hover {
+    border-color: var(--accent);
+    background: #FCFAFA;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(42, 36, 30, 0.05);
+  }
+  .option-label:active { transform: translateY(0) scale(0.995); }
+
   .option-input {
     appearance: none; -webkit-appearance: none;
     width: 22px; height: 22px; flex-shrink: 0;
     border: 2px solid var(--border-light);
     border-radius: 50%; margin-top: 2px;
-    transition: all 0.2s ease;
     position: relative;
     cursor: pointer;
+    transition: border-color 0.22s var(--ease-soft);
   }
   .option-input:checked { border-color: var(--accent); }
   .option-input:checked::after {
-    content: ''; position: absolute; inset: 4px;
-    background: var(--accent); border-radius: 50%;
-    animation: popIn 0.3s var(--ease-out) forwards;
+    content: '';
+    position: absolute; inset: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: popIn 0.32s var(--ease-spring) both;
   }
-  @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
-  
+  @keyframes popIn {
+    0%   { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+
   .option-label:has(.option-input:checked) {
     border-color: var(--accent);
     background: var(--accent-bg);
   }
   .option-label:has(.option-input:focus-visible) {
-    outline: 2px solid var(--accent); outline-offset: 2px;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 
-  .option-text { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); line-height: 1.5; transition: color 0.2s; }
-  .option-label:has(.option-input:checked) .option-text { color: var(--accent-hover); font-weight: 600; }
+  .option-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    line-height: 1.5;
+    transition: color 0.22s var(--ease-soft);
+  }
+  .option-label:has(.option-input:checked) .option-text {
+    color: var(--accent-hover);
+    font-weight: 600;
+  }
 
+  /* ---------- NAVIGATION BUTTONS ---------- */
+  .q-actions {
+    margin-top: auto;
+    padding-top: 28px;
+    display: flex;
+    flex-direction: column-reverse; /* mobile: Next on top, Back below */
+    gap: 12px;
+  }
+  .q-actions .btn {
+    width: 100%;
+    max-width: 100%;
+  }
+  @media (min-width: 480px) {
+    .q-actions {
+      flex-direction: row; /* desktop: Back left, Next right */
+      justify-content: flex-end;
+    }
+    .q-actions .btn {
+      width: auto;
+      min-width: 160px;
+      max-width: none;
+    }
+  }
+  #btn-back[hidden] { display: inline-flex; visibility: hidden; }
+
+  /* ---------- RESULTS ---------- */
   .results-header { text-align: center; margin-bottom: 40px; }
   .radar-container {
-    width: min(360px, 100%); margin: 0 auto 20px;
-    background: #FFFFFF; border-radius: 24px; padding: 24px;
+    width: min(360px, 100%);
+    margin: 0 auto 20px;
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 24px;
     box-shadow: 0 10px 30px rgba(42, 36, 30, 0.04);
     border: 1px solid rgba(0,0,0,0.04);
+    animation: contentEnter 0.6s var(--ease-smooth) both;
   }
   .radar-svg { width: 100%; height: auto; overflow: visible; }
-  
-  .radar-poly { fill: rgba(181,103,63,0.12); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; transition: all 1s var(--ease-out); }
-  .radar-dot { fill: var(--accent); stroke: #FFF; stroke-width: 2; transition: all 1s var(--ease-out); }
-  .radar-dot-strength { fill: var(--support); stroke-width: 3; r: 5; }
-  .radar-dot-growth { fill: var(--accent-hover); stroke-width: 3; r: 5; }
-  
+
+  .radar-grid       { fill: none; stroke: var(--border-light); stroke-width: 1; }
+  .radar-grid-outer { stroke-width: 1.5; }
+  .radar-axis       { stroke: var(--border-light); stroke-width: 1; }
+
+  .radar-poly {
+    fill: rgba(181,103,63,0.12);
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    transform-box: view-box;
+    transform-origin: 150px 150px;
+    animation: radarGrow 1s var(--ease-smooth) 0.1s both;
+    will-change: transform, opacity;
+  }
+  .radar-dot {
+    fill: var(--accent);
+    stroke: #FFF;
+    stroke-width: 2;
+    transform-box: view-box;
+    transform-origin: 150px 150px;
+    animation: radarGrow 0.85s var(--ease-spring) 0.45s both;
+  }
+  .radar-dot-strength { fill: var(--support); stroke-width: 2; r: 5; }
+  .radar-dot-growth   { fill: var(--accent-hover); stroke-width: 2; r: 5; }
+
+  @keyframes radarGrow {
+    from { transform: scale(0.05); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
+  }
+
   .radar-label { font-family: var(--font-sans); font-size: 11px; font-weight: 600; fill: var(--text-light); }
   .radar-label-strength { fill: var(--support); font-weight: 700; }
-  .radar-label-growth { fill: var(--accent-hover); font-weight: 700; }
+  .radar-label-growth   { fill: var(--accent-hover); font-weight: 700; }
+
+  .radar-center-num   { font-family: var(--font-serif); font-size: 32px; font-weight: 600; fill: var(--text-main); }
+  .radar-center-label { font-family: var(--font-sans); font-size: 8px; font-weight: 700; letter-spacing: 0.1em; fill: var(--text-light); }
 
   .results-title { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: 12px; }
   .results-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
   .dim-list { display: flex; flex-direction: column; gap: 24px; margin-bottom: 40px; }
-  .dim-card { background: #FFFFFF; border-radius: 16px; padding: 24px; border: 1px solid var(--border-light); }
+  .dim-card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--border-light);
+    animation: contentEnter 0.6s var(--ease-smooth) both;
+  }
   .dim-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
   .dim-card-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
   .dim-card-score { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; color: var(--text-main); }
-  
+
   .badge { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 99px; }
   .badge-strength { background: var(--support-bg); color: var(--support); }
   .badge-growth { background: var(--accent-bg); color: var(--accent-hover); }
 
   .dim-track { height: 6px; background: var(--border-light); border-radius: 99px; overflow: hidden; margin-bottom: 16px; }
-  .dim-track-fill { height: 100%; background: var(--text-light); border-radius: 99px; width: 0%; transition: width 1s var(--ease-out); }
+  .dim-track-fill {
+    height: 100%;
+    background: var(--text-light);
+    border-radius: 99px;
+    width: 0%;
+    transition: width 1.1s var(--ease-smooth);
+  }
   .dim-track-fill.strength { background: var(--support); }
   .dim-track-fill.growth { background: var(--accent); }
 
@@ -209,19 +429,38 @@
   .dim-action { background: var(--bg-color); padding: 16px; border-radius: 12px; border-left: 3px solid var(--accent); font-size: 0.9rem; color: var(--text-main); }
   .dim-action strong { color: var(--accent-hover); }
 
-  /* Toast Notification */
+  /* ---------- TOAST ---------- */
   .toast {
-    position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
-    background: var(--text-main); color: #FFFFFF; padding: 12px 24px;
-    border-radius: 99px; font-size: 0.9rem; font-weight: 500;
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-main);
+    color: #FFFFFF;
+    padding: 12px 24px;
+    border-radius: 99px;
+    font-size: 0.9rem;
+    font-weight: 500;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    transition: bottom 0.4s var(--ease-out);
+    transition: bottom 0.55s var(--ease-spring);
     z-index: 1000;
     pointer-events: none;
   }
   .toast.show { bottom: 30px; }
 
   footer { text-align: center; padding: 30px 20px; color: var(--text-light); font-size: 0.85rem; border-top: 1px solid var(--border-light); margin-top: auto; }
+
+  /* ---------- REDUCED MOTION ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -237,13 +476,13 @@
 
 <main id="main-content">
   <div class="container">
-    
+
     <section id="screen-intro" class="screen active">
       <div class="intro-header">
         <span class="intro-eyebrow">An 18-Question Reflection</span>
         <h1 class="intro-title">Communication is not one skill. It is six.</h1>
         <p class="intro-desc">
-          The Esperiel Index maps how you show up across six dimensions of communication. 
+          The Esperiel Index maps how you show up across six dimensions of communication.
           See where you are already strong—and where your next edge of growth actually lies.
         </p>
       </div>
@@ -257,43 +496,39 @@
         <span class="feature-tag">Conviction</span>
       </div>
 
-      <div class="button-group" id="intro-buttons">
-        <!-- Buttons injected by JS -->
-      </div>
+      <div class="button-group" id="intro-buttons"><!-- injected --></div>
     </section>
 
     <section id="screen-quiz" class="screen">
       <div class="quiz-header">
-        <button id="btn-back" class="btn-back" hidden aria-label="Previous question">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-          Back
-        </button>
         <div id="quiz-progress-text" class="progress-text" aria-live="polite">Question 1 of 18</div>
       </div>
-      
-      <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="progress-bar-attr">
+
+      <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-attr">
         <div class="progress-fill" id="progress-fill"></div>
       </div>
 
       <div class="question-container">
-        <div id="question-fader" class="question-fader fade-in">
-          <!-- Question content injected here by JS -->
+        <div id="question-fader" class="question-fader fade-in"><!-- injected --></div>
+
+        <div class="q-actions">
+          <button type="button" id="btn-back" class="btn btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+            Back
+          </button>
+          <button type="button" id="btn-next" class="btn btn-primary">Next</button>
         </div>
       </div>
     </section>
 
     <section id="screen-results" class="screen">
       <div class="results-header">
-        <div class="radar-container" id="radar-container">
-          <!-- Radar SVG injected here -->
-        </div>
+        <div class="radar-container" id="radar-container"><!-- injected --></div>
         <h2 class="results-title" id="results-title">Your Profile</h2>
         <p class="results-desc" id="results-summary"></p>
       </div>
 
-      <div class="dim-list" id="dim-list">
-        <!-- Dimension breakdowns injected here -->
-      </div>
+      <div class="dim-list" id="dim-list"><!-- injected --></div>
 
       <div class="button-group">
         <button class="btn btn-primary" id="btn-share">Share my result</button>
@@ -308,270 +543,181 @@
   <p>Esperiel Index · A reflective tool, not a diagnostic instrument.</p>
 </footer>
 
-<div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+<div id="toast" class="toast" role="alert"></div>
 
 <script>
 (function() {
   'use strict';
 
-  /* --- DATA CONFIGURATION --- */
+  /* --- DATA --- */
   const DIMENSIONS = {
-    clarity: { name: 'Clarity', blurb: 'How well you translate complex thinking into language other people can follow.', action: 'State the conclusion first, then the reasoning behind it.' },
+    clarity:    { name: 'Clarity',    blurb: 'How well you translate complex thinking into language other people can follow.', action: 'State the conclusion first, then the reasoning behind it.' },
     confidence: { name: 'Confidence', blurb: 'Your ability to hold your ground and speak without shrinking.', action: 'Make one statement without softening it with "just" or "sort of."' },
     connection: { name: 'Connection', blurb: 'How attuned you are to the people you are communicating with.', action: 'Ask someone what they are actually working on, then listen without planning your reply.' },
-    composure: { name: 'Composure', blurb: 'How steady you stay when a conversation becomes difficult.', action: 'When you feel the heat rise, name it silently and wait three seconds before speaking.' },
-    curiosity: { name: 'Curiosity', blurb: 'How openly you seek out perspectives beyond your own.', action: 'In your next disagreement, ask: "What would have to be true for you to be right?"' },
+    composure:  { name: 'Composure',  blurb: 'How steady you stay when a conversation becomes difficult.', action: 'When you feel the heat rise, name it silently and wait three seconds before speaking.' },
+    curiosity:  { name: 'Curiosity',  blurb: 'How openly you seek out perspectives beyond your own.', action: 'In your next disagreement, ask: "What would have to be true for you to be right?"' },
     conviction: { name: 'Conviction', blurb: 'How firmly you stand behind your ideas and your commitments.', action: 'Pick one small commitment this week and treat it as unbreakable.' }
   };
 
-  /* 
-    The 18 Questions with completely custom, contextual sentences.
-    This provides a much richer experience than "Agree/Disagree".
-  */
   const QUESTIONS = [
-    // CLARITY
-    {
-      dim: 'clarity',
-      text: 'When you explain a complex idea to a group, what usually happens?',
-      options: [
-        { val: 1, label: 'People look confused, and I usually have to start over from scratch.' },
-        { val: 2, label: 'I frequently have to re-explain key points to get people on the same page.' },
-        { val: 3, label: 'It varies; sometimes they follow me, sometimes they need a lot of clarification.' },
-        { val: 4, label: 'Most people understand my point clearly after my first explanation.' },
-        { val: 5, label: 'People almost always grasp the full complexity immediately without repetition.' }
-      ]
-    },
-    {
-      dim: 'clarity',
-      text: 'How do you approach organizing your thoughts before speaking?',
-      options: [
-        { val: 1, label: 'I figure out what I want to say entirely by talking out loud.' },
-        { val: 2, label: 'I often start talking and hope the main point eventually becomes clear.' },
-        { val: 3, label: 'I pause briefly to find a starting point, but structure it as I go.' },
-        { val: 4, label: 'I usually mentally outline my main point and supporting details before speaking.' },
-        { val: 5, label: 'I always distill my thoughts into a clear, structured sequence before opening my mouth.' }
-      ]
-    },
-    {
-      dim: 'clarity',
-      text: 'If asked to summarize a long, winding meeting, you would...',
-      options: [
-        { val: 1, label: 'Find it very difficult to condense without giving a long recap of everything.' },
-        { val: 2, label: 'Provide a summary that still includes quite a few unnecessary details.' },
-        { val: 3, label: 'Summarize the main themes, though it might take a few sentences.' },
-        { val: 4, label: 'Confidently extract the core takeaway into a brief, clear summary.' },
-        { val: 5, label: 'Easily distill the entire discussion into a single, sharp, actionable sentence.' }
-      ]
-    },
-    // CONFIDENCE
-    {
-      dim: 'confidence',
-      text: 'How do you behave in a room where you are the least senior person?',
-      options: [
-        { val: 1, label: 'I stay completely silent; it is not my place to speak.' },
-        { val: 2, label: 'I only speak if I am directly asked a question by a senior leader.' },
-        { val: 3, label: 'I will share an idea, but I feel highly anxious and often rush through it.' },
-        { val: 4, label: 'I comfortably offer my perspective when I know it adds value.' },
-        { val: 5, label: 'I speak up with the same steady presence as I would with my peers.' }
-      ]
-    },
-    {
-      dim: 'confidence',
-      text: 'When presenting a strong viewpoint, how often do you use words like "just", "maybe", or "sort of"?',
-      options: [
-        { val: 1, label: 'Constantly; I subconsciously pad almost every statement I make.' },
-        { val: 2, label: 'Frequently, especially if I am worried about how my view will be received.' },
-        { val: 3, label: 'Occasionally, mostly out of habit rather than lack of certainty.' },
-        { val: 4, label: 'Rarely; I try to make my statements direct and unqualified.' },
-        { val: 5, label: 'Never; I state my views plainly without hedging them into something smaller.' }
-      ]
-    },
-    {
-      dim: 'confidence',
-      text: 'When asked a question you don’t know the answer to, you typically:',
-      options: [
-        { val: 1, label: 'Panic, guess, or make something up to avoid looking incompetent.' },
-        { val: 2, label: 'Talk around the issue hoping nobody notices I didn’t answer the question.' },
-        { val: 3, label: 'Admit I don\'t know, but feel deeply embarrassed about it.' },
-        { val: 4, label: 'Simply state I don\'t know and offer to find the answer.' },
-        { val: 5, label: 'Say "I don\'t know" comfortably, knowing it doesn\'t diminish my value.' }
-      ]
-    },
-    // CONNECTION
-    {
-      dim: 'connection',
-      text: 'During a 1-on-1 conversation, if the other person starts to disengage:',
-      options: [
-        { val: 1, label: 'I rarely notice until the conversation is completely over.' },
-        { val: 2, label: 'I might notice they are quiet, but I just keep talking to fill the silence.' },
-        { val: 3, label: 'I notice, but I\'m not always sure how to bring them back in.' },
-        { val: 4, label: 'I usually notice and pause to ask them a question.' },
-        { val: 5, label: 'I immediately sense the shift and smoothly adapt my approach to re-engage them.' }
-      ]
-    },
-    {
-      dim: 'connection',
-      text: 'When people describe their problems to you, they usually:',
-      options: [
-        { val: 1, label: 'Give me a very brief, formal summary and move on.' },
-        { val: 2, label: 'Share the surface-level facts but keep their real feelings hidden.' },
-        { val: 3, label: 'Tell me the practical issues, but only occasionally open up.' },
-        { val: 4, label: 'Feel comfortable enough to share their genuine frustrations with me.' },
-        { val: 5, label: 'Consistently reveal what is really going on beneath the surface.' }
-      ]
-    },
-    {
-      dim: 'connection',
-      text: 'How well do you track the personal details of the people you work with?',
-      options: [
-        { val: 1, label: 'I struggle to remember names, let alone personal details.' },
-        { val: 2, label: 'I focus strictly on the work and rarely learn about what matters to them.' },
-        { val: 3, label: 'I remember big life events, but forget the smaller details.' },
-        { val: 4, label: 'I make a mental note of their interests and occasionally ask about them.' },
-        { val: 5, label: 'I instinctively remember what matters to them and naturally weave it into future chats.' }
-      ]
-    },
-    // COMPOSURE
-    {
-      dim: 'composure',
-      text: 'When you are caught off guard by harsh feedback:',
-      options: [
-        { val: 1, label: 'I visibly panic or immediately shut down completely.' },
-        { val: 2, label: 'I get highly defensive and snap back with a justification immediately.' },
-        { val: 3, label: 'I get flustered and give a rushed, messy response.' },
-        { val: 4, label: 'I feel a spike of stress but manage to pause before responding.' },
-        { val: 5, label: 'I take a slow breath, process the information calmly, and respond with total steadiness.' }
-      ]
-    },
-    {
-      dim: 'composure',
-      text: 'When a meeting suddenly turns tense or adversarial:',
-      options: [
-        { val: 1, label: 'I become entirely overwhelmed and either flee or lose my temper.' },
-        { val: 2, label: 'My voice gets shaky or raises, and I let my emotions drive my words.' },
-        { val: 3, label: 'I become very quiet and try to avoid the conflict entirely.' },
-        { val: 4, label: 'I manage to keep my voice level, even though my heart is racing.' },
-        { val: 5, label: 'I remain an anchoring presence in the room, keeping the conversation productive.' }
-      ]
-    },
-    {
-      dim: 'composure',
-      text: 'When a colleague aggressively disagrees with your core strategy:',
-      options: [
-        { val: 1, label: 'I take it as a deeply personal attack and hold a grudge.' },
-        { val: 2, label: 'I argue back fiercely to prove I am right and they are wrong.' },
-        { val: 3, label: 'I feel personally offended, but try to hide it professionally.' },
-        { val: 4, label: 'I can separate my ego from the idea and debate the merits.' },
-        { val: 5, label: 'I completely detach from ego, viewing the disagreement purely as a puzzle to solve together.' }
-      ]
-    },
-    // CURIOSITY
-    {
-      dim: 'curiosity',
-      text: 'While someone is explaining an opposing viewpoint, you are usually:',
-      options: [
-        { val: 1, label: 'Interrupting them to tell them why they are wrong.' },
-        { val: 2, label: 'Silently rehearsing my counter-argument while they speak.' },
-        { val: 3, label: 'Half-listening, waiting for my turn to speak.' },
-        { val: 4, label: 'Listening closely to understand the logic behind their stance.' },
-        { val: 5, label: 'Deeply listening and asking clarifying questions to fully map their perspective.' }
-      ]
-    },
-    {
-      dim: 'curiosity',
-      text: 'How often do you intentionally consume content or seek opinions that challenge your beliefs?',
-      options: [
-        { val: 1, label: 'Never. I stick strictly to people and sources that agree with me.' },
-        { val: 2, label: 'Rarely. If I encounter opposing views, I usually ignore them.' },
-        { val: 3, label: 'Sometimes, though I mostly do it to find flaws in their arguments.' },
-        { val: 4, label: 'Regularly. I like to keep a pulse on what the other side thinks.' },
-        { val: 5, label: 'Constantly. I actively seek out intelligent challenges to stress-test my own worldview.' }
-      ]
-    },
-    {
-      dim: 'curiosity',
-      text: 'When presented with clear evidence that contradicts a long-held belief you have:',
-      options: [
-        { val: 1, label: 'I reject the evidence entirely to protect my belief.' },
-        { val: 2, label: 'I heavily scrutinize the evidence, looking for any reason to dismiss it.' },
-        { val: 3, label: 'I feel uncomfortable, but will quietly reconsider my stance over time.' },
-        { val: 4, label: 'I readily accept the new data and adjust my thinking accordingly.' },
-        { val: 5, label: 'I immediately change my mind and openly admit to others that I was previously wrong.' }
-      ]
-    },
-    // CONVICTION
-    {
-      dim: 'conviction',
-      text: 'If you realize your idea is highly unpopular in a room full of peers:',
-      options: [
-        { val: 1, label: 'I instantly abandon the idea and agree with the majority.' },
-        { val: 2, label: 'I backtrack and pretend I wasn\'t actually serious about it.' },
-        { val: 3, label: 'I water the idea down significantly to make it more palatable.' },
-        { val: 4, label: 'I politely defend it, but will back down if pushed too hard.' },
-        { val: 5, label: 'I calmly and firmly advocate for it, regardless of the room\'s resistance.' }
-      ]
-    },
-    {
-      dim: 'conviction',
-      text: 'When you make a commitment to do something, and it later becomes highly inconvenient:',
-      options: [
-        { val: 1, label: 'I regularly drop commitments if they become too difficult.' },
-        { val: 2, label: 'I often look for excuses or technicalities to get out of it.' },
-        { val: 3, label: 'I might flake, but I feel very guilty about doing so.' },
-        { val: 4, label: 'I usually push through and get it done, though I might complain.' },
-        { val: 5, label: 'I follow through with zero exceptions. My word is unbreakable.' }
-      ]
-    },
-    {
-      dim: 'conviction',
-      text: 'If a project requirement directly conflicts with your stated ethical values:',
-      options: [
-        { val: 1, label: 'I ignore my values entirely to get the job done.' },
-        { val: 2, label: 'I follow orders, assuming leadership knows best.' },
-        { val: 3, label: 'I feel conflicted and complain privately, but still comply.' },
-        { val: 4, label: 'I push back and suggest alternative ways to achieve the goal.' },
-        { val: 5, label: 'I refuse to proceed. My actions will always match the values I claim to hold.' }
-      ]
-    }
+    { dim: 'clarity', text: 'When you explain a complex idea to a group, what usually happens?', options: [
+      { val: 1, label: 'People look confused, and I usually have to start over from scratch.' },
+      { val: 2, label: 'I frequently have to re-explain key points to get people on the same page.' },
+      { val: 3, label: 'It varies; sometimes they follow me, sometimes they need a lot of clarification.' },
+      { val: 4, label: 'Most people understand my point clearly after my first explanation.' },
+      { val: 5, label: 'People almost always grasp the full complexity immediately without repetition.' }
+    ]},
+    { dim: 'clarity', text: 'How do you approach organizing your thoughts before speaking?', options: [
+      { val: 1, label: 'I figure out what I want to say entirely by talking out loud.' },
+      { val: 2, label: 'I often start talking and hope the main point eventually becomes clear.' },
+      { val: 3, label: 'I pause briefly to find a starting point, but structure it as I go.' },
+      { val: 4, label: 'I usually mentally outline my main point and supporting details before speaking.' },
+      { val: 5, label: 'I always distill my thoughts into a clear, structured sequence before opening my mouth.' }
+    ]},
+    { dim: 'clarity', text: 'If asked to summarize a long, winding meeting, you would...', options: [
+      { val: 1, label: 'Find it very difficult to condense without giving a long recap of everything.' },
+      { val: 2, label: 'Provide a summary that still includes quite a few unnecessary details.' },
+      { val: 3, label: 'Summarize the main themes, though it might take a few sentences.' },
+      { val: 4, label: 'Confidently extract the core takeaway into a brief, clear summary.' },
+      { val: 5, label: 'Easily distill the entire discussion into a single, sharp, actionable sentence.' }
+    ]},
+    { dim: 'confidence', text: 'How do you behave in a room where you are the least senior person?', options: [
+      { val: 1, label: 'I stay completely silent; it is not my place to speak.' },
+      { val: 2, label: 'I only speak if I am directly asked a question by a senior leader.' },
+      { val: 3, label: 'I will share an idea, but I feel highly anxious and often rush through it.' },
+      { val: 4, label: 'I comfortably offer my perspective when I know it adds value.' },
+      { val: 5, label: 'I speak up with the same steady presence as I would with my peers.' }
+    ]},
+    { dim: 'confidence', text: 'When presenting a strong viewpoint, how often do you use words like "just", "maybe", or "sort of"?', options: [
+      { val: 1, label: 'Constantly; I subconsciously pad almost every statement I make.' },
+      { val: 2, label: 'Frequently, especially if I am worried about how my view will be received.' },
+      { val: 3, label: 'Occasionally, mostly out of habit rather than lack of certainty.' },
+      { val: 4, label: 'Rarely; I try to make my statements direct and unqualified.' },
+      { val: 5, label: 'Never; I state my views plainly without hedging them into something smaller.' }
+    ]},
+    { dim: 'confidence', text: 'When asked a question you don’t know the answer to, you typically:', options: [
+      { val: 1, label: 'Panic, guess, or make something up to avoid looking incompetent.' },
+      { val: 2, label: 'Talk around the issue hoping nobody notices I didn’t answer the question.' },
+      { val: 3, label: 'Admit I don\'t know, but feel deeply embarrassed about it.' },
+      { val: 4, label: 'Simply state I don\'t know and offer to find the answer.' },
+      { val: 5, label: 'Say "I don\'t know" comfortably, knowing it doesn\'t diminish my value.' }
+    ]},
+    { dim: 'connection', text: 'During a 1-on-1 conversation, if the other person starts to disengage:', options: [
+      { val: 1, label: 'I rarely notice until the conversation is completely over.' },
+      { val: 2, label: 'I might notice they are quiet, but I just keep talking to fill the silence.' },
+      { val: 3, label: 'I notice, but I\'m not always sure how to bring them back in.' },
+      { val: 4, label: 'I usually notice and pause to ask them a question.' },
+      { val: 5, label: 'I immediately sense the shift and smoothly adapt my approach to re-engage them.' }
+    ]},
+    { dim: 'connection', text: 'When people describe their problems to you, they usually:', options: [
+      { val: 1, label: 'Give me a very brief, formal summary and move on.' },
+      { val: 2, label: 'Share the surface-level facts but keep their real feelings hidden.' },
+      { val: 3, label: 'Tell me the practical issues, but only occasionally open up.' },
+      { val: 4, label: 'Feel comfortable enough to share their genuine frustrations with me.' },
+      { val: 5, label: 'Consistently reveal what is really going on beneath the surface.' }
+    ]},
+    { dim: 'connection', text: 'How well do you track the personal details of the people you work with?', options: [
+      { val: 1, label: 'I struggle to remember names, let alone personal details.' },
+      { val: 2, label: 'I focus strictly on the work and rarely learn about what matters to them.' },
+      { val: 3, label: 'I remember big life events, but forget the smaller details.' },
+      { val: 4, label: 'I make a mental note of their interests and occasionally ask about them.' },
+      { val: 5, label: 'I instinctively remember what matters to them and naturally weave it into future chats.' }
+    ]},
+    { dim: 'composure', text: 'When you are caught off guard by harsh feedback:', options: [
+      { val: 1, label: 'I visibly panic or immediately shut down completely.' },
+      { val: 2, label: 'I get highly defensive and snap back with a justification immediately.' },
+      { val: 3, label: 'I get flustered and give a rushed, messy response.' },
+      { val: 4, label: 'I feel a spike of stress but manage to pause before responding.' },
+      { val: 5, label: 'I take a slow breath, process the information calmly, and respond with total steadiness.' }
+    ]},
+    { dim: 'composure', text: 'When a meeting suddenly turns tense or adversarial:', options: [
+      { val: 1, label: 'I become entirely overwhelmed and either flee or lose my temper.' },
+      { val: 2, label: 'My voice gets shaky or raises, and I let my emotions drive my words.' },
+      { val: 3, label: 'I become very quiet and try to avoid the conflict entirely.' },
+      { val: 4, label: 'I manage to keep my voice level, even though my heart is racing.' },
+      { val: 5, label: 'I remain an anchoring presence in the room, keeping the conversation productive.' }
+    ]},
+    { dim: 'composure', text: 'When a colleague aggressively disagrees with your core strategy:', options: [
+      { val: 1, label: 'I take it as a deeply personal attack and hold a grudge.' },
+      { val: 2, label: 'I argue back fiercely to prove I am right and they are wrong.' },
+      { val: 3, label: 'I feel personally offended, but try to hide it professionally.' },
+      { val: 4, label: 'I can separate my ego from the idea and debate the merits.' },
+      { val: 5, label: 'I completely detach from ego, viewing the disagreement purely as a puzzle to solve together.' }
+    ]},
+    { dim: 'curiosity', text: 'While someone is explaining an opposing viewpoint, you are usually:', options: [
+      { val: 1, label: 'Interrupting them to tell them why they are wrong.' },
+      { val: 2, label: 'Silently rehearsing my counter-argument while they speak.' },
+      { val: 3, label: 'Half-listening, waiting for my turn to speak.' },
+      { val: 4, label: 'Listening closely to understand the logic behind their stance.' },
+      { val: 5, label: 'Deeply listening and asking clarifying questions to fully map their perspective.' }
+    ]},
+    { dim: 'curiosity', text: 'How often do you intentionally consume content or seek opinions that challenge your beliefs?', options: [
+      { val: 1, label: 'Never. I stick strictly to people and sources that agree with me.' },
+      { val: 2, label: 'Rarely. If I encounter opposing views, I usually ignore them.' },
+      { val: 3, label: 'Sometimes, though I mostly do it to find flaws in their arguments.' },
+      { val: 4, label: 'Regularly. I like to keep a pulse on what the other side thinks.' },
+      { val: 5, label: 'Constantly. I actively seek out intelligent challenges to stress-test my own worldview.' }
+    ]},
+    { dim: 'curiosity', text: 'When presented with clear evidence that contradicts a long-held belief you have:', options: [
+      { val: 1, label: 'I reject the evidence entirely to protect my belief.' },
+      { val: 2, label: 'I heavily scrutinize the evidence, looking for any reason to dismiss it.' },
+      { val: 3, label: 'I feel uncomfortable, but will quietly reconsider my stance over time.' },
+      { val: 4, label: 'I readily accept the new data and adjust my thinking accordingly.' },
+      { val: 5, label: 'I immediately change my mind and openly admit to others that I was previously wrong.' }
+    ]},
+    { dim: 'conviction', text: 'If you realize your idea is highly unpopular in a room full of peers:', options: [
+      { val: 1, label: 'I instantly abandon the idea and agree with the majority.' },
+      { val: 2, label: 'I backtrack and pretend I wasn\'t actually serious about it.' },
+      { val: 3, label: 'I water the idea down significantly to make it more palatable.' },
+      { val: 4, label: 'I politely defend it, but will back down if pushed too hard.' },
+      { val: 5, label: 'I calmly and firmly advocate for it, regardless of the room\'s resistance.' }
+    ]},
+    { dim: 'conviction', text: 'When you make a commitment to do something, and it later becomes highly inconvenient:', options: [
+      { val: 1, label: 'I regularly drop commitments if they become too difficult.' },
+      { val: 2, label: 'I often look for excuses or technicalities to get out of it.' },
+      { val: 3, label: 'I might flake, but I feel very guilty about doing so.' },
+      { val: 4, label: 'I usually push through and get it done, though I might complain.' },
+      { val: 5, label: 'I follow through with zero exceptions. My word is unbreakable.' }
+    ]},
+    { dim: 'conviction', text: 'If a project requirement directly conflicts with your stated ethical values:', options: [
+      { val: 1, label: 'I ignore my values entirely to get the job done.' },
+      { val: 2, label: 'I follow orders, assuming leadership knows best.' },
+      { val: 3, label: 'I feel conflicted and complain privately, but still comply.' },
+      { val: 4, label: 'I push back and suggest alternative ways to achieve the goal.' },
+      { val: 5, label: 'I refuse to proceed. My actions will always match the values I claim to hold.' }
+    ]}
   ];
 
-  // System State
+  /* --- STATE --- */
   const STORAGE_KEY = 'esperiel-index-flat-v1';
   let answers = new Array(QUESTIONS.length).fill(null);
   let currentIndex = 0;
   let isAnimating = false;
 
+  /* --- DOM --- */
   const screens = {
-    intro: document.getElementById('screen-intro'),
-    quiz: document.getElementById('screen-quiz'),
+    intro:   document.getElementById('screen-intro'),
+    quiz:    document.getElementById('screen-quiz'),
     results: document.getElementById('screen-results')
   };
 
-  // Intro UI
-  const introButtons = document.getElementById('intro-buttons');
-  
-  // Quiz UI
-  const fader = document.getElementById('question-fader');
-  const btnBack = document.getElementById('btn-back');
-  const progressText = document.getElementById('quiz-progress-text');
-  const progressFill = document.getElementById('progress-fill');
+  const introButtons    = document.getElementById('intro-buttons');
+  const fader           = document.getElementById('question-fader');
+  const btnBack         = document.getElementById('btn-back');
+  const btnNext         = document.getElementById('btn-next');
+  const progressText    = document.getElementById('quiz-progress-text');
+  const progressFill    = document.getElementById('progress-fill');
   const progressBarAttr = document.getElementById('progress-bar-attr');
-  
-  // Results UI
+
   const radarContainer = document.getElementById('radar-container');
-  const resultsTitle = document.getElementById('results-title');
+  const resultsTitle   = document.getElementById('results-title');
   const resultsSummary = document.getElementById('results-summary');
-  const dimList = document.getElementById('dim-list');
-  const btnShare = document.getElementById('btn-share');
-  const btnRetake = document.getElementById('btn-retake');
-  const toast = document.getElementById('toast');
+  const dimList        = document.getElementById('dim-list');
+  const btnShare       = document.getElementById('btn-share');
+  const btnRetake      = document.getElementById('btn-retake');
+  const toast          = document.getElementById('toast');
 
-  function init() {
-    loadState();
-    renderIntro();
-    switchScreen('intro');
-  }
-
+  /* --- PERSISTENCE --- */
   function saveState() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ answers, currentIndex })); } catch (e) {}
   }
@@ -580,7 +726,7 @@
       const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
       if (data && Array.isArray(data.answers) && data.answers.length === QUESTIONS.length) {
         answers = data.answers;
-        currentIndex = data.currentIndex || 0;
+        currentIndex = typeof data.currentIndex === 'number' ? data.currentIndex : 0;
       }
     } catch (e) {}
   }
@@ -589,133 +735,114 @@
     currentIndex = 0;
     try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
   }
-
   function answeredCount() { return answers.filter(a => a !== null).length; }
 
-  function switchScreen(screenName) {
-    Object.keys(screens).forEach(key => {
-      if (key === screenName) {
-        screens[key].classList.add('active');
-      } else {
-        screens[key].classList.remove('active');
-      }
-    });
+  /* --- SCREEN CONTROL --- */
+  function switchScreen(name) {
+    Object.keys(screens).forEach(k => screens[k].classList.toggle('active', k === name));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  /* --- INTRO --- */
   function renderIntro() {
     const count = answeredCount();
     let html = '';
-    
+
     if (count === QUESTIONS.length) {
       html = `
         <button class="btn btn-primary" id="start-results">View your results</button>
-        <button class="btn btn-secondary" id="start-new">Start over</button>
-      `;
+        <button class="btn btn-secondary" id="start-new">Start over</button>`;
     } else if (count > 0) {
       html = `
         <button class="btn btn-primary" id="start-resume">Resume (${QUESTIONS.length - count} left)</button>
-        <button class="btn btn-secondary" id="start-new">Start over</button>
-      `;
+        <button class="btn btn-secondary" id="start-new">Start over</button>`;
     } else {
       html = `<button class="btn btn-primary" id="start-new">Begin the index</button>`;
     }
-    
+
     introButtons.innerHTML = html;
-    
-    const btnNew = document.getElementById('start-new');
-    const btnRes = document.getElementById('start-resume');
-    const btnView = document.getElementById('start-results');
-    
-    if (btnNew) btnNew.addEventListener('click', () => { clearState(); startQuiz(); });
-    if (btnRes) btnRes.addEventListener('click', () => { startQuiz(); });
-    if (btnView) btnView.addEventListener('click', () => { generateResults(); switchScreen('results'); });
+
+    document.getElementById('start-new')?.addEventListener('click', () => { clearState(); startQuiz(); });
+    document.getElementById('start-resume')?.addEventListener('click', () => startQuiz());
+    document.getElementById('start-results')?.addEventListener('click', () => { generateResults(); switchScreen('results'); });
   }
 
   function startQuiz() {
     switchScreen('quiz');
-    renderQuestion(false); // First render, no animation needed
+    renderQuestion(false);
   }
 
+  /* --- QUIZ --- */
   function updateQuizHeader() {
     const total = QUESTIONS.length;
-    const pct = Math.round(((currentIndex) / total) * 100);
-    
+    const pct = Math.round(((currentIndex + 1) / total) * 100);
+
     progressText.textContent = `Question ${currentIndex + 1} of ${total}`;
     progressFill.style.width = `${pct}%`;
     progressBarAttr.setAttribute('aria-valuenow', pct);
-    
+  }
+
+  function updateQuizControls() {
+    const isLast = currentIndex === QUESTIONS.length - 1;
+    const hasAnswer = answers[currentIndex] !== null;
+
+    btnNext.textContent = isLast ? 'See my results' : 'Next';
+    btnNext.disabled = !hasAnswer;
+
     if (currentIndex === 0) btnBack.setAttribute('hidden', '');
     else btnBack.removeAttribute('hidden');
   }
 
   function renderQuestion(animateIn = true) {
     updateQuizHeader();
+
     const q = QUESTIONS[currentIndex];
     const dim = DIMENSIONS[q.dim];
     const currentVal = answers[currentIndex];
-    
-    let html = `
-      <comment-tag id="3"><div class="q-dim">${dim.name}</div>
-      <h3 class="q-text">${q.text}</h3>
-      <div class="options-list" role="radiogroup"></comment-tag id="3" text="To ensure screen readers don't lose their place when the card auto-advances, it's best practice to programmatically focus the new question text. You can do this by adding an ID and a tabindex.
 
+    fader.innerHTML = `
       <div class="q-dim">${dim.name}</div>
       <h3 class="q-text" id="q-text" tabindex="-1">${q.text}</h3>
-      <div class="options-list" role="radiogroup">
-
-(Note: You would also add `document.getElementById('q-text')?.focus({preventScroll: true});` to your JS logic right after `fader.innerHTML` updates)." type="suggestion">
-        ${q.options.map((opt, idx) => `
-          <label class="option-label">
+      <div class="options-list" role="radiogroup" aria-labelledby="q-text">
+        ${q.options.map((opt, i) => `
+          <label class="option-label" style="animation-delay: ${60 + i * 45}ms">
             <input type="radio" name="q${currentIndex}" value="${opt.val}" class="option-input" ${currentVal === opt.val ? 'checked' : ''}>
             <span class="option-text">${opt.label}</span>
           </label>
         `).join('')}
       </div>
     `;
-    
-    fader.innerHTML = html;
-    
-    <comment-tag id="2">if (animateIn) {
-      fader.className = 'question-fader fade-in';
-    }
-    
-    // Attach listener for choices</comment-tag id="2" text="On mobile devices, users often scroll down to read the last few options. When the next question fades in, they might be left looking at the bottom of the new card. Adding a smooth scroll ensures they always start at the top of the next question.
 
-if (animateIn) {
-      fader.className = 'question-fader fade-in';
-    }
-    
-    // Ensure mobile users are scrolled to the top of the new question
-    const qContainer = document.querySelector('.question-container');
-    if (qContainer && animateIn) {
-      const y = qContainer.getBoundingClientRect().top + window.scrollY - 20;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+    fader.className = 'question-fader fade-in';
+    updateQuizControls();
+
+    if (animateIn) {
+      const qText = document.getElementById('q-text');
+      if (qText) qText.focus({ preventScroll: true });
+
+      const qContainer = document.querySelector('.question-container');
+      if (qContainer) {
+        const y = qContainer.getBoundingClientRect().top + window.scrollY - 20;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
     }
 
-    // Attach listener for choices" type="suggestion">
-    const inputs = fader.querySelectorAll('input[type="radio"]');
-    inputs.forEach(input => {
+    fader.querySelectorAll('input[type="radio"]').forEach(input => {
       input.addEventListener('change', handleAnswer);
     });
   }
 
   function handleAnswer(e) {
     if (isAnimating) return;
-    <comment-tag id="1">const val = parseInt(e.target.value, 10);
-    answers[currentIndex] = val;
-    saveState();</comment-tag id="1" text="Adding a subtle haptic vibration here makes the digital interface feel highly responsive and tactile on mobile devices when a user makes a selection.
 
-const val = parseInt(e.target.value, 10);
+    const val = parseInt(e.target.value, 10);
     answers[currentIndex] = val;
     if (navigator.vibrate) navigator.vibrate(25);
-    saveState();" type="suggestion">
-    
-    // Slight delay to show selected state before moving on
+    saveState();
+    updateQuizControls();
+
     isAnimating = true;
-    setTimeout(() => {
-      goToNext();
-    }, 400); 
+    setTimeout(() => goToNext(), 420);
   }
 
   function goToNext() {
@@ -726,7 +853,7 @@ const val = parseInt(e.target.value, 10);
         saveState();
         renderQuestion(true);
         isAnimating = false;
-      }, 300); // Wait for fade out CSS
+      }, 380);
     } else {
       isAnimating = false;
       generateResults();
@@ -734,7 +861,7 @@ const val = parseInt(e.target.value, 10);
     }
   }
 
-  btnBack.addEventListener('click', () => {
+  function goBack() {
     if (isAnimating || currentIndex === 0) return;
     isAnimating = true;
     fader.className = 'question-fader fade-out';
@@ -743,26 +870,57 @@ const val = parseInt(e.target.value, 10);
       saveState();
       renderQuestion(true);
       isAnimating = false;
-    }, 300);
+    }, 380);
+  }
+
+  btnNext.addEventListener('click', () => {
+    if (isAnimating || answers[currentIndex] === null) return;
+    goToNext();
   });
 
+  btnBack.addEventListener('click', goBack);
+
+  /* Keyboard shortcuts: 1–5 select an option, Backspace goes back */
+  document.addEventListener('keydown', (e) => {
+    if (!screens.quiz.classList.contains('active')) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    const n = parseInt(e.key, 10);
+    if (n >= 1 && n <= 5) {
+      const input = fader.querySelector(`input[value="${n}"]`);
+      if (input) {
+        e.preventDefault();
+        if (answers[currentIndex] === n) return;
+        input.checked = true;
+        handleAnswer({ target: input });
+      }
+    } else if (e.key === 'Backspace') {
+      if (currentIndex === 0) return;
+      e.preventDefault();
+      goBack();
+    }
+  });
+
+  /* --- SCORING --- */
   function computeScores() {
     const rawScores = {};
     Object.keys(DIMENSIONS).forEach(key => { rawScores[key] = { total: 0, max: 0 }; });
-    
+
     QUESTIONS.forEach((q, i) => {
       rawScores[q.dim].total += (answers[i] || 0);
       rawScores[q.dim].max += 5;
     });
 
     const results = Object.keys(DIMENSIONS).map(key => {
-      const pct = rawScores[key].max > 0 ? Math.round((rawScores[key].total / rawScores[key].max) * 100) : 0;
+      const pct = rawScores[key].max > 0
+        ? Math.round((rawScores[key].total / rawScores[key].max) * 100)
+        : 0;
       return { key, name: DIMENSIONS[key].name, blurb: DIMENSIONS[key].blurb, action: DIMENSIONS[key].action, pct };
     });
 
-    const overall = Math.round((answers.reduce((sum, a) => sum + (a || 0), 0) / (QUESTIONS.length * 5)) * 100);
-    
-    // Sort to find strength and growth
+    const totalAnswered = answers.reduce((sum, a) => sum + (a || 0), 0);
+    const overall = Math.round((totalAnswered / (QUESTIONS.length * 5)) * 100);
+
     const sorted = [...results].sort((a, b) => b.pct - a.pct);
     const strongest = sorted[0];
     const growth = sorted[sorted.length - 1];
@@ -770,52 +928,45 @@ const val = parseInt(e.target.value, 10);
     return { results, overall, strongest, growth };
   }
 
-  <comment-tag id="5">function getBandText(score) {
-    if (score >= 80) return { title: 'A Well-Rounded Communicator', summary: 'Your dimensions are balanced and consistently high. The work now is contextual refinement rather than fixing weak areas.' };</comment-tag id="5" text="Adding a top-tier band for exceptionally high scores rewards users and adds a layer of gamification that makes achieving a high score feel more special.
-
   function getBandText(score) {
     if (score >= 92) return { title: 'A Masterful Communicator', summary: 'Your dimensions are exceptionally high across the board. Your focus now is mentoring others and adapting to the most high-stakes environments.' };
-    if (score >= 80) return { title: 'A Well-Rounded Communicator', summary: 'Your dimensions are balanced and consistently high. The work now is contextual refinement rather than fixing weak areas.' };" type="suggestion">
+    if (score >= 80) return { title: 'A Well-Rounded Communicator', summary: 'Your dimensions are balanced and consistently high. The work now is contextual refinement rather than fixing weak areas.' };
     if (score >= 60) return { title: 'A Capable Communicator', summary: 'You have solid strengths. The fastest progress will come from deliberately practicing your lowest dimension.' };
     if (score >= 40) return { title: 'A Communicator in Development', summary: 'You have an honest baseline. Pick one dimension—the lowest—and work on it for a month before touching anything else.' };
     return { title: 'At the Beginning', summary: 'Low scores here are information, not verdicts. Choose the single dimension that would change the most for you, and start there.' };
   }
 
-  // Pure SVG Math function
+  /* --- RADAR CHART --- */
   function getPolarCoordinates(r, index, total, cx, cy) {
     const angle = (index * (360 / total) - 90) * (Math.PI / 180);
     return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
   }
 
   function drawRadar(results, overall, strongKey, growthKey) {
-    const size = 300, cx = 150, cy = 150, maxR = 90, labelR = 125, rings = [0.25, 0.5, 0.75, 1.0];
+    const size = 300, cx = 150, cy = 150, maxR = 90, labelR = 125;
+    const rings = [0.25, 0.5, 0.75, 1.0];
     const n = results.length;
-    
-    // Draw background rings
-    const gridHtml = rings.map((level, ringIdx) => {
+
+    const gridHtml = rings.map(level => {
       const pts = results.map((_, i) => {
         const p = getPolarCoordinates(maxR * level, i, n, cx, cy);
         return `${p.x},${p.y}`;
       }).join(' ');
       const isOuter = level === 1.0;
-      return `<polygon points="${pts}" fill="none" stroke="var(--border-light)" stroke-width="${isOuter ? 1.5 : 1}" />`;
+      return `<polygon points="${pts}" class="${isOuter ? 'radar-grid radar-grid-outer' : 'radar-grid'}" />`;
     }).join('');
 
-    // Draw axes
     const axesHtml = results.map((_, i) => {
       const p = getPolarCoordinates(maxR, i, n, cx, cy);
-      return `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" stroke="var(--border-light)" stroke-width="1" />`;
+      return `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" class="radar-axis" />`;
     }).join('');
 
-    // Draw Data Polygon
     const dataPts = results.map((d, i) => {
       const p = getPolarCoordinates(maxR * (d.pct / 100), i, n, cx, cy);
       return `${p.x},${p.y}`;
     }).join(' ');
-    
     const polyHtml = `<polygon points="${dataPts}" class="radar-poly" />`;
 
-    // Draw Dots and Labels
     let dotsHtml = '';
     let labelsHtml = '';
 
@@ -830,7 +981,7 @@ const val = parseInt(e.target.value, 10);
       const dx = pLabel.x - cx, dy = pLabel.y - cy;
       const anchor = dx > 10 ? 'start' : dx < -10 ? 'end' : 'middle';
       const baseline = dy < -10 ? 'auto' : dy > 10 ? 'hanging' : 'middle';
-      
+
       let labelClass = 'radar-label';
       if (d.key === strongKey && strongKey !== growthKey) labelClass += ' radar-label-strength';
       else if (d.key === growthKey && strongKey !== growthKey) labelClass += ' radar-label-growth';
@@ -839,60 +990,70 @@ const val = parseInt(e.target.value, 10);
     });
 
     const centerHtml = `
-      <text x="${cx}" y="${cy + 6}" text-anchor="middle" font-family="var(--font-serif)" font-size="32" font-weight="600" fill="var(--text-main)">${overall}</text>
-      <text x="${cx}" y="${cy + 22}" text-anchor="middle" font-family="var(--font-sans)" font-size="8" font-weight="700" letter-spacing="0.1em" text-transform="uppercase" fill="var(--text-light)">Overall</text>
+      <text x="${cx}" y="${cy + 6}" text-anchor="middle" class="radar-center-num">${overall}</text>
+      <text x="${cx}" y="${cy + 22}" text-anchor="middle" class="radar-center-label">OVERALL</text>
     `;
 
-    return `<svg class="radar-svg" viewBox="0 0 ${size} ${size}">
-      <g>${gridHtml}</g><g>${axesHtml}</g><g>${polyHtml}</g><g>${dotsHtml}</g><g>${labelsHtml}</g>${centerHtml}
+    return `<svg class="radar-svg" viewBox="0 0 ${size} ${size}" role="img" aria-label="Communication profile radar chart">
+      <g>${gridHtml}</g>
+      <g>${axesHtml}</g>
+      <g>${polyHtml}</g>
+      <g>${dotsHtml}</g>
+      <g>${labelsHtml}</g>
+      ${centerHtml}
     </svg>`;
   }
 
+  /* --- RESULTS --- */
   function generateResults() {
     const { results, overall, strongest, growth } = computeScores();
     const band = getBandText(overall);
     const tied = strongest.pct === growth.pct;
 
-    // Set Headers
     resultsTitle.textContent = band.title;
-    resultsSummary.textContent = band.summary;
+    resultsSummary.textContent = tied
+      ? `${band.summary} Your dimensions are evenly balanced — pick any one and work it deliberately.`
+      : band.summary;
 
-    // Draw Chart
     radarContainer.innerHTML = drawRadar(results, overall, tied ? null : strongest.key, tied ? null : growth.key);
 
-    // Build Dimension Cards
-    dimList.innerHTML = results.map(d => {
+    dimList.innerHTML = results.map((d, i) => {
       const isStrong = !tied && d.key === strongest.key;
       const isGrowth = !tied && d.key === growth.key;
-      
+
       let badgeHtml = '';
       let fillClass = 'dim-track-fill';
       if (isStrong) { badgeHtml = `<span class="badge badge-strength">Strength</span>`; fillClass += ' strength'; }
       if (isGrowth) { badgeHtml = `<span class="badge badge-growth">Growth Edge</span>`; fillClass += ' growth'; }
 
-      const actionHtml = isGrowth ? `<div class="dim-action"><strong>Try this next:</strong> ${d.action}</div>` : '';
+      const actionHtml = isGrowth
+        ? `<div class="dim-action"><strong>Try this next:</strong> ${d.action}</div>`
+        : '';
 
       return `
-        <div class="dim-card">
+        <div class="dim-card" style="animation-delay: ${i * 70}ms">
           <div class="dim-card-header">
             <span class="dim-card-title">${d.name} ${badgeHtml}</span>
             <span class="dim-card-score">${d.pct}%</span>
           </div>
-          <div class="dim-track"><div class="${fillClass}" data-target="${d.pct}%"></div></div>
+          <div class="dim-track"><div class="${fillClass}" data-target="${d.pct}%" data-index="${i}"></div></div>
           <p class="dim-blurb">${d.blurb}</p>
           ${actionHtml}
         </div>
       `;
     }).join('');
 
-    // Trigger bar animations via requestAnimationFrame
-    setTimeout(() => {
+    // Animate bars with a slight stagger for fluidity
+    requestAnimationFrame(() => {
       document.querySelectorAll('.dim-track-fill').forEach(el => {
+        const idx = parseInt(el.getAttribute('data-index'), 10) || 0;
+        el.style.transitionDelay = `${180 + idx * 80}ms`;
         el.style.width = el.getAttribute('data-target');
       });
-    }, 100);
+    });
   }
 
+  /* --- RETAKE / SHARE --- */
   btnRetake.addEventListener('click', () => {
     clearState();
     renderIntro();
@@ -906,21 +1067,19 @@ const val = parseInt(e.target.value, 10);
   }
 
   btnShare.addEventListener('click', async () => {
-    <comment-tag id="4">const { overall, strongest, growth } = computeScores();
-    const text = `My Esperiel Index: ${overall}% overall. Strongest: ${strongest.name}. Growth edge: ${growth.name}.`;
-    const url = window.location.href;</comment-tag id="4" text="When users share their results to apps like WhatsApp, Slack, or Twitter, plain text can get lost. Formatting it with emojis and line breaks makes the output much more striking and encourages others to take the index.
-
     const { overall, strongest, growth } = computeScores();
-    const text = `📊 My Esperiel Index: ${overall}%\n🏆 Strength: ${strongest.name}\n🌱 Growth Edge: ${growth.name}\n\nTake the assessment:`;
-    const url = window.location.href;" type="suggestion">
+    const text = `📊 My Esperiel Index: ${overall}%\n🏆 Strength: ${strongest.name}\n🌱 Growth edge: ${growth.name}\n\nTake the assessment:`;
+    const url = window.location.href;
 
     if (navigator.share) {
       try {
         await navigator.share({ title: 'Esperiel Index', text, url });
         return;
-      } catch (e) { if (e.name === 'AbortError') return; }
+      } catch (e) {
+        if (e.name === 'AbortError') return;
+      }
     }
-    
+
     try {
       await navigator.clipboard.writeText(`${text} ${url}`);
       showToast('Result copied to clipboard');
@@ -929,9 +1088,10 @@ const val = parseInt(e.target.value, 10);
     }
   });
 
-  // Start app
-  init();
-
+  /* --- INIT --- */
+  loadState();
+  renderIntro();
+  switchScreen('intro');
 })();
 </script>
 </body>
