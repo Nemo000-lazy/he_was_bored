@@ -98,7 +98,7 @@
   button { font-family: inherit; border: none; background: none; cursor: pointer; }
   button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
 
-  /* ---------- HEADER ---------- */
+  /* ---------- HEADER (sticky w/ blur on scroll) ---------- */
   header {
     position: sticky;
     top: 0;
@@ -177,8 +177,17 @@
   }
   .hero-radar-svg { width: 100%; height: auto; overflow: visible; }
 
-  .hero-radar-ring { fill: none; stroke: var(--border-light); stroke-width: 1; opacity: 0.7; }
-  .hero-radar-axis { stroke: var(--border-light); stroke-width: 1; opacity: 0.5; }
+  .hero-radar-ring {
+    fill: none;
+    stroke: var(--border-light);
+    stroke-width: 1;
+    opacity: 0.7;
+  }
+  .hero-radar-axis {
+    stroke: var(--border-light);
+    stroke-width: 1;
+    opacity: 0.5;
+  }
   .hero-radar-ghost {
     fill: rgba(181, 103, 63, 0.06);
     stroke: var(--accent);
@@ -187,130 +196,15 @@
     opacity: 0.7;
     animation: ghostFade 1.2s var(--ease-smooth) 0.4s both;
   }
-  @keyframes ghostFade { from { opacity: 0; } to { opacity: 0.7; } }
+  @keyframes ghostFade {
+    from { opacity: 0; }
+    to   { opacity: 0.7; }
+  }
   .hero-radar-label {
     font-family: var(--font-sans);
     font-size: 10px;
     font-weight: 600;
     fill: var(--text-light);
-  }
-
-  /* NEW: Commitment status card on the intro */
-  .commit-status {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    max-width: 480px;
-    margin: 26px auto 0;
-    padding: 18px 22px 18px 18px;
-    background: linear-gradient(165deg, #FCF2EC 0%, #FFFFFF 65%);
-    border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--border-light));
-    border-radius: 18px;
-    box-shadow: 0 16px 40px -20px rgba(181, 103, 63, 0.32);
-    animation: contentEnter 0.7s var(--ease-smooth) 0.3s both;
-    text-align: left;
-  }
-  .commit-ring {
-    position: relative;
-    width: 52px;
-    height: 52px;
-    flex-shrink: 0;
-  }
-  .commit-ring-svg { width: 52px; height: 52px; transform: rotate(-90deg); }
-  .commit-ring-bg { fill: none; stroke: var(--border-light); stroke-width: 3; }
-  .commit-ring-fill {
-    fill: none;
-    stroke: var(--accent);
-    stroke-width: 3;
-    stroke-linecap: round;
-    transition: stroke-dashoffset 1.2s var(--ease-smooth);
-  }
-  .commit-ring-num {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-serif);
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--accent-hover);
-    font-variation-settings: 'SOFT' 30, 'WONK' 1;
-    transform: none;
-  }
-  .commit-status-body { flex: 1; min-width: 0; }
-  .commit-status-label {
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--accent-hover);
-    display: block;
-    margin-bottom: 3px;
-  }
-  .commit-status-text {
-    font-size: 0.98rem;
-    color: var(--text-main);
-    line-height: 1.4;
-  }
-  .commit-status-text strong {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-variation-settings: 'SOFT' 30, 'WONK' 1;
-  }
-  .commit-status-link {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--accent);
-    text-decoration: none;
-    white-space: nowrap;
-    flex-shrink: 0;
-    padding: 6px 4px;
-    border-radius: 8px;
-    transition: color 0.2s var(--ease-soft);
-  }
-  .commit-status-link:hover { color: var(--accent-hover); }
-
-  /* NEW: "What you'll get" bullets on landing */
-  .what-you-get {
-    max-width: 460px;
-    margin: 30px auto 0;
-    padding: 22px 26px;
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid var(--border-light);
-    border-radius: 16px;
-    animation: contentEnter 0.75s var(--ease-smooth) 0.4s both;
-  }
-  .what-you-get-title {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--text-light);
-    text-align: center;
-    margin-bottom: 14px;
-  }
-  .what-you-get ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .what-you-get li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 0.92rem;
-    color: var(--text-muted);
-    line-height: 1.45;
-  }
-  .what-you-get li::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-    margin-top: 8px;
   }
 
   .button-group {
@@ -395,17 +289,6 @@
     transform: none;
     box-shadow: none;
   }
-
-  /* NEW: Loading spinner for share button */
-  .spinner {
-    width: 14px; height: 14px;
-    border: 2px solid rgba(255,255,255,0.35);
-    border-top-color: #FFF;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    flex-shrink: 0;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
 
   /* ---------- QUIZ ---------- */
   .quiz-header {
@@ -601,6 +484,7 @@
   /* ===============  RESULTS PAGE  ================== */
   /* ================================================= */
 
+  /* --- Archetype hero --- */
   .results-hero {
     text-align: center;
     padding: 32px 0 8px;
@@ -690,109 +574,6 @@
     background: var(--border-light);
   }
 
-  /* NEW: Comparison block */
-  .comparison {
-    max-width: 620px;
-    margin: 0 auto 34px;
-    padding: 24px 28px 22px;
-    background: linear-gradient(180deg, #FFFFFF 0%, #FDFBF8 100%);
-    border: 1px solid var(--border-light);
-    border-radius: 20px;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.9),
-      0 16px 44px -24px rgba(42, 36, 30, 0.14);
-    animation: contentEnter 0.6s var(--ease-smooth) both;
-  }
-  .comparison-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 4px;
-  }
-  .comparison-eyebrow {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--accent);
-  }
-  .comparison-since {
-    font-size: 0.82rem;
-    color: var(--text-light);
-    font-style: italic;
-  }
-  .comparison-title {
-    font-family: var(--font-serif);
-    font-size: 1.35rem;
-    font-weight: 600;
-    font-variation-settings: 'SOFT' 30, 'WONK' 1;
-    letter-spacing: -0.012em;
-    color: var(--text-main);
-    margin-bottom: 18px;
-    line-height: 1.25;
-  }
-  .comparison-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .delta-row {
-    display: grid;
-    grid-template-columns: 10px 1fr auto;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 4px;
-    border-bottom: 1px solid var(--border-light);
-  }
-  .delta-row:last-child { border-bottom: none; }
-  .delta-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--dim-color);
-  }
-  .delta-name {
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    font-weight: 600;
-    font-variation-settings: 'SOFT' 30, 'WONK' 1;
-    color: var(--text-main);
-  }
-  .delta-value {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-feature-settings: 'tnum' 1;
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-  .delta-num { color: var(--text-light); font-weight: 500; }
-  .delta-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    padding: 3px 9px;
-    border-radius: 99px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    min-width: 56px;
-    justify-content: center;
-  }
-  .delta-up { background: var(--support-bg); color: var(--support); }
-  .delta-down { background: var(--accent-bg); color: var(--accent-hover); }
-  .delta-flat { background: rgba(42, 36, 30, 0.05); color: var(--text-light); }
-  .comparison-footer {
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px dashed var(--border-light);
-    font-size: 0.86rem;
-    color: var(--text-muted);
-    font-style: italic;
-    text-align: center;
-  }
-
   /* --- Radar --- */
   .radar-container {
     width: min(420px, 100%);
@@ -830,20 +611,6 @@
     transform-origin: 160px 160px;
     animation: radarGrow 1s var(--ease-smooth) 0.1s both;
   }
-
-  /* NEW: Ghost polygon for previous attempt */
-  .radar-poly-ghost {
-    fill: none;
-    stroke: var(--text-light);
-    stroke-width: 1.5;
-    stroke-linejoin: round;
-    stroke-dasharray: 4 5;
-    opacity: 0.5;
-    transform-box: view-box;
-    transform-origin: 160px 160px;
-    animation: radarGrow 1s var(--ease-smooth) 0.25s both;
-  }
-
   .radar-dot {
     fill: var(--accent);
     stroke: #FFF;
@@ -873,11 +640,12 @@
   .radar-center-num   { font-family: var(--font-serif); font-size: 36px; font-weight: 600; fill: var(--ink); font-variation-settings: 'SOFT' 30, 'WONK' 1; }
   .radar-center-label { font-family: var(--font-sans); font-size: 8px; font-weight: 700; letter-spacing: 0.14em; fill: var(--text-light); }
 
+  /* interactive: dim non-hovered nodes */
   .radar-node { cursor: pointer; }
   .radar-svg:hover .radar-node { opacity: 0.35; transition: opacity 0.25s var(--ease-soft); }
   .radar-svg:hover .radar-node:hover { opacity: 1; }
 
-  /* --- Bookends --- */
+  /* --- Bookends (Strength + Growth) --- */
   .bookends {
     display: grid;
     grid-template-columns: 1fr;
@@ -1013,7 +781,7 @@
     margin-top: 6px;
   }
 
-  /* --- Compact list --- */
+  /* --- Compact list (the other 4) --- */
   .compact-list {
     display: flex;
     flex-direction: column;
@@ -1181,7 +949,7 @@
     opacity: 0.55;
   }
 
-  /* --- Review --- */
+  /* --- Review answers --- */
   .review-section {
     border-radius: 16px;
     border: 1px solid var(--border-light);
@@ -1331,15 +1099,6 @@
       transition-delay: 0ms !important;
       scroll-behavior: auto !important;
     }
-    /* Ensure final states so nothing stays invisible */
-    .hero-radar-ghost { opacity: 0.7 !important; animation: none !important; }
-    .screen.active { animation: none !important; }
-    .option-label { animation: none !important; opacity: 1 !important; }
-    .radar-poly, .radar-poly-ghost, .radar-dot { animation: none !important; opacity: 1 !important; transform: none !important; }
-    .archetype-insight, .results-hero, .radar-container, .bookend, .focus-card,
-    .compact-row, .review-section, .commit-status, .what-you-get, .comparison {
-      animation: none !important; opacity: 1 !important; transform: none !important;
-    }
   }
 </style>
 </head>
@@ -1370,23 +1129,10 @@
 
       <div class="hero-radar" id="hero-radar" aria-hidden="true"><!-- injected --></div>
 
-      <!-- NEW: commitment status shows here when active -->
-      <div id="intro-commit-slot"></div>
-
       <div class="button-group" id="intro-buttons">
         <button class="btn btn-primary" id="start-new">Begin the index</button>
       </div>
       <p class="trust-line">Takes 3 minutes. Your answers stay on your device.</p>
-
-      <!-- NEW: what you'll get -->
-      <div class="what-you-get">
-        <div class="what-you-get-title">What you'll get</div>
-        <ul>
-          <li>A radar of your six communication dimensions</li>
-          <li>A named communication archetype</li>
-          <li>A 30-day focus plan targeting your growth edge</li>
-        </ul>
-      </div>
     </section>
 
     <!-- ================= QUIZ ================= -->
@@ -1416,9 +1162,7 @@
     <!-- ================= RESULTS ================= -->
     <section id="screen-results" class="screen">
 
-      <!-- NEW: commit status banner (top of results) -->
-      <div id="results-commit-slot"></div>
-
+      <!-- 1. Archetype hero -->
       <div class="results-hero">
         <span class="archetype-eyebrow">Your profile</span>
         <h2 class="archetype-title" id="archetype-title">The Translator</h2>
@@ -1429,24 +1173,26 @@
         <p class="archetype-insight" id="archetype-insight"></p>
       </div>
 
-      <!-- NEW: comparison block appears here when there is a previous run -->
-      <div id="comparison-slot"></div>
-
       <div class="results-divider"><span></span></div>
 
+      <!-- 2. Radar chart -->
       <div class="radar-container" id="radar-container"><!-- injected --></div>
 
       <div class="results-divider"><span></span></div>
 
+      <!-- 3. Bookends -->
       <div class="bookends">
         <div class="bookend bookend-strength" id="bookend-strength"><!-- injected --></div>
         <div class="bookend bookend-growth" id="bookend-growth"><!-- injected --></div>
       </div>
 
+      <!-- 4. Compact list of remaining dimensions -->
       <div class="compact-list" id="compact-list"><!-- injected --></div>
 
+      <!-- 5. 30-day focus -->
       <div class="focus-card" id="focus-card"><!-- injected --></div>
 
+      <!-- 6. Review answers -->
       <details class="review-section" id="review-section">
         <summary>
           <span>Review your answers</span>
@@ -1455,6 +1201,7 @@
         <div class="review-content" id="review-content"><!-- injected --></div>
       </details>
 
+      <!-- 7. Actions -->
       <div class="button-group">
         <button class="btn btn-primary" id="btn-share">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1656,14 +1403,9 @@
   /* =====================  STATE  ===================== */
   const STORAGE_KEY    = 'esperiel-index-flat-v1';
   const COMMIT_KEY     = 'esperiel-commit-v1';
-  const HISTORY_KEY    = 'esperiel-history-v1';
-  const COMMIT_DAYS    = 30;
-
   let answers = new Array(QUESTIONS.length).fill(null);
   let currentIndex = 0;
   let isAnimating = false;
-  let savedRunTs = null;         // ts of the run we saved this session (if any)
-  let fromShare = false;         // true if current view came from a shared link
 
   /* =====================  DOM  ===================== */
   const screens = {
@@ -1672,19 +1414,16 @@
     results: document.getElementById('screen-results')
   };
 
-  const siteHeader       = document.getElementById('site-header');
-  const introButtons     = document.getElementById('intro-buttons');
-  const heroRadar        = document.getElementById('hero-radar');
-  const introCommitSlot  = document.getElementById('intro-commit-slot');
-  const resultsCommitSlot= document.getElementById('results-commit-slot');
-  const comparisonSlot   = document.getElementById('comparison-slot');
-  const fader            = document.getElementById('question-fader');
-  const btnBack          = document.getElementById('btn-back');
-  const btnNext          = document.getElementById('btn-next');
-  const quizDimLabel     = document.getElementById('quiz-dim');
-  const progressText     = document.getElementById('quiz-progress-text');
-  const progressFill     = document.getElementById('progress-fill');
-  const progressBarAttr  = document.getElementById('progress-bar-attr');
+  const siteHeader      = document.getElementById('site-header');
+  const introButtons    = document.getElementById('intro-buttons');
+  const heroRadar       = document.getElementById('hero-radar');
+  const fader           = document.getElementById('question-fader');
+  const btnBack         = document.getElementById('btn-back');
+  const btnNext         = document.getElementById('btn-next');
+  const quizDimLabel    = document.getElementById('quiz-dim');
+  const progressText    = document.getElementById('quiz-progress-text');
+  const progressFill    = document.getElementById('progress-fill');
+  const progressBarAttr = document.getElementById('progress-bar-attr');
 
   const radarContainer   = document.getElementById('radar-container');
   const archetypeTitle   = document.getElementById('archetype-title');
@@ -1722,7 +1461,6 @@
   function clearState() {
     answers = new Array(QUESTIONS.length).fill(null);
     currentIndex = 0;
-    savedRunTs = null;
     try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
   }
   function answeredCount() { return answers.filter(a => a !== null).length; }
@@ -1732,85 +1470,6 @@
   }
   function loadCommit() {
     try { return JSON.parse(localStorage.getItem(COMMIT_KEY)); } catch (e) { return null; }
-  }
-  function clearCommit() {
-    try { localStorage.removeItem(COMMIT_KEY); } catch (e) {}
-  }
-
-  /* --- History of completed runs --- */
-  function loadHistory() {
-    try {
-      const data = JSON.parse(localStorage.getItem(HISTORY_KEY));
-      if (Array.isArray(data)) return data;
-    } catch (e) {}
-    return [];
-  }
-  function saveRun(ans) {
-    const history = loadHistory();
-    const ts = Date.now();
-    history.push({ ts, answers: [...ans] });
-    const trimmed = history.slice(-10);
-    try { localStorage.setItem(HISTORY_KEY, JSON.stringify(trimmed)); } catch (e) {}
-    return ts;
-  }
-  function getPreviousRun() {
-    const history = loadHistory();
-    if (history.length < 1) return null;
-    // Prefer the most recent run that isn't the one we just saved
-    if (savedRunTs !== null) {
-      for (let i = history.length - 1; i >= 0; i--) {
-        if (history[i].ts !== savedRunTs) return history[i];
-      }
-      return null;
-    }
-    return history[history.length - 1];
-  }
-
-  /* --- URL hash: encode/decode answers --- */
-  function encodeAnswers(ans) {
-    return ans.map(a => a === null ? '0' : String(a)).join('');
-  }
-  function parseHash() {
-    try {
-      const hash = window.location.hash.slice(1);
-      if (!hash) return null;
-      const match = hash.match(/^p=([0-5]+)$/);
-      if (!match) return null;
-      const digits = match[1];
-      if (digits.length !== QUESTIONS.length) return null;
-      const parsed = digits.split('').map(d => parseInt(d, 10));
-      // Must have at least one non-zero
-      if (parsed.every(v => v === 0)) return null;
-      return parsed.map(v => v === 0 ? null : v);
-    } catch (e) { return null; }
-  }
-  function buildShareUrl() {
-    const url = new URL(window.location.href);
-    url.hash = 'p=' + encodeAnswers(answers);
-    return url.toString();
-  }
-  function clearHash() {
-    try {
-      const url = new URL(window.location.href);
-      url.hash = '';
-      window.history.replaceState({}, '', url.toString());
-    } catch (e) {}
-  }
-
-  /* --- Commitment progress --- */
-  function getCommitProgress(commit) {
-    if (!commit || !commit.ts) return null;
-    const elapsedMs = Date.now() - commit.ts;
-    const daysIn = Math.floor(elapsedMs / (1000 * 60 * 60 * 24));
-    const daysLeft = Math.max(0, COMMIT_DAYS - daysIn);
-    const progress = Math.min(1, daysIn / COMMIT_DAYS);
-    return {
-      daysIn: Math.max(1, daysIn + 1),
-      daysSince: daysIn,
-      daysLeft,
-      progress,
-      isComplete: daysIn >= COMMIT_DAYS
-    };
   }
 
   /* =====================  SCREEN CONTROL  ===================== */
@@ -1872,64 +1531,6 @@
     </svg>`;
   }
 
-  /* =====================  COMMIT STATUS RENDER  ===================== */
-  function renderCommitStatus(container, commit, opts = {}) {
-    const progress = getCommitProgress(commit);
-    if (!progress) { container.innerHTML = ''; return; }
-
-    const dim = DIMENSIONS[commit.dim];
-    if (!dim) { container.innerHTML = ''; return; }
-
-    const circumference = 2 * Math.PI * 22; // r=22 in the 52x52 svg
-    const offset = circumference * (1 - progress.progress);
-
-    const daysLabel = progress.isComplete
-      ? `Day ${COMMIT_DAYS} of ${COMMIT_DAYS}`
-      : `Day ${progress.daysIn} of ${COMMIT_DAYS}`;
-
-    const leadText = progress.isComplete
-      ? `Your 30-day practice on <strong>${dim.name}</strong> is complete.`
-      : `You committed to <strong>${dim.name}</strong> ${progress.daysSince === 0 ? 'today' : progress.daysSince + ' day' + (progress.daysSince === 1 ? '' : 's') + ' ago'}.`;
-
-    const subText = progress.isComplete
-      ? `${progress.daysLeft} days left — time to reflect on how it went.`
-      : `${progress.daysLeft} day${progress.daysLeft === 1 ? '' : 's'} remaining.`;
-
-    const linkLabel = opts.showLink === false ? '' :
-      `<a class="commit-status-link" href="#results" data-action="view-profile">View profile →</a>`;
-
-    container.innerHTML = `
-      <div class="commit-status" style="--dim-color: ${dim.color}">
-        <div class="commit-ring" aria-hidden="true">
-          <svg class="commit-ring-svg" viewBox="0 0 52 52">
-            <circle class="commit-ring-bg" cx="26" cy="26" r="22"></circle>
-            <circle class="commit-ring-fill" cx="26" cy="26" r="22"
-                    style="stroke-dasharray: ${circumference.toFixed(1)}; stroke-dashoffset: ${offset.toFixed(1)};"></circle>
-          </svg>
-          <span class="commit-ring-num">${progress.daysIn}</span>
-        </div>
-        <div class="commit-status-body">
-          <span class="commit-status-label">${progress.isComplete ? 'Practice complete' : 'Active focus'} · ${daysLabel}</span>
-          <p class="commit-status-text">${leadText}</p>
-          <p class="commit-status-text" style="color: var(--text-light); font-size: 0.86rem; margin-top: 2px;">${subText}</p>
-        </div>
-        ${linkLabel}
-      </div>
-    `;
-
-    // Wire the "View profile" link
-    const link = container.querySelector('[data-action="view-profile"]');
-    if (link) {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (answeredCount() === QUESTIONS.length) {
-          generateResults({ fromShare: false, saveToHistory: false });
-        }
-        switchScreen('results');
-      });
-    }
-  }
-
   /* =====================  INTRO  ===================== */
   function renderIntro() {
     heroRadar.innerHTML = drawHeroRadar();
@@ -1944,14 +1545,6 @@
         <button class="btn btn-primary" id="start-resume">Resume &middot; ${count}/${QUESTIONS.length}</button>
         <button class="btn btn-secondary" id="start-new">Start over</button>`;
     }
-
-    // Render commitment card if present
-    const commit = loadCommit();
-    if (commit) {
-      renderCommitStatus(introCommitSlot, commit);
-    } else {
-      introCommitSlot.innerHTML = '';
-    }
   }
 
   introButtons.addEventListener('click', (e) => {
@@ -1959,9 +1552,9 @@
     if (!btn) return;
     const id = btn.id;
 
-    if (id === 'start-new') { clearState(); clearHash(); startQuiz(); }
+    if (id === 'start-new') { clearState(); startQuiz(); }
     else if (id === 'start-resume') { startQuiz(); }
-    else if (id === 'start-results') { generateResults({ saveToHistory: false }); switchScreen('results'); }
+    else if (id === 'start-results') { generateResults(); switchScreen('results'); }
   });
 
   function startQuiz() {
@@ -2053,7 +1646,7 @@
       }, 380);
     } else {
       isAnimating = false;
-      generateResults({ saveToHistory: true });
+      generateResults();
       switchScreen('results');
     }
   }
@@ -2096,12 +1689,12 @@
   });
 
   /* =====================  SCORING  ===================== */
-  function computeScoresFrom(ans) {
+  function computeScores() {
     const rawScores = {};
     Object.keys(DIMENSIONS).forEach(key => { rawScores[key] = { total: 0, max: 0 }; });
 
     QUESTIONS.forEach((q, i) => {
-      rawScores[q.dim].total += (ans[i] || 0);
+      rawScores[q.dim].total += (answers[i] || 0);
       rawScores[q.dim].max += 5;
     });
 
@@ -2119,7 +1712,7 @@
       };
     });
 
-    const totalAnswered = ans.reduce((sum, a) => sum + (a || 0), 0);
+    const totalAnswered = answers.reduce((sum, a) => sum + (a || 0), 0);
     const overall = Math.round((totalAnswered / (QUESTIONS.length * 5)) * 100);
 
     const sorted = [...results].sort((a, b) => b.pct - a.pct);
@@ -2127,10 +1720,6 @@
     const growth = sorted[sorted.length - 1];
 
     return { results, overall, strongest, growth };
-  }
-
-  function computeScores() {
-    return computeScoresFrom(answers);
   }
 
   /* =====================  CROSS-DIMENSION INSIGHT  ===================== */
@@ -2159,7 +1748,7 @@
   }
 
   /* =====================  RADAR  ===================== */
-  function drawRadar(results, overall, strongKey, growthKey, previousResults) {
+  function drawRadar(results, overall, strongKey, growthKey) {
     const size = 320, cx = 160, cy = 160, maxR = 95, labelR = 132;
     const rings = [0.25, 0.5, 0.75, 1.0];
     const n = results.length;
@@ -2191,16 +1780,6 @@
       return `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" class="radar-axis" />`;
     }).join('');
 
-    // Ghost polygon from previous attempt
-    let ghostHtml = '';
-    if (previousResults) {
-      const ghostPts = previousResults.map((d, i) => {
-        const p = getPolarCoordinates(maxR * (d.pct / 100), i, n, cx, cy);
-        return `${p.x},${p.y}`;
-      }).join(' ');
-      ghostHtml = `<polygon points="${ghostPts}" class="radar-poly-ghost" />`;
-    }
-
     const dataPts = results.map((d, i) => {
       const p = getPolarCoordinates(maxR * (d.pct / 100), i, n, cx, cy);
       return `${p.x},${p.y}`;
@@ -2225,6 +1804,7 @@
       if (d.key === strongKey && strongKey !== growthKey) labelClass += ' radar-label-strength';
       else if (d.key === growthKey && strongKey !== growthKey) labelClass += ' radar-label-growth';
 
+      // Group dot + label as an interactive node
       dotsHtml += `<g class="radar-node" data-key="${d.key}">
         <title>${d.name}: ${d.pct}%</title>
         <circle cx="${pDot.x}" cy="${pDot.y}" r="3.5" class="${dotClass}" />
@@ -2242,87 +1822,10 @@
       <g>${gridHtml}</g>
       <g>${ringLabels}</g>
       <g>${axesHtml}</g>
-      ${ghostHtml}
       <g>${polyHtml}</g>
       <g>${dotsHtml}</g>
       ${centerHtml}
     </svg>`;
-  }
-
-  /* =====================  COMPARISON  ===================== */
-  function renderComparison(current, previous) {
-    if (!previous) { comparisonSlot.innerHTML = ''; return; }
-
-    const prevScores = computeScoresFrom(previous.answers);
-    const prevMap = {};
-    prevScores.results.forEach(r => { prevMap[r.key] = r.pct; });
-
-    // Compute deltas
-    const deltas = current.results.map(d => ({
-      key: d.key,
-      name: d.name,
-      color: d.color,
-      current: d.pct,
-      previous: prevMap[d.key] || 0,
-      delta: d.pct - (prevMap[d.key] || 0)
-    }));
-
-    // Days ago
-    const daysAgo = Math.round((Date.now() - previous.ts) / (1000 * 60 * 60 * 24));
-    const agoText = daysAgo === 0 ? 'earlier today'
-                  : daysAgo === 1 ? 'yesterday'
-                  : daysAgo < 7 ? daysAgo + ' days ago'
-                  : daysAgo < 30 ? Math.round(daysAgo / 7) + ' weeks ago'
-                  : Math.round(daysAgo / 30) + ' months ago';
-
-    // Sort by absolute delta descending so the biggest movers surface first
-    const sortedDeltas = [...deltas].sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta));
-    // Show only the ones that moved (or all if nothing moved)
-    const moved = sortedDeltas.filter(d => d.delta !== 0).slice(0, 6);
-    const shown = moved.length > 0 ? moved : sortedDeltas.slice(0, 3);
-
-    const overallDelta = current.overall - prevScores.overall;
-
-    const rowsHtml = shown.map(d => {
-      const dir = d.delta > 0 ? 'up' : d.delta < 0 ? 'down' : 'flat';
-      const arrow = d.delta > 0 ? '▲' : d.delta < 0 ? '▼' : '—';
-      const deltaText = d.delta === 0 ? '±0' : (d.delta > 0 ? '+' : '') + d.delta;
-      return `
-        <div class="delta-row" style="--dim-color: ${d.color}">
-          <span class="delta-dot"></span>
-          <span class="delta-name">${d.name}</span>
-          <span class="delta-value">
-            <span class="delta-num">${d.previous} → ${d.current}</span>
-            <span class="delta-badge delta-${dir}">${arrow} ${deltaText}</span>
-          </span>
-        </div>
-      `;
-    }).join('');
-
-    let footerText;
-    if (moved.length === 0) {
-      footerText = 'Every dimension held steady. Consistency is its own kind of progress.';
-    } else if (overallDelta > 5) {
-      footerText = 'You are, on balance, moving forward. Keep going.';
-    } else if (overallDelta < -5) {
-      footerText = 'A dip this cycle is not a verdict — it is a signal worth listening to.';
-    } else {
-      footerText = 'Small movements matter. Look at the shape, not just the numbers.';
-    }
-
-    comparisonSlot.innerHTML = `
-      <div class="comparison">
-        <div class="comparison-header">
-          <span class="comparison-eyebrow">Since your last attempt</span>
-          <span class="comparison-since">${agoText}</span>
-        </div>
-        <h3 class="comparison-title">Here is what changed.</h3>
-        <div class="comparison-grid">
-          ${rowsHtml}
-        </div>
-        <div class="comparison-footer">${footerText}</div>
-      </div>
-    `;
   }
 
   /* =====================  BOOKENDS  ===================== */
@@ -2335,7 +1838,12 @@
       ? `<div class="bookend-action">
            <strong>Try this next</strong>
            ${dim.action}
-         </div>`
+         </div>
+         <label class="commit-row">
+           <input type="checkbox" id="commit-checkbox">
+           <span>I commit to this for 30 days</span>
+         </label>
+         <div class="commit-caption" id="commit-caption" hidden>Saved. We\u2019ll show this next time you visit.</div>`
       : '';
 
     container.innerHTML = `
@@ -2348,6 +1856,28 @@
       </div>
       <div class="bookend-numeral" aria-hidden="true">${numeral}</div>
     `;
+
+    if (isGrowth) {
+      const cb = container.querySelector('#commit-checkbox');
+      const caption = container.querySelector('#commit-caption');
+      const saved = loadCommit();
+
+      if (saved && saved.dim === dim.key) {
+        cb.checked = true;
+        caption.hidden = false;
+      }
+
+      cb.addEventListener('change', () => {
+        if (cb.checked) {
+          saveCommit(dim.key);
+          caption.hidden = false;
+          if (navigator.vibrate) navigator.vibrate(15);
+        } else {
+          try { localStorage.removeItem(COMMIT_KEY); } catch (e) {}
+          caption.hidden = true;
+        }
+      });
+    }
   }
 
   /* =====================  COMPACT LIST  ===================== */
@@ -2395,7 +1925,7 @@
         <input type="checkbox" id="focus-commit-checkbox">
         <span>I commit to this for 30 days</span>
       </label>
-      <div class="commit-caption" id="focus-commit-caption" hidden>Saved. We\u2019ll track your progress on return visits.</div>
+      <div class="commit-caption" id="focus-commit-caption" hidden>Saved. We\u2019ll show this next time you visit.</div>
     `;
 
     const cb = focusCard.querySelector('#focus-commit-checkbox');
@@ -2413,7 +1943,7 @@
         caption.hidden = false;
         if (navigator.vibrate) navigator.vibrate(15);
       } else {
-        clearCommit();
+        try { localStorage.removeItem(COMMIT_KEY); } catch (e) {}
         caption.hidden = true;
       }
     });
@@ -2449,81 +1979,41 @@
   }
 
   /* =====================  GENERATE RESULTS  ===================== */
-  function generateResults(opts = {}) {
-    const { fromShare: isShared = false, saveToHistory = true } = opts;
-
-    // Guard: no answers at all
-    if (answeredCount() === 0) {
-      showToast('Take the quiz first.');
-      switchScreen('intro');
-      return;
-    }
-
+  function generateResults() {
     const { results, overall, strongest, growth } = computeScores();
     const tied = strongest.pct === growth.pct;
 
-    // Save this run to history exactly once
-    if (saveToHistory && !isShared && answers.every(a => a !== null) && savedRunTs === null) {
-      savedRunTs = saveRun(answers);
-    }
-
-    // Grab previous run for comparison
-    const previous = isShared ? null : getPreviousRun();
-    let previousResults = null;
-    if (previous) {
-      const prevScores = computeScoresFrom(previous.answers);
-      previousResults = prevScores.results;
-    }
-
-    // Archetype
+    // Archetype from strongest dimension (if tied, use first)
     const archetype = ARCHETYPES[strongest.key];
     archetypeTitle.textContent = archetype.name;
     archetypeTagline.textContent = archetype.tagline;
     overallNum.textContent = overall;
 
-    // Insight
+    // Insight paragraph
     const insightText = tied
       ? 'Your dimensions are evenly balanced — pick any one and work it deliberately for a month.'
       : getInsight(results);
     archetypeInsight.textContent = insightText;
 
-    // Radar — pass previous results for ghost polygon
-    radarContainer.innerHTML = drawRadar(
-      results, overall,
-      tied ? null : strongest.key,
-      tied ? null : growth.key,
-      previousResults
-    );
-
-    // Comparison block (only if there is a previous run and not viewing a shared link)
-    if (previous && !isShared) {
-      renderComparison({ results, overall, strongest, growth }, previous);
-    } else {
-      comparisonSlot.innerHTML = '';
-    }
+    // Radar
+    radarContainer.innerHTML = drawRadar(results, overall, tied ? null : strongest.key, tied ? null : growth.key);
 
     // Bookends
     renderBookend(bookendStrength, strongest, 'strength');
     renderBookend(bookendGrowth, growth, 'growth');
 
-    // Compact list
+    // Compact list — everything except strongest and growth
     const middle = results.filter(d => d.key !== strongest.key && d.key !== growth.key);
     renderCompactList(middle);
 
-    // Focus card
+    // 30-day focus — target the growth dimension
     renderFocusCard(growth);
 
     // Review
     renderReview(results);
-    reviewSection.open = false;
 
-    // Commitment banner at top of results (only if commit matches current growth dim)
-    const commit = loadCommit();
-    if (commit && commit.dim === growth.key && !isShared) {
-      renderCommitStatus(resultsCommitSlot, commit, { showLink: false });
-    } else {
-      resultsCommitSlot.innerHTML = '';
-    }
+    // Reset review section to closed
+    reviewSection.open = false;
   }
 
   /* =====================  SHARE IMAGE  ===================== */
@@ -2544,6 +2034,7 @@
       return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
     };
 
+    // Rings
     [0.25, 0.5, 0.75, 1.0].forEach(level => {
       ctx.beginPath();
       results.forEach((_, i) => {
@@ -2557,6 +2048,7 @@
       ctx.stroke();
     });
 
+    // Axes
     results.forEach((_, i) => {
       const p = polar(maxR, i);
       ctx.beginPath();
@@ -2567,6 +2059,7 @@
       ctx.stroke();
     });
 
+    // Polygon fill
     ctx.beginPath();
     results.forEach((d, i) => {
       const p = polar(maxR * d.pct / 100, i);
@@ -2581,6 +2074,7 @@
     ctx.lineJoin = 'round';
     ctx.stroke();
 
+    // Dots
     results.forEach((d, i) => {
       const p = polar(maxR * d.pct / 100, i);
       ctx.beginPath();
@@ -2592,6 +2086,7 @@
       ctx.stroke();
     });
 
+    // Labels
     ctx.font = '600 17px Inter, system-ui, sans-serif';
     ctx.fillStyle = '#736556';
     results.forEach((d, i) => {
@@ -2627,25 +2122,31 @@
     canvas.height = size;
     const ctx = canvas.getContext('2d');
 
+    // Background
     ctx.fillStyle = '#FAF7F2';
     ctx.fillRect(0, 0, size, size);
 
+    // Eyebrow
     ctx.fillStyle = '#B5673F';
     ctx.font = '700 22px Inter, system-ui, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText('MY ESPERIEL INDEX', size / 2, 110);
 
+    // Archetype
     ctx.fillStyle = '#2A241E';
     ctx.font = '600 96px Fraunces, Georgia, serif';
     ctx.fillText(archetype.name, size / 2, 240);
 
+    // Tagline
     ctx.fillStyle = '#564A3E';
     ctx.font = 'italic 500 26px Fraunces, Georgia, serif';
     ctx.fillText(archetype.tagline, size / 2, 292);
 
+    // Radar
     const cx = size / 2, cy = 600, maxR = 210;
     drawRadarOnCanvas(ctx, results, cx, cy, maxR);
 
+    // Overall number
     ctx.fillStyle = '#1E2A28';
     ctx.font = '600 70px Fraunces, Georgia, serif';
     ctx.textAlign = 'center';
@@ -2657,6 +2158,7 @@
     ctx.textBaseline = 'alphabetic';
     ctx.fillText('OVERALL', cx, cy + 44);
 
+    // Chips
     function drawChip(x, y, label, value, accent, bg) {
       const w = 300, h = 112;
       ctx.fillStyle = bg;
@@ -2678,6 +2180,7 @@
     drawChip(230, chipY, 'STRENGTH', strongest.name, '#5E7362', '#EAF0EB');
     drawChip(size - 230, chipY, 'GROWTH EDGE', growth.name, '#8E4D2C', '#F8EFEA');
 
+    // URL
     ctx.fillStyle = '#736556';
     ctx.font = '500 20px Inter, system-ui, sans-serif';
     ctx.textAlign = 'center';
@@ -2686,14 +2189,9 @@
     return new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
   }
 
-  /* =====================  RETAKE (with confirmation)  ===================== */
+  /* =====================  RETAKE  ===================== */
   btnRetake.addEventListener('click', () => {
-    if (answeredCount() === QUESTIONS.length) {
-      const ok = window.confirm('Start over? Your current answers and this run will be cleared. Your previous attempts stay in your history.');
-      if (!ok) return;
-    }
     clearState();
-    clearHash();
     renderIntro();
     switchScreen('intro');
   });
@@ -2707,36 +2205,27 @@
 
   /* =====================  SHARE  ===================== */
   btnShare.addEventListener('click', async () => {
-    // Show spinner
-    const originalHtml = btnShare.innerHTML;
     btnShare.disabled = true;
-    btnShare.innerHTML = '<span class="spinner" aria-hidden="true"></span> Generating…';
 
     try {
       const blob = await generateShareImage();
       const file = new File([blob], 'esperiel-index.png', { type: 'image/png' });
-      const shareUrl = buildShareUrl();
 
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         try {
           await navigator.share({
             files: [file],
             title: 'Esperiel Index',
-            text: 'My Esperiel Index profile — open this link to see the interactive version: ' + shareUrl
+            text: 'My Esperiel Index profile'
           });
           btnShare.disabled = false;
-          btnShare.innerHTML = originalHtml;
           return;
         } catch (e) {
-          if (e.name === 'AbortError') {
-            btnShare.disabled = false;
-            btnShare.innerHTML = originalHtml;
-            return;
-          }
+          if (e.name === 'AbortError') { btnShare.disabled = false; return; }
         }
       }
 
-      // Fallback: download image, then offer to copy the link
+      // Fallback: download the image
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -2745,46 +2234,18 @@
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-
-      // Copy link too
-      try {
-        await navigator.clipboard.writeText(shareUrl);
-        showToast('Image saved · link copied');
-      } catch (e) {
-        showToast('Image saved');
-      }
+      showToast('Image saved');
     } catch (e) {
       showToast('Could not generate image');
     }
 
     btnShare.disabled = false;
-    btnShare.innerHTML = originalHtml;
   });
-
-  /* =====================  URL HASH ROUTING  ===================== */
-  function handleHashOnLoad() {
-    const shared = parseHash();
-    if (shared) {
-      // Land directly on the results for this profile
-      fromShare = true;
-      answers = shared;
-      currentIndex = 0;
-      generateResults({ fromShare: true, saveToHistory: false });
-      switchScreen('results');
-      showToast('Viewing a shared profile');
-    }
-  }
 
   /* =====================  INIT  ===================== */
   loadState();
   renderIntro();
-
-  // If a valid shared profile exists in the URL, jump straight to it
-  if (parseHash()) {
-    handleHashOnLoad();
-  } else {
-    switchScreen('intro');
-  }
+  switchScreen('intro');
 })();
 </script>
 </body>
