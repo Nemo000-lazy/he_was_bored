@@ -41,6 +41,10 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     font-family: var(--font-sans);
     color: var(--text-main);
@@ -48,8 +52,10 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
+    min-height: 100dvh; /* Fixes mobile scroll recalculation glitch */
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; /* Prevents side-to-side wobble */
   }
 
   /* Utility Classes */
