@@ -27,7 +27,7 @@
 
     --text-main:    #2A241E;
     --text-muted:   #564A3E;
-    --text-light:   #8A7C6D;
+    --text-light:   #736556;
 
     --ink:          #1E2A28;
     --ink-soft:     #2C3A36;
@@ -41,7 +41,6 @@
     --support:      #5E7362;
     --support-bg:   #EAF0EB;
 
-    /* Dimension palette */
     --dim-clarity:    #B5673F;
     --dim-confidence: #8B4A2B;
     --dim-connection: #7A8471;
@@ -58,7 +57,6 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { -webkit-text-size-adjust: 100%; }
 
   body {
@@ -74,7 +72,6 @@
     overflow-x: hidden;
   }
 
-  /* Paper grain overlay */
   body::before {
     content: '';
     position: fixed;
@@ -89,9 +86,8 @@
   header, main, footer { position: relative; z-index: 1; }
 
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
-  .container { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  .container { width: 100%; max-width: 780px; margin: 0 auto; padding: 0 20px; }
 
-  /* Fraunces with variable axes */
   h1, h2, h3 {
     font-family: var(--font-serif);
     font-weight: 600;
@@ -102,8 +98,32 @@
   button { font-family: inherit; border: none; background: none; cursor: pointer; }
   button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
 
-  header { padding: 24px 0; }
-  .logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; text-decoration: none; color: var(--text-main); font-variation-settings: 'SOFT' 30, 'WONK' 1; }
+  /* ---------- HEADER ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 20px 0;
+    transition: background-color 0.35s var(--ease-smooth), backdrop-filter 0.35s var(--ease-smooth), padding 0.35s var(--ease-smooth);
+  }
+  header.scrolled {
+    background: rgba(250, 247, 242, 0.82);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    backdrop-filter: saturate(180%) blur(14px);
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(42, 36, 30, 0.05);
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text-main);
+    font-variation-settings: 'SOFT' 30, 'WONK' 1;
+  }
   .logo-mark {
     width: 12px; height: 12px;
     background: var(--accent);
@@ -118,6 +138,11 @@
   @keyframes screenEnter {
     from { opacity: 0; transform: translateY(18px) scale(0.995); }
     to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes contentEnter {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   /* ---------- INTRO ---------- */
@@ -145,7 +170,6 @@
     line-height: 1.55;
   }
 
-  /* Hero mini radar */
   .hero-radar {
     width: min(300px, 80vw);
     margin: 24px auto 8px;
@@ -153,17 +177,8 @@
   }
   .hero-radar-svg { width: 100%; height: auto; overflow: visible; }
 
-  .hero-radar-ring {
-    fill: none;
-    stroke: var(--border-light);
-    stroke-width: 1;
-    opacity: 0.7;
-  }
-  .hero-radar-axis {
-    stroke: var(--border-light);
-    stroke-width: 1;
-    opacity: 0.5;
-  }
+  .hero-radar-ring { fill: none; stroke: var(--border-light); stroke-width: 1; opacity: 0.7; }
+  .hero-radar-axis { stroke: var(--border-light); stroke-width: 1; opacity: 0.5; }
   .hero-radar-ghost {
     fill: rgba(181, 103, 63, 0.06);
     stroke: var(--accent);
@@ -172,16 +187,130 @@
     opacity: 0.7;
     animation: ghostFade 1.2s var(--ease-smooth) 0.4s both;
   }
-  @keyframes ghostFade {
-    from { opacity: 0; }
-    to   { opacity: 0.7; }
-  }
+  @keyframes ghostFade { from { opacity: 0; } to { opacity: 0.7; } }
   .hero-radar-label {
     font-family: var(--font-sans);
     font-size: 10px;
     font-weight: 600;
-    letter-spacing: 0.02em;
     fill: var(--text-light);
+  }
+
+  /* NEW: Commitment status card on the intro */
+  .commit-status {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    max-width: 480px;
+    margin: 26px auto 0;
+    padding: 18px 22px 18px 18px;
+    background: linear-gradient(165deg, #FCF2EC 0%, #FFFFFF 65%);
+    border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--border-light));
+    border-radius: 18px;
+    box-shadow: 0 16px 40px -20px rgba(181, 103, 63, 0.32);
+    animation: contentEnter 0.7s var(--ease-smooth) 0.3s both;
+    text-align: left;
+  }
+  .commit-ring {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+  }
+  .commit-ring-svg { width: 52px; height: 52px; transform: rotate(-90deg); }
+  .commit-ring-bg { fill: none; stroke: var(--border-light); stroke-width: 3; }
+  .commit-ring-fill {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1.2s var(--ease-smooth);
+  }
+  .commit-ring-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent-hover);
+    font-variation-settings: 'SOFT' 30, 'WONK' 1;
+    transform: none;
+  }
+  .commit-status-body { flex: 1; min-width: 0; }
+  .commit-status-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent-hover);
+    display: block;
+    margin-bottom: 3px;
+  }
+  .commit-status-text {
+    font-size: 0.98rem;
+    color: var(--text-main);
+    line-height: 1.4;
+  }
+  .commit-status-text strong {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-variation-settings: 'SOFT' 30, 'WONK' 1;
+  }
+  .commit-status-link {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 6px 4px;
+    border-radius: 8px;
+    transition: color 0.2s var(--ease-soft);
+  }
+  .commit-status-link:hover { color: var(--accent-hover); }
+
+  /* NEW: "What you'll get" bullets on landing */
+  .what-you-get {
+    max-width: 460px;
+    margin: 30px auto 0;
+    padding: 22px 26px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    animation: contentEnter 0.75s var(--ease-smooth) 0.4s both;
+  }
+  .what-you-get-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-light);
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .what-you-get ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .what-you-get li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+  .what-you-get li::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    margin-top: 8px;
   }
 
   .button-group {
@@ -193,19 +322,27 @@
     width: 100%;
   }
 
+  .trust-line {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 18px;
+    font-style: italic;
+  }
+
   /* ---------- BUTTONS ---------- */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 9px;
     padding: 15px 34px;
     border-radius: 99px;
     font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
     width: 100%;
-    max-width: 320px;
+    max-width: 340px;
     transition:
       background-color 0.25s var(--ease-soft),
       color            0.25s var(--ease-soft),
@@ -214,6 +351,8 @@
       transform        0.35s var(--ease-spring);
   }
   @media (min-width: 480px) { .btn { width: auto; max-width: none; } }
+
+  .btn svg { flex-shrink: 0; }
 
   .btn-primary {
     background: linear-gradient(180deg, #C07347 0%, #B5673F 100%);
@@ -256,6 +395,17 @@
     transform: none;
     box-shadow: none;
   }
+
+  /* NEW: Loading spinner for share button */
+  .spinner {
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.35);
+    border-top-color: #FFF;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
   /* ---------- QUIZ ---------- */
   .quiz-header {
@@ -325,18 +475,10 @@
   .question-fader {
     display: flex;
     flex-direction: column;
-    transition:
-      opacity   0.42s var(--ease-smooth),
-      transform 0.42s var(--ease-smooth);
+    transition: opacity 0.42s var(--ease-smooth), transform 0.42s var(--ease-smooth);
   }
-  .question-fader.fade-out {
-    opacity: 0;
-    transform: translateY(-10px) scale(0.985);
-  }
-  .question-fader.fade-in {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  .question-fader.fade-out { opacity: 0; transform: translateY(-10px) scale(0.985); }
+  .question-fader.fade-in  { opacity: 1; transform: translateY(0) scale(1); }
 
   .q-dim {
     display: inline-flex;
@@ -354,12 +496,7 @@
     margin-bottom: 18px;
     animation: contentEnter 0.5s var(--ease-smooth) both;
   }
-  .q-dim::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: currentColor;
-  }
+  .q-dim::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
   .q-text {
     font-family: var(--font-serif);
     font-size: clamp(1.3rem, 3.2vw, 1.7rem);
@@ -370,10 +507,6 @@
     outline: none;
     letter-spacing: -0.01em;
     animation: contentEnter 0.55s var(--ease-smooth) 0.04s both;
-  }
-  @keyframes contentEnter {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
   }
 
   .options-list { display: flex; flex-direction: column; gap: 12px; }
@@ -427,10 +560,7 @@
     border-radius: 50%;
     animation: popIn 0.32s var(--ease-spring) both;
   }
-  @keyframes popIn {
-    0%   { transform: scale(0); }
-    100% { transform: scale(1); }
-  }
+  @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
 
   .option-label:has(.option-input:checked) {
     border-color: var(--dim-color, var(--accent));
@@ -441,7 +571,6 @@
     outline: 2px solid var(--dim-color, var(--accent));
     outline-offset: 2px;
   }
-
   .option-text {
     font-size: 0.95rem;
     font-weight: 500;
@@ -454,7 +583,6 @@
     font-weight: 600;
   }
 
-  /* ---------- NAVIGATION BUTTONS ---------- */
   .q-actions {
     margin-top: auto;
     padding-top: 28px;
@@ -464,26 +592,214 @@
   }
   .q-actions .btn { width: 100%; max-width: 100%; }
   @media (min-width: 480px) {
-    .q-actions {
-      flex-direction: row;
-      justify-content: flex-end;
-    }
-    .q-actions .btn {
-      width: auto;
-      min-width: 160px;
-      max-width: none;
-    }
+    .q-actions { flex-direction: row; justify-content: flex-end; }
+    .q-actions .btn { width: auto; min-width: 160px; max-width: none; }
   }
   #btn-back[hidden] { display: inline-flex; visibility: hidden; }
 
-  /* ---------- RESULTS ---------- */
-  .results-header { text-align: center; margin-bottom: 40px; }
+  /* ================================================= */
+  /* ===============  RESULTS PAGE  ================== */
+  /* ================================================= */
+
+  .results-hero {
+    text-align: center;
+    padding: 32px 0 8px;
+    animation: contentEnter 0.6s var(--ease-smooth) both;
+  }
+  .archetype-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .archetype-title {
+    font-size: clamp(2.2rem, 5.4vw, 3.4rem);
+    letter-spacing: -0.024em;
+    color: var(--text-main);
+    margin-bottom: 10px;
+    line-height: 1.05;
+  }
+  .archetype-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+    color: var(--text-muted);
+    font-variation-settings: 'SOFT' 60, 'WONK' 1, 'opsz' 30;
+    margin-bottom: 26px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.45;
+  }
+  .overall-badge {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 18px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 14px rgba(42, 36, 30, 0.04);
+  }
+  .overall-badge strong {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0;
+    font-variation-settings: 'SOFT' 30, 'WONK' 1;
+  }
+  .archetype-insight {
+    margin-top: 26px;
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: var(--text-main);
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 4px;
+    animation: contentEnter 0.6s var(--ease-smooth) 0.1s both;
+  }
+
+  .results-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 44px 0;
+    opacity: 0.8;
+  }
+  .results-divider::before,
+  .results-divider::after {
+    content: '';
+    flex: 0 0 52px;
+    height: 1px;
+    background: var(--border-light);
+  }
+  .results-divider span {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--border-light);
+  }
+
+  /* NEW: Comparison block */
+  .comparison {
+    max-width: 620px;
+    margin: 0 auto 34px;
+    padding: 24px 28px 22px;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FDFBF8 100%);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 16px 44px -24px rgba(42, 36, 30, 0.14);
+    animation: contentEnter 0.6s var(--ease-smooth) both;
+  }
+  .comparison-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .comparison-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+  }
+  .comparison-since {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+  .comparison-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    font-variation-settings: 'SOFT' 30, 'WONK' 1;
+    letter-spacing: -0.012em;
+    color: var(--text-main);
+    margin-bottom: 18px;
+    line-height: 1.25;
+  }
+  .comparison-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .delta-row {
+    display: grid;
+    grid-template-columns: 10px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 4px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .delta-row:last-child { border-bottom: none; }
+  .delta-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--dim-color);
+  }
+  .delta-name {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    font-variation-settings: 'SOFT' 30, 'WONK' 1;
+    color: var(--text-main);
+  }
+  .delta-value {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-feature-settings: 'tnum' 1;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .delta-num { color: var(--text-light); font-weight: 500; }
+  .delta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 3px 9px;
+    border-radius: 99px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    min-width: 56px;
+    justify-content: center;
+  }
+  .delta-up { background: var(--support-bg); color: var(--support); }
+  .delta-down { background: var(--accent-bg); color: var(--accent-hover); }
+  .delta-flat { background: rgba(42, 36, 30, 0.05); color: var(--text-light); }
+  .comparison-footer {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border-light);
+    font-size: 0.86rem;
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* --- Radar --- */
   .radar-container {
-    width: min(380px, 100%);
-    margin: 0 auto 24px;
-    background: #FFFFFF;
+    width: min(420px, 100%);
+    margin: 0 auto;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FDFBF8 100%);
     border-radius: 24px;
-    padding: 24px 24px 18px;
+    padding: 28px 24px 20px;
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.9),
       0 20px 50px -20px rgba(42, 36, 30, 0.12);
@@ -511,15 +827,29 @@
     stroke-linejoin: round;
     filter: drop-shadow(0 4px 14px rgba(181, 103, 63, 0.22));
     transform-box: view-box;
-    transform-origin: 150px 150px;
+    transform-origin: 160px 160px;
     animation: radarGrow 1s var(--ease-smooth) 0.1s both;
   }
+
+  /* NEW: Ghost polygon for previous attempt */
+  .radar-poly-ghost {
+    fill: none;
+    stroke: var(--text-light);
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+    stroke-dasharray: 4 5;
+    opacity: 0.5;
+    transform-box: view-box;
+    transform-origin: 160px 160px;
+    animation: radarGrow 1s var(--ease-smooth) 0.25s both;
+  }
+
   .radar-dot {
     fill: var(--accent);
     stroke: #FFF;
     stroke-width: 2;
     transform-box: view-box;
-    transform-origin: 150px 150px;
+    transform-origin: 160px 160px;
     animation: radarGrow 0.85s var(--ease-spring) 0.45s both;
   }
   .radar-dot-strength { fill: var(--support); stroke-width: 2; r: 5; }
@@ -535,89 +865,411 @@
     font-size: 10.5px;
     font-weight: 600;
     fill: var(--text-light);
+    transition: fill 0.25s var(--ease-soft), font-weight 0.25s var(--ease-soft);
   }
   .radar-label-strength { fill: var(--support); font-weight: 700; }
   .radar-label-growth   { fill: var(--accent-hover); font-weight: 700; }
 
-  .radar-center-num   { font-family: var(--font-serif); font-size: 34px; font-weight: 600; fill: var(--ink); font-variation-settings: 'SOFT' 30, 'WONK' 1; }
+  .radar-center-num   { font-family: var(--font-serif); font-size: 36px; font-weight: 600; fill: var(--ink); font-variation-settings: 'SOFT' 30, 'WONK' 1; }
   .radar-center-label { font-family: var(--font-sans); font-size: 8px; font-weight: 700; letter-spacing: 0.14em; fill: var(--text-light); }
 
-  .results-title {
-    font-size: clamp(1.7rem, 4.2vw, 2.4rem);
-    margin-bottom: 14px;
-    letter-spacing: -0.02em;
-  }
-  .results-desc {
-    font-size: 1.12rem;
-    color: var(--text-main);
-    max-width: 540px;
-    margin: 0 auto;
-    line-height: 1.55;
-  }
+  .radar-node { cursor: pointer; }
+  .radar-svg:hover .radar-node { opacity: 0.35; transition: opacity 0.25s var(--ease-soft); }
+  .radar-svg:hover .radar-node:hover { opacity: 1; }
 
-  .dim-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
-  .dim-card {
-    background: #FFFFFF;
-    border-radius: 18px;
-    padding: 24px;
+  /* --- Bookends --- */
+  .bookends {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  @media (min-width: 620px) { .bookends { grid-template-columns: 1fr 1fr; } }
+
+  .bookend {
+    position: relative;
+    border-radius: 20px;
+    padding: 28px 26px 26px;
+    overflow: hidden;
     border: 1px solid var(--border-light);
     animation: contentEnter 0.6s var(--ease-smooth) both;
-    transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth);
+    isolation: isolate;
   }
-  .dim-card.is-strength {
-    background: linear-gradient(180deg, #F3F7F3 0%, #FFFFFF 70%);
-    border-color: color-mix(in srgb, var(--support) 24%, var(--border-light));
-    box-shadow: 0 12px 32px -18px rgba(94, 115, 98, 0.35);
+  .bookend-strength {
+    background: linear-gradient(165deg, #F0F5F1 0%, #FFFFFF 65%);
+    border-color: color-mix(in srgb, var(--support) 26%, var(--border-light));
+    box-shadow: 0 16px 44px -22px rgba(94, 115, 98, 0.4);
   }
-  .dim-card.is-growth {
-    background: linear-gradient(180deg, #FCF3ED 0%, #FFFFFF 70%);
-    border-color: color-mix(in srgb, var(--accent) 26%, var(--border-light));
-    box-shadow: 0 12px 32px -18px rgba(181, 103, 63, 0.35);
+  .bookend-growth {
+    background: linear-gradient(165deg, #FCF2EC 0%, #FFFFFF 65%);
+    border-color: color-mix(in srgb, var(--accent) 28%, var(--border-light));
+    box-shadow: 0 16px 44px -22px rgba(181, 103, 63, 0.4);
   }
+  .bookend-numeral {
+    position: absolute;
+    right: -12px;
+    bottom: -32px;
+    font-family: var(--font-serif);
+    font-size: 9rem;
+    font-weight: 600;
+    font-variation-settings: 'SOFT' 30, 'WONK' 1, 'opsz' 144;
+    line-height: 1;
+    color: rgba(42, 36, 30, 0.055);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .bookend-strength .bookend-numeral { color: rgba(94, 115, 98, 0.1); }
+  .bookend-growth .bookend-numeral   { color: rgba(181, 103, 63, 0.1); }
 
-  .dim-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; }
-  .dim-card-title { font-size: 1.12rem; font-weight: 600; display: flex; align-items: center; gap: 10px; font-variation-settings: 'SOFT' 30, 'WONK' 1; }
-  .dim-card-title::before {
-    content: '';
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--dim-color, var(--text-light));
-  }
-  .dim-card-score { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 600; color: var(--text-main); font-variation-settings: 'SOFT' 30, 'WONK' 1; }
+  .bookend-content { position: relative; z-index: 1; }
 
-  .badge {
-    font-size: 0.65rem;
+  .bookend-label {
+    font-size: 0.68rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    padding: 4px 10px;
-    border-radius: 99px;
+    letter-spacing: 0.18em;
+    margin-bottom: 10px;
+    display: inline-block;
   }
-  .badge-strength { background: var(--support-bg); color: var(--support); }
-  .badge-growth { background: var(--accent-bg); color: var(--accent-hover); }
+  .bookend-strength .bookend-label { color: var(--support); }
+  .bookend-growth .bookend-label { color: var(--accent-hover); }
 
-  .dim-track { height: 6px; background: var(--border-light); border-radius: 99px; overflow: hidden; margin-bottom: 16px; }
-  .dim-track-fill {
-    height: 100%;
-    background: var(--text-light);
-    border-radius: 99px;
-    width: 0%;
-    transition: width 1.1s var(--ease-smooth);
+  .bookend-name {
+    font-family: var(--font-serif);
+    font-size: 1.65rem;
+    font-weight: 600;
+    font-variation-settings: 'SOFT' 30, 'WONK' 1, 'opsz' 60;
+    letter-spacing: -0.015em;
+    color: var(--text-main);
+    margin-bottom: 6px;
+    line-height: 1.1;
   }
-  .dim-track-fill.strength { background: var(--support); }
-  .dim-track-fill.growth { background: var(--accent); }
-
-  .dim-blurb { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.55; }
-  .dim-action {
-    background: rgba(255, 255, 255, 0.7);
-    padding: 16px 18px;
+  .bookend-score {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-light);
+    font-variation-settings: 'SOFT' 30, 'WONK' 1;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .bookend-blurb {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+  .bookend-action {
+    margin-top: 18px;
+    padding: 15px 16px;
+    background: rgba(255, 255, 255, 0.75);
     border-radius: 12px;
     border-left: 3px solid var(--accent);
     font-size: 0.92rem;
     color: var(--text-main);
     line-height: 1.5;
   }
-  .dim-action strong { color: var(--accent-hover); }
+  .bookend-action strong { color: var(--accent-hover); display: block; margin-bottom: 4px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; }
+
+  .commit-row {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    user-select: none;
+    padding: 6px 2px;
+  }
+  .commit-row input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border-light);
+    border-radius: 5px;
+    background: #FFF;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: border-color 0.2s var(--ease-soft), background-color 0.2s var(--ease-soft);
+  }
+  .commit-row input[type="checkbox"]:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .commit-row input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px; top: 1px;
+    width: 5px; height: 10px;
+    border: solid #FFF;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    animation: popIn 0.25s var(--ease-spring) both;
+  }
+  .commit-caption {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  /* --- Compact list --- */
+  .compact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 40px;
+  }
+  .compact-row {
+    display: grid;
+    grid-template-columns: 12px 1fr auto 140px;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    border-bottom: 1px solid var(--border-light);
+    cursor: pointer;
+    transition: background-color 0.25s var(--ease-soft);
+    animation: contentEnter 0.55s var(--ease-smooth) both;
+  }
+  .compact-row:last-child { border-bottom: none; }
+  .compact-row:hover { background: rgba(255, 255, 255, 0.7); }
+
+  .compact-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--dim-color);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--dim-color) 14%, transparent);
+  }
+  .compact-name {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-variation-settings: 'SOFT' 30, 'WONK' 1;
+    color: var(--text-main);
+  }
+  .compact-score {
+    font-feature-settings: 'tnum' 1;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-variation-settings: 'SOFT' 30, 'WONK' 1;
+  }
+  .compact-bar {
+    height: 5px;
+    background: var(--border-light);
+    border-radius: 99px;
+    overflow: hidden;
+    position: relative;
+  }
+  .compact-bar-fill {
+    height: 100%;
+    background: var(--dim-color);
+    border-radius: 99px;
+    width: 0;
+    transition: width 1s var(--ease-smooth);
+  }
+  @media (max-width: 500px) {
+    .compact-row {
+      grid-template-columns: 12px 1fr auto;
+      grid-template-areas:
+        "dot name score"
+        "bar bar bar";
+      row-gap: 10px;
+    }
+    .compact-dot { grid-area: dot; }
+    .compact-name { grid-area: name; }
+    .compact-score { grid-area: score; }
+    .compact-bar { grid-area: bar; }
+  }
+
+  /* --- 30-Day Focus --- */
+  .focus-card {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FDFBF8 100%);
+    border-radius: 20px;
+    padding: 32px 30px;
+    border: 1px solid var(--border-light);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 16px 44px -24px rgba(42, 36, 30, 0.14);
+    margin-bottom: 40px;
+    animation: contentEnter 0.6s var(--ease-smooth) both;
+  }
+  .focus-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .focus-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+  }
+  .focus-dim-name {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--text-light);
+    font-variation-settings: 'SOFT' 60, 'WONK' 1;
+  }
+  .focus-title {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-variation-settings: 'SOFT' 30, 'WONK' 1;
+    letter-spacing: -0.015em;
+    margin-bottom: 22px;
+    color: var(--text-main);
+    line-height: 1.2;
+  }
+  .focus-primary {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 22px;
+  }
+  .focus-primary strong {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent-hover);
+    margin-bottom: 6px;
+  }
+  .focus-primary p {
+    font-size: 1rem;
+    color: var(--text-main);
+    line-height: 1.5;
+  }
+  .focus-supporting-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+  .focus-supporting {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .focus-supporting li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .focus-supporting li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.55;
+  }
+
+  /* --- Review --- */
+  .review-section {
+    border-radius: 16px;
+    border: 1px solid var(--border-light);
+    background: rgba(255, 255, 255, 0.55);
+    margin-bottom: 40px;
+    overflow: hidden;
+    animation: contentEnter 0.6s var(--ease-smooth) both;
+  }
+  .review-section summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    transition: background-color 0.25s var(--ease-soft);
+  }
+  .review-section summary::-webkit-details-marker { display: none; }
+  .review-section summary:hover { background: rgba(255, 255, 255, 0.6); }
+  .review-section summary svg {
+    transition: transform 0.35s var(--ease-smooth);
+    flex-shrink: 0;
+    color: var(--text-light);
+  }
+  .review-section[open] summary svg { transform: rotate(180deg); }
+  .review-content {
+    padding: 0 24px 24px;
+    animation: contentEnter 0.4s var(--ease-smooth) both;
+  }
+
+  .review-group {
+    padding-top: 22px;
+    margin-top: 22px;
+    border-top: 1px solid var(--border-light);
+  }
+  .review-group:first-child { padding-top: 0; margin-top: 0; border-top: none; }
+  .review-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+  }
+  .review-group-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-variation-settings: 'SOFT' 30, 'WONK' 1;
+    color: var(--text-main);
+  }
+  .review-group-name::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--dim-color);
+  }
+  .review-group-score {
+    font-family: var(--font-serif);
+    font-feature-settings: 'tnum' 1;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-variation-settings: 'SOFT' 30, 'WONK' 1;
+  }
+  .review-item {
+    margin-bottom: 14px;
+    padding-left: 18px;
+    border-left: 2px solid var(--border-light);
+  }
+  .review-item:last-child { margin-bottom: 0; }
+  .review-q {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.5;
+    margin-bottom: 4px;
+  }
+  .review-a {
+    font-size: 0.92rem;
+    color: var(--text-main);
+    line-height: 1.5;
+    font-weight: 500;
+  }
 
   /* ---------- TOAST ---------- */
   .toast {
@@ -654,10 +1306,20 @@
     gap: 6px;
     margin-bottom: 12px;
   }
-  .footer-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    display: block;
+  .footer-dot { width: 7px; height: 7px; border-radius: 50%; display: block; }
+
+  /* ---------- PRINT ---------- */
+  @media print {
+    header, footer, .button-group, .toast, .trust-line, .results-divider { display: none !important; }
+    body::before { display: none; }
+    .screen:not(.active) { display: none !important; }
+    .radar-container, .bookend, .focus-card, .dim-card { box-shadow: none !important; }
+    .review-section { border: 1px solid #ccc; }
+    .review-section > summary { display: none !important; }
+    .review-content { display: block !important; }
+    details { display: block !important; }
+    details > summary { display: none !important; }
+    .bookends { grid-template-columns: 1fr 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -669,12 +1331,21 @@
       transition-delay: 0ms !important;
       scroll-behavior: auto !important;
     }
+    /* Ensure final states so nothing stays invisible */
+    .hero-radar-ghost { opacity: 0.7 !important; animation: none !important; }
+    .screen.active { animation: none !important; }
+    .option-label { animation: none !important; opacity: 1 !important; }
+    .radar-poly, .radar-poly-ghost, .radar-dot { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .archetype-insight, .results-hero, .radar-container, .bookend, .focus-card,
+    .compact-row, .review-section, .commit-status, .what-you-get, .comparison {
+      animation: none !important; opacity: 1 !important; transform: none !important;
+    }
   }
 </style>
 </head>
 <body>
 
-<header>
+<header id="site-header">
   <div class="container">
     <a href="./" class="logo">
       <span class="logo-mark" aria-hidden="true"></span>
@@ -686,6 +1357,7 @@
 <main id="main-content">
   <div class="container">
 
+    <!-- ================= INTRO ================= -->
     <section id="screen-intro" class="screen active">
       <div class="intro-header">
         <span class="intro-eyebrow">An 18-Question Reflection</span>
@@ -698,11 +1370,26 @@
 
       <div class="hero-radar" id="hero-radar" aria-hidden="true"><!-- injected --></div>
 
+      <!-- NEW: commitment status shows here when active -->
+      <div id="intro-commit-slot"></div>
+
       <div class="button-group" id="intro-buttons">
         <button class="btn btn-primary" id="start-new">Begin the index</button>
       </div>
+      <p class="trust-line">Takes 3 minutes. Your answers stay on your device.</p>
+
+      <!-- NEW: what you'll get -->
+      <div class="what-you-get">
+        <div class="what-you-get-title">What you'll get</div>
+        <ul>
+          <li>A radar of your six communication dimensions</li>
+          <li>A named communication archetype</li>
+          <li>A 30-day focus plan targeting your growth edge</li>
+        </ul>
+      </div>
     </section>
 
+    <!-- ================= QUIZ ================= -->
     <section id="screen-quiz" class="screen">
       <div class="quiz-header">
         <div class="quiz-dim" id="quiz-dim">Clarity</div>
@@ -726,19 +1413,66 @@
       </div>
     </section>
 
+    <!-- ================= RESULTS ================= -->
     <section id="screen-results" class="screen">
-      <div class="results-header">
-        <div class="radar-container" id="radar-container"><!-- injected --></div>
-        <h2 class="results-title" id="results-title">Your Profile</h2>
-        <p class="results-desc" id="results-summary"></p>
+
+      <!-- NEW: commit status banner (top of results) -->
+      <div id="results-commit-slot"></div>
+
+      <div class="results-hero">
+        <span class="archetype-eyebrow">Your profile</span>
+        <h2 class="archetype-title" id="archetype-title">The Translator</h2>
+        <p class="archetype-tagline" id="archetype-tagline"></p>
+        <div class="overall-badge">
+          Overall <strong id="overall-num">0</strong>
+        </div>
+        <p class="archetype-insight" id="archetype-insight"></p>
       </div>
 
-      <div class="dim-list" id="dim-list"><!-- injected --></div>
+      <!-- NEW: comparison block appears here when there is a previous run -->
+      <div id="comparison-slot"></div>
+
+      <div class="results-divider"><span></span></div>
+
+      <div class="radar-container" id="radar-container"><!-- injected --></div>
+
+      <div class="results-divider"><span></span></div>
+
+      <div class="bookends">
+        <div class="bookend bookend-strength" id="bookend-strength"><!-- injected --></div>
+        <div class="bookend bookend-growth" id="bookend-growth"><!-- injected --></div>
+      </div>
+
+      <div class="compact-list" id="compact-list"><!-- injected --></div>
+
+      <div class="focus-card" id="focus-card"><!-- injected --></div>
+
+      <details class="review-section" id="review-section">
+        <summary>
+          <span>Review your answers</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="review-content" id="review-content"><!-- injected --></div>
+      </details>
 
       <div class="button-group">
-        <button class="btn btn-primary" id="btn-share">Share my result</button>
-        <button class="btn btn-secondary" id="btn-retake">Retake assessment</button>
+        <button class="btn btn-primary" id="btn-share">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+            <polyline points="16 6 12 2 8 6"/>
+            <line x1="12" y1="2" x2="12" y2="15"/>
+          </svg>
+          Share my result
+        </button>
+        <button class="btn btn-secondary" id="btn-retake">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 12a9 9 0 1 0 3-6.7L3 8"/>
+            <path d="M3 3v5h5"/>
+          </svg>
+          Retake
+        </button>
       </div>
+
     </section>
 
   </div>
@@ -762,7 +1496,7 @@
 (function() {
   'use strict';
 
-  /* --- DATA --- */
+  /* =====================  DATA  ===================== */
   const DIMENSIONS = {
     clarity:    { name: 'Clarity',    color: '#B5673F', blurb: 'How well you translate complex thinking into language other people can follow.', action: 'State the conclusion first, then the reasoning behind it.' },
     confidence: { name: 'Confidence', color: '#8B4A2B', blurb: 'Your ability to hold your ground and speak without shrinking.', action: 'Make one statement without softening it with "just" or "sort of."' },
@@ -770,6 +1504,24 @@
     composure:  { name: 'Composure',  color: '#5E7362', blurb: 'How steady you stay when a conversation becomes difficult.', action: 'When you feel the heat rise, name it silently and wait three seconds before speaking.' },
     curiosity:  { name: 'Curiosity',  color: '#C08A3E', blurb: 'How openly you seek out perspectives beyond your own.', action: 'In your next disagreement, ask: "What would have to be true for you to be right?"' },
     conviction: { name: 'Conviction', color: '#8E5E4A', blurb: 'How firmly you stand behind your ideas and your commitments.', action: 'Pick one small commitment this week and treat it as unbreakable.' }
+  };
+
+  const ARCHETYPES = {
+    clarity:    { name: 'The Translator', tagline: 'You make complex things land simply.' },
+    confidence: { name: 'The Advocate',   tagline: 'You say what you mean, and you mean what you say.' },
+    connection: { name: 'The Bridge',     tagline: 'People feel heard when they\u2019re with you.' },
+    composure:  { name: 'The Anchor',     tagline: 'You stay steady when the room doesn\u2019t.' },
+    curiosity:  { name: 'The Explorer',   tagline: 'You\u2019d rather learn than win.' },
+    conviction: { name: 'The Pillar',     tagline: 'You hold your ground without needing to fight.' }
+  };
+
+  const SUPPORTING_PRACTICES = {
+    clarity:    ['Before a meeting, write your one-sentence takeaway at the top of the page.', 'Draft a reply, then delete the first two sentences. See what\u2019s left.'],
+    confidence: ['Speak first in one meeting this week. Even just to frame the agenda.', 'Write down one strong opinion and say it out loud before entering the conversation.'],
+    connection: ['In every conversation, ask two follow-up questions before pivoting.', 'Once a day, ask someone how they actually are \u2014 and stay for the real answer.'],
+    composure:  ['Before a difficult conversation, write down the outcome you actually want.', 'Once a week, replay one tense moment and ask what you\u2019d have done differently.'],
+    curiosity:  ['Read one article this week that disagrees with you. Look for what\u2019s right, not what\u2019s wrong.', 'In your next disagreement, ask: "What would have to be true for you to be right?"'],
+    conviction: ['Name one belief you hold that costs you something. Say it once this week.', 'Defend one idea without prefacing or softening. Just state it.']
   };
 
   const QUESTIONS = [
@@ -808,9 +1560,9 @@
       { val: 4, label: 'Rarely; I try to make my statements direct and unqualified.' },
       { val: 5, label: 'Never; I state my views plainly without hedging them into something smaller.' }
     ]},
-    { dim: 'confidence', text: 'When asked a question you don’t know the answer to, you typically:', options: [
+    { dim: 'confidence', text: 'When asked a question you don\u2019t know the answer to, you typically:', options: [
       { val: 1, label: 'Panic, guess, or make something up to avoid looking incompetent.' },
-      { val: 2, label: 'Talk around the issue hoping nobody notices I didn’t answer the question.' },
+      { val: 2, label: 'Talk around the issue hoping nobody notices I didn\u2019t answer the question.' },
       { val: 3, label: 'Admit I don\'t know, but feel deeply embarrassed about it.' },
       { val: 4, label: 'Simply state I don\'t know and offer to find the answer.' },
       { val: 5, label: 'Say "I don\'t know" comfortably, knowing it doesn\'t diminish my value.' }
@@ -901,38 +1653,60 @@
     ]}
   ];
 
-  /* --- STATE --- */
-  const STORAGE_KEY = 'esperiel-index-flat-v1';
+  /* =====================  STATE  ===================== */
+  const STORAGE_KEY    = 'esperiel-index-flat-v1';
+  const COMMIT_KEY     = 'esperiel-commit-v1';
+  const HISTORY_KEY    = 'esperiel-history-v1';
+  const COMMIT_DAYS    = 30;
+
   let answers = new Array(QUESTIONS.length).fill(null);
   let currentIndex = 0;
   let isAnimating = false;
+  let savedRunTs = null;         // ts of the run we saved this session (if any)
+  let fromShare = false;         // true if current view came from a shared link
 
-  /* --- DOM --- */
+  /* =====================  DOM  ===================== */
   const screens = {
     intro:   document.getElementById('screen-intro'),
     quiz:    document.getElementById('screen-quiz'),
     results: document.getElementById('screen-results')
   };
 
-  const introButtons    = document.getElementById('intro-buttons');
-  const heroRadar       = document.getElementById('hero-radar');
-  const fader           = document.getElementById('question-fader');
-  const btnBack         = document.getElementById('btn-back');
-  const btnNext         = document.getElementById('btn-next');
-  const quizDimLabel    = document.getElementById('quiz-dim');
-  const progressText    = document.getElementById('quiz-progress-text');
-  const progressFill    = document.getElementById('progress-fill');
-  const progressBarAttr = document.getElementById('progress-bar-attr');
+  const siteHeader       = document.getElementById('site-header');
+  const introButtons     = document.getElementById('intro-buttons');
+  const heroRadar        = document.getElementById('hero-radar');
+  const introCommitSlot  = document.getElementById('intro-commit-slot');
+  const resultsCommitSlot= document.getElementById('results-commit-slot');
+  const comparisonSlot   = document.getElementById('comparison-slot');
+  const fader            = document.getElementById('question-fader');
+  const btnBack          = document.getElementById('btn-back');
+  const btnNext          = document.getElementById('btn-next');
+  const quizDimLabel     = document.getElementById('quiz-dim');
+  const progressText     = document.getElementById('quiz-progress-text');
+  const progressFill     = document.getElementById('progress-fill');
+  const progressBarAttr  = document.getElementById('progress-bar-attr');
 
-  const radarContainer = document.getElementById('radar-container');
-  const resultsTitle   = document.getElementById('results-title');
-  const resultsSummary = document.getElementById('results-summary');
-  const dimList        = document.getElementById('dim-list');
-  const btnShare       = document.getElementById('btn-share');
-  const btnRetake      = document.getElementById('btn-retake');
-  const toast          = document.getElementById('toast');
+  const radarContainer   = document.getElementById('radar-container');
+  const archetypeTitle   = document.getElementById('archetype-title');
+  const archetypeTagline = document.getElementById('archetype-tagline');
+  const archetypeInsight = document.getElementById('archetype-insight');
+  const overallNum       = document.getElementById('overall-num');
+  const bookendStrength  = document.getElementById('bookend-strength');
+  const bookendGrowth    = document.getElementById('bookend-growth');
+  const compactList      = document.getElementById('compact-list');
+  const focusCard        = document.getElementById('focus-card');
+  const reviewContent    = document.getElementById('review-content');
+  const reviewSection    = document.getElementById('review-section');
+  const btnShare         = document.getElementById('btn-share');
+  const btnRetake        = document.getElementById('btn-retake');
+  const toast            = document.getElementById('toast');
 
-  /* --- PERSISTENCE --- */
+  /* =====================  HEADER SCROLL  ===================== */
+  window.addEventListener('scroll', () => {
+    siteHeader.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  /* =====================  PERSISTENCE  ===================== */
   function saveState() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ answers, currentIndex })); } catch (e) {}
   }
@@ -948,22 +1722,110 @@
   function clearState() {
     answers = new Array(QUESTIONS.length).fill(null);
     currentIndex = 0;
+    savedRunTs = null;
     try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
   }
   function answeredCount() { return answers.filter(a => a !== null).length; }
 
-  /* --- SCREEN CONTROL --- */
+  function saveCommit(dim) {
+    try { localStorage.setItem(COMMIT_KEY, JSON.stringify({ dim, ts: Date.now() })); } catch (e) {}
+  }
+  function loadCommit() {
+    try { return JSON.parse(localStorage.getItem(COMMIT_KEY)); } catch (e) { return null; }
+  }
+  function clearCommit() {
+    try { localStorage.removeItem(COMMIT_KEY); } catch (e) {}
+  }
+
+  /* --- History of completed runs --- */
+  function loadHistory() {
+    try {
+      const data = JSON.parse(localStorage.getItem(HISTORY_KEY));
+      if (Array.isArray(data)) return data;
+    } catch (e) {}
+    return [];
+  }
+  function saveRun(ans) {
+    const history = loadHistory();
+    const ts = Date.now();
+    history.push({ ts, answers: [...ans] });
+    const trimmed = history.slice(-10);
+    try { localStorage.setItem(HISTORY_KEY, JSON.stringify(trimmed)); } catch (e) {}
+    return ts;
+  }
+  function getPreviousRun() {
+    const history = loadHistory();
+    if (history.length < 1) return null;
+    // Prefer the most recent run that isn't the one we just saved
+    if (savedRunTs !== null) {
+      for (let i = history.length - 1; i >= 0; i--) {
+        if (history[i].ts !== savedRunTs) return history[i];
+      }
+      return null;
+    }
+    return history[history.length - 1];
+  }
+
+  /* --- URL hash: encode/decode answers --- */
+  function encodeAnswers(ans) {
+    return ans.map(a => a === null ? '0' : String(a)).join('');
+  }
+  function parseHash() {
+    try {
+      const hash = window.location.hash.slice(1);
+      if (!hash) return null;
+      const match = hash.match(/^p=([0-5]+)$/);
+      if (!match) return null;
+      const digits = match[1];
+      if (digits.length !== QUESTIONS.length) return null;
+      const parsed = digits.split('').map(d => parseInt(d, 10));
+      // Must have at least one non-zero
+      if (parsed.every(v => v === 0)) return null;
+      return parsed.map(v => v === 0 ? null : v);
+    } catch (e) { return null; }
+  }
+  function buildShareUrl() {
+    const url = new URL(window.location.href);
+    url.hash = 'p=' + encodeAnswers(answers);
+    return url.toString();
+  }
+  function clearHash() {
+    try {
+      const url = new URL(window.location.href);
+      url.hash = '';
+      window.history.replaceState({}, '', url.toString());
+    } catch (e) {}
+  }
+
+  /* --- Commitment progress --- */
+  function getCommitProgress(commit) {
+    if (!commit || !commit.ts) return null;
+    const elapsedMs = Date.now() - commit.ts;
+    const daysIn = Math.floor(elapsedMs / (1000 * 60 * 60 * 24));
+    const daysLeft = Math.max(0, COMMIT_DAYS - daysIn);
+    const progress = Math.min(1, daysIn / COMMIT_DAYS);
+    return {
+      daysIn: Math.max(1, daysIn + 1),
+      daysSince: daysIn,
+      daysLeft,
+      progress,
+      isComplete: daysIn >= COMMIT_DAYS
+    };
+  }
+
+  /* =====================  SCREEN CONTROL  ===================== */
   function switchScreen(name) {
     Object.keys(screens).forEach(k => screens[k].classList.toggle('active', k === name));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  /* --- INTRO + HERO RADAR --- */
+  /* =====================  GEOMETRY  ===================== */
   function getPolarCoordinates(r, index, total, cx, cy) {
     const angle = (index * (360 / total) - 90) * (Math.PI / 180);
     return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
   }
 
+  /* =====================  HERO RADAR  ===================== */
   function drawHeroRadar() {
     const size = 300, cx = 150, cy = 150, maxR = 88, labelR = 122;
     const keys = Object.keys(DIMENSIONS);
@@ -1010,6 +1872,65 @@
     </svg>`;
   }
 
+  /* =====================  COMMIT STATUS RENDER  ===================== */
+  function renderCommitStatus(container, commit, opts = {}) {
+    const progress = getCommitProgress(commit);
+    if (!progress) { container.innerHTML = ''; return; }
+
+    const dim = DIMENSIONS[commit.dim];
+    if (!dim) { container.innerHTML = ''; return; }
+
+    const circumference = 2 * Math.PI * 22; // r=22 in the 52x52 svg
+    const offset = circumference * (1 - progress.progress);
+
+    const daysLabel = progress.isComplete
+      ? `Day ${COMMIT_DAYS} of ${COMMIT_DAYS}`
+      : `Day ${progress.daysIn} of ${COMMIT_DAYS}`;
+
+    const leadText = progress.isComplete
+      ? `Your 30-day practice on <strong>${dim.name}</strong> is complete.`
+      : `You committed to <strong>${dim.name}</strong> ${progress.daysSince === 0 ? 'today' : progress.daysSince + ' day' + (progress.daysSince === 1 ? '' : 's') + ' ago'}.`;
+
+    const subText = progress.isComplete
+      ? `${progress.daysLeft} days left — time to reflect on how it went.`
+      : `${progress.daysLeft} day${progress.daysLeft === 1 ? '' : 's'} remaining.`;
+
+    const linkLabel = opts.showLink === false ? '' :
+      `<a class="commit-status-link" href="#results" data-action="view-profile">View profile →</a>`;
+
+    container.innerHTML = `
+      <div class="commit-status" style="--dim-color: ${dim.color}">
+        <div class="commit-ring" aria-hidden="true">
+          <svg class="commit-ring-svg" viewBox="0 0 52 52">
+            <circle class="commit-ring-bg" cx="26" cy="26" r="22"></circle>
+            <circle class="commit-ring-fill" cx="26" cy="26" r="22"
+                    style="stroke-dasharray: ${circumference.toFixed(1)}; stroke-dashoffset: ${offset.toFixed(1)};"></circle>
+          </svg>
+          <span class="commit-ring-num">${progress.daysIn}</span>
+        </div>
+        <div class="commit-status-body">
+          <span class="commit-status-label">${progress.isComplete ? 'Practice complete' : 'Active focus'} · ${daysLabel}</span>
+          <p class="commit-status-text">${leadText}</p>
+          <p class="commit-status-text" style="color: var(--text-light); font-size: 0.86rem; margin-top: 2px;">${subText}</p>
+        </div>
+        ${linkLabel}
+      </div>
+    `;
+
+    // Wire the "View profile" link
+    const link = container.querySelector('[data-action="view-profile"]');
+    if (link) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (answeredCount() === QUESTIONS.length) {
+          generateResults({ fromShare: false, saveToHistory: false });
+        }
+        switchScreen('results');
+      });
+    }
+  }
+
+  /* =====================  INTRO  ===================== */
   function renderIntro() {
     heroRadar.innerHTML = drawHeroRadar();
 
@@ -1020,10 +1941,17 @@
         <button class="btn btn-secondary" id="start-new">Start over</button>`;
     } else if (count > 0) {
       introButtons.innerHTML = `
-        <button class="btn btn-primary" id="start-resume">Resume (${QUESTIONS.length - count} left)</button>
+        <button class="btn btn-primary" id="start-resume">Resume &middot; ${count}/${QUESTIONS.length}</button>
         <button class="btn btn-secondary" id="start-new">Start over</button>`;
     }
-    // else: leave the static "Begin the index" button in place
+
+    // Render commitment card if present
+    const commit = loadCommit();
+    if (commit) {
+      renderCommitStatus(introCommitSlot, commit);
+    } else {
+      introCommitSlot.innerHTML = '';
+    }
   }
 
   introButtons.addEventListener('click', (e) => {
@@ -1031,15 +1959,9 @@
     if (!btn) return;
     const id = btn.id;
 
-    if (id === 'start-new') {
-      clearState();
-      startQuiz();
-    } else if (id === 'start-resume') {
-      startQuiz();
-    } else if (id === 'start-results') {
-      generateResults();
-      switchScreen('results');
-    }
+    if (id === 'start-new') { clearState(); clearHash(); startQuiz(); }
+    else if (id === 'start-resume') { startQuiz(); }
+    else if (id === 'start-results') { generateResults({ saveToHistory: false }); switchScreen('results'); }
   });
 
   function startQuiz() {
@@ -1047,7 +1969,7 @@
     renderQuestion(false);
   }
 
-  /* --- QUIZ --- */
+  /* =====================  QUIZ  ===================== */
   function updateQuizHeader() {
     const q = QUESTIONS[currentIndex];
     const dim = DIMENSIONS[q.dim];
@@ -1065,7 +1987,6 @@
   function updateQuizControls() {
     const isLast = currentIndex === QUESTIONS.length - 1;
     const hasAnswer = answers[currentIndex] !== null;
-
     btnNext.textContent = isLast ? 'See my results' : 'Next';
     btnNext.disabled = !hasAnswer;
 
@@ -1075,7 +1996,6 @@
 
   function renderQuestion(animateIn = true) {
     updateQuizHeader();
-
     const q = QUESTIONS[currentIndex];
     const dim = DIMENSIONS[q.dim];
     const currentVal = answers[currentIndex];
@@ -1099,7 +2019,6 @@
     if (animateIn) {
       const qText = document.getElementById('q-text');
       if (qText) qText.focus({ preventScroll: true });
-
       const qContainer = document.querySelector('.question-container');
       if (qContainer) {
         const y = qContainer.getBoundingClientRect().top + window.scrollY - 20;
@@ -1114,13 +2033,11 @@
 
   function handleAnswer(e) {
     if (isAnimating) return;
-
     const val = parseInt(e.target.value, 10);
     answers[currentIndex] = val;
     if (navigator.vibrate) navigator.vibrate(25);
     saveState();
     updateQuizControls();
-
     isAnimating = true;
     setTimeout(() => goToNext(), 420);
   }
@@ -1136,7 +2053,7 @@
       }, 380);
     } else {
       isAnimating = false;
-      generateResults();
+      generateResults({ saveToHistory: true });
       switchScreen('results');
     }
   }
@@ -1157,13 +2074,11 @@
     if (isAnimating || answers[currentIndex] === null) return;
     goToNext();
   });
-
   btnBack.addEventListener('click', goBack);
 
   document.addEventListener('keydown', (e) => {
     if (!screens.quiz.classList.contains('active')) return;
     if (e.metaKey || e.ctrlKey || e.altKey) return;
-
     const n = parseInt(e.key, 10);
     if (n >= 1 && n <= 5) {
       const input = fader.querySelector(`input[value="${n}"]`);
@@ -1180,13 +2095,13 @@
     }
   });
 
-  /* --- SCORING --- */
-  function computeScores() {
+  /* =====================  SCORING  ===================== */
+  function computeScoresFrom(ans) {
     const rawScores = {};
     Object.keys(DIMENSIONS).forEach(key => { rawScores[key] = { total: 0, max: 0 }; });
 
     QUESTIONS.forEach((q, i) => {
-      rawScores[q.dim].total += (answers[i] || 0);
+      rawScores[q.dim].total += (ans[i] || 0);
       rawScores[q.dim].max += 5;
     });
 
@@ -1204,7 +2119,7 @@
       };
     });
 
-    const totalAnswered = answers.reduce((sum, a) => sum + (a || 0), 0);
+    const totalAnswered = ans.reduce((sum, a) => sum + (a || 0), 0);
     const overall = Math.round((totalAnswered / (QUESTIONS.length * 5)) * 100);
 
     const sorted = [...results].sort((a, b) => b.pct - a.pct);
@@ -1214,16 +2129,37 @@
     return { results, overall, strongest, growth };
   }
 
-  function getBandText(score) {
-    if (score >= 92) return { title: 'A Masterful Communicator', summary: 'Your dimensions are exceptionally high across the board. Your focus now is mentoring others and adapting to the most high-stakes environments.' };
-    if (score >= 80) return { title: 'A Well-Rounded Communicator', summary: 'Your dimensions are balanced and consistently high. The work now is contextual refinement rather than fixing weak areas.' };
-    if (score >= 60) return { title: 'A Capable Communicator', summary: 'You have solid strengths. The fastest progress will come from deliberately practicing your lowest dimension.' };
-    if (score >= 40) return { title: 'A Communicator in Development', summary: 'You have an honest baseline. Pick one dimension—the lowest—and work on it for a month before touching anything else.' };
-    return { title: 'At the Beginning', summary: 'Low scores here are information, not verdicts. Choose the single dimension that would change the most for you, and start there.' };
+  function computeScores() {
+    return computeScoresFrom(answers);
   }
 
-  /* --- RESULTS RADAR --- */
-  function drawRadar(results, overall, strongKey, growthKey) {
+  /* =====================  CROSS-DIMENSION INSIGHT  ===================== */
+  function getInsight(scores) {
+    const s = {};
+    scores.forEach(d => { s[d.key] = d.pct; });
+
+    if (s.clarity >= 70 && s.confidence < 50)
+      return 'You can explain anything, but you may be holding back from saying the sharp thing. Your clarity is being under-used.';
+    if (s.conviction >= 70 && s.connection < 50)
+      return 'You stand behind your ideas firmly — but you may be winning arguments at a relational cost.';
+    if (s.connection >= 70 && s.conviction < 50)
+      return 'You read the room beautifully, which means you may be softening positions you actually believe in.';
+    if (s.composure >= 70 && s.curiosity < 50)
+      return 'You stay calm under fire, but you may be defending positions rather than updating them.';
+    if (s.curiosity >= 70 && s.confidence < 50)
+      return 'You\u2019re genuinely open to being wrong. The work now is trusting your own conclusions out loud.';
+    if (s.clarity >= 70 && s.composure < 50)
+      return 'You communicate with precision, but the heat of a hard conversation may be where that precision slips.';
+    if (s.confidence >= 70 && s.curiosity < 50)
+      return 'You speak with conviction. The edge now is being genuinely changed by what you hear back.';
+    if (s.connection >= 70 && s.composure < 50)
+      return 'People trust you with how they feel. The work now is trusting yourself to stay steady when it matters.';
+
+    return 'Your profile is well-distributed. The next edge is depth over breadth — pick one dimension and go further in.';
+  }
+
+  /* =====================  RADAR  ===================== */
+  function drawRadar(results, overall, strongKey, growthKey, previousResults) {
     const size = 320, cx = 160, cy = 160, maxR = 95, labelR = 132;
     const rings = [0.25, 0.5, 0.75, 1.0];
     const n = results.length;
@@ -1234,8 +2170,7 @@
           <stop offset="0%" stop-color="#B5673F" stop-opacity="0.24" />
           <stop offset="100%" stop-color="#B5673F" stop-opacity="0.02" />
         </radialGradient>
-      </defs>
-    `;
+      </defs>`;
 
     const gridHtml = rings.map(level => {
       const pts = results.map((_, i) => {
@@ -1246,7 +2181,6 @@
       return `<polygon points="${pts}" class="${isOuter ? 'radar-grid radar-grid-outer' : 'radar-grid'}" />`;
     }).join('');
 
-    // Ring labels (25/50/75/100) along the vertical top axis
     const ringLabels = rings.map(level => {
       const y = cy - maxR * level;
       return `<text x="${cx + 6}" y="${y + 3}" text-anchor="start" class="radar-ring-label">${Math.round(level * 100)}</text>`;
@@ -1256,6 +2190,16 @@
       const p = getPolarCoordinates(maxR, i, n, cx, cy);
       return `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" class="radar-axis" />`;
     }).join('');
+
+    // Ghost polygon from previous attempt
+    let ghostHtml = '';
+    if (previousResults) {
+      const ghostPts = previousResults.map((d, i) => {
+        const p = getPolarCoordinates(maxR * (d.pct / 100), i, n, cx, cy);
+        return `${p.x},${p.y}`;
+      }).join(' ');
+      ghostHtml = `<polygon points="${ghostPts}" class="radar-poly-ghost" />`;
+    }
 
     const dataPts = results.map((d, i) => {
       const p = getPolarCoordinates(maxR * (d.pct / 100), i, n, cx, cy);
@@ -1271,7 +2215,6 @@
       let dotClass = 'radar-dot';
       if (d.key === strongKey && strongKey !== growthKey) dotClass += ' radar-dot-strength';
       else if (d.key === growthKey && strongKey !== growthKey) dotClass += ' radar-dot-growth';
-      dotsHtml += `<circle cx="${pDot.x}" cy="${pDot.y}" r="3.5" class="${dotClass}" />`;
 
       const pLabel = getPolarCoordinates(labelR, i, n, cx, cy);
       const dx = pLabel.x - cx, dy = pLabel.y - cy;
@@ -1282,7 +2225,11 @@
       if (d.key === strongKey && strongKey !== growthKey) labelClass += ' radar-label-strength';
       else if (d.key === growthKey && strongKey !== growthKey) labelClass += ' radar-label-growth';
 
-      labelsHtml += `<text x="${pLabel.x}" y="${pLabel.y}" text-anchor="${anchor}" dominant-baseline="${baseline}" class="${labelClass}">${d.name}</text>`;
+      dotsHtml += `<g class="radar-node" data-key="${d.key}">
+        <title>${d.name}: ${d.pct}%</title>
+        <circle cx="${pDot.x}" cy="${pDot.y}" r="3.5" class="${dotClass}" />
+        <text x="${pLabel.x}" y="${pLabel.y}" text-anchor="${anchor}" dominant-baseline="${baseline}" class="${labelClass}">${d.name}</text>
+      </g>`;
     });
 
     const centerHtml = `
@@ -1295,104 +2242,549 @@
       <g>${gridHtml}</g>
       <g>${ringLabels}</g>
       <g>${axesHtml}</g>
+      ${ghostHtml}
       <g>${polyHtml}</g>
       <g>${dotsHtml}</g>
-      <g>${labelsHtml}</g>
       ${centerHtml}
     </svg>`;
   }
 
-  /* --- RESULTS --- */
-  function generateResults() {
-    const { results, overall, strongest, growth } = computeScores();
-    const band = getBandText(overall);
-    const tied = strongest.pct === growth.pct;
+  /* =====================  COMPARISON  ===================== */
+  function renderComparison(current, previous) {
+    if (!previous) { comparisonSlot.innerHTML = ''; return; }
 
-    resultsTitle.textContent = band.title;
-    resultsSummary.textContent = tied
-      ? `${band.summary} Your dimensions are evenly balanced — pick any one and work it deliberately.`
-      : band.summary;
+    const prevScores = computeScoresFrom(previous.answers);
+    const prevMap = {};
+    prevScores.results.forEach(r => { prevMap[r.key] = r.pct; });
 
-    radarContainer.innerHTML = drawRadar(results, overall, tied ? null : strongest.key, tied ? null : growth.key);
+    // Compute deltas
+    const deltas = current.results.map(d => ({
+      key: d.key,
+      name: d.name,
+      color: d.color,
+      current: d.pct,
+      previous: prevMap[d.key] || 0,
+      delta: d.pct - (prevMap[d.key] || 0)
+    }));
 
-    dimList.innerHTML = results.map((d, i) => {
-      const isStrong = !tied && d.key === strongest.key;
-      const isGrowth = !tied && d.key === growth.key;
+    // Days ago
+    const daysAgo = Math.round((Date.now() - previous.ts) / (1000 * 60 * 60 * 24));
+    const agoText = daysAgo === 0 ? 'earlier today'
+                  : daysAgo === 1 ? 'yesterday'
+                  : daysAgo < 7 ? daysAgo + ' days ago'
+                  : daysAgo < 30 ? Math.round(daysAgo / 7) + ' weeks ago'
+                  : Math.round(daysAgo / 30) + ' months ago';
 
-      let cardClass = 'dim-card';
-      if (isStrong) cardClass += ' is-strength';
-      if (isGrowth) cardClass += ' is-growth';
+    // Sort by absolute delta descending so the biggest movers surface first
+    const sortedDeltas = [...deltas].sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta));
+    // Show only the ones that moved (or all if nothing moved)
+    const moved = sortedDeltas.filter(d => d.delta !== 0).slice(0, 6);
+    const shown = moved.length > 0 ? moved : sortedDeltas.slice(0, 3);
 
-      let badgeHtml = '';
-      let fillClass = 'dim-track-fill';
-      if (isStrong) { badgeHtml = `<span class="badge badge-strength">Strength</span>`; fillClass += ' strength'; }
-      if (isGrowth) { badgeHtml = `<span class="badge badge-growth">Growth Edge</span>`; fillClass += ' growth'; }
+    const overallDelta = current.overall - prevScores.overall;
 
-      const actionHtml = isGrowth
-        ? `<div class="dim-action"><strong>Try this next:</strong> ${d.action}</div>`
-        : '';
-
+    const rowsHtml = shown.map(d => {
+      const dir = d.delta > 0 ? 'up' : d.delta < 0 ? 'down' : 'flat';
+      const arrow = d.delta > 0 ? '▲' : d.delta < 0 ? '▼' : '—';
+      const deltaText = d.delta === 0 ? '±0' : (d.delta > 0 ? '+' : '') + d.delta;
       return `
-        <div class="${cardClass}" style="animation-delay: ${i * 70}ms; --dim-color: ${d.color}">
-          <div class="dim-card-header">
-            <span class="dim-card-title">${d.name} ${badgeHtml}</span>
-            <span class="dim-card-score">${d.pct}%</span>
-          </div>
-          <div class="dim-track"><div class="${fillClass}" data-target="${d.pct}%" data-index="${i}"></div></div>
-          <p class="dim-blurb">${d.blurb}</p>
-          ${actionHtml}
+        <div class="delta-row" style="--dim-color: ${d.color}">
+          <span class="delta-dot"></span>
+          <span class="delta-name">${d.name}</span>
+          <span class="delta-value">
+            <span class="delta-num">${d.previous} → ${d.current}</span>
+            <span class="delta-badge delta-${dir}">${arrow} ${deltaText}</span>
+          </span>
         </div>
       `;
     }).join('');
 
+    let footerText;
+    if (moved.length === 0) {
+      footerText = 'Every dimension held steady. Consistency is its own kind of progress.';
+    } else if (overallDelta > 5) {
+      footerText = 'You are, on balance, moving forward. Keep going.';
+    } else if (overallDelta < -5) {
+      footerText = 'A dip this cycle is not a verdict — it is a signal worth listening to.';
+    } else {
+      footerText = 'Small movements matter. Look at the shape, not just the numbers.';
+    }
+
+    comparisonSlot.innerHTML = `
+      <div class="comparison">
+        <div class="comparison-header">
+          <span class="comparison-eyebrow">Since your last attempt</span>
+          <span class="comparison-since">${agoText}</span>
+        </div>
+        <h3 class="comparison-title">Here is what changed.</h3>
+        <div class="comparison-grid">
+          ${rowsHtml}
+        </div>
+        <div class="comparison-footer">${footerText}</div>
+      </div>
+    `;
+  }
+
+  /* =====================  BOOKENDS  ===================== */
+  function renderBookend(container, dim, kind) {
+    const isGrowth = kind === 'growth';
+    const label = isGrowth ? 'Growth Edge' : 'Strength';
+    const numeral = dim.pct;
+
+    const actionHtml = isGrowth
+      ? `<div class="bookend-action">
+           <strong>Try this next</strong>
+           ${dim.action}
+         </div>`
+      : '';
+
+    container.innerHTML = `
+      <div class="bookend-content">
+        <span class="bookend-label">${label}</span>
+        <h3 class="bookend-name">${dim.name}</h3>
+        <span class="bookend-score">${dim.pct}% overall</span>
+        <p class="bookend-blurb">${dim.blurb}</p>
+        ${actionHtml}
+      </div>
+      <div class="bookend-numeral" aria-hidden="true">${numeral}</div>
+    `;
+  }
+
+  /* =====================  COMPACT LIST  ===================== */
+  function renderCompactList(dims) {
+    compactList.innerHTML = dims.map((d, i) => `
+      <div class="compact-row" style="animation-delay: ${i * 60}ms; --dim-color: ${d.color}">
+        <span class="compact-dot"></span>
+        <span class="compact-name">${d.name}</span>
+        <span class="compact-score">${d.pct}%</span>
+        <div class="compact-bar"><div class="compact-bar-fill" data-target="${d.pct}%" data-index="${i}"></div></div>
+      </div>
+    `).join('');
+
     requestAnimationFrame(() => {
-      document.querySelectorAll('.dim-track-fill').forEach(el => {
+      compactList.querySelectorAll('.compact-bar-fill').forEach(el => {
         const idx = parseInt(el.getAttribute('data-index'), 10) || 0;
-        el.style.transitionDelay = `${180 + idx * 80}ms`;
+        el.style.transitionDelay = `${120 + idx * 90}ms`;
         el.style.width = el.getAttribute('data-target');
       });
     });
   }
 
-  /* --- RETAKE / SHARE --- */
+  /* =====================  30-DAY FOCUS  ===================== */
+  function renderFocusCard(dim) {
+    const practices = SUPPORTING_PRACTICES[dim.key] || [];
+
+    focusCard.innerHTML = `
+      <div class="focus-header">
+        <span class="focus-eyebrow">Your 30-day focus</span>
+        <span class="focus-dim-name">on ${dim.name}</span>
+      </div>
+      <h3 class="focus-title">Work this one thing, and everything else lifts.</h3>
+
+      <div class="focus-primary">
+        <strong>Primary practice</strong>
+        <p>${dim.action}</p>
+      </div>
+
+      <div class="focus-supporting-label">Supporting practices</div>
+      <ul class="focus-supporting">
+        ${practices.map(p => `<li>${p}</li>`).join('')}
+      </ul>
+
+      <label class="commit-row">
+        <input type="checkbox" id="focus-commit-checkbox">
+        <span>I commit to this for 30 days</span>
+      </label>
+      <div class="commit-caption" id="focus-commit-caption" hidden>Saved. We\u2019ll track your progress on return visits.</div>
+    `;
+
+    const cb = focusCard.querySelector('#focus-commit-checkbox');
+    const caption = focusCard.querySelector('#focus-commit-caption');
+    const saved = loadCommit();
+
+    if (saved && saved.dim === dim.key) {
+      cb.checked = true;
+      caption.hidden = false;
+    }
+
+    cb.addEventListener('change', () => {
+      if (cb.checked) {
+        saveCommit(dim.key);
+        caption.hidden = false;
+        if (navigator.vibrate) navigator.vibrate(15);
+      } else {
+        clearCommit();
+        caption.hidden = true;
+      }
+    });
+  }
+
+  /* =====================  REVIEW ANSWERS  ===================== */
+  function renderReview(results) {
+    const groups = results.map(d => {
+      const items = QUESTIONS.map((q, i) => {
+        if (q.dim !== d.key) return null;
+        const chosen = q.options.find(o => o.val === answers[i]);
+        const label = chosen ? chosen.label : '(not answered)';
+        return `
+          <div class="review-item">
+            <div class="review-q">${q.text}</div>
+            <div class="review-a">${label}</div>
+          </div>
+        `;
+      }).filter(Boolean).join('');
+
+      return `
+        <div class="review-group" style="--dim-color: ${d.color}">
+          <div class="review-group-header">
+            <span class="review-group-name">${d.name}</span>
+            <span class="review-group-score">${d.pct}%</span>
+          </div>
+          ${items}
+        </div>
+      `;
+    }).join('');
+
+    reviewContent.innerHTML = groups;
+  }
+
+  /* =====================  GENERATE RESULTS  ===================== */
+  function generateResults(opts = {}) {
+    const { fromShare: isShared = false, saveToHistory = true } = opts;
+
+    // Guard: no answers at all
+    if (answeredCount() === 0) {
+      showToast('Take the quiz first.');
+      switchScreen('intro');
+      return;
+    }
+
+    const { results, overall, strongest, growth } = computeScores();
+    const tied = strongest.pct === growth.pct;
+
+    // Save this run to history exactly once
+    if (saveToHistory && !isShared && answers.every(a => a !== null) && savedRunTs === null) {
+      savedRunTs = saveRun(answers);
+    }
+
+    // Grab previous run for comparison
+    const previous = isShared ? null : getPreviousRun();
+    let previousResults = null;
+    if (previous) {
+      const prevScores = computeScoresFrom(previous.answers);
+      previousResults = prevScores.results;
+    }
+
+    // Archetype
+    const archetype = ARCHETYPES[strongest.key];
+    archetypeTitle.textContent = archetype.name;
+    archetypeTagline.textContent = archetype.tagline;
+    overallNum.textContent = overall;
+
+    // Insight
+    const insightText = tied
+      ? 'Your dimensions are evenly balanced — pick any one and work it deliberately for a month.'
+      : getInsight(results);
+    archetypeInsight.textContent = insightText;
+
+    // Radar — pass previous results for ghost polygon
+    radarContainer.innerHTML = drawRadar(
+      results, overall,
+      tied ? null : strongest.key,
+      tied ? null : growth.key,
+      previousResults
+    );
+
+    // Comparison block (only if there is a previous run and not viewing a shared link)
+    if (previous && !isShared) {
+      renderComparison({ results, overall, strongest, growth }, previous);
+    } else {
+      comparisonSlot.innerHTML = '';
+    }
+
+    // Bookends
+    renderBookend(bookendStrength, strongest, 'strength');
+    renderBookend(bookendGrowth, growth, 'growth');
+
+    // Compact list
+    const middle = results.filter(d => d.key !== strongest.key && d.key !== growth.key);
+    renderCompactList(middle);
+
+    // Focus card
+    renderFocusCard(growth);
+
+    // Review
+    renderReview(results);
+    reviewSection.open = false;
+
+    // Commitment banner at top of results (only if commit matches current growth dim)
+    const commit = loadCommit();
+    if (commit && commit.dim === growth.key && !isShared) {
+      renderCommitStatus(resultsCommitSlot, commit, { showLink: false });
+    } else {
+      resultsCommitSlot.innerHTML = '';
+    }
+  }
+
+  /* =====================  SHARE IMAGE  ===================== */
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function drawRadarOnCanvas(ctx, results, cx, cy, maxR) {
+    const n = results.length;
+    const polar = (r, i) => {
+      const angle = (i * (360 / n) - 90) * Math.PI / 180;
+      return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
+    };
+
+    [0.25, 0.5, 0.75, 1.0].forEach(level => {
+      ctx.beginPath();
+      results.forEach((_, i) => {
+        const p = polar(maxR * level, i);
+        if (i === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
+      });
+      ctx.closePath();
+      ctx.strokeStyle = '#E8DFD3';
+      ctx.lineWidth = level === 1 ? 2 : 1;
+      ctx.stroke();
+    });
+
+    results.forEach((_, i) => {
+      const p = polar(maxR, i);
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(p.x, p.y);
+      ctx.strokeStyle = '#E8DFD3';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+
+    ctx.beginPath();
+    results.forEach((d, i) => {
+      const p = polar(maxR * d.pct / 100, i);
+      if (i === 0) ctx.moveTo(p.x, p.y);
+      else ctx.lineTo(p.x, p.y);
+    });
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(181,103,63,0.16)';
+    ctx.fill();
+    ctx.strokeStyle = '#B5673F';
+    ctx.lineWidth = 3;
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+
+    results.forEach((d, i) => {
+      const p = polar(maxR * d.pct / 100, i);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 7, 0, Math.PI * 2);
+      ctx.fillStyle = '#B5673F';
+      ctx.fill();
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+    });
+
+    ctx.font = '600 17px Inter, system-ui, sans-serif';
+    ctx.fillStyle = '#736556';
+    results.forEach((d, i) => {
+      const p = polar(maxR + 34, i);
+      const dx = p.x - cx, dy = p.y - cy;
+      let align = 'center';
+      if (dx > 15) align = 'left';
+      else if (dx < -15) align = 'right';
+      ctx.textAlign = align;
+
+      let baseline = 'middle';
+      if (dy < -15) baseline = 'bottom';
+      else if (dy > 15) baseline = 'top';
+      ctx.textBaseline = baseline;
+
+      ctx.fillText(d.name, p.x, p.y);
+    });
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'alphabetic';
+  }
+
+  async function generateShareImage() {
+    if (document.fonts && document.fonts.ready) {
+      try { await document.fonts.ready; } catch (e) {}
+    }
+
+    const { results, overall, strongest, growth } = computeScores();
+    const archetype = ARCHETYPES[strongest.key];
+
+    const size = 1080;
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = '#FAF7F2';
+    ctx.fillRect(0, 0, size, size);
+
+    ctx.fillStyle = '#B5673F';
+    ctx.font = '700 22px Inter, system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('MY ESPERIEL INDEX', size / 2, 110);
+
+    ctx.fillStyle = '#2A241E';
+    ctx.font = '600 96px Fraunces, Georgia, serif';
+    ctx.fillText(archetype.name, size / 2, 240);
+
+    ctx.fillStyle = '#564A3E';
+    ctx.font = 'italic 500 26px Fraunces, Georgia, serif';
+    ctx.fillText(archetype.tagline, size / 2, 292);
+
+    const cx = size / 2, cy = 600, maxR = 210;
+    drawRadarOnCanvas(ctx, results, cx, cy, maxR);
+
+    ctx.fillStyle = '#1E2A28';
+    ctx.font = '600 70px Fraunces, Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(String(overall), cx, cy - 8);
+
+    ctx.font = '700 14px Inter, system-ui, sans-serif';
+    ctx.fillStyle = '#736556';
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillText('OVERALL', cx, cy + 44);
+
+    function drawChip(x, y, label, value, accent, bg) {
+      const w = 300, h = 112;
+      ctx.fillStyle = bg;
+      roundRect(ctx, x - w / 2, y - h / 2, w, h, 22);
+      ctx.fill();
+
+      ctx.fillStyle = accent;
+      ctx.font = '700 13px Inter, system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillText(label, x, y - 18);
+
+      ctx.fillStyle = '#2A241E';
+      ctx.font = '600 30px Fraunces, Georgia, serif';
+      ctx.fillText(value, x, y + 22);
+    }
+
+    const chipY = 940;
+    drawChip(230, chipY, 'STRENGTH', strongest.name, '#5E7362', '#EAF0EB');
+    drawChip(size - 230, chipY, 'GROWTH EDGE', growth.name, '#8E4D2C', '#F8EFEA');
+
+    ctx.fillStyle = '#736556';
+    ctx.font = '500 20px Inter, system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('esperiel.index', size / 2, size - 48);
+
+    return new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+  }
+
+  /* =====================  RETAKE (with confirmation)  ===================== */
   btnRetake.addEventListener('click', () => {
+    if (answeredCount() === QUESTIONS.length) {
+      const ok = window.confirm('Start over? Your current answers and this run will be cleared. Your previous attempts stay in your history.');
+      if (!ok) return;
+    }
     clearState();
+    clearHash();
     renderIntro();
     switchScreen('intro');
   });
 
+  /* =====================  TOAST  ===================== */
   function showToast(msg) {
     toast.textContent = msg;
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 3000);
   }
 
+  /* =====================  SHARE  ===================== */
   btnShare.addEventListener('click', async () => {
-    const { overall, strongest, growth } = computeScores();
-    const text = `📊 My Esperiel Index: ${overall}%\n🏆 Strength: ${strongest.name}\n🌱 Growth edge: ${growth.name}\n\nTake the assessment:`;
-    const url = window.location.href;
-
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: 'Esperiel Index', text, url });
-        return;
-      } catch (e) {
-        if (e.name === 'AbortError') return;
-      }
-    }
+    // Show spinner
+    const originalHtml = btnShare.innerHTML;
+    btnShare.disabled = true;
+    btnShare.innerHTML = '<span class="spinner" aria-hidden="true"></span> Generating…';
 
     try {
-      await navigator.clipboard.writeText(`${text} ${url}`);
-      showToast('Result copied to clipboard');
+      const blob = await generateShareImage();
+      const file = new File([blob], 'esperiel-index.png', { type: 'image/png' });
+      const shareUrl = buildShareUrl();
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            files: [file],
+            title: 'Esperiel Index',
+            text: 'My Esperiel Index profile — open this link to see the interactive version: ' + shareUrl
+          });
+          btnShare.disabled = false;
+          btnShare.innerHTML = originalHtml;
+          return;
+        } catch (e) {
+          if (e.name === 'AbortError') {
+            btnShare.disabled = false;
+            btnShare.innerHTML = originalHtml;
+            return;
+          }
+        }
+      }
+
+      // Fallback: download image, then offer to copy the link
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'esperiel-index.png';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+      // Copy link too
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        showToast('Image saved · link copied');
+      } catch (e) {
+        showToast('Image saved');
+      }
     } catch (e) {
-      showToast('Copying failed in this browser');
+      showToast('Could not generate image');
     }
+
+    btnShare.disabled = false;
+    btnShare.innerHTML = originalHtml;
   });
 
-  /* --- INIT --- */
+  /* =====================  URL HASH ROUTING  ===================== */
+  function handleHashOnLoad() {
+    const shared = parseHash();
+    if (shared) {
+      // Land directly on the results for this profile
+      fromShare = true;
+      answers = shared;
+      currentIndex = 0;
+      generateResults({ fromShare: true, saveToHistory: false });
+      switchScreen('results');
+      showToast('Viewing a shared profile');
+    }
+  }
+
+  /* =====================  INIT  ===================== */
   loadState();
   renderIntro();
-  switchScreen('intro');
+
+  // If a valid shared profile exists in the URL, jump straight to it
+  if (parseHash()) {
+    handleHashOnLoad();
+  } else {
+    switchScreen('intro');
+  }
 })();
 </script>
 </body>
