@@ -16,7 +16,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -29,6 +29,9 @@
     --text-muted:   #564A3E;
     --text-light:   #8A7C6D;
 
+    --ink:          #1E2A28;
+    --ink-soft:     #2C3A36;
+
     --border-light: #E8DFD3;
 
     --accent:       #B5673F;
@@ -37,6 +40,14 @@
 
     --support:      #5E7362;
     --support-bg:   #EAF0EB;
+
+    /* Dimension palette */
+    --dim-clarity:    #B5673F;
+    --dim-confidence: #8B4A2B;
+    --dim-connection: #7A8471;
+    --dim-composure:  #5E7362;
+    --dim-curiosity:  #C08A3E;
+    --dim-conviction: #8E5E4A;
 
     --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
     --font-serif:   'Fraunces', Georgia, serif;
@@ -63,17 +74,41 @@
     overflow-x: hidden;
   }
 
+  /* Paper grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.045;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  header, main, footer { position: relative; z-index: 1; }
+
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .container { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 20px; }
 
-  h1, h2, h3 { font-family: var(--font-serif); font-weight: 600; line-height: 1.2; }
+  /* Fraunces with variable axes */
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    line-height: 1.15;
+    font-variation-settings: 'SOFT' 30, 'WONK' 1, 'opsz' 144;
+  }
 
   button { font-family: inherit; border: none; background: none; cursor: pointer; }
   button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
 
   header { padding: 24px 0; }
-  .logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; text-decoration: none; color: var(--text-main); }
-  .logo-dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--accent); }
+  .logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; text-decoration: none; color: var(--text-main); font-variation-settings: 'SOFT' 30, 'WONK' 1; }
+  .logo-mark {
+    width: 12px; height: 12px;
+    background: var(--accent);
+    clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  }
 
   main { flex: 1; padding-bottom: 60px; }
 
@@ -86,16 +121,77 @@
   }
 
   /* ---------- INTRO ---------- */
-  .intro-header { text-align: center; margin: 40px 0; }
-  .intro-eyebrow { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 16px; display: block; }
-  .intro-title { font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; margin-bottom: 20px; color: var(--text-main); }
-  .intro-desc { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+  .intro-header { text-align: center; margin: 40px 0 20px; }
+  .intro-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 18px;
+    display: block;
+  }
+  .intro-title {
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    letter-spacing: -0.028em;
+    margin-bottom: 22px;
+    color: var(--text-main);
+  }
+  .intro-desc {
+    font-size: 1.12rem;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
 
-  .features { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 40px 0; }
-  .feature-tag { background: #FFFFFF; border: 1px solid var(--border-light); padding: 8px 16px; border-radius: 99px; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); display: inline-flex; align-items: center; gap: 8px; }
-  .feature-tag::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  /* Hero mini radar */
+  .hero-radar {
+    width: min(300px, 80vw);
+    margin: 24px auto 8px;
+    animation: contentEnter 0.8s var(--ease-smooth) 0.15s both;
+  }
+  .hero-radar-svg { width: 100%; height: auto; overflow: visible; }
 
-  .button-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 30px; width: 100%; }
+  .hero-radar-ring {
+    fill: none;
+    stroke: var(--border-light);
+    stroke-width: 1;
+    opacity: 0.7;
+  }
+  .hero-radar-axis {
+    stroke: var(--border-light);
+    stroke-width: 1;
+    opacity: 0.5;
+  }
+  .hero-radar-ghost {
+    fill: rgba(181, 103, 63, 0.06);
+    stroke: var(--accent);
+    stroke-width: 1.25;
+    stroke-dasharray: 3 4;
+    opacity: 0.7;
+    animation: ghostFade 1.2s var(--ease-smooth) 0.4s both;
+  }
+  @keyframes ghostFade {
+    from { opacity: 0; }
+    to   { opacity: 0.7; }
+  }
+  .hero-radar-label {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    fill: var(--text-light);
+  }
+
+  .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 20px;
+    width: 100%;
+  }
 
   /* ---------- BUTTONS ---------- */
   .btn {
@@ -103,7 +199,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 14px 32px;
+    padding: 15px 34px;
     border-radius: 99px;
     font-size: 1rem;
     font-weight: 600;
@@ -120,18 +216,21 @@
   @media (min-width: 480px) { .btn { width: auto; max-width: none; } }
 
   .btn-primary {
-    background-color: var(--accent);
+    background: linear-gradient(180deg, #C07347 0%, #B5673F 100%);
     color: #FFFFFF;
-    box-shadow: 0 4px 12px rgba(181, 103, 63, 0.2);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 4px 14px rgba(181, 103, 63, 0.24);
   }
   .btn-primary:hover:not(:disabled) {
-    background-color: var(--accent-hover);
+    background: linear-gradient(180deg, #A85B33 0%, #8E4D2C 100%);
     transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(181, 103, 63, 0.28);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 12px 26px rgba(181, 103, 63, 0.32);
   }
   .btn-primary:active:not(:disabled) {
     transform: translateY(0) scale(0.97);
-    box-shadow: 0 3px 8px rgba(181, 103, 63, 0.25);
     transition-duration: 0.08s;
   }
 
@@ -163,14 +262,33 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
     min-height: 24px;
+    gap: 16px;
   }
-  .progress-text {
-    font-size: 0.8rem;
+  .quiz-dim {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
+    color: var(--dim-color, var(--accent));
+    transition: color 0.4s var(--ease-smooth);
+  }
+  .quiz-dim::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 15%, transparent);
+  }
+  .progress-text {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
     color: var(--text-light);
   }
 
@@ -184,19 +302,22 @@
   }
   .progress-fill {
     height: 100%;
-    background: var(--accent);
+    background: var(--ink);
     border-radius: 99px;
     width: 0%;
-    transition: width 0.55s var(--ease-smooth);
+    transition: width 0.6s var(--ease-smooth);
   }
 
   .question-container {
-    background: var(--card-bg);
+    background: linear-gradient(180deg, #FFFFFF 0%, #FDFBF8 100%);
     border-radius: 24px;
-    padding: clamp(24px, 5vw, 40px);
-    box-shadow: 0 10px 30px rgba(42, 36, 30, 0.04), 0 1px 3px rgba(42, 36, 30, 0.02);
-    border: 1px solid rgba(0,0,0,0.04);
-    min-height: 480px;
+    padding: clamp(26px, 5vw, 42px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 24px 60px -22px rgba(42, 36, 30, 0.14),
+      0 2px 6px rgba(42, 36, 30, 0.03);
+    border: 1px solid rgba(42, 36, 30, 0.05);
+    min-height: 500px;
     display: flex;
     flex-direction: column;
   }
@@ -207,7 +328,6 @@
     transition:
       opacity   0.42s var(--ease-smooth),
       transform 0.42s var(--ease-smooth);
-    will-change: opacity, transform;
   }
   .question-fader.fade-out {
     opacity: 0;
@@ -219,21 +339,36 @@
   }
 
   .q-dim {
-    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    padding: 6px 12px 6px 10px;
+    border-radius: 99px;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-    margin-bottom: 12px;
+    letter-spacing: 0.14em;
+    color: var(--dim-color, var(--accent));
+    background: color-mix(in srgb, var(--dim-color, var(--accent)) 11%, transparent);
+    margin-bottom: 18px;
     animation: contentEnter 0.5s var(--ease-smooth) both;
+  }
+  .q-dim::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
   }
   .q-text {
     font-family: var(--font-serif);
-    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-size: clamp(1.3rem, 3.2vw, 1.7rem);
+    font-variation-settings: 'SOFT' 30, 'WONK' 1, 'opsz' 60;
     margin-bottom: 32px;
-    line-height: 1.4;
+    line-height: 1.35;
     color: var(--text-main);
     outline: none;
+    letter-spacing: -0.01em;
     animation: contentEnter 0.55s var(--ease-smooth) 0.04s both;
   }
   @keyframes contentEnter {
@@ -247,14 +382,16 @@
     display: flex;
     align-items: flex-start;
     gap: 16px;
-    padding: 16px 20px;
+    padding: 16px 20px 16px 22px;
     background: #FFFFFF;
     border: 1px solid var(--border-light);
+    border-left: 3px solid transparent;
     border-radius: 16px;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     transition:
       border-color 0.22s var(--ease-soft),
+      border-left-color 0.22s var(--ease-soft),
       background-color 0.22s var(--ease-soft),
       transform 0.28s var(--ease-spring),
       box-shadow 0.28s var(--ease-smooth);
@@ -266,6 +403,7 @@
   }
   .option-label:hover {
     border-color: var(--accent);
+    border-left-color: var(--accent);
     background: #FCFAFA;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(42, 36, 30, 0.05);
@@ -281,11 +419,11 @@
     cursor: pointer;
     transition: border-color 0.22s var(--ease-soft);
   }
-  .option-input:checked { border-color: var(--accent); }
+  .option-input:checked { border-color: var(--dim-color, var(--accent)); }
   .option-input:checked::after {
     content: '';
     position: absolute; inset: 4px;
-    background: var(--accent);
+    background: var(--dim-color, var(--accent));
     border-radius: 50%;
     animation: popIn 0.32s var(--ease-spring) both;
   }
@@ -295,11 +433,12 @@
   }
 
   .option-label:has(.option-input:checked) {
-    border-color: var(--accent);
-    background: var(--accent-bg);
+    border-color: var(--dim-color, var(--accent));
+    border-left-color: var(--dim-color, var(--accent));
+    background: color-mix(in srgb, var(--dim-color, var(--accent)) 7%, #FFFFFF);
   }
   .option-label:has(.option-input:focus-visible) {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--dim-color, var(--accent));
     outline-offset: 2px;
   }
 
@@ -311,7 +450,7 @@
     transition: color 0.22s var(--ease-soft);
   }
   .option-label:has(.option-input:checked) .option-text {
-    color: var(--accent-hover);
+    color: var(--text-main);
     font-weight: 600;
   }
 
@@ -320,13 +459,10 @@
     margin-top: auto;
     padding-top: 28px;
     display: flex;
-    flex-direction: column-reverse; /* mobile: Next on top, Back below */
+    flex-direction: column-reverse;
     gap: 12px;
   }
-  .q-actions .btn {
-    width: 100%;
-    max-width: 100%;
-  }
+  .q-actions .btn { width: 100%; max-width: 100%; }
   @media (min-width: 480px) {
     .q-actions {
       flex-direction: row;
@@ -343,13 +479,15 @@
   /* ---------- RESULTS ---------- */
   .results-header { text-align: center; margin-bottom: 40px; }
   .radar-container {
-    width: min(360px, 100%);
-    margin: 0 auto 20px;
+    width: min(380px, 100%);
+    margin: 0 auto 24px;
     background: #FFFFFF;
     border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0 10px 30px rgba(42, 36, 30, 0.04);
-    border: 1px solid rgba(0,0,0,0.04);
+    padding: 24px 24px 18px;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 20px 50px -20px rgba(42, 36, 30, 0.12);
+    border: 1px solid rgba(42, 36, 30, 0.05);
     animation: contentEnter 0.6s var(--ease-smooth) both;
   }
   .radar-svg { width: 100%; height: auto; overflow: visible; }
@@ -358,11 +496,20 @@
   .radar-grid-outer { stroke-width: 1.5; }
   .radar-axis       { stroke: var(--border-light); stroke-width: 1; }
 
+  .radar-ring-label {
+    font-family: var(--font-sans);
+    font-size: 8px;
+    font-weight: 600;
+    fill: var(--text-light);
+    opacity: 0.65;
+  }
+
   .radar-poly {
-    fill: rgba(181,103,63,0.12);
+    fill: url(#radarGrad);
     stroke: var(--accent);
     stroke-width: 2;
     stroke-linejoin: round;
+    filter: drop-shadow(0 4px 14px rgba(181, 103, 63, 0.22));
     transform-box: view-box;
     transform-origin: 150px 150px;
     animation: radarGrow 1s var(--ease-smooth) 0.1s both;
@@ -383,29 +530,69 @@
     to   { transform: scale(1);    opacity: 1; }
   }
 
-  .radar-label { font-family: var(--font-sans); font-size: 11px; font-weight: 600; fill: var(--text-light); }
+  .radar-label {
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    font-weight: 600;
+    fill: var(--text-light);
+  }
   .radar-label-strength { fill: var(--support); font-weight: 700; }
   .radar-label-growth   { fill: var(--accent-hover); font-weight: 700; }
 
-  .radar-center-num   { font-family: var(--font-serif); font-size: 32px; font-weight: 600; fill: var(--text-main); }
-  .radar-center-label { font-family: var(--font-sans); font-size: 8px; font-weight: 700; letter-spacing: 0.1em; fill: var(--text-light); }
+  .radar-center-num   { font-family: var(--font-serif); font-size: 34px; font-weight: 600; fill: var(--ink); font-variation-settings: 'SOFT' 30, 'WONK' 1; }
+  .radar-center-label { font-family: var(--font-sans); font-size: 8px; font-weight: 700; letter-spacing: 0.14em; fill: var(--text-light); }
 
-  .results-title { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: 12px; }
-  .results-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+  .results-title {
+    font-size: clamp(1.7rem, 4.2vw, 2.4rem);
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+  .results-desc {
+    font-size: 1.12rem;
+    color: var(--text-main);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
 
-  .dim-list { display: flex; flex-direction: column; gap: 24px; margin-bottom: 40px; }
+  .dim-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
   .dim-card {
     background: #FFFFFF;
-    border-radius: 16px;
+    border-radius: 18px;
     padding: 24px;
     border: 1px solid var(--border-light);
     animation: contentEnter 0.6s var(--ease-smooth) both;
+    transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth);
   }
-  .dim-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
-  .dim-card-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
-  .dim-card-score { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; color: var(--text-main); }
+  .dim-card.is-strength {
+    background: linear-gradient(180deg, #F3F7F3 0%, #FFFFFF 70%);
+    border-color: color-mix(in srgb, var(--support) 24%, var(--border-light));
+    box-shadow: 0 12px 32px -18px rgba(94, 115, 98, 0.35);
+  }
+  .dim-card.is-growth {
+    background: linear-gradient(180deg, #FCF3ED 0%, #FFFFFF 70%);
+    border-color: color-mix(in srgb, var(--accent) 26%, var(--border-light));
+    box-shadow: 0 12px 32px -18px rgba(181, 103, 63, 0.35);
+  }
 
-  .badge { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 99px; }
+  .dim-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; }
+  .dim-card-title { font-size: 1.12rem; font-weight: 600; display: flex; align-items: center; gap: 10px; font-variation-settings: 'SOFT' 30, 'WONK' 1; }
+  .dim-card-title::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--dim-color, var(--text-light));
+  }
+  .dim-card-score { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 600; color: var(--text-main); font-variation-settings: 'SOFT' 30, 'WONK' 1; }
+
+  .badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 4px 10px;
+    border-radius: 99px;
+  }
   .badge-strength { background: var(--support-bg); color: var(--support); }
   .badge-growth { background: var(--accent-bg); color: var(--accent-hover); }
 
@@ -420,8 +607,16 @@
   .dim-track-fill.strength { background: var(--support); }
   .dim-track-fill.growth { background: var(--accent); }
 
-  .dim-blurb { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 12px; }
-  .dim-action { background: var(--bg-color); padding: 16px; border-radius: 12px; border-left: 3px solid var(--accent); font-size: 0.9rem; color: var(--text-main); }
+  .dim-blurb { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.55; }
+  .dim-action {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 16px 18px;
+    border-radius: 12px;
+    border-left: 3px solid var(--accent);
+    font-size: 0.92rem;
+    color: var(--text-main);
+    line-height: 1.5;
+  }
   .dim-action strong { color: var(--accent-hover); }
 
   /* ---------- TOAST ---------- */
@@ -430,20 +625,40 @@
     bottom: -100px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--text-main);
+    background: var(--ink);
     color: #FFFFFF;
     padding: 12px 24px;
     border-radius: 99px;
     font-size: 0.9rem;
     font-weight: 500;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
     transition: bottom 0.55s var(--ease-spring);
     z-index: 1000;
     pointer-events: none;
   }
   .toast.show { bottom: 30px; }
 
-  footer { text-align: center; padding: 30px 20px; color: var(--text-light); font-size: 0.85rem; border-top: 1px solid var(--border-light); margin-top: auto; }
+  /* ---------- FOOTER ---------- */
+  footer {
+    text-align: center;
+    padding: 34px 20px 30px;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-light);
+    margin-top: auto;
+    background: linear-gradient(180deg, transparent 0%, rgba(30, 42, 40, 0.025) 100%);
+  }
+  .footer-mark {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .footer-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    display: block;
+  }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -462,7 +677,7 @@
 <header>
   <div class="container">
     <a href="./" class="logo">
-      <span class="logo-dot" aria-hidden="true"></span>
+      <span class="logo-mark" aria-hidden="true"></span>
       Esperiel Index
     </a>
   </div>
@@ -481,14 +696,7 @@
         </p>
       </div>
 
-      <div class="features">
-        <span class="feature-tag">Clarity</span>
-        <span class="feature-tag">Confidence</span>
-        <span class="feature-tag">Connection</span>
-        <span class="feature-tag">Composure</span>
-        <span class="feature-tag">Curiosity</span>
-        <span class="feature-tag">Conviction</span>
-      </div>
+      <div class="hero-radar" id="hero-radar" aria-hidden="true"><!-- injected --></div>
 
       <div class="button-group" id="intro-buttons">
         <button class="btn btn-primary" id="start-new">Begin the index</button>
@@ -497,6 +705,7 @@
 
     <section id="screen-quiz" class="screen">
       <div class="quiz-header">
+        <div class="quiz-dim" id="quiz-dim">Clarity</div>
         <div id="quiz-progress-text" class="progress-text" aria-live="polite">Question 1 of 18</div>
       </div>
 
@@ -536,6 +745,14 @@
 </main>
 
 <footer>
+  <div class="footer-mark" aria-hidden="true">
+    <span class="footer-dot" style="background: var(--dim-clarity)"></span>
+    <span class="footer-dot" style="background: var(--dim-confidence)"></span>
+    <span class="footer-dot" style="background: var(--dim-connection)"></span>
+    <span class="footer-dot" style="background: var(--dim-composure)"></span>
+    <span class="footer-dot" style="background: var(--dim-curiosity)"></span>
+    <span class="footer-dot" style="background: var(--dim-conviction)"></span>
+  </div>
   <p>Esperiel Index · A reflective tool, not a diagnostic instrument.</p>
 </footer>
 
@@ -547,12 +764,12 @@
 
   /* --- DATA --- */
   const DIMENSIONS = {
-    clarity:    { name: 'Clarity',    blurb: 'How well you translate complex thinking into language other people can follow.', action: 'State the conclusion first, then the reasoning behind it.' },
-    confidence: { name: 'Confidence', blurb: 'Your ability to hold your ground and speak without shrinking.', action: 'Make one statement without softening it with "just" or "sort of."' },
-    connection: { name: 'Connection', blurb: 'How attuned you are to the people you are communicating with.', action: 'Ask someone what they are actually working on, then listen without planning your reply.' },
-    composure:  { name: 'Composure',  blurb: 'How steady you stay when a conversation becomes difficult.', action: 'When you feel the heat rise, name it silently and wait three seconds before speaking.' },
-    curiosity:  { name: 'Curiosity',  blurb: 'How openly you seek out perspectives beyond your own.', action: 'In your next disagreement, ask: "What would have to be true for you to be right?"' },
-    conviction: { name: 'Conviction', blurb: 'How firmly you stand behind your ideas and your commitments.', action: 'Pick one small commitment this week and treat it as unbreakable.' }
+    clarity:    { name: 'Clarity',    color: '#B5673F', blurb: 'How well you translate complex thinking into language other people can follow.', action: 'State the conclusion first, then the reasoning behind it.' },
+    confidence: { name: 'Confidence', color: '#8B4A2B', blurb: 'Your ability to hold your ground and speak without shrinking.', action: 'Make one statement without softening it with "just" or "sort of."' },
+    connection: { name: 'Connection', color: '#7A8471', blurb: 'How attuned you are to the people you are communicating with.', action: 'Ask someone what they are actually working on, then listen without planning your reply.' },
+    composure:  { name: 'Composure',  color: '#5E7362', blurb: 'How steady you stay when a conversation becomes difficult.', action: 'When you feel the heat rise, name it silently and wait three seconds before speaking.' },
+    curiosity:  { name: 'Curiosity',  color: '#C08A3E', blurb: 'How openly you seek out perspectives beyond your own.', action: 'In your next disagreement, ask: "What would have to be true for you to be right?"' },
+    conviction: { name: 'Conviction', color: '#8E5E4A', blurb: 'How firmly you stand behind your ideas and your commitments.', action: 'Pick one small commitment this week and treat it as unbreakable.' }
   };
 
   const QUESTIONS = [
@@ -698,9 +915,11 @@
   };
 
   const introButtons    = document.getElementById('intro-buttons');
+  const heroRadar       = document.getElementById('hero-radar');
   const fader           = document.getElementById('question-fader');
   const btnBack         = document.getElementById('btn-back');
   const btnNext         = document.getElementById('btn-next');
+  const quizDimLabel    = document.getElementById('quiz-dim');
   const progressText    = document.getElementById('quiz-progress-text');
   const progressFill    = document.getElementById('progress-fill');
   const progressBarAttr = document.getElementById('progress-bar-attr');
@@ -739,10 +958,62 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  /* --- INTRO --- */
-  function renderIntro() {
-    const count = answeredCount();
+  /* --- INTRO + HERO RADAR --- */
+  function getPolarCoordinates(r, index, total, cx, cy) {
+    const angle = (index * (360 / total) - 90) * (Math.PI / 180);
+    return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
+  }
 
+  function drawHeroRadar() {
+    const size = 300, cx = 150, cy = 150, maxR = 88, labelR = 122;
+    const keys = Object.keys(DIMENSIONS);
+    const n = keys.length;
+
+    const rings = [0.33, 0.66, 1.0].map(level => {
+      const pts = keys.map((_, i) => {
+        const p = getPolarCoordinates(maxR * level, i, n, cx, cy);
+        return `${p.x},${p.y}`;
+      }).join(' ');
+      return `<polygon points="${pts}" class="hero-radar-ring" />`;
+    }).join('');
+
+    const axes = keys.map((_, i) => {
+      const p = getPolarCoordinates(maxR, i, n, cx, cy);
+      return `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" class="hero-radar-axis" />`;
+    }).join('');
+
+    const ghostPts = keys.map((_, i) => {
+      const p = getPolarCoordinates(maxR * 0.6, i, n, cx, cy);
+      return `${p.x},${p.y}`;
+    }).join(' ');
+    const ghost = `<polygon points="${ghostPts}" class="hero-radar-ghost" />`;
+
+    const dots = keys.map((key, i) => {
+      const p = getPolarCoordinates(maxR * 0.6, i, n, cx, cy);
+      return `<circle cx="${p.x}" cy="${p.y}" r="4" fill="${DIMENSIONS[key].color}" stroke="#FFF" stroke-width="1.5" />`;
+    }).join('');
+
+    const labels = keys.map((key, i) => {
+      const p = getPolarCoordinates(labelR, i, n, cx, cy);
+      const dx = p.x - cx, dy = p.y - cy;
+      const anchor = dx > 10 ? 'start' : dx < -10 ? 'end' : 'middle';
+      const baseline = dy < -10 ? 'auto' : dy > 10 ? 'hanging' : 'middle';
+      return `<text x="${p.x}" y="${p.y}" text-anchor="${anchor}" dominant-baseline="${baseline}" class="hero-radar-label">${DIMENSIONS[key].name}</text>`;
+    }).join('');
+
+    return `<svg class="hero-radar-svg" viewBox="0 0 ${size} ${size}">
+      <g>${rings}</g>
+      <g>${axes}</g>
+      <g>${ghost}</g>
+      <g>${dots}</g>
+      <g>${labels}</g>
+    </svg>`;
+  }
+
+  function renderIntro() {
+    heroRadar.innerHTML = drawHeroRadar();
+
+    const count = answeredCount();
     if (count === QUESTIONS.length) {
       introButtons.innerHTML = `
         <button class="btn btn-primary" id="start-results">View your results</button>
@@ -755,7 +1026,6 @@
     // else: leave the static "Begin the index" button in place
   }
 
-  /* Delegated handler — works for both static and JS-rendered buttons */
   introButtons.addEventListener('click', (e) => {
     const btn = e.target.closest('button');
     if (!btn) return;
@@ -779,8 +1049,13 @@
 
   /* --- QUIZ --- */
   function updateQuizHeader() {
+    const q = QUESTIONS[currentIndex];
+    const dim = DIMENSIONS[q.dim];
     const total = QUESTIONS.length;
     const pct = Math.round(((currentIndex + 1) / total) * 100);
+
+    quizDimLabel.textContent = dim.name;
+    quizDimLabel.style.setProperty('--dim-color', dim.color);
 
     progressText.textContent = `Question ${currentIndex + 1} of ${total}`;
     progressFill.style.width = `${pct}%`;
@@ -806,11 +1081,11 @@
     const currentVal = answers[currentIndex];
 
     fader.innerHTML = `
-      <div class="q-dim">${dim.name}</div>
+      <div class="q-dim" style="--dim-color: ${dim.color}">${dim.name}</div>
       <h3 class="q-text" id="q-text" tabindex="-1">${q.text}</h3>
-      <div class="options-list" role="radiogroup" aria-labelledby="q-text">
+      <div class="options-list" role="radiogroup" aria-labelledby="q-text" style="--dim-color: ${dim.color}">
         ${q.options.map((opt, i) => `
-          <label class="option-label" style="animation-delay: ${60 + i * 45}ms">
+          <label class="option-label" style="animation-delay: ${60 + i * 45}ms; --dim-color: ${dim.color}">
             <input type="radio" name="q${currentIndex}" value="${opt.val}" class="option-input" ${currentVal === opt.val ? 'checked' : ''}>
             <span class="option-text">${opt.label}</span>
           </label>
@@ -919,7 +1194,14 @@
       const pct = rawScores[key].max > 0
         ? Math.round((rawScores[key].total / rawScores[key].max) * 100)
         : 0;
-      return { key, name: DIMENSIONS[key].name, blurb: DIMENSIONS[key].blurb, action: DIMENSIONS[key].action, pct };
+      return {
+        key,
+        name: DIMENSIONS[key].name,
+        color: DIMENSIONS[key].color,
+        blurb: DIMENSIONS[key].blurb,
+        action: DIMENSIONS[key].action,
+        pct
+      };
     });
 
     const totalAnswered = answers.reduce((sum, a) => sum + (a || 0), 0);
@@ -940,16 +1222,20 @@
     return { title: 'At the Beginning', summary: 'Low scores here are information, not verdicts. Choose the single dimension that would change the most for you, and start there.' };
   }
 
-  /* --- RADAR CHART --- */
-  function getPolarCoordinates(r, index, total, cx, cy) {
-    const angle = (index * (360 / total) - 90) * (Math.PI / 180);
-    return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
-  }
-
+  /* --- RESULTS RADAR --- */
   function drawRadar(results, overall, strongKey, growthKey) {
-    const size = 300, cx = 150, cy = 150, maxR = 90, labelR = 125;
+    const size = 320, cx = 160, cy = 160, maxR = 95, labelR = 132;
     const rings = [0.25, 0.5, 0.75, 1.0];
     const n = results.length;
+
+    const defs = `
+      <defs>
+        <radialGradient id="radarGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#B5673F" stop-opacity="0.24" />
+          <stop offset="100%" stop-color="#B5673F" stop-opacity="0.02" />
+        </radialGradient>
+      </defs>
+    `;
 
     const gridHtml = rings.map(level => {
       const pts = results.map((_, i) => {
@@ -958,6 +1244,12 @@
       }).join(' ');
       const isOuter = level === 1.0;
       return `<polygon points="${pts}" class="${isOuter ? 'radar-grid radar-grid-outer' : 'radar-grid'}" />`;
+    }).join('');
+
+    // Ring labels (25/50/75/100) along the vertical top axis
+    const ringLabels = rings.map(level => {
+      const y = cy - maxR * level;
+      return `<text x="${cx + 6}" y="${y + 3}" text-anchor="start" class="radar-ring-label">${Math.round(level * 100)}</text>`;
     }).join('');
 
     const axesHtml = results.map((_, i) => {
@@ -995,11 +1287,13 @@
 
     const centerHtml = `
       <text x="${cx}" y="${cy + 6}" text-anchor="middle" class="radar-center-num">${overall}</text>
-      <text x="${cx}" y="${cy + 22}" text-anchor="middle" class="radar-center-label">OVERALL</text>
+      <text x="${cx}" y="${cy + 24}" text-anchor="middle" class="radar-center-label">OVERALL</text>
     `;
 
     return `<svg class="radar-svg" viewBox="0 0 ${size} ${size}" role="img" aria-label="Communication profile radar chart">
+      ${defs}
       <g>${gridHtml}</g>
+      <g>${ringLabels}</g>
       <g>${axesHtml}</g>
       <g>${polyHtml}</g>
       <g>${dotsHtml}</g>
@@ -1025,6 +1319,10 @@
       const isStrong = !tied && d.key === strongest.key;
       const isGrowth = !tied && d.key === growth.key;
 
+      let cardClass = 'dim-card';
+      if (isStrong) cardClass += ' is-strength';
+      if (isGrowth) cardClass += ' is-growth';
+
       let badgeHtml = '';
       let fillClass = 'dim-track-fill';
       if (isStrong) { badgeHtml = `<span class="badge badge-strength">Strength</span>`; fillClass += ' strength'; }
@@ -1035,7 +1333,7 @@
         : '';
 
       return `
-        <div class="dim-card" style="animation-delay: ${i * 70}ms">
+        <div class="${cardClass}" style="animation-delay: ${i * 70}ms; --dim-color: ${d.color}">
           <div class="dim-card-header">
             <span class="dim-card-title">${d.name} ${badgeHtml}</span>
             <span class="dim-card-score">${d.pct}%</span>
