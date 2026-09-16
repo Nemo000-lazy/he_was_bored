@@ -74,6 +74,7 @@
   main { flex: 1; padding-bottom: 60px; }
   .screen { display: none; opacity: 0; transition: opacity 0.4s var(--ease-out); }
   .screen.active { display: block; opacity: 1; animation: slideUp 0.5s var(--ease-out) forwards; }
+  .screen:focus { outline: none; }
   
   @keyframes slideUp {
     from { transform: translateY(15px); opacity: 0; }
@@ -103,7 +104,7 @@
   .progress-text { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); }
   .btn-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); padding: 8px 12px; border-radius: 8px; transition: background 0.2s; }
   .btn-back:hover { background: rgba(0,0,0,0.05); }
-  .btn-back[hidden] { visibility: hidden; } /* Use visibility to keep layout stable */
+  .btn-back[hidden] { display: inline-flex; visibility: hidden; }
   
   .progress-bar { width: 100%; height: 6px; background: var(--border-light); border-radius: 99px; overflow: hidden; margin-bottom: 30px; }
   .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s var(--ease-out); }
@@ -225,8 +226,6 @@
 </style>
 </head>
 <body>
-
-<a class="skip-link" href="#main-content">Skip to content</a>
 
 <header>
   <div class="container">
@@ -602,6 +601,9 @@
         screens[key].classList.remove('active');
       }
     });
+    const activeScreen = screens[screenName];
+    activeScreen.setAttribute('tabindex', '-1');
+    activeScreen.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -659,8 +661,8 @@
     
     let html = `
       <div class="q-dim">${dim.name}</div>
-      <h3 class="q-text">${q.text}</h3>
-      <div class="options-list" role="radiogroup">
+      <h3 class="q-text" id="q-text">${q.text}</h3>
+      <div class="options-list" role="radiogroup" aria-labelledby="q-text">
         ${q.options.map((opt, idx) => `
           <label class="option-label">
             <input type="radio" name="q${currentIndex}" value="${opt.val}" class="option-input" ${currentVal === opt.val ? 'checked' : ''}>
@@ -681,6 +683,13 @@
     inputs.forEach(input => {
       input.addEventListener('change', handleAnswer);
     });
+
+    // Focus the question for screen readers
+    const qText = fader.querySelector('.q-text');
+    if (qText) {
+      qText.setAttribute('tabindex', '-1');
+      qText.focus({ preventScroll: true });
+    }
   }
 
   function handleAnswer(e) {
@@ -766,19 +775,20 @@
     const n = results.length;
     
     // Draw background rings
-    const gridHtml = rings.map((level, ringIdx) => {
+    const gridHtml = rings.map((level) => {
       const pts = results.map((_, i) => {
         const p = getPolarCoordinates(maxR * level, i, n, cx, cy);
         return `${p.x},${p.y}`;
       }).join(' ');
       const isOuter = level === 1.0;
-      return `<polygon points="${pts}" fill="none" stroke="var(--border-light)" stroke-width="${isOuter ? 1.5 : 1}" />`;
+      const strokeWidth = isOuter ? 1.5 : 1;
+      return `<polygon points="${pts}" style="fill:none; stroke:var(--border-light); stroke-width:${strokeWidth};" />`;
     }).join('');
 
     // Draw axes
     const axesHtml = results.map((_, i) => {
       const p = getPolarCoordinates(maxR, i, n, cx, cy);
-      return `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" stroke="var(--border-light)" stroke-width="1" />`;
+      return `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" style="stroke:var(--border-light); stroke-width:1;" />`;
     }).join('');
 
     // Draw Data Polygon
@@ -813,8 +823,8 @@
     });
 
     const centerHtml = `
-      <text x="${cx}" y="${cy + 6}" text-anchor="middle" font-family="var(--font-serif)" font-size="32" font-weight="600" fill="var(--text-main)">${overall}</text>
-      <text x="${cx}" y="${cy + 22}" text-anchor="middle" font-family="var(--font-sans)" font-size="8" font-weight="700" letter-spacing="0.1em" text-transform="uppercase" fill="var(--text-light)">Overall</text>
+      <text x="${cx}" y="${cy + 6}" text-anchor="middle" style="font-family:var(--font-serif); font-size:32px; font-weight:600; fill:var(--text-main);">${overall}</text>
+      <text x="${cx}" y="${cy + 22}" text-anchor="middle" style="font-family:var(--font-sans); font-size:8px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; fill:var(--text-light);">Overall</text>
     `;
 
     return `<svg class="radar-svg" viewBox="0 0 ${size} ${size}">
