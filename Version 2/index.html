@@ -15,7 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23FAF7F2'/%3E%3Cpolygon points='32 10, 54 22, 54 42, 32 54, 10 42, 10 22' fill='%23B5673F'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23FAF7F2'/%3E%3Cpolygon points='90 30, 152 66, 152 114, 90 150, 28 114, 28 66' fill='%23B5673F'/%3E%3C/svg%3E">
-<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Esperiel%20Index%22%2C%22short_name%22%3A%22Esperiel%22%2C%22description%22%3A%22An%2018-question%20self-assessment%20mapping%20six%20dimensions%20of%20communication.%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23FAF7F2%22%2C%22theme_color%22%3A%22%23B5673F%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%2527http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2527%2520viewBox%253D%25270%25200%2520512%2520512%2527%253E%253Crect%2520width%253D%2527512%2527%2520height%253D%2527512%2527%2520fill%253D%2527%2523FAF7F2%2527%252F%253E%253Cpolygon%2520points%253D%2527256%252080%252C%2520432%2520176%252C%2520432%2520336%252C%2520256%2520432%252C%252080%2520336%252C%252080%2520176%2527%2520fill%253D%2527%2523B5673F%2527%252F%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%22%7D%5D%7D">
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Esperiel%20Index%22%2C%22short_name%22%3A%22Esperiel%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23FAF7F2%22%2C%22theme_color%22%3A%22%23B5673F%22%7D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
 {"@context":"https://schema.org","@type":"WebApplication","name":"Esperiel Index","description":"An 18-question self-assessment mapping six dimensions of communication.","applicationCategory":"LifestyleApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"}}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Quiz","name":"Esperiel Index","description":"Map how you show up across Clarity, Confidence, Connection, Composure, Curiosity, and Conviction.","numberOfQuestions":18,"about":{"@type":"Thing","name":"Communication"},"educationalLevel":"beginner","assesses":"Communication self-awareness across six dimensions","typicalAgeRange":"18-"}
+{"@context":"https://schema.org","@type":"Quiz","name":"Esperiel Index","numberOfQuestions":18,"about":{"@type":"Thing","name":"Communication"},"educationalLevel":"beginner","assesses":"Communication self-awareness across six dimensions"}
 </script>
 <style>
 :root{color-scheme:light;--bg-color:#FAF7F2;--card-bg:#FFFFFF;--text-main:#2A241E;--text-muted:#564A3E;--text-light:#736556;--ink:#1E2A28;--border-light:#E8DFD3;--accent:#B5673F;--accent-hover:#8E4D2C;--accent-bg:#F8EFEA;--support:#5E7362;--support-bg:#EAF0EB;--dim-clarity:#B5673F;--dim-confidence:#8B4A2B;--dim-connection:#7A8471;--dim-composure:#5E7362;--dim-curiosity:#C08A3E;--dim-conviction:#8E5E4A;--font-sans:'Inter',system-ui,-apple-system,sans-serif;--font-serif:'Fraunces',Georgia,serif;--ease-smooth:cubic-bezier(0.22,1,0.36,1);--ease-spring:cubic-bezier(0.34,1.45,0.64,1);--ease-soft:cubic-bezier(0.4,0,0.2,1)}
@@ -33,6 +33,8 @@ body{font-family:var(--font-sans);color:var(--text-main);background-color:var(--
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.045;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 header,main,footer{position:relative;z-index:1}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.skip-link{position:fixed;top:-100px;left:12px;z-index:9999;padding:12px 20px;background:var(--accent);color:#FFFFFF;font-weight:600;border-radius:0 0 12px 12px;text-decoration:none;font-size:.9rem;transition:top .25s var(--ease-spring)}
+.skip-link:focus{top:0;outline:2px solid var(--ink);outline-offset:2px}
 .container{width:100%;max-width:780px;margin:0 auto;padding:0 20px}
 h1,h2,h3{font-family:var(--font-serif);font-weight:600;line-height:1.15;font-variation-settings:'SOFT' 30,'WONK' 1,'opsz' 144}
 button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
@@ -167,6 +169,7 @@ main{flex:1;padding-bottom:60px}
 .belief-quote-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--text-light);margin-bottom:8px;display:block}
 .belief-quote-text{font-family:var(--font-serif);font-style:italic;font-size:1.02rem;line-height:1.5;color:var(--text-main);font-variation-settings:'SOFT' 60,'WONK' 1,'opsz' 30}
 .delta-row{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:26px}
+.delta-row[hidden]{display:none !important}
 .delta-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;font-size:.8rem;font-weight:600;background:#FFF;border:1px solid var(--border-light);color:var(--text-muted);font-variant-numeric:tabular-nums}
 .delta-pill .delta-up{color:var(--support);font-weight:700}
 .delta-pill .delta-down{color:var(--accent-hover);font-weight:700}
@@ -272,6 +275,9 @@ main{flex:1;padding-bottom:60px}
 .commit-row input[type="checkbox"]:checked::after{content:'';position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #FFF;border-width:0 2px 2px 0;transform:rotate(45deg);animation:popIn .25s var(--ease-spring) both}
 .commit-caption{font-size:.82rem;color:var(--text-light);font-style:italic;margin-top:8px;padding-left:30px}
 .commit-caption.is-active{color:var(--accent-hover);font-style:normal;font-weight:600}
+.btn-calendar{margin-top:16px;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:99px;font-size:.85rem;font-weight:600;background:rgba(255,255,255,.85);border:1px solid var(--border-light);color:var(--text-muted);transition:border-color .22s var(--ease-soft),color .22s var(--ease-soft),background-color .22s var(--ease-soft),transform .28s var(--ease-spring)}
+.btn-calendar:hover{border-color:var(--accent);color:var(--accent-hover);background:#FFF;transform:translateY(-1px)}
+.btn-calendar svg{flex-shrink:0}
 .notify-prompt{margin-top:14px;padding:14px 16px;background:rgba(255,255,255,.75);border:1px dashed var(--border-light);border-radius:12px;font-size:.85rem;color:var(--text-muted);line-height:1.5;display:flex;align-items:center;gap:12px;flex-wrap:wrap;animation:contentEnter .4s var(--ease-smooth) both}
 .notify-prompt-text{flex:1;min-width:200px}
 .notify-prompt-actions{display:flex;gap:8px}
@@ -362,7 +368,6 @@ footer{text-align:center;padding:34px 20px 30px;color:var(--text-light);font-siz
 .guess-result-copy{font-size:.95rem;color:var(--text-muted);line-height:1.55;margin-bottom:20px}
 .guess-callout{padding:14px 16px;background:rgba(255,255,255,.7);border-left:3px solid var(--accent);border-radius:10px;font-size:.9rem;line-height:1.5;color:var(--text-main);margin-bottom:20px;text-align:left}
 .guess-callout strong{color:var(--accent-hover);display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px}
-/* MANIFESTO */
 .manifesto{max-width:620px;margin:0 auto;padding:40px 0 20px;animation:contentEnter .6s var(--ease-smooth) both}
 .manifesto-eyebrow{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:14px;display:block;text-align:center}
 .manifesto-title{font-size:clamp(2rem,5vw,3rem);letter-spacing:-.024em;margin-bottom:24px;color:var(--text-main);text-align:center}
@@ -375,7 +380,6 @@ footer{text-align:center;padding:34px 20px 30px;color:var(--text-light);font-siz
 .manifesto ul li b{color:var(--text-main);font-family:var(--font-serif);font-weight:600;font-variation-settings:'SOFT' 30,'WONK' 1;min-width:110px}
 .manifesto-closing{font-family:var(--font-serif);font-size:clamp(1.1rem,2.4vw,1.3rem);font-style:italic;color:var(--text-main);font-variation-settings:'SOFT' 60,'WONK' 1;line-height:1.5;text-align:center;margin-top:36px;padding-top:36px;border-top:1px solid var(--border-light)}
 .manifesto-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:40px}
-/* TOGGLES */
 .motion-toggle,.contrast-toggle{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;color:var(--text-light);padding:7px 12px;border-radius:99px;background:transparent;transition:background-color .2s var(--ease-soft),color .2s var(--ease-soft)}
 .motion-toggle:hover,.contrast-toggle:hover{background:rgba(42,36,30,.05);color:var(--text-main)}
 .motion-toggle svg,.contrast-toggle svg{width:13px;height:13px;flex-shrink:0}
@@ -405,7 +409,35 @@ footer{text-align:center;padding:34px 20px 30px;color:var(--text-light);font-siz
 .reading-sparkbar{width:5px;border-radius:3px;opacity:.85;transition:opacity .2s var(--ease-soft)}
 .reading-card:hover .reading-sparkbar{opacity:1}
 .readings-empty{text-align:center;padding:60px 24px;color:var(--text-light);font-size:.95rem;font-style:italic}
+.reflection-entry{background:#FFF;border:1px solid var(--border-light);border-radius:16px;padding:22px 24px;animation:contentEnter .5s var(--ease-smooth) both}
+.reflection-entry-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border-light)}
+.reflection-entry-date{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--accent)}
+.reflection-entry-meta{font-size:.78rem;color:var(--text-light);font-style:italic}
+.reflection-entry-field{margin-bottom:14px}
+.reflection-entry-field:last-child{margin-bottom:0}
+.reflection-entry-label{display:block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--text-light);margin-bottom:4px}
+.reflection-entry-field p{font-family:var(--font-serif);font-size:1rem;line-height:1.5;color:var(--text-main);font-variation-settings:'SOFT' 30,'WONK' 1}
 .sr-only-result{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* ONBOARDING — [hidden] override is critical so the fixed-position overlay
+   does not sit on top of every button and eat clicks when it is not playing. */
+.onboarding-overlay{position:fixed;inset:0;z-index:200;background:var(--bg-color);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .5s var(--ease-smooth)}
+.onboarding-overlay[hidden]{display:none !important}
+.onboarding-overlay.is-visible{opacity:1;pointer-events:auto}
+.onboarding-overlay.is-exiting{opacity:0;pointer-events:none}
+.onboarding-stage{display:flex;flex-direction:column;align-items:center;gap:32px}
+.onboarding-hex{width:200px;height:200px;overflow:visible}
+.onboarding-hex-path{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:600;stroke-dashoffset:600;animation:hexDraw 1.2s var(--ease-smooth) .8s forwards}
+@keyframes hexDraw{to{stroke-dashoffset:0}}
+.onboarding-dot{fill:var(--accent);opacity:0;transform-box:fill-box;transform-origin:center;animation:dotPop .4s var(--ease-spring) forwards}
+.onboarding-dot[data-i="0"]{animation-delay:.05s}
+.onboarding-dot[data-i="1"]{animation-delay:.25s}
+.onboarding-dot[data-i="2"]{animation-delay:.45s}
+.onboarding-dot[data-i="3"]{animation-delay:.65s}
+.onboarding-dot[data-i="4"]{animation-delay:.85s}
+.onboarding-dot[data-i="5"]{animation-delay:1.05s}
+@keyframes dotPop{0%{opacity:0;transform:scale(0)}60%{opacity:1;transform:scale(1.35)}100%{opacity:1;transform:scale(1)}}
+.onboarding-title{font-family:var(--font-serif);font-size:1.5rem;font-weight:600;color:var(--text-main);font-variation-settings:'SOFT' 30,'WONK' 1;text-align:center;max-width:480px;line-height:1.4;opacity:0;animation:contentEnter .6s var(--ease-smooth) 2.2s forwards}
+html.reduce-motion .onboarding-overlay,html.reduce-motion .onboarding-hex-path,html.reduce-motion .onboarding-dot,html.reduce-motion .onboarding-title{animation-duration:.01ms !important;animation-delay:0ms !important;transition-duration:.01ms !important}
 /* HIGH CONTRAST */
 html.high-contrast{--bg-color:#FFFFFF;--text-main:#000000;--text-muted:#1F1814;--text-light:#3A2E24;--border-light:#8F7F68;--accent:#6E3920;--accent-hover:#4A2410;--accent-bg:#F5E4D6;--support:#2E4A2E;--support-bg:#D9E5D9;--ink:#000000}
 html.high-contrast body::before{display:none}
@@ -420,18 +452,62 @@ html.high-contrast .bookend-strength,html.high-contrast .bookend-growth,html.hig
 html.high-contrast .btn-primary{background:var(--accent)}
 html.high-contrast .btn-primary:hover:not(:disabled){background:var(--accent-hover)}
 html.high-contrast .progress-fill{background:var(--ink)}
-html.high-contrast .badge-strength,html.high-contrast .badge-growth{border:1px solid currentColor}
-@media (prefers-contrast: more){
-  :root{--bg-color:#FFFFFF;--text-main:#000000;--text-muted:#1F1814;--text-light:#3A2E24;--border-light:#8F7F68;--accent:#6E3920}
+@media (prefers-contrast: more){:root{--bg-color:#FFFFFF;--text-main:#000000;--text-muted:#1F1814;--text-light:#3A2E24;--border-light:#8F7F68;--accent:#6E3920}body::before{display:none}.option-label{border-width:2px}}
+/* PRINT */
+.print-cover{display:none}
+@media print{
+  @page{margin:18mm 16mm}
+  @page :first{margin-top:30mm}
+  header,footer,.button-group,.toast,.trust-line,.empty-state,.results-divider,.reflection-journal,.radar-help,.commit-row,.compact-row .chev,.keyboard-hint,.intro-readings,.visit-meta,.motion-toggle,.contrast-toggle,.snapshot-banner,.priorities,.results-view-toggle,.results-ctas,.compare-actions,.notify-prompt,.manifesto-actions,.onboarding-overlay,.hero-radar,.btn-calendar{display:none !important}
+  body{background:#FFF}
   body::before{display:none}
-  .option-label{border-width:2px}
+  .screen:not(.active){display:none !important}
+  .screen.active{animation:none !important;opacity:1 !important}
+  .container{max-width:100%;padding:0}
+  .radar-container,.bookend,.focus-card,.compact-item,.reading-card,.consistency-note,.receipt-group,.reflection-entry{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none !important;break-inside:avoid;page-break-inside:avoid}
+  .radar-poly,.radar-dot,.radar-grid{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .review-section{border:1px solid #CCC}
+  .review-section > summary{display:none !important}
+  .review-content{display:block !important;padding:12px 0 !important}
+  .print-header{display:block !important;font-size:1.1rem;margin:0 0 20px;color:#2A241E;font-family:Georgia,serif;border-bottom:1px solid #E8DFD3;padding-bottom:8px}
+  .compact-detail{display:block !important}
+  .bookends{grid-template-columns:1fr 1fr;gap:16px}
+  .results-hero{break-after:avoid;page-break-after:avoid}
+  .radar-container{break-inside:avoid;page-break-inside:avoid}
+  .bookends{break-inside:avoid;page-break-inside:avoid;break-before:page;page-break-before:always}
+  .focus-card{break-before:page;page-break-before:always}
+  .review-section{break-before:page;page-break-before:always}
+  .reflection{break-before:page;page-break-before:always}
+  .print-cover{display:block !important;text-align:center;padding:40mm 20mm 20mm;break-after:page;page-break-after:always}
+  .print-cover-eyebrow{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:#B5673F;margin-bottom:16px;display:block}
+  .print-cover-title{font-family:Fraunces,Georgia,serif;font-size:3rem;font-weight:600;line-height:1.05;letter-spacing:-.024em;color:#2A241E;margin-bottom:12px}
+  .print-cover-tagline{font-family:Fraunces,Georgia,serif;font-style:italic;font-size:1.2rem;color:#564A3E;margin-bottom:30px}
+  .print-cover-overall{font-family:Inter,system-ui,sans-serif;font-size:4rem;font-weight:800;color:#1E2A28;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1;margin-bottom:4px}
+  .print-cover-overall-label{font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#736556;margin-bottom:40px}
+  .print-cover-meta{font-size:.9rem;color:#564A3E;line-height:1.6;margin-top:20px}
+  .print-cover-meta strong{color:#2A241E}
 }
-@media print{@page{margin:24mm}header,footer,.button-group,.toast,.trust-line,.empty-state,.results-divider,.reflection,.radar-help,.commit-row,.compact-row .chev,.keyboard-hint,.intro-readings,.visit-meta,.motion-toggle,.contrast-toggle,.snapshot-banner,.priorities,.results-view-toggle,.results-ctas,.compare-actions,.notify-prompt,.manifesto-actions{display:none !important}body::before{display:none}.screen:not(.active){display:none !important}.radar-container,.bookend,.focus-card,.compact-item,.reading-card,.consistency-note,.receipt-group{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none !important}.radar-poly,.radar-dot,.radar-grid{-webkit-print-color-adjust:exact;print-color-adjust:exact}.review-section>summary{display:none !important}.review-content{display:block !important}.print-header{display:block !important;font-size:1rem;margin-bottom:16px;color:#564A3E;font-family:Georgia,serif}.compact-detail{display:block !important}.bookends{grid-template-columns:1fr 1fr}.manifesto{margin-top:0;padding-top:0}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;transition-delay:0ms !important;scroll-behavior:auto !important}.hero-radar-ghost{animation:none !important;opacity:.7 !important}.screen.active{animation:none !important;opacity:1 !important}.option-label{animation:none !important;opacity:1 !important;transform:none !important}.dim-card,.bookend,.focus-card,.compact-row,.results-hero,.q-dim,.q-text,.reading-card,.consistency-note,.priorities,.belief-quote,.receipt-group,.compare-insight,.guess-result,.manifesto{animation:none !important;opacity:1 !important;transform:none !important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;transition-delay:0ms !important;scroll-behavior:auto !important}.hero-radar-ghost{animation:none !important;opacity:.7 !important}.screen.active{animation:none !important;opacity:1 !important}.option-label{animation:none !important;opacity:1 !important;transform:none !important}.dim-card,.bookend,.focus-card,.compact-row,.results-hero,.q-dim,.q-text,.reading-card,.consistency-note,.priorities,.belief-quote,.receipt-group,.compare-insight,.guess-result,.manifesto,.reflection-entry{animation:none !important;opacity:1 !important;transform:none !important}}
 html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{animation-duration:.01ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;transition-delay:0ms !important;scroll-behavior:auto !important}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<div id="onboarding-overlay" class="onboarding-overlay" hidden>
+  <div class="onboarding-stage">
+    <svg class="onboarding-hex" viewBox="0 0 200 200" aria-hidden="true">
+      <polygon class="onboarding-hex-path" points="100 20, 173 60, 173 140, 100 180, 27 140, 27 60" />
+      <circle class="onboarding-dot" data-i="0" cx="100" cy="20" r="6" />
+      <circle class="onboarding-dot" data-i="1" cx="173" cy="60" r="6" />
+      <circle class="onboarding-dot" data-i="2" cx="173" cy="140" r="6" />
+      <circle class="onboarding-dot" data-i="3" cx="100" cy="180" r="6" />
+      <circle class="onboarding-dot" data-i="4" cx="27" cy="140" r="6" />
+      <circle class="onboarding-dot" data-i="5" cx="27" cy="60" r="6" />
+    </svg>
+    <p class="onboarding-title" id="onboarding-title"></p>
+  </div>
+</div>
 
 <header id="site-header">
   <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
@@ -440,11 +516,11 @@ html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{an
       Esperiel Index
     </a>
     <div class="header-actions">
-      <button class="contrast-toggle" id="contrast-toggle" data-on="false" aria-pressed="false" type="button">
+      <button class="contrast-toggle" id="contrast-toggle" data-on="false" aria-pressed="false" aria-label="High contrast mode" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M12 2a10 10 0 0 0 0 20" fill="currentColor" fill-opacity="0.35"/></svg>
         <span class="contrast-label">High contrast</span>
       </button>
-      <button class="motion-toggle" id="motion-toggle" data-on="false" aria-pressed="false" type="button">
+      <button class="motion-toggle" id="motion-toggle" data-on="false" aria-pressed="false" aria-label="Reduce motion" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 8v4l2 2"/></svg>
         <span class="motion-label">Reduce motion</span>
       </button>
@@ -544,6 +620,14 @@ html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{an
     </section>
 
     <section id="screen-results" class="screen">
+      <div class="print-cover" aria-hidden="true">
+        <span class="print-cover-eyebrow">Esperiel Index</span>
+        <h1 class="print-cover-title" id="print-cover-title">The Translator</h1>
+        <p class="print-cover-tagline" id="print-cover-tagline"></p>
+        <div class="print-cover-overall" id="print-cover-overall">0</div>
+        <div class="print-cover-overall-label">Overall</div>
+        <div class="print-cover-meta" id="print-cover-meta"></div>
+      </div>
       <div class="results-view-toggle" id="results-view-toggle" role="group" aria-label="View mode">
         <button type="button" data-view="full" aria-pressed="true">Full</button>
         <button type="button" data-view="minimal" aria-pressed="false">Minimal</button>
@@ -636,6 +720,10 @@ html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{an
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
           <span class="btn-label">Share my result</span>
         </button>
+        <button class="btn btn-secondary" id="btn-print" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Save as PDF
+        </button>
         <button class="btn btn-secondary" id="btn-retake" type="button">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
           Retake
@@ -650,8 +738,26 @@ html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{an
         <p class="readings-desc">Every time you complete the assessment, we save a snapshot. Over time, these show your trajectory.</p>
       </div>
       <div class="readings-list" id="readings-list"></div>
-      <div class="button-group" style="margin-top:40px;">
+      <div style="text-align:center;margin-top:24px;">
+        <a href="#reflections" class="readings-link" id="open-reflections">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span id="reflections-link-label">View past reflections</span>
+        </a>
+      </div>
+      <div class="button-group" style="margin-top:24px;">
         <button class="btn btn-secondary" id="btn-readings-back" type="button">Back</button>
+      </div>
+    </section>
+
+    <section id="screen-reflections" class="screen">
+      <div class="readings-header">
+        <span class="archetype-eyebrow">Your journal</span>
+        <h2 class="readings-title">Past reflections</h2>
+        <p class="readings-desc">What you wrote the last time you sat with these questions.</p>
+      </div>
+      <div class="readings-list" id="reflections-list"></div>
+      <div class="button-group" style="margin-top:40px;">
+        <button class="btn btn-secondary" id="btn-reflections-back" type="button">Back</button>
       </div>
     </section>
 
@@ -723,6 +829,7 @@ html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{an
   <div class="footer-links">
     <a href="#manifesto" id="footer-manifesto">Manifesto</a>
     <a href="#readings" id="footer-readings">Past readings</a>
+    <a href="#reflections" id="footer-reflections">Reflections</a>
   </div>
 </footer>
 
@@ -773,134 +880,278 @@ var REFLECTION_PROMPTS={
   curiosity:'When did you last change your mind about something that mattered? What shifted you?',
   conviction:'When did you last stand behind something when it would have been easier to fold?'
 };
-var QUESTIONS=[
-  {dim:'clarity',weight:1.3,text:'You\u2019ve got 60 seconds to explain a complex idea to someone who doesn\u2019t know the field. What happens?',options:[
-    {val:1,label:'I jump in and figure it out as I go \u2014 and lose them halfway.'},
-    {val:2,label:'I get partway there and have to restart or re-explain.'},
-    {val:3,label:'It depends on the topic; some ideas I nail, others I fumble.'},
-    {val:4,label:'I land the main point clearly on the first try.'},
-    {val:5,label:'I lead with the one-line version, then layer in detail they can absorb.'}
-  ]},
-  {dim:'clarity',weight:1.0,text:'You\u2019re about to speak in a meeting you care about. What happens in the 10 seconds before you open your mouth?',options:[
-    {val:1,label:'Nothing much \u2014 I speak to figure out what I think.'},
-    {val:2,label:'I have a vague sense of the point but not the shape of it.'},
-    {val:3,label:'I know my main point; the details find themselves as I talk.'},
-    {val:4,label:'I have the point and the two or three supports ready.'},
-    {val:5,label:'I know exactly how I\u2019ll open, land, and close \u2014 in that order.'}
-  ]},
-  {dim:'clarity',weight:1.0,text:'A 90-minute meeting just ended. Your colleague turns to you and asks, \u201CSo what happened?\u201D',options:[
-    {val:1,label:'I would have to walk them through most of it to be accurate.'},
-    {val:2,label:'I would give a decent summary but include details they do not need.'},
-    {val:3,label:'I could give them the main themes in a few sentences.'},
-    {val:4,label:'I would give them the takeaway and the one or two decisions that matter.'},
-    {val:5,label:'I would give them one sentence, then ask what they want to dig into.'}
-  ]},
-  {dim:'confidence',weight:1.3,text:'The room is senior. The agenda is open. You have a thought that could matter.',options:[
-    {val:1,label:'I stay silent. The cost of being wrong here is too high.'},
-    {val:2,label:'I\u2019ll speak \u2014 but only if someone asks me directly.'},
-    {val:3,label:'I\u2019ll share it, though I\u2019ll probably rush or over-qualify it.'},
-    {val:4,label:'I\u2019ll offer it when the moment fits, without shrinking.'},
-    {val:5,label:'I\u2019ll speak with the same ease I would with my peers.'}
-  ]},
-  {dim:'confidence',weight:1.1,text:'You\u2019re stating something you believe. Which sounds most like you?',options:[
-    {val:1,label:'I hedge it heavily before getting to the point.'},
-    {val:2,label:'I soften it with kind-of words even when I am sure.'},
-    {val:3,label:'I state it plainly but attach a small qualifier.'},
-    {val:4,label:'I say it directly.'},
-    {val:5,label:'I say it directly without looking for permission first.'}
-  ]},
-  {dim:'confidence',weight:0.9,text:'Someone asks you a question in a meeting and you do not know the answer.',options:[
-    {val:1,label:'I improvise something \u2014 anything \u2014 to avoid the silence.'},
-    {val:2,label:'I give a long, vague answer and hope the topic moves on.'},
-    {val:3,label:'I say I do not know, and it bothers me for the rest of the day.'},
-    {val:4,label:'I say I do not know and offer to find out.'},
-    {val:5,label:'I say I do not know \u2014 comfortably \u2014 and move on.'}
-  ]},
-  {dim:'connection',weight:1.2,text:'Mid-conversation, you notice the other person has drifted. They are still nodding, but they have left.',options:[
-    {val:1,label:'I usually do not notice until after the conversation ends.'},
-    {val:2,label:'I notice they have gone quiet but I keep talking to fill the gap.'},
-    {val:3,label:'I notice but I am not sure how to bring them back.'},
-    {val:4,label:'I pause and ask them a question.'},
-    {val:5,label:'I pivot \u2014 I sense what shifted and I adjust what I am doing.'}
-  ]},
-  {dim:'connection',weight:1.1,text:'A friend starts telling you about a hard week. How do they usually talk to you?',options:[
-    {val:1,label:'They keep it brief and surface-level.'},
-    {val:2,label:'They tell me the facts but keep the feelings tucked away.'},
-    {val:3,label:'They open up on the practical stuff but not the personal.'},
-    {val:4,label:'They share what is really going on \u2014 including the messy parts.'},
-    {val:5,label:'They tell me things they have not said out loud to anyone else.'}
-  ]},
-  {dim:'connection',weight:1.0,text:'Someone you work with mentioned three weeks ago that their child was starting a new school. Today you...',options:[
-    {val:1,label:'Have no memory of it.'},
-    {val:2,label:'Remember vaguely that something was going on.'},
-    {val:3,label:'Remember the fact but would not bring it up.'},
-    {val:4,label:'Ask them how it went.'},
-    {val:5,label:'Ask \u2014 and remember what they said last time.'}
-  ]},
-  {dim:'composure',weight:1.3,text:'Someone gives you harsh feedback you did not see coming. What happens in the next 10 seconds?',options:[
-    {val:1,label:'I shut down or panic visibly.'},
-    {val:2,label:'I get defensive and snap back before I have thought.'},
-    {val:3,label:'I get flustered and stumble through a rushed reply.'},
-    {val:4,label:'I feel the spike but I pause before I respond.'},
-    {val:5,label:'I take a breath, take it in, and respond steadily.'}
-  ]},
-  {dim:'composure',weight:1.1,text:'A meeting has just turned tense. People are talking over each other. The energy is rising.',options:[
-    {val:1,label:'I want out. I shut down or I snap.'},
-    {val:2,label:'My voice tightens or my volume rises \u2014 the room is driving me.'},
-    {val:3,label:'I get very quiet and try to avoid the conflict.'},
-    {val:4,label:'I keep my voice level even though my heart is racing.'},
-    {val:5,label:'I become the anchor in the room \u2014 I slow it down and keep it useful.'}
-  ]},
-  {dim:'composure',weight:0.9,text:'A colleague publicly disagrees with your strategy \u2014 sharply. What is happening inside you?',options:[
-    {val:1,label:'It feels like an attack and I hold onto it for days.'},
-    {val:2,label:'I fight back hard \u2014 I need to be right.'},
-    {val:3,label:'I take it personally but hide it and stay professional.'},
-    {val:4,label:'I can separate my ego from the idea and debate it on the merits.'},
-    {val:5,label:'I find it interesting \u2014 a puzzle to work through together.'}
-  ]},
-  {dim:'curiosity',weight:1.2,text:'Someone is laying out a view you disagree with. Where are you?',options:[
-    {val:1,label:'I am interrupting them with why they are wrong.'},
-    {val:2,label:'I am quietly rehearsing my counter while they talk.'},
-    {val:3,label:'I am half-listening, waiting for my turn.'},
-    {val:4,label:'I am listening to understand their reasoning.'},
-    {val:5,label:'I am asking questions until I can argue their side as well as they can.'}
-  ]},
-  {dim:'curiosity',weight:1.0,text:'When did you last seek out a view that challenged your own?',options:[
-    {val:1,label:'Honestly, I cannot remember.'},
-    {val:2,label:'Not often. I mostly stick to sources I already trust.'},
-    {val:3,label:'Sometimes, though I usually read it to find the flaws.'},
-    {val:4,label:'Recently, and it gave me something to think about.'},
-    {val:5,label:'Within the last week. It is a habit.'}
-  ]},
-  {dim:'curiosity',weight:1.1,text:'You find clear evidence that contradicts something you have believed for years.',options:[
-    {val:1,label:'I dismiss it. My belief matters more than one study.'},
-    {val:2,label:'I dig for reasons to discount it.'},
-    {val:3,label:'It nags at me and I gradually reconsider.'},
-    {val:4,label:'I update my view \u2014 and notice the update.'},
-    {val:5,label:'I say openly that I was wrong, and why the new evidence changed me.'}
-  ]},
-  {dim:'conviction',weight:1.2,text:'You believe something the room is clearly against. Everyone is looking at you.',options:[
-    {val:1,label:'I drop it immediately. Not worth the cost.'},
-    {val:2,label:'I pretend I was not serious about it.'},
-    {val:3,label:'I soften it heavily to keep the room.'},
-    {val:4,label:'I defend it politely but fold under real pressure.'},
-    {val:5,label:'I hold it \u2014 calmly \u2014 regardless of who is pushing back.'}
-  ]},
-  {dim:'conviction',weight:1.0,text:'You promised to do something months ago. Now it is inconvenient, no one is checking, and you could quietly not do it.',options:[
-    {val:1,label:'I drop it. Circumstances change.'},
-    {val:2,label:'I look for a polite reason to get out.'},
-    {val:3,label:'I might not do it, but I feel bad about it.'},
-    {val:4,label:'I push through and get it done, even if I grumble.'},
-    {val:5,label:'It gets done. Zero exceptions.'}
-  ]},
-  {dim:'conviction',weight:1.1,text:'A project asks you to do something you consider wrong \u2014 not illegal, but against your values.',options:[
-    {val:1,label:'I do it. My values are not the company\u2019s concern.'},
-    {val:2,label:'I do it. Leadership knows better than I do.'},
-    {val:3,label:'I do it, but I complain about it in private.'},
-    {val:4,label:'I push back and propose alternatives.'},
-    {val:5,label:'I will not do it. My actions will match my stated values.'}
-  ]}
-];
+
+/* ================== QUESTION POOL ================== */
+var QUESTION_POOL = {
+  clarity: [
+    { dim:'clarity', text:'You\u2019ve got 60 seconds to explain a complex idea to someone who doesn\u2019t know the field. What happens?', options:[
+      { val:1, label:'I jump in and figure it out as I go \u2014 and lose them halfway.' },
+      { val:2, label:'I get partway there and have to restart or re-explain.' },
+      { val:3, label:'It depends on the topic; some ideas I nail, others I fumble.' },
+      { val:4, label:'I land the main point clearly on the first try.' },
+      { val:5, label:'I lead with the one-line version, then layer in detail they can absorb.' }
+    ]},
+    { dim:'clarity', text:'A 90-minute meeting just ended. Your colleague turns to you and asks, \u201CSo what happened?\u201D', options:[
+      { val:1, label:'I would have to walk them through most of it to be accurate.' },
+      { val:2, label:'I would give a decent summary but include details they do not need.' },
+      { val:3, label:'I could give them the main themes in a few sentences.' },
+      { val:4, label:'I would give them the takeaway and the one or two decisions that matter.' },
+      { val:5, label:'I would give them one sentence, then ask what they want to dig into.' }
+    ]},
+    { dim:'clarity', text:'You finish explaining something. Someone says, \u201CWait \u2014 what?\u201D What do you do?', options:[
+      { val:1, label:'I start the whole explanation over from the beginning.' },
+      { val:2, label:'I repeat the same words, only louder or slower.' },
+      { val:3, label:'I rephrase the last part and hope it lands.' },
+      { val:4, label:'I ask which part was unclear and go from there.' },
+      { val:5, label:'I try a different angle \u2014 a story, an analogy, a picture.' }
+    ]},
+    { dim:'clarity', text:'You\u2019re writing a long email explaining a decision. What does it usually look like when you\u2019re done?', options:[
+      { val:1, label:'A long preamble before the actual point appears.' },
+      { val:2, label:'The reader will probably need to read it twice.' },
+      { val:3, label:'Reasonably clear, though a bit dense in places.' },
+      { val:4, label:'The decision up front, then the reasoning.' },
+      { val:5, label:'Short, structured, and impossible to misread.' }
+    ]},
+    { dim:'clarity', text:'You\u2019re teaching someone a process they\u2019ve never seen before. Where do you start?', options:[
+      { val:1, label:'I dive in and explain as I go.' },
+      { val:2, label:'I walk through every step in order, all at once.' },
+      { val:3, label:'I give them an overview, then walk through the steps.' },
+      { val:4, label:'I show a visual first, then talk through it.' },
+      { val:5, label:'I strip it down to the smallest useful version first, then add layers.' }
+    ]},
+    { dim:'clarity', text:'Someone asks you a question that has a simple answer and a complicated one. What happens?', options:[
+      { val:1, label:'I get tangled up trying to decide which one to give.' },
+      { val:2, label:'I start with the simple one, then keep going and complicate it.' },
+      { val:3, label:'I give the simple one but feel like I left something out.' },
+      { val:4, label:'I give the simple answer and stop there.' },
+      { val:5, label:'I give the simple answer first, then ask if they want the nuance.' }
+    ]}
+  ],
+  confidence: [
+    { dim:'confidence', text:'The room is senior. The agenda is open. You have a thought that could matter.', options:[
+      { val:1, label:'I stay silent. The cost of being wrong here is too high.' },
+      { val:2, label:'I\u2019ll speak \u2014 but only if someone asks me directly.' },
+      { val:3, label:'I\u2019ll share it, though I\u2019ll probably rush or over-qualify it.' },
+      { val:4, label:'I\u2019ll offer it when the moment fits, without shrinking.' },
+      { val:5, label:'I\u2019ll speak with the same ease I would with my peers.' }
+    ]},
+    { dim:'confidence', text:'Someone asks you a question in a meeting and you do not know the answer.', options:[
+      { val:1, label:'I improvise something \u2014 anything \u2014 to avoid the silence.' },
+      { val:2, label:'I give a long, vague answer and hope the topic moves on.' },
+      { val:3, label:'I say I do not know, and it bothers me for the rest of the day.' },
+      { val:4, label:'I say I do not know and offer to find out.' },
+      { val:5, label:'I say I do not know \u2014 comfortably \u2014 and move on.' }
+    ]},
+    { dim:'confidence', text:'A peer interrupts you mid-sentence in a meeting.', options:[
+      { val:1, label:'I stop talking and let them take over.' },
+      { val:2, label:'I feel irritated but do not say anything.' },
+      { val:3, label:'I keep going at the same pace, hoping they stop.' },
+      { val:4, label:'I wait for them to finish, then pick up where I left off.' },
+      { val:5, label:'I calmly say \u201Clet me finish\u201D and continue.' }
+    ]},
+    { dim:'confidence', text:'You\u2019re about to present to a group you\u2019ve never met.', options:[
+      { val:1, label:'I feel physically sick beforehand.' },
+      { val:2, label:'I rehearse it word-for-word so I can\u2019t mess up.' },
+      { val:3, label:'The nerves are real, but I get through it.' },
+      { val:4, label:'I\u2019m comfortable from the start.' },
+      { val:5, label:'I\u2019m energized by the room, not drained by it.' }
+    ]},
+    { dim:'confidence', text:'Someone with more authority makes a claim you believe is wrong.', options:[
+      { val:1, label:'I say nothing. Not my place.' },
+      { val:2, label:'I ask a soft question and hope they get it.' },
+      { val:3, label:'I raise it privately afterward.' },
+      { val:4, label:'I disagree in the moment, politely.' },
+      { val:5, label:'I disagree directly, with my reasoning.' }
+    ]},
+    { dim:'confidence', text:'You\u2019re stating something you believe. Which sounds most like you?', options:[
+      { val:1, label:'I hedge it heavily before getting to the point.' },
+      { val:2, label:'I soften it with kind-of words even when I am sure.' },
+      { val:3, label:'I state it plainly but attach a small qualifier.' },
+      { val:4, label:'I say it directly.' },
+      { val:5, label:'I say it directly without looking for permission first.' }
+    ]}
+  ],
+  connection: [
+    { dim:'connection', text:'Mid-conversation, you notice the other person has drifted. They are still nodding, but they have left.', options:[
+      { val:1, label:'I usually do not notice until after the conversation ends.' },
+      { val:2, label:'I notice they have gone quiet but I keep talking to fill the gap.' },
+      { val:3, label:'I notice but I am not sure how to bring them back.' },
+      { val:4, label:'I pause and ask them a question.' },
+      { val:5, label:'I pivot \u2014 I sense what shifted and I adjust what I am doing.' }
+    ]},
+    { dim:'connection', text:'A friend starts telling you about a hard week. How do they usually talk to you?', options:[
+      { val:1, label:'They keep it brief and surface-level.' },
+      { val:2, label:'They tell me the facts but keep the feelings tucked away.' },
+      { val:3, label:'They open up on the practical stuff but not the personal.' },
+      { val:4, label:'They share what is really going on \u2014 including the messy parts.' },
+      { val:5, label:'They tell me things they have not said out loud to anyone else.' }
+    ]},
+    { dim:'connection', text:'A close friend seems off but says they\u2019re fine.', options:[
+      { val:1, label:'I take them at their word.' },
+      { val:2, label:'I worry about it in silence.' },
+      { val:3, label:'I gently push once, then drop it.' },
+      { val:4, label:'I ask a specific question \u2014 \u201CIs it work? Is it your mom?\u201D' },
+      { val:5, label:'I create space for it now, and follow up in a few days.' }
+    ]},
+    { dim:'connection', text:'Someone tells you about their worst week in a while.', options:[
+      { val:1, label:'I offer advice.' },
+      { val:2, label:'I tell them about a time something similar happened to me.' },
+      { val:3, label:'I ask questions to understand what happened.' },
+      { val:4, label:'I mostly sit with them and let them talk.' },
+      { val:5, label:'I ask what they need from me right now.' }
+    ]},
+    { dim:'connection', text:'You\u2019re in a group conversation. Someone hasn\u2019t spoken yet.', options:[
+      { val:1, label:'I probably do not notice.' },
+      { val:2, label:'I notice but don\u2019t do anything about it.' },
+      { val:3, label:'I keep talking; they\u2019ll speak up if they want to.' },
+      { val:4, label:'I try to catch their eye and include them.' },
+      { val:5, label:'I ask them a direct, easy-to-answer question.' }
+    ]},
+    { dim:'connection', text:'Someone you work with mentioned three weeks ago that their child was starting a new school. Today you...', options:[
+      { val:1, label:'Have no memory of it.' },
+      { val:2, label:'Remember vaguely that something was going on.' },
+      { val:3, label:'Remember the fact but would not bring it up.' },
+      { val:4, label:'Ask them how it went.' },
+      { val:5, label:'Ask \u2014 and remember what they said last time.' }
+    ]}
+  ],
+  composure: [
+    { dim:'composure', text:'Someone gives you harsh feedback you did not see coming. What happens in the next 10 seconds?', options:[
+      { val:1, label:'I shut down or panic visibly.' },
+      { val:2, label:'I get defensive and snap back before I have thought.' },
+      { val:3, label:'I get flustered and stumble through a rushed reply.' },
+      { val:4, label:'I feel the spike but I pause before I respond.' },
+      { val:5, label:'I take a breath, take it in, and respond steadily.' }
+    ]},
+    { dim:'composure', text:'A meeting has just turned tense. People are talking over each other. The energy is rising.', options:[
+      { val:1, label:'I want out. I shut down or I snap.' },
+      { val:2, label:'My voice tightens or my volume rises \u2014 the room is driving me.' },
+      { val:3, label:'I get very quiet and try to avoid the conflict.' },
+      { val:4, label:'I keep my voice level even though my heart is racing.' },
+      { val:5, label:'I become the anchor in the room \u2014 I slow it down and keep it useful.' }
+    ]},
+    { dim:'composure', text:'You\u2019ve been in a meeting that ran 40 minutes over. You\u2019re exhausted.', options:[
+      { val:1, label:'I snap at someone. I don\u2019t have the capacity to filter.' },
+      { val:2, label:'I zone out and stop contributing.' },
+      { val:3, label:'I go quiet and just want it to end.' },
+      { val:4, label:'I force myself to stay present.' },
+      { val:5, label:'I step out for a minute to reset, then come back sharp.' }
+    ]},
+    { dim:'composure', text:'You sent an email with a mistake in it. Someone points it out in front of a group.', options:[
+      { val:1, label:'I panic and start over-explaining myself.' },
+      { val:2, label:'I get defensive and blame the tool or the deadline.' },
+      { val:3, label:'I apologize but stew about it for the rest of the day.' },
+      { val:4, label:'I acknowledge briefly and correct it.' },
+      { val:5, label:'I thank them and move on \u2014 it genuinely doesn\u2019t land as a blow.' }
+    ]},
+    { dim:'composure', text:'A difficult conversation you\u2019ve been avoiding is finally happening.', options:[
+      { val:1, label:'I shut down and get very quiet.' },
+      { val:2, label:'I get emotional \u2014 my voice shakes.' },
+      { val:3, label:'I get aggressive; the other person becomes the problem.' },
+      { val:4, label:'I stay level, but I\u2019m checked out.' },
+      { val:5, label:'I stay present and steer the conversation toward something useful.' }
+    ]},
+    { dim:'composure', text:'A colleague publicly disagrees with your strategy \u2014 sharply. What is happening inside you?', options:[
+      { val:1, label:'It feels like an attack and I hold onto it for days.' },
+      { val:2, label:'I fight back hard \u2014 I need to be right.' },
+      { val:3, label:'I take it personally but hide it and stay professional.' },
+      { val:4, label:'I can separate my ego from the idea and debate it on the merits.' },
+      { val:5, label:'I find it interesting \u2014 a puzzle to work through together.' }
+    ]}
+  ],
+  curiosity: [
+    { dim:'curiosity', text:'Someone is laying out a view you disagree with. Where are you?', options:[
+      { val:1, label:'I am interrupting them with why they are wrong.' },
+      { val:2, label:'I am quietly rehearsing my counter while they talk.' },
+      { val:3, label:'I am half-listening, waiting for my turn.' },
+      { val:4, label:'I am listening to understand their reasoning.' },
+      { val:5, label:'I am asking questions until I can argue their side as well as they can.' }
+    ]},
+    { dim:'curiosity', text:'You find clear evidence that contradicts something you have believed for years.', options:[
+      { val:1, label:'I dismiss it. My belief matters more than one study.' },
+      { val:2, label:'I dig for reasons to discount it.' },
+      { val:3, label:'It nags at me and I gradually reconsider.' },
+      { val:4, label:'I update my view \u2014 and notice the update.' },
+      { val:5, label:'I say openly that I was wrong, and why the new evidence changed me.' }
+    ]},
+    { dim:'curiosity', text:'You\u2019re reading something that contradicts your view. What happens next?', options:[
+      { val:1, label:'I stop reading. It\u2019s obviously wrong.' },
+      { val:2, label:'I skim for the flaws and close the tab.' },
+      { val:3, label:'I read it critically, looking for where it fails.' },
+      { val:4, label:'I read it seriously, even if I stay unconvinced.' },
+      { val:5, label:'I read it trying to see what a smart person would see in it.' }
+    ]},
+    { dim:'curiosity', text:'A colleague\u2019s approach is completely different from yours.', options:[
+      { val:1, label:'I dismiss it as wrong.' },
+      { val:2, label:'I argue that mine is better.' },
+      { val:3, label:'I stay neutral and let them do their thing.' },
+      { val:4, label:'I ask why they chose it.' },
+      { val:5, label:'I try it myself to see what they see.' }
+    ]},
+    { dim:'curiosity', text:'Someone explains a view you think is naive.', options:[
+      { val:1, label:'I dismiss it internally and move on.' },
+      { val:2, label:'I argue the flaw in it.' },
+      { val:3, label:'I listen politely until they\u2019re done.' },
+      { val:4, label:'I ask how they got there.' },
+      { val:5, label:'I try to understand what world would make it true.' }
+    ]},
+    { dim:'curiosity', text:'When did you last seek out a view that challenged your own?', options:[
+      { val:1, label:'Honestly, I cannot remember.' },
+      { val:2, label:'Not often. I mostly stick to sources I already trust.' },
+      { val:3, label:'Sometimes, though I usually read it to find the flaws.' },
+      { val:4, label:'Recently, and it gave me something to think about.' },
+      { val:5, label:'Within the last week. It is a habit.' }
+    ]}
+  ],
+  conviction: [
+    { dim:'conviction', text:'You believe something the room is clearly against. Everyone is looking at you.', options:[
+      { val:1, label:'I drop it immediately. Not worth the cost.' },
+      { val:2, label:'I pretend I was not serious about it.' },
+      { val:3, label:'I soften it heavily to keep the room.' },
+      { val:4, label:'I defend it politely but fold under real pressure.' },
+      { val:5, label:'I hold it \u2014 calmly \u2014 regardless of who is pushing back.' }
+    ]},
+    { dim:'conviction', text:'You promised to do something months ago. Now it is inconvenient, no one is checking, and you could quietly not do it.', options:[
+      { val:1, label:'I drop it. Circumstances change.' },
+      { val:2, label:'I look for a polite reason to get out.' },
+      { val:3, label:'I might not do it, but I feel bad about it.' },
+      { val:4, label:'I push through and get it done, even if I grumble.' },
+      { val:5, label:'It gets done. Zero exceptions.' }
+    ]},
+    { dim:'conviction', text:'You said you\u2019d deliver something that now looks impossible.', options:[
+      { val:1, label:'I quietly push the deadline and hope no one notices.' },
+      { val:2, label:'I tell them it can\u2019t be done.' },
+      { val:3, label:'I ask for more time or more help.' },
+      { val:4, label:'I do what I can and I\u2019m honest about the rest.' },
+      { val:5, label:'I find a way \u2014 even if it\u2019s not the way I planned.' }
+    ]},
+    { dim:'conviction', text:'Your team is heading toward a decision you think is wrong.', options:[
+      { val:1, label:'I go along with it. They must know something I don\u2019t.' },
+      { val:2, label:'I raise it once and drop it if no one bites.' },
+      { val:3, label:'I argue against it in the room.' },
+      { val:4, label:'I escalate it to someone who can actually stop it.' },
+      { val:5, label:'I block it \u2014 even if it costs me something.' }
+    ]},
+    { dim:'conviction', text:'Someone asks you to bend a principle you hold.', options:[
+      { val:1, label:'I bend it. It\u2019s not worth the friction.' },
+      { val:2, label:'I say I\u2019ll consider it and hope the topic moves on.' },
+      { val:3, label:'I stall and avoid saying yes or no.' },
+      { val:4, label:'I explain why I can\u2019t.' },
+      { val:5, label:'I refuse clearly, and I don\u2019t apologize for it.' }
+    ]},
+    { dim:'conviction', text:'A project asks you to do something you consider wrong \u2014 not illegal, but against your values.', options:[
+      { val:1, label:'I do it. My values are not the company\u2019s concern.' },
+      { val:2, label:'I do it. Leadership knows better than I do.' },
+      { val:3, label:'I do it, but I complain about it in private.' },
+      { val:4, label:'I push back and propose alternatives.' },
+      { val:5, label:'I will not do it. My actions will match my stated values.' }
+    ]}
+  ]
+};
+
+/* Mutable — populated by startQuiz / loadState */
+var QUESTIONS = [];
+
 var FORCED_CHOICE=[
   {a:{key:'clarity',label:'Getting the idea exactly right'},b:{key:'connection',label:'Making sure everyone in the room still feels with me'}},
   {a:{key:'confidence',label:'Saying the sharp thing in the moment'},b:{key:'composure',label:'Staying steady and waiting for the right moment'}},
@@ -920,13 +1171,16 @@ var CONTRAST_KEY='esperiel-high-contrast-v1';
 var CONTEXT_KEY='esperiel-context-v1';
 var ONBOARD_KEY='esperiel-onboarding-v1';
 var FORCED_KEY='esperiel-forced-v1';
-var REFLECTION_KEY='esperiel-reflection-v1';
 var VIEW_KEY='esperiel-view-v1';
 var CHALLENGE_KEY='esperiel-pending-challenge-v1';
 var NOTIFY_KEY='esperiel-notify-log-v1';
 var NOTIFY_PROMPT_KEY='esperiel-notify-prompted-v1';
 var ANALYTICS_KEY='esperiel-analytics-v1';
-var answers=new Array(QUESTIONS.length).fill(null);
+var QPICKS_KEY='esperiel-q-picks-v1';
+var ONBOARDED_KEY='esperiel-onboarded-v1';
+var REFLECTIONS_KEY='esperiel-reflections-v1';
+
+var answers=new Array(18).fill(null);
 var currentIndex=0;
 var forcedAnswers=new Array(FORCED_CHOICE.length).fill(null);
 var forcedIndex=0;
@@ -947,6 +1201,7 @@ var screens={
   forced:document.getElementById('screen-forced'),
   results:document.getElementById('screen-results'),
   readings:document.getElementById('screen-readings'),
+  reflections:document.getElementById('screen-reflections'),
   compare:document.getElementById('screen-compare'),
   guess:document.getElementById('screen-guess'),
   manifesto:document.getElementById('screen-manifesto')
@@ -998,6 +1253,7 @@ var refl3=document.getElementById('refl-3');
 var reviewContent=document.getElementById('review-content');
 var reviewSection=document.getElementById('review-section');
 var btnShare=document.getElementById('btn-share');
+var btnPrint=document.getElementById('btn-print');
 var btnRetake=document.getElementById('btn-retake');
 var toast=document.getElementById('toast');
 var resultsViewToggle=document.getElementById('results-view-toggle');
@@ -1014,6 +1270,9 @@ var manifestoStart=document.getElementById('manifesto-start');
 var manifestoBack=document.getElementById('manifesto-back');
 var footerManifesto=document.getElementById('footer-manifesto');
 var footerReadings=document.getElementById('footer-readings');
+var footerReflections=document.getElementById('footer-reflections');
+var reflectionsList=document.getElementById('reflections-list');
+var btnReflectionsBack=document.getElementById('btn-reflections-back');
 
 /* ================== ANALYTICS ================== */
 function track(event){
@@ -1038,19 +1297,59 @@ function safeReplaceHash(hash){
   try{var newUrl=window.location.pathname+window.location.search+(hash||'');history.replaceState(null,'',newUrl);}catch(e){}
 }
 
+/* ================== QUESTION SELECTION ================== */
+function pickQuestionsForRun(){
+  var picks={};
+  Object.keys(QUESTION_POOL).forEach(function(dim){
+    var idx=[0,1,2,3,4,5];
+    for(var i=0;i<3;i++){
+      var j=i+Math.floor(Math.random()*(6-i));
+      var t=idx[i];idx[i]=idx[j];idx[j]=t;
+    }
+    picks[dim]=idx.slice(0,3);
+  });
+  return picks;
+}
+function buildActiveQuestions(picks){
+  var out=[];
+  Object.keys(DIMENSIONS).forEach(function(dim){
+    (picks[dim]||[0,1,2]).forEach(function(i){
+      var q=QUESTION_POOL[dim][i];
+      if(q)out.push(q);
+    });
+  });
+  return out;
+}
+function savePicks(picks){try{localStorage.setItem(QPICKS_KEY,JSON.stringify(picks));}catch(e){}}
+function loadPicks(){try{var d=JSON.parse(localStorage.getItem(QPICKS_KEY));if(d&&typeof d==='object')return d;}catch(e){}return null;}
+function clearPicks(){try{localStorage.removeItem(QPICKS_KEY);}catch(e){}}
+
 /* ================== PERSISTENCE ================== */
 function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({answers:answers,currentIndex:currentIndex,ts:Date.now()}));}catch(e){}}
 function loadState(){
   try{var data=JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if(data&&Array.isArray(data.answers)&&data.answers.length===QUESTIONS.length){answers=data.answers;currentIndex=typeof data.currentIndex==='number'?data.currentIndex:0;return data.ts||null;}
+    if(data&&Array.isArray(data.answers)&&data.answers.length===18){
+      answers=data.answers;
+      currentIndex=typeof data.currentIndex==='number'?data.currentIndex:0;
+      var picks=loadPicks();
+      if(picks){QUESTIONS=buildActiveQuestions(picks);}
+      else{
+        var fallback={};Object.keys(QUESTION_POOL).forEach(function(dim){fallback[dim]=[0,1,2];});
+        QUESTIONS=buildActiveQuestions(fallback);
+      }
+      return data.ts||null;
+    }
   }catch(e){}
+  var defaults={};Object.keys(QUESTION_POOL).forEach(function(dim){defaults[dim]=[0,1,2];});
+  QUESTIONS=buildActiveQuestions(defaults);
   return null;
 }
 function clearState(){
-  answers=new Array(QUESTIONS.length).fill(null);currentIndex=0;
+  answers=new Array(18).fill(null);currentIndex=0;
   forcedAnswers=new Array(FORCED_CHOICE.length).fill(null);forcedIndex=0;
   try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
   try{localStorage.removeItem(FORCED_KEY);}catch(e){}
+  clearPicks();
 }
 function answeredCount(){return answers.filter(function(a){return a!==null;}).length;}
 function saveCommit(dim){try{localStorage.setItem(COMMIT_KEY,JSON.stringify({dim:dim,ts:Date.now()}));}catch(e){}}
@@ -1064,13 +1363,24 @@ function saveOnboarding(text){try{localStorage.setItem(ONBOARD_KEY,text||'');}ca
 function loadOnboarding(){try{return localStorage.getItem(ONBOARD_KEY)||'';}catch(e){return '';}}
 function saveForced(){try{localStorage.setItem(FORCED_KEY,JSON.stringify(forcedAnswers));}catch(e){}}
 function loadForced(){try{var d=JSON.parse(localStorage.getItem(FORCED_KEY));return Array.isArray(d)&&d.length===FORCED_CHOICE.length?d:new Array(FORCED_CHOICE.length).fill(null);}catch(e){return new Array(FORCED_CHOICE.length).fill(null);}}
-function saveReflection(data){try{localStorage.setItem(REFLECTION_KEY,JSON.stringify({q1:data.q1,q2:data.q2,q3:data.q3,ts:Date.now()}));}catch(e){}}
-function loadReflection(){try{return JSON.parse(localStorage.getItem(REFLECTION_KEY));}catch(e){return null;}}
 function saveViewMode(v){try{localStorage.setItem(VIEW_KEY,v);}catch(e){}}
 function loadViewMode(){try{return localStorage.getItem(VIEW_KEY)||'full';}catch(e){return 'full';}}
 function savePendingChallenge(arr){try{localStorage.setItem(CHALLENGE_KEY,JSON.stringify(arr));}catch(e){}}
-function loadPendingChallenge(){try{var d=JSON.parse(localStorage.getItem(CHALLENGE_KEY));return Array.isArray(d)&&d.length===QUESTIONS.length?d:null;}catch(e){return null;}}
+function loadPendingChallenge(){try{var d=JSON.parse(localStorage.getItem(CHALLENGE_KEY));return Array.isArray(d)&&d.length===18?d:null;}catch(e){return null;}}
 function clearPendingChallenge(){try{localStorage.removeItem(CHALLENGE_KEY);}catch(e){}}
+
+/* ================== REFLECTIONS ================== */
+function saveReflection(data){
+  try{
+    var all=JSON.parse(localStorage.getItem(REFLECTIONS_KEY)||'[]');
+    var growthKey=null,overall=null;
+    try{var s=computeScores();growthKey=s.growth?s.growth.key:null;overall=s.overall;}catch(e){}
+    all.push({q1:data.q1,q2:data.q2,q3:data.q3,ts:Date.now(),growthKey:growthKey,overall:overall});
+    localStorage.setItem(REFLECTIONS_KEY,JSON.stringify(all.slice(-100)));
+  }catch(e){}
+}
+function loadReflections(){try{return JSON.parse(localStorage.getItem(REFLECTIONS_KEY)||'[]');}catch(e){return[];}}
+function loadLatestReflection(){var all=loadReflections();return all.length?all[all.length-1]:null;}
 
 /* ================== VISITS ================== */
 function incrementVisit(){
@@ -1110,9 +1420,7 @@ function setupMotionToggle(){
 function setupContrastToggle(){
   var btn=document.getElementById('contrast-toggle');if(!btn)return;
   var stored=null;try{stored=localStorage.getItem(CONTRAST_KEY);}catch(e){}
-  if(stored===null){
-    try{if(window.matchMedia&&window.matchMedia('(prefers-contrast: more)').matches)stored='1';}catch(e){}
-  }
+  if(stored===null){try{if(window.matchMedia&&window.matchMedia('(prefers-contrast: more)').matches)stored='1';}catch(e){}}
   var on=stored==='1';
   if(on)document.documentElement.classList.add('high-contrast');
   btn.setAttribute('data-on',on?'true':'false');
@@ -1180,7 +1488,7 @@ function renderNotifyPrompt(){
 /* ================== URL HASH ================== */
 function encodeAnswers(){return answers.map(function(a){return a===null?'0':String(a);}).join('');}
 function decodeAnswers(str){
-  if(!str||str.length!==QUESTIONS.length)return null;
+  if(!str||str.length!==18)return null;
   var arr=str.split('').map(function(c){return c==='0'?null:parseInt(c,10);});
   for(var i=0;i<arr.length;i++){var v=arr[i];if(v!==null&&(isNaN(v)||v<1||v>5))return null;}
   return arr;
@@ -1193,13 +1501,22 @@ function switchScreen(name,updateUrl){
   window.scrollTo({top:0,behavior:'smooth'});
   currentView=name;
   if(updateUrl){
-    if(name==='results'&&answeredCount()===QUESTIONS.length&&!loadedFromHash){safeReplaceHash('#r='+encodeAnswers());}
+    if(name==='results'&&answeredCount()===18&&!loadedFromHash){safeReplaceHash('#r='+encodeAnswers());}
     else if(name==='quiz'){safeReplaceHash('#quiz');}
     else if(name==='prep'){safeReplaceHash('#prep');}
     else if(name==='forced'){safeReplaceHash('#forced');}
     else if(name==='readings'){safeReplaceHash('#readings');}
+    else if(name==='reflections'){safeReplaceHash('#reflections');}
     else if(name==='manifesto'){safeReplaceHash('#manifesto');}
     else{safeReplaceHash('');}
+  }
+  var active=screens[name];
+  if(active){
+    var h=active.querySelector('h1, h2, h3');
+    if(h){
+      if(!h.hasAttribute('tabindex'))h.setAttribute('tabindex','-1');
+      setTimeout(function(){h.focus({preventScroll:true});},100);
+    }
   }
 }
 
@@ -1235,12 +1552,12 @@ function drawHeroRadar(){
 function renderIntro(){
   if(heroRadar)heroRadar.innerHTML=drawHeroRadar();
   var count=answeredCount();
-  if(count===QUESTIONS.length){
+  if(count===18){
     introButtons.innerHTML='<button class="btn btn-primary" id="start-results">View your results</button><button class="btn btn-secondary" id="start-new">Start over</button>';
   }else if(count>0){
     var saved=null;try{saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');}catch(e){}
     var hoursOld=(saved&&saved.ts)?(Date.now()-saved.ts)/(1000*60*60):0;
-    var label=hoursOld>24?'Finish where you left off ('+(QUESTIONS.length-count)+' left)':'Resume &middot; '+count+'/'+QUESTIONS.length;
+    var label=hoursOld>24?'Finish where you left off ('+(18-count)+' left)':'Resume &middot; '+count+'/18';
     introButtons.innerHTML='<button class="btn btn-primary" id="start-resume">'+label+'</button><button class="btn btn-secondary" id="start-new">Start over</button>';
   }else{
     introButtons.innerHTML='<button class="btn btn-primary" id="start-new">Begin the index</button>';
@@ -1288,6 +1605,15 @@ btnPrepContinue.addEventListener('click',function(){
 });
 function startQuiz(){
   track('startQuiz');
+  var picks=loadPicks();
+  if(!picks||answeredCount()===0){
+    picks=pickQuestionsForRun();
+    savePicks(picks);
+    answers=new Array(18).fill(null);
+    currentIndex=0;
+    try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
+  }
+  QUESTIONS=buildActiveQuestions(picks);
   if(answeredCount()===0){
     activePaneId='a';
     var apA=document.getElementById('q-pane-a');
@@ -1304,7 +1630,9 @@ if(logoLink){
 
 /* ================== QUIZ ================== */
 function updateQuizHeader(){
-  var q=QUESTIONS[currentIndex];var dim=DIMENSIONS[q.dim];var total=QUESTIONS.length;
+  var q=QUESTIONS[currentIndex]||{dim:'clarity'};
+  var dim=DIMENSIONS[q.dim];
+  var total=QUESTIONS.length||18;
   var pct=Math.round(((currentIndex+1)/total)*100);
   quizDimLabel.textContent=dim.name;
   quizDimLabel.style.setProperty('--dim-color',dim.color);
@@ -1325,6 +1653,7 @@ function getInactivePane(){return document.getElementById('q-pane-'+(activePaneI
 function bindPaneEvents(pane){pane.querySelectorAll('input[type="radio"]').forEach(function(input){input.addEventListener('change',handleAnswer);});}
 function renderQuestion(animateIn){
   if(animateIn===undefined)animateIn=true;
+  if(!QUESTIONS[currentIndex]){return;}
   updateQuizHeader();
   var q=QUESTIONS[currentIndex];var dim=DIMENSIONS[q.dim];var currentVal=answers[currentIndex];
   var hint=currentIndex===0?'<p class="keyboard-hint">Tip: press <kbd>1</kbd>&ndash;<kbd>5</kbd> to answer, <kbd>Backspace</kbd> to go back.</p>':'';
@@ -1332,18 +1661,23 @@ function renderQuestion(animateIn){
     var checked=currentVal===opt.val?'checked':'';
     return'<label class="option-label" style="animation-delay:'+(60+i*45)+'ms"><input type="radio" name="q'+currentIndex+'" value="'+opt.val+'" class="option-input" '+checked+'><span class="option-text">'+opt.label+'</span></label>';
   }).join('');
-  var html='<div class="q-dim" style="--dim-color:'+dim.color+'">'+dim.name+'</div><h3 class="q-text" tabindex="-1">'+q.text+'</h3><div class="options-list" role="radiogroup">'+optionsHtml+'</div>'+hint;
+  var html='<div class="q-dim" style="--dim-color:'+dim.color+'">'+dim.name+'</div><h3 class="q-text" id="q-text" tabindex="-1">'+q.text+'</h3><div class="options-list" role="radiogroup" aria-labelledby="q-text">'+optionsHtml+'</div>'+hint;
   if(!animateIn){
     var ap=getActivePane();ap.innerHTML=html;ap.className='q-pane is-active';bindPaneEvents(ap);updateQuizControls();return;
   }
   var outgoing=getActivePane();var incoming=getInactivePane();
-  incoming.innerHTML=html;incoming.className='q-pane';void incoming.offsetWidth;
-  outgoing.className='q-pane is-leaving';incoming.className='q-pane is-active';
+  incoming.innerHTML=html;incoming.className='q-pane';incoming.setAttribute('aria-hidden','true');void incoming.offsetWidth;
+  outgoing.className='q-pane is-leaving';outgoing.setAttribute('aria-hidden','true');
+  incoming.className='q-pane is-active';incoming.removeAttribute('aria-hidden');
   activePaneId=activePaneId==='a'?'b':'a';
   bindPaneEvents(incoming);updateQuizControls();
   var qText=incoming.querySelector('.q-text');if(qText)qText.focus({preventScroll:true});
   if(qContainer){var y=qContainer.getBoundingClientRect().top+window.scrollY-20;window.scrollTo({top:y,behavior:'smooth'});}
-  setTimeout(function(){if(outgoing.classList.contains('is-leaving')){outgoing.className='q-pane';outgoing.innerHTML='';}},450);
+  setTimeout(function(){
+    if(outgoing.classList.contains('is-leaving')){
+      outgoing.className='q-pane';outgoing.innerHTML='';outgoing.removeAttribute('aria-hidden');
+    }
+  },450);
 }
 function handleAnswer(e){
   if(isAnimating)return;
@@ -1450,7 +1784,7 @@ function computeRawResults(answersArr){
       pct:pct,vals:vals,minVal:minVal,maxVal:maxVal,spread:spread,spreadLabel:spreadLabel,isInconsistent:spread>=3};
   });
   var totalAnswered=answersArr.reduce(function(sum,a){return sum+(a||0);},0);
-  var overall=Math.round((totalAnswered/(QUESTIONS.length*5))*100);
+  var overall=Math.round((totalAnswered/(18*5))*100);
   return{results:results,overall:overall};
 }
 function pickWithTieBreak(sorted,index,allResults,forcedArr){
@@ -1671,12 +2005,12 @@ btnGuessBack.addEventListener('click',function(){renderIntro();switchScreen('int
 
 /* ================== SHARE BUTTONS ================== */
 btnCompareShare.addEventListener('click',function(){
-  if(answeredCount()!==QUESTIONS.length){showToast('Take the assessment first');return;}
+  if(answeredCount()!==18){showToast('Take the assessment first');return;}
   copyToClipboard(buildCompareLink(),'Compare link copied');
   track('shareCompare');
 });
 btnGuessShare.addEventListener('click',function(){
-  if(answeredCount()!==QUESTIONS.length){showToast('Take the assessment first');return;}
+  if(answeredCount()!==18){showToast('Take the assessment first');return;}
   copyToClipboard(buildGuessLink(),'Challenge link copied');
   track('shareGuess');
 });
@@ -1776,6 +2110,55 @@ function renderPriorities(){
   priorities.hidden=false;
 }
 
+/* ================== CALENDAR ================== */
+function icsEscape(s){
+  return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+}
+function pad2(n){return n<10?'0'+n:String(n);}
+function formatIcsDate(d){
+  return d.getUTCFullYear()+pad2(d.getUTCMonth()+1)+pad2(d.getUTCDate())+
+    'T'+pad2(d.getUTCHours())+pad2(d.getUTCMinutes())+'00Z';
+}
+function downloadFocusIcs(dim){
+  var start=new Date();
+  start.setDate(start.getDate()+1);
+  start.setHours(9,0,0,0);
+  var lines=[
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Esperiel Index//30-Day Focus//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'X-WR-CALNAME:Esperiel Index \u2014 '+icsEscape(dim.name)+' focus'
+  ];
+  var practices=SUPPORTING_PRACTICES[dim.key]||[];
+  var dayPractices=[dim.action].concat(practices);
+  for(var i=0;i<30;i++){
+    var dayStart=new Date(start.getTime());
+    dayStart.setDate(dayStart.getDate()+i);
+    var dayEnd=new Date(dayStart.getTime()+15*60*1000);
+    var practice=dayPractices[i%dayPractices.length];
+    lines.push('BEGIN:VEVENT');
+    lines.push('UID:esperiel-'+dim.key+'-'+i+'-'+Math.floor(Date.now()/1000)+'@esperiel.index');
+    lines.push('DTSTAMP:'+formatIcsDate(new Date()));
+    lines.push('DTSTART:'+formatIcsDate(dayStart));
+    lines.push('DTEND:'+formatIcsDate(dayEnd));
+    lines.push('SUMMARY:'+icsEscape('Esperiel \u00B7 Day '+(i+1)+' \u2014 '+dim.name));
+    lines.push('DESCRIPTION:'+icsEscape(practice));
+    lines.push('CATEGORIES:Esperiel Index');
+    lines.push('TRANSP:TRANSPARENT');
+    lines.push('END:VEVENT');
+  }
+  lines.push('END:VCALENDAR');
+  var blob=new Blob([lines.join('\r\n')],{type:'text/calendar;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download='esperiel-focus-'+dim.key+'.ics';
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  showToast('Calendar file downloaded');
+}
+
 /* ================== FOCUS CARD ================== */
 function renderFocusCard(dim){
   var practices=SUPPORTING_PRACTICES[dim.key]||[];
@@ -1795,7 +2178,12 @@ function renderFocusCard(dim){
     '<div class="focus-supporting-label">Supporting practices</div>'+
     '<ul class="focus-supporting">'+practices.map(function(p){return'<li>'+p+'</li>';}).join('')+'</ul>'+
     '<div class="commit-block"><label class="commit-row"><input type="checkbox" id="focus-commit-checkbox" '+(isCommitted?'checked':'')+'><span>I commit to this for 30 days</span></label>'+
-    '<div class="commit-caption'+(isCommitted?' is-active':'')+'" id="focus-commit-caption">'+captionText+'</div></div>';
+    '<div class="commit-caption'+(isCommitted?' is-active':'')+'" id="focus-commit-caption">'+captionText+'</div>'+
+    '<button type="button" class="btn-calendar" id="btn-add-calendar">'+
+      '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg>'+
+      '<span>Add 30 days to calendar</span>'+
+    '</button>'+
+    '</div>';
   var cb=focusCard.querySelector('#focus-commit-checkbox');
   var caption=focusCard.querySelector('#focus-commit-caption');
   cb.addEventListener('change',function(){
@@ -1807,12 +2195,19 @@ function renderFocusCard(dim){
       renderNotifyPrompt();
     }else{try{localStorage.removeItem(COMMIT_KEY);}catch(e){}caption.textContent='';caption.classList.remove('is-active');}
   });
+  var calBtn=focusCard.querySelector('#btn-add-calendar');
+  if(calBtn){
+    calBtn.addEventListener('click',function(){
+      downloadFocusIcs(dim);
+      track('calendarExport');
+    });
+  }
 }
 
 /* ================== REFLECTION ================== */
 function renderReflectionPrompt(growthKey){reflectionPrompt.textContent=REFLECTION_PROMPTS[growthKey];}
 function renderReflectionJournal(){
-  var saved=loadReflection();
+  var saved=loadLatestReflection();
   if(saved){
     refl1.value=saved.q1||'';refl2.value=saved.q2||'';refl3.value=saved.q3||'';
     var days=Math.floor((Date.now()-saved.ts)/(1000*60*60*24));
@@ -1825,12 +2220,14 @@ function renderReflectionJournal(){
 reflectionSaveBtn.addEventListener('click',function(){
   var data={q1:refl1.value.trim(),q2:refl2.value.trim(),q3:refl3.value.trim()};
   if(!data.q1&&!data.q2&&!data.q3){showToast('Write something first');return;}
+  var latest=loadLatestReflection();
+  if(latest&&latest.q1===data.q1&&latest.q2===data.q2&&latest.q3===data.q3){showToast('Already saved');return;}
   saveReflection(data);renderReflectionJournal();showToast('Reflection saved');
   if(navigator.vibrate)navigator.vibrate(15);
   track('reflectionSave');
 });
 
-/* ================== RECEIPT REVIEW ================== */
+/* ================== REVIEW ================== */
 function renderReview(results){
   var grid='<div class="receipt-grid">';
   results.forEach(function(d){
@@ -1919,6 +2316,11 @@ function renderSparkline(results){
 function renderReadings(){
   var list=document.getElementById('readings-list');if(!list)return;
   var runs=loadRuns();
+  var refLabel=document.getElementById('reflections-link-label');
+  if(refLabel){
+    var reflCount=loadReflections().length;
+    refLabel.textContent=reflCount===0?'Your reflections will appear here':reflCount===1?'View past reflection':'View past reflections ('+reflCount+')';
+  }
   if(!runs.length){list.innerHTML='<div class="readings-empty">You have not taken the assessment yet. Once you do, your readings will appear here.</div>';return;}
   var ordered=runs.slice().reverse();
   list.innerHTML=ordered.map(function(run,i){
@@ -1931,6 +2333,40 @@ function renderReadings(){
       '<div><div class="reading-date">'+dateStr+'</div><div class="reading-overall">'+run.overall+'</div></div>'+
       '<div><div class="reading-arch">'+arch+'</div><div class="reading-detail">Strongest <span>'+strongName+'</span> &middot; Edge <span>'+growthName+'</span></div></div>'+
       renderSparkline(run.results)+'</div>';
+  }).join('');
+}
+
+/* ================== REFLECTIONS LIST ================== */
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,function(c){
+    return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+  });
+}
+function renderReflections(){
+  var list=reflectionsList;if(!list)return;
+  var all=loadReflections();
+  if(!all.length){list.innerHTML='<div class="readings-empty">Your reflections will appear here after your first save.</div>';return;}
+  var ordered=all.slice().reverse();
+  list.innerHTML=ordered.map(function(r,i){
+    var date=new Date(r.ts);
+    var dateStr=date.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+    var dimName=r.growthKey&&DIMENSIONS[r.growthKey]?DIMENSIONS[r.growthKey].name:'';
+    var overallStr=(r.overall!==null&&r.overall!==undefined)?r.overall+'% overall':'';
+    var metaParts=[];
+    if(dimName)metaParts.push('Edge: '+dimName);
+    if(overallStr)metaParts.push(overallStr);
+    var meta=metaParts.join(' \u00B7 ');
+    var fields='';
+    if(r.q1)fields+='<div class="reflection-entry-field"><span class="reflection-entry-label">Went well</span><p>'+escapeHtml(r.q1)+'</p></div>';
+    if(r.q2)fields+='<div class="reflection-entry-field"><span class="reflection-entry-label">What worked</span><p>'+escapeHtml(r.q2)+'</p></div>';
+    if(r.q3)fields+='<div class="reflection-entry-field"><span class="reflection-entry-label">Dimension in play</span><p>'+escapeHtml(r.q3)+'</p></div>';
+    return'<div class="reflection-entry" style="animation-delay:'+(i*55)+'ms">'+
+      '<div class="reflection-entry-head">'+
+        '<span class="reflection-entry-date">'+dateStr+'</span>'+
+        (meta?'<span class="reflection-entry-meta">'+meta+'</span>':'')+
+      '</div>'+
+      fields+
+    '</div>';
   }).join('');
 }
 
@@ -1958,6 +2394,17 @@ function generateResults(saveAsRun){
   archetypeTagline.textContent=ctxCopy?archetype.tagline.replace(/\.$/,'')+' \u2014 '+ctxCopy+'.':archetype.tagline;
   overallNum.textContent=overall;
   archetypeInsight.textContent=tied?'Your dimensions are evenly balanced \u2014 pick any one and work it deliberately for a month.':getInsight(results,ctxCopy);
+  var pt=document.getElementById('print-cover-title');
+  var ptl=document.getElementById('print-cover-tagline');
+  var po=document.getElementById('print-cover-overall');
+  var pm=document.getElementById('print-cover-meta');
+  if(pt)pt.textContent=archetype.name;
+  if(ptl)ptl.textContent=archetype.tagline;
+  if(po)po.textContent=overall;
+  if(pm){
+    var today=new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
+    pm.innerHTML='<strong>'+today+'</strong><br>Strongest dimension: <strong>'+strongest.name+' ('+strongest.pct+'%)</strong><br>Growth edge: <strong>'+growth.name+' ('+growth.pct+'%)</strong>';
+  }
   var savedOnboard=loadOnboarding();
   if(savedOnboard){beliefQuoteText.textContent='\u201C'+savedOnboard+'\u201D';beliefQuote.hidden=false;}
   else{beliefQuote.hidden=true;}
@@ -2090,7 +2537,7 @@ function generateShareImage(){
 
 /* ================== RETAKE ================== */
 btnRetake.addEventListener('click',function(){
-  if(answeredCount()===QUESTIONS.length){if(!confirm('Start over? Your current answers will be lost.'))return;}
+  if(answeredCount()===18){if(!confirm('Start over? Your current answers will be lost.'))return;}
   clearState();renderIntro();switchScreen('intro');track('retake');
 });
 
@@ -2122,6 +2569,12 @@ btnShare.addEventListener('click',function(){
   });
   track('shareImage');
 });
+if(btnPrint){
+  btnPrint.addEventListener('click',function(){
+    track('print');
+    setTimeout(function(){window.print();},50);
+  });
+}
 
 /* ================== READINGS UI ================== */
 var openReadings=document.getElementById('open-readings');
@@ -2129,6 +2582,10 @@ if(openReadings){openReadings.addEventListener('click',function(e){e.preventDefa
 var btnReadingsBack=document.getElementById('btn-readings-back');
 if(btnReadingsBack){btnReadingsBack.addEventListener('click',function(){renderIntro();switchScreen('intro');});}
 if(footerReadings){footerReadings.addEventListener('click',function(e){e.preventDefault();renderReadings();switchScreen('readings');});}
+var openReflections=document.getElementById('open-reflections');
+if(openReflections){openReflections.addEventListener('click',function(e){e.preventDefault();renderReflections();switchScreen('reflections');});}
+if(btnReflectionsBack){btnReflectionsBack.addEventListener('click',function(){renderIntro();switchScreen('intro');});}
+if(footerReflections){footerReflections.addEventListener('click',function(e){e.preventDefault();renderReflections();switchScreen('reflections');});}
 
 /* ================== MANIFESTO UI ================== */
 if(footerManifesto){footerManifesto.addEventListener('click',function(e){e.preventDefault();switchScreen('manifesto');});}
@@ -2145,7 +2602,7 @@ function routeFromHash(){
   if(hash.indexOf('#c=')===0){
     var challenger=decodeAnswers(hash.slice(3));
     if(challenger){
-      if(answeredCount()===QUESTIONS.length){renderCompareView(challenger,answers);switchScreen('compare',false);}
+      if(answeredCount()===18){renderCompareView(challenger,answers);switchScreen('compare',false);}
       else{savePendingChallenge(challenger);showToast('Take the assessment to compare');openPrep();}
       return true;
     }
@@ -2155,11 +2612,12 @@ function routeFromHash(){
     if(sender){renderGuessView(sender);switchScreen('guess',false);return true;}
   }
   if(hash==='#readings'){renderReadings();switchScreen('readings',false);return true;}
+  if(hash==='#reflections'){renderReflections();switchScreen('reflections',false);return true;}
   if(hash==='#manifesto'){switchScreen('manifesto',false);return true;}
   if(hash==='#prep'){openPrep();switchScreen('prep',false);return true;}
   if(hash==='#quiz'){switchScreen('quiz',false);renderQuestion(false);return true;}
   if(hash==='#forced'){switchScreen('forced',false);renderForced();return true;}
-  if(hash==='#results'&&answeredCount()===QUESTIONS.length){generateResults(false);switchScreen('results',false);return true;}
+  if(hash==='#results'&&answeredCount()===18){generateResults(false);switchScreen('results',false);return true;}
   return false;
 }
 window.addEventListener('hashchange',function(){
@@ -2176,6 +2634,49 @@ document.addEventListener('visibilitychange',function(){
   }
 });
 
+/* ================== ONBOARDING ================== */
+function maybePlayOnboarding(){
+  var played=false;
+  try{played=localStorage.getItem(ONBOARDED_KEY)==='1';}catch(e){}
+  if(played)return false;
+  if(isReducedMotion()){try{localStorage.setItem(ONBOARDED_KEY,'1');}catch(e){}return false;}
+  if(window.location.hash&&window.location.hash.length>1&&window.location.hash.indexOf('#r=')!==0)return false;
+
+  var overlay=document.getElementById('onboarding-overlay');
+  var title=document.getElementById('onboarding-title');
+  if(!overlay)return false;
+
+  title.textContent='Communication is not one skill. It is six.';
+  overlay.hidden=false;
+  requestAnimationFrame(function(){overlay.classList.add('is-visible');});
+
+  var finished=false;
+  var finish=function(){
+    if(finished)return;
+    finished=true;
+    overlay.classList.add('is-exiting');
+    setTimeout(function(){
+      overlay.hidden=true;
+      overlay.classList.remove('is-visible','is-exiting');
+    },500);
+  };
+
+  setTimeout(function(){
+    try{localStorage.setItem(ONBOARDED_KEY,'1');}catch(e){}
+    finish();
+  },3000);
+
+  var skip=function(){
+    try{localStorage.setItem(ONBOARDED_KEY,'1');}catch(e){}
+    finish();
+    overlay.removeEventListener('click',skip);
+    document.removeEventListener('keydown',skip);
+  };
+  overlay.addEventListener('click',skip);
+  document.addEventListener('keydown',skip);
+  return true;
+}
+
 /* ================== INIT ================== */
 loadState();
 forcedAnswers=loadForced();
@@ -2186,7 +2687,10 @@ setupContrastToggle();
 setupViewToggle();
 track('view');
 maybeFireReminder();
-if(!routeFromHash()){switchScreen('intro',false);}
+if(!routeFromHash()){
+  switchScreen('intro',false);
+  maybePlayOnboarding();
+}
 
 })();
 </script>
